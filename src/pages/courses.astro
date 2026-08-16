@@ -1,0 +1,128 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+/*
+  HIDDEN PAGE — not in Navbar or Footer, and excluded from the sitemap
+  (noindex below). Link to it manually when you want to drive waitlist signups.
+  Remove the robots meta and add to nav when the course is ready to sell.
+*/
+
+const modules = [
+  "Map your current relationship ecosystem",
+  "Find the structural bottleneck",
+  "Choose recurring environments with high fit and repetition",
+  "Strengthen selected weak and dormant ties",
+  "Build bridges between the isolated parts of your life",
+  "Turn contact into reciprocity, invitations, and introductions",
+  "Integrate dating channels without making apps the whole system",
+  "Build a 90-day maintenance and adaptation plan",
+];
+---
+
+<Layout
+  theme="connection"
+  noindex
+  title="The Sociogram Course | Dr. Axel Schumacher"
+  description="A self-paced course teaching the Sociogram Method for rebuilding the social structure behind loneliness. In development — join the research list."
+>
+  <section class="glow-top relative overflow-hidden border-b border-[color:var(--border)]">
+    <div class="container-x relative z-10 py-24 md:py-28">
+      <span class="eyebrow">In development</span>
+      <h1 class="mt-6 max-w-4xl text-[clamp(2.2rem,5vw,3.6rem)] font-bold">
+        The Sociogram Method, as a self-paced course.
+      </h1>
+      <p class="lead mt-7 max-w-2xl text-lg">
+        The same five-step process I use in one-to-one work — map, diagnose, design, act, adapt —
+        built into lessons, worksheets, and field protocols you can run on your own schedule.
+      </p>
+      <div class="mt-9">
+        <a href="#waitlist" class="btn btn-primary">Join the research list</a>
+      </div>
+      <div class="pill-row">
+        <span class="pill">Not yet open for enrolment</span>
+        <span class="pill">No launch date announced</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-x grid gap-12 md:grid-cols-[0.85fr_1.15fr]">
+      <div class="reveal">
+        <span class="eyebrow">Why it isn't for sale yet</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+          The live work comes first. The course is its output.
+        </h2>
+      </div>
+      <div class="reveal space-y-5 leading-relaxed text-[color:var(--text-muted)]">
+        <p>
+          Building a course before knowing which explanations actually change behaviour is the
+          expensive way to get it wrong. The lessons here are being refined against real client
+          questions — where people get confused, where they resist, and which actions they actually
+          complete.
+        </p>
+        <p>
+          The research list shapes that: what your bottleneck is, what result you want, and which
+          format you'd genuinely use. You'll get first access when enrolment opens, and no launch
+          date will be announced until the material and the legal structure are settled.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Provisional spine</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Eight modules, subject to change.</h2>
+        <p class="lead mt-6">
+          This is the current working sequence, not a final syllabus. Feedback from the research
+          list will change it.
+        </p>
+      </div>
+      <ul class="offer__list mt-10 md:grid-cols-2">
+        {modules.map((m) => <li>{m}</li>)}
+      </ul>
+
+      <div class="note-box reveal">
+        <h3>Would you rather run it than study it?</h3>
+        <p>
+          The same eight steps are being built into <b>Amoro</b>, the app version of the method —
+          your map, your score, and one small move a week, instead of lessons to sit through.
+          Different people finish different formats, so both waitlists are open and it costs nothing
+          to sit on both.
+        </p>
+        <p style="margin-top:1rem;">
+          <a href="/amoro" class="link-underline text-accent">See the app →</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="waitlist" class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="card glow-top relative overflow-hidden p-10 text-center md:p-14">
+        <h2 class="mx-auto max-w-2xl text-3xl font-semibold md:text-4xl">Join the research list</h2>
+        <p class="lead mx-auto mt-5 text-center">
+          Three questions: your main bottleneck, the result you want, and the format you'd actually
+          use. First access when enrolment opens.
+        </p>
+        <div class="mt-8">
+          <span class="chip">Brevo / Tally embed</span>
+          <p class="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-[color:var(--text-muted)]">
+            Paste the waitlist form embed here.
+          </p>
+        </div>
+      </div>
+
+      <div class="note-box">
+        <h3>Before selling this in Germany</h3>
+        <p>
+          A paid course combining asynchronous lessons with monitoring or individualised feedback
+          may fall under the Fernunterrichtsschutzgesetz and require ZFU approval. Get current legal
+          advice on applicability before opening enrolment — approval takes time and is easier to
+          plan for than to retrofit.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

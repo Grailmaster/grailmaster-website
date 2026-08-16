@@ -1,0 +1,87 @@
+---
+const links = [
+  { href: "/scv-framework", label: "The Science" },
+  { href: "/dating-coaching", label: "Get Coaching" },
+  { href: "/inside-the-dating-mind", label: "Podcast" },
+  { href: "/journal", label: "Books & Resources" },
+  { href: "/organizations", label: "For Organizations" },
+  { href: "/biotech", label: "Biotech" },
+  { href: "/about", label: "About" },
+];
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === "/" ? path === "/" : path.startsWith(href);
+---
+
+<header class="sticky top-0 z-40 border-b border-[color:var(--border)] bg-[color:var(--bg)]/80 backdrop-blur-xl">
+  <nav class="container-x flex h-16 items-center justify-between gap-6" aria-label="Primary">
+    <a href="/" class="group flex items-center gap-3" aria-label="Dr. Axel Schumacher — home">
+      <svg class="h-7 w-7 shrink-0 text-accent" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+        <circle cx="15" cy="15" r="13" stroke="currentColor" stroke-opacity="0.4" stroke-width="1.3" stroke-dasharray="2 3"></circle>
+        <circle cx="15" cy="15" r="8.5" stroke="currentColor" stroke-opacity="0.7" stroke-width="1.3"></circle>
+        <circle cx="15" cy="15" r="4" stroke="currentColor" stroke-width="1.4"></circle>
+        <circle cx="15" cy="15" r="2" fill="currentColor"></circle>
+        <circle cx="23.5" cy="15" r="1.5" fill="currentColor"></circle>
+        <circle cx="9" cy="7.5" r="1.3" fill="currentColor"></circle>
+      </svg>
+      <span
+        class="whitespace-nowrap text-[0.92rem] font-semibold uppercase leading-none tracking-[0.1em]"
+        style="font-family:'Cinzel', serif;"
+        >Dr. Axel Schumacher</span
+      >
+    </a>
+
+    <!-- Desktop links -->
+    <ul class="hidden items-center gap-0.5 xl:flex">
+      {
+        links.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              aria-current={isActive(l.href) ? "page" : undefined}
+              class:list={[
+                "whitespace-nowrap rounded-full px-2 py-2 text-[0.8rem] text-[color:var(--text-muted)] transition-colors hover:text-[color:var(--text)]",
+                isActive(l.href) && "text-[color:var(--text)]",
+              ]}
+            >
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="hidden xl:block">
+      <a href="/dating-coaching#book" class="btn btn-primary whitespace-nowrap px-4 py-2 text-[0.8rem]">Work with me</a>
+    </div>
+
+    <!-- Mobile / tablet disclosure (zero-JS) -->
+    <details class="relative xl:hidden">
+      <summary
+        class="grid h-9 w-9 cursor-pointer list-none place-items-center rounded-md border border-[color:var(--border-strong)] [&::-webkit-details-marker]:hidden"
+        aria-label="Open menu"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </summary>
+      <div
+        class="absolute right-0 mt-3 w-60 overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] p-2 shadow-2xl"
+      >
+        {
+          links.map((l) => (
+            <a
+              href={l.href}
+              class="block rounded-lg px-3 py-2.5 text-sm text-[color:var(--text-muted)] hover:bg-[color:var(--surface-2)] hover:text-[color:var(--text)]"
+            >
+              {l.label}
+            </a>
+          ))
+        }
+        <a href="/dating-coaching#book" class="btn btn-primary mt-2 w-full text-sm">Work with me</a>
+      </div>
+    </details>
+  </nav>
+</header>

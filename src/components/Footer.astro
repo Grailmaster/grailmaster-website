@@ -1,0 +1,83 @@
+---
+const year = new Date().getFullYear();
+
+const cols = [
+  {
+    heading: "Connection",
+    links: [
+      { href: "/scv-framework", label: "The Science" },
+      { href: "/dating-coaching", label: "Get Coaching" },
+      { href: "/organizations", label: "For Organizations" },
+      { href: "/inside-the-dating-mind", label: "Podcast" },
+      { href: "/journal", label: "Books & Resources" },
+      { href: "/amoro", label: "Amoro (app)" },
+    ],
+  },
+  {
+    heading: "Science",
+    links: [
+      { href: "/biotech", label: "Biotech & Ventures" },
+      { href: "/scv-framework", label: "Longevity & SCV" },
+      { href: "/about", label: "About the Doctor" },
+    ],
+  },
+];
+---
+
+<footer class="border-t border-[color:var(--border)] bg-[color:var(--bg)]">
+  <div class="container-x py-16">
+    <div class="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div>
+        <div class="flex items-center gap-2.5">
+          <svg class="h-7 w-7 text-accent" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+            <circle cx="15" cy="15" r="13" stroke="currentColor" stroke-opacity="0.4" stroke-width="1.3" stroke-dasharray="2 3"></circle>
+            <circle cx="15" cy="15" r="8.5" stroke="currentColor" stroke-opacity="0.7" stroke-width="1.3"></circle>
+            <circle cx="15" cy="15" r="4" stroke="currentColor" stroke-width="1.4"></circle>
+            <circle cx="15" cy="15" r="2" fill="currentColor"></circle>
+            <circle cx="23.5" cy="15" r="1.5" fill="currentColor"></circle>
+            <circle cx="9" cy="7.5" r="1.3" fill="currentColor"></circle>
+          </svg>
+          <span class="font-[family-name:var(--font-display)] font-semibold tracking-tight">GRAILMASTER</span>
+        </div>
+        <p class="lead mt-4 text-sm">
+          Optimizing the human lifespan through biology, network science, and deep connection.
+        </p>
+      </div>
+
+      {
+        cols.map((c) => (
+          <nav aria-label={c.heading}>
+            <h3 class="eyebrow mb-4">{c.heading}</h3>
+            <ul class="space-y-2.5">
+              {c.links.map((l) => (
+                <li>
+                  <a
+                    href={l.href}
+                    class="text-sm text-[color:var(--text-muted)] transition-colors hover:text-[color:var(--text)]"
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))
+      }
+    </div>
+
+    <hr class="hairline my-10" />
+
+    <div class="flex flex-col gap-4 text-xs text-[color:var(--text-dim)] sm:flex-row sm:items-center sm:justify-between">
+      <p>© {year} Dr. Axel Schumacher · Grailmaster · Munich, Germany</p>
+      <nav class="flex flex-wrap gap-x-5 gap-y-2" aria-label="Legal">
+        <a href="/imprint" class="hover:text-[color:var(--text-muted)]">Imprint</a>
+        <a href="/privacy" class="hover:text-[color:var(--text-muted)]">Privacy</a>
+        <a href="/about" class="hover:text-[color:var(--text-muted)]">Contact</a>
+      </nav>
+    </div>
+
+    <p class="mt-6 font-[family-name:var(--font-mono)] text-[0.68rem] leading-relaxed text-[color:var(--text-dim)]">
+      parallel-space.eu · draxelschumacher.com · amoro.app now unify under grailmaster.com
+    </p>
+  </div>
+</footer>

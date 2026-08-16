@@ -1,0 +1,1102 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+/* ------------------------------------------------------------------
+   Mortality comparison. Every comparator kills FEWER people per year
+   than loneliness and yet has a dedicated global financing mechanism.
+   That contrast — not the absolute number — is the argument.
+   Sources: WHO Commission on Social Connection (30 June 2025);
+   UNAIDS Global AIDS Update / fact sheet 2025 (2024 data);
+   WHO World Malaria Report 2025 (2024 data);
+   WHO, "Global status report on alcohol and drug use" (2019 data).
+   ------------------------------------------------------------------ */
+const MAXD = 871000;
+const mortality = [
+  {
+    name: "Loneliness & social isolation",
+    label: "871 000",
+    deaths: 871000,
+    year: "2025 est.",
+    fund: "No fund. No agency. No budget line.",
+    hl: true,
+  },
+  {
+    name: "HIV / AIDS",
+    label: "630 000",
+    deaths: 630000,
+    year: "2024",
+    fund: "Global Fund · PEPFAR · UNAIDS",
+    hl: false,
+  },
+  {
+    name: "Malaria",
+    label: "610 000",
+    deaths: 610000,
+    year: "2024",
+    fund: "Global Fund · PMI · WHO Global Malaria Programme",
+    hl: false,
+  },
+  {
+    name: "Drug use disorders",
+    label: "600 000",
+    deaths: 600000,
+    year: "2019",
+    fund: "UNODC · national opioid strategies · treatment & harm reduction",
+    hl: false,
+  },
+].map((m) => ({ ...m, pct: (m.deaths / MAXD) * 100 }));
+
+/* ------------------------------------------------------------------
+   Fertility curves. World Bank SP.DYN.TFRT.IN, series updated
+   2026-07-13. Plot area x 86→880, y 44→430, value domain 0.6→6.2.
+   ------------------------------------------------------------------ */
+const west = [
+  { name: "United States", c: "#4CC0D8", last: "1.63", d: "M86.0,173.0 C96.3,179.8 127.4,202.8 148.0,213.5 C168.7,224.2 189.4,226.7 210.1,237.1 C230.7,247.5 251.4,269.8 272.1,275.7 C292.8,281.5 313.4,272.7 334.1,272.0 C354.8,271.4 375.5,274.0 396.2,271.9 C416.8,269.7 437.5,260.2 458.2,258.9 C478.9,257.7 499.5,264.3 520.2,264.5 C540.9,264.8 561.6,261.0 582.2,260.2 C602.9,259.5 623.6,259.1 644.3,260.2 C665.0,261.4 685.6,265.2 706.3,267.1 C727.0,269.0 747.7,269.2 768.3,271.9 C789.0,274.5 811.8,280.9 830.4,282.9 C849.0,284.9 871.7,283.5 880.0,283.7" },
+  { name: "France", c: "#5B9BF0", last: "1.61", d: "M86.0,216.9 C96.3,217.0 127.4,214.8 148.0,217.5 C168.7,220.2 189.4,226.5 210.1,233.3 C230.7,240.1 251.4,252.1 272.1,258.4 C292.8,264.8 313.4,269.4 334.1,271.5 C354.8,273.6 375.5,270.2 396.2,270.9 C416.8,271.7 437.5,274.8 458.2,275.9 C478.9,277.0 499.5,278.6 520.2,277.5 C540.9,276.4 561.6,271.2 582.2,269.4 C602.9,267.5 623.6,267.9 644.3,266.6 C665.0,265.3 685.6,261.9 706.3,261.7 C727.0,261.5 747.7,263.6 768.3,265.6 C789.0,267.5 811.8,270.0 830.4,273.2 C849.0,276.3 871.7,282.7 880.0,284.6" },
+  { name: "United Kingdom", c: "#8E8BF0", last: "1.55", d: "M86.0,225.6 C96.3,224.1 127.4,214.1 148.0,216.4 C168.7,218.7 189.4,229.7 210.1,239.3 C230.7,248.8 251.4,268.8 272.1,273.7 C292.8,278.6 313.4,268.6 334.1,268.8 C354.8,269.0 375.5,274.2 396.2,274.8 C416.8,275.5 437.5,271.9 458.2,272.6 C478.9,273.3 499.5,277.4 520.2,279.2 C540.9,280.9 561.6,283.5 582.2,283.0 C602.9,282.5 623.6,279.0 644.3,276.4 C665.0,273.9 685.6,268.1 706.3,267.7 C727.0,267.4 747.7,271.1 768.3,274.3 C789.0,277.4 811.8,284.6 830.4,286.8 C849.0,289.1 871.7,287.7 880.0,287.9" },
+  { name: "Germany", c: "#B57FD8", last: "1.36", d: "M86.0,243.1 C96.3,241.9 127.4,232.9 148.0,236.0 C168.7,239.1 189.4,252.2 210.1,261.7 C230.7,271.3 251.4,288.0 272.1,293.4 C292.8,298.7 313.4,293.2 334.1,293.9 C354.8,294.6 375.5,297.8 396.2,297.7 C416.8,297.6 437.5,292.3 458.2,293.4 C478.9,294.5 499.5,303.7 520.2,304.3 C540.9,304.9 561.6,298.0 582.2,297.2 C602.9,296.4 623.6,299.5 644.3,299.4 C665.0,299.3 685.6,298.1 706.3,296.6 C727.0,295.2 747.7,291.9 768.3,290.7 C789.0,289.4 811.8,287.7 830.4,289.0 C849.0,290.3 871.7,296.8 880.0,298.3" },
+  { name: "Italy", c: "#6BC98A", last: "1.18", d: "M86.0,241.5 C96.3,239.6 127.4,230.4 148.0,230.5 C168.7,230.8 189.4,238.7 210.1,242.6 C230.7,246.5 251.4,247.3 272.1,254.1 C292.8,260.8 313.4,276.2 334.1,283.0 C354.8,289.8 375.5,292.2 396.2,295.0 C416.8,297.8 437.5,297.8 458.2,299.9 C478.9,302.0 499.5,306.9 520.2,307.5 C540.9,308.2 561.6,305.0 582.2,303.7 C602.9,302.5 623.6,301.6 644.3,299.9 C665.0,298.3 685.6,294.2 706.3,293.9 C727.0,293.7 747.7,296.5 768.3,298.3 C789.0,300.1 811.8,303.2 830.4,304.8 C849.0,306.5 871.7,307.5 880.0,308.1" },
+  { name: "Spain", c: "#2E9BA0", last: "1.10", d: "M86.0,216.4 C96.3,215.6 127.4,211.8 148.0,212.0 C168.7,212.2 189.4,215.9 210.1,217.5 C230.7,219.1 251.4,215.6 272.1,221.3 C292.8,226.9 313.4,241.1 334.1,251.3 C354.8,261.6 375.5,275.1 396.2,283.0 C416.8,290.8 437.5,293.9 458.2,298.3 C478.9,302.6 499.5,307.9 520.2,309.2 C540.9,310.5 561.6,307.5 582.2,306.0 C602.9,304.4 623.6,301.3 644.3,299.9 C665.0,298.6 685.6,297.7 706.3,297.7 C727.0,297.7 747.7,298.2 768.3,299.9 C789.0,301.7 811.8,306.0 830.4,308.1 C849.0,310.2 871.7,311.7 880.0,312.5" },
+];
+
+const east = [
+  { name: "Japan", c: "#D96B92", last: "1.15", d: "M86.0,263.3 C96.3,262.1 127.4,256.8 148.0,255.7 C168.7,254.5 189.4,254.1 210.1,256.2 C230.7,258.3 251.4,264.8 272.1,268.2 C292.8,271.7 313.4,275.6 334.1,277.0 C354.8,278.4 375.5,274.5 396.2,276.4 C416.8,278.4 437.5,285.4 458.2,288.4 C478.9,291.5 499.5,293.4 520.2,295.0 C540.9,296.6 561.6,296.8 582.2,298.3 C602.9,299.8 623.6,304.1 644.3,303.7 C665.0,303.5 685.6,298.4 706.3,296.6 C727.0,294.9 747.7,292.8 768.3,293.4 C789.0,293.9 811.8,297.2 830.4,299.9 C849.0,302.6 871.7,308.1 880.0,309.8" },
+  { name: "Singapore", c: "#E4695E", last: "0.97", d: "M86.0,58.0 C96.3,68.1 127.4,93.6 148.0,118.1 C168.7,142.6 189.4,181.3 210.1,204.9 C230.7,228.5 251.4,248.1 272.1,259.5 C292.8,270.9 313.4,269.0 334.1,273.2 C354.8,277.4 375.5,284.7 396.2,284.6 C416.8,284.6 437.5,273.2 458.2,272.6 C478.9,272.0 499.5,279.3 520.2,281.3 C540.9,283.5 561.6,281.5 582.2,285.2 C602.9,288.9 623.6,299.6 644.3,303.7 C665.0,307.9 685.6,309.6 706.3,309.8 C727.0,309.9 747.7,304.4 768.3,304.8 C789.0,305.3 811.8,310.0 830.4,312.5 C849.0,314.9 871.7,318.4 880.0,319.6" },
+  { name: "Hong Kong", c: "#EE8B57", last: "0.84", d: "M86.0,94.9 C96.3,96.3 127.4,88.3 148.0,103.7 C168.7,119.2 189.4,167.1 210.1,187.7 C230.7,208.2 251.4,214.8 272.1,227.0 C292.8,239.2 313.4,250.1 334.1,260.8 C354.8,271.5 375.5,284.1 396.2,291.1 C416.8,298.2 437.5,301.3 458.2,303.1 C478.9,304.8 499.5,299.6 520.2,301.8 C540.9,304.1 561.6,313.2 582.2,316.2 C602.9,319.3 623.6,321.0 644.3,320.2 C665.0,319.3 685.6,313.2 706.3,311.0 C727.0,308.9 747.7,305.0 768.3,307.2 C789.0,309.4 811.8,321.1 830.4,324.3 C849.0,327.6 871.7,326.2 880.0,326.6" },
+  { name: "South Korea", c: "#F0B44E", last: "0.75", d: "M86.0,45.2 C96.3,55.3 127.4,92.4 148.0,105.7 C168.7,119.0 189.4,111.9 210.1,125.2 C230.7,138.4 251.4,169.7 272.1,185.2 C292.8,200.8 313.4,202.4 334.1,218.6 C354.8,234.7 375.5,270.5 396.2,281.9 C416.8,293.3 437.5,286.5 458.2,286.8 C478.9,287.0 499.5,282.5 520.2,283.3 C540.9,284.2 561.6,286.7 582.2,291.7 C602.9,296.7 623.6,311.0 644.3,313.3 C665.0,315.6 685.6,307.0 706.3,305.6 C727.0,304.2 747.7,301.4 768.3,304.9 C789.0,308.4 811.8,322.4 830.4,326.9 C849.0,331.3 871.7,330.9 880.0,331.7" },
+];
+
+const xTicks = [
+  { year: "1960", x: 86 },
+  { year: "1970", x: 210.1 },
+  { year: "1980", x: 334.1 },
+  { year: "1990", x: 458.2 },
+  { year: "2000", x: 582.2 },
+  { year: "2010", x: 706.3 },
+  { year: "2020", x: 830.4 },
+];
+
+const yTicks = [
+  { v: "6", y: 44.9 },
+  { v: "5", y: 99.5 },
+  { v: "4", y: 154.1 },
+  { v: "3", y: 208.7 },
+  { v: "2", y: 263.3 },
+  { v: "1", y: 317.9 },
+];
+
+/* Right-edge end points (2024 value -> y) and legend row geometry. */
+const YV = (v) => 34 + (6.2 - v) * 54.6;
+const REPL = YV(2.1);
+
+const dropoffs = [
+  {
+    island: "Islands 01 & 02",
+    body: "Vast numbers are stranded by infinite option sets and never form a lasting pair-bond.",
+  },
+  {
+    island: "Island 03",
+    body: "Supernormal substitutes and friction-free novelty satisfy the sex drive without ever crossing into real-world partnership.",
+  },
+  {
+    island: "Island 04",
+    body: "Virtual status and curated online tribes satisfy the hunger for belonging, leaving the biological clock to quietly run out.",
+  },
+];
+
+const services = [
+  {
+    name: "Policy & strategy advisory",
+    body: "Problem framing, stakeholder mapping, and intervention portfolios for national or local strategy on loneliness and social connection. Benchmarking against what other governments have already tried — and what the evidence says actually moved.",
+  },
+  {
+    name: "Program design",
+    body: "Community, campus, ageing, relocation, or workforce connection programs designed around social structure rather than awareness campaigns. Includes social-prescribing network design and referral logic.",
+  },
+  {
+    name: "Measurement & impact design",
+    body: "Baseline logic, structural indicators, outcome selection, and ethical data handling. What to measure so that a program can be judged honestly — and so a null result is still informative.",
+  },
+  {
+    name: "Pilot & evaluation",
+    body: "Small, time-bounded tests with explicit learning questions and decision criteria. Designed so the pilot answers whether to scale, revise, or stop.",
+  },
+  {
+    name: "Training & capacity building",
+    body: "Practical sociogram-informed tools for frontline professionals — community health workers, student services, volunteer coordinators, HR and people teams. Train-the-trainer modules where scale is required.",
+  },
+];
+
+const audiences = [
+  "Ministries of health, social affairs, and family policy",
+  "Municipal and regional government running loneliness strategies",
+  "Public health bodies, insurers, and social-prescribing schemes",
+  "Universities and student services",
+  "Professional sports clubs and elite academies",
+  "Mission-led employers and large workforces",
+  "Foundations funding social-connection work",
+];
+
+const speakingTopics = [
+  "The loneliness pandemic — what the WHO Commission did and did not settle",
+  "Loneliness as measurable structure, not a mood",
+  "The sociogram: making a population's social architecture legible",
+  "The Great Decoupling — why falling birth rates are a connection problem",
+  "AI companionship and the human partnership market",
+];
+
+const speakingFormats = [
+  "Keynote, 30–45 minutes",
+  "Closed-door briefing for policy or executive teams",
+  "Half-day workshop with a working group",
+  "Panel and moderated discussion",
+  "University lecture or seminar",
+];
+---
+
+<Layout
+  theme="lab"
+  title="Loneliness Strategy, Measurement & Pilot Design | Dr. Axel Schumacher"
+  description="Advisory for governments, health bodies, universities, employers and sports clubs: measure the social structures behind the loneliness pandemic, design targeted interventions, and evaluate pilots honestly."
+>
+  {/* ===== HERO ===== */}
+  <section class="hero-org glow-top relative overflow-hidden border-b border-[color:var(--border)]">
+    <div class="hero-photo" aria-hidden="true"></div>
+    <div class="container-x relative z-10 py-24 md:py-28">
+      <span class="eyebrow">For governments, institutions & clubs</span>
+      <h1 class="mt-6 max-w-4xl text-[clamp(2.2rem,5vw,3.6rem)] font-bold">
+        Loneliness is now a global health emergency. You cannot solve what you cannot see.
+      </h1>
+      <p class="lead mt-7 max-w-xl text-lg">
+        In June 2025 the World Health Organization put a number on it: one in six people worldwide,
+        and 871,000 deaths a year. The mandate now exists. The method mostly does not. I work with
+        institutions on the part that has been missing — turning loneliness from a feeling people
+        report into a structure you can see, target, and solve.
+      </p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="#enquiry" class="btn btn-primary">Discuss a pilot</a>
+        <a href="#scale" class="btn btn-ghost">See the evidence</a>
+      </div>
+      <div class="pill-row">
+        <span class="pill">Ph.D. human genetics</span>
+        <span class="pill">30+ years in clinical research environments</span>
+        <span class="pill">Published sociogram methodology</span>
+        <span class="pill">Author, <em>Ending Loneliness</em></span>
+        <span class="pill">Munich · EU-based</span>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== THE SCALE ===== */}
+  <section id="scale" class="section">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">The scale</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+          Loneliness kills more people than HIV. Or malaria. Or drugs.
+        </h2>
+        <p class="lead mt-6">
+          Each of those has a dedicated global fund, a UN agency, and national programmes financed in
+          the billions. Loneliness kills more people than any of them and has a commission and a
+          report.
+        </p>
+      </div>
+
+      <figure
+        class="reveal mt-12 rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] p-5 md:p-8"
+      >
+        <div class="mort-head" aria-hidden="true">
+          <span>Cause</span>
+          <span>Estimated deaths per year</span>
+          <span>Dedicated global financing</span>
+        </div>
+
+        <ul class="mort-list">
+          {
+            mortality.map((m) => (
+              <li class={m.hl ? "mort-row is-hl" : "mort-row"}>
+                <div class="mort-name">
+                  {m.name}
+                  <span class="mort-year">{m.year}</span>
+                </div>
+                <div class="mort-track">
+                  <div class="mort-barwrap">
+                    <div class="mort-bar" style={`width:${m.pct}%`} />
+                  </div>
+                  <span class="mort-value">{m.label}</span>
+                </div>
+                <div class="mort-fund">{m.fund}</div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <figcaption
+          class="mt-6 border-t border-[color:var(--border)] pt-4 text-xs leading-relaxed text-[color:var(--text-dim)]"
+        >
+          Estimated deaths per year. Sources: WHO Commission on Social Connection, <em
+            >From Loneliness to Social Connection</em
+          >, 30 June 2025; UNAIDS fact sheet 2025 (2024 data); WHO World Malaria Report 2025 (2024
+          data); WHO global status report on alcohol and drug use (2019 data — the most recent
+          comparable global estimate for deaths attributable to psychoactive drug use). Note the
+          methods differ: the loneliness figure is an attributable-risk estimate derived from
+          association studies, not a cause-of-death code on a certificate. It should be read as an
+          order of magnitude, not a body count.
+        </figcaption>
+      </figure>
+
+      <div class="note-box">
+        <h3>Why this is not simply a mental-health problem</h3>
+        <p>
+          The mortality signal does not run mainly through suicide. It runs through cardiovascular
+          disease, stroke, type 2 diabetes, immune function and dementia — which is why House and
+          colleagues concluded, as far back as 1988, that social relationships constitute a risk
+          factor rivalling smoking, blood pressure and obesity. Loneliness belongs on a health
+          ministry's balance sheet, not only in its mental-health directorate.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== QUOTE: NORMAN COUSINS ===== */}
+  <section class="photo-band">
+    <div class="container-x">
+      <div class="quote-layout">
+        <div class="quote-panel reveal">
+          <span class="eyebrow">The human case</span>
+          <blockquote>
+            “The eternal quest of the individual human being is to shatter his loneliness.”
+          </blockquote>
+          <p class="attrib">
+            Norman Cousins (1915–1990) — American journalist, author and peace advocate; editor of
+            the <em>Saturday Review</em> for three decades.
+          </p>
+        </div>
+
+        {/* reveal sits on a wrapper: .reveal.is-visible sets transform:none,
+            which would otherwise cancel the tilt-card's rotation */}
+        <div class="portrait-wrap reveal">
+          <figure class="tilt-card portrait-hist">
+            <img
+              src="/images/photos/norman-cousins.webp"
+              alt="Portrait of Norman Cousins"
+              width="300"
+              height="399"
+              loading="lazy"
+            />
+          </figure>
+        </div>
+      </div>
+
+      <p
+        class="relative z-[1] mx-auto mt-12 max-w-2xl text-center leading-relaxed text-[color:var(--text-muted)]"
+      >
+        Cousins wrote that decades before the mortality data existed. The quest is not new — what is
+        new is that the structures behind it can now be measured, targeted and evaluated.
+      </p>
+    </div>
+  </section>
+
+  {/* ===== MEASUREMENT GAP ===== */}
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x grid gap-12 md:grid-cols-[0.85fr_1.15fr]">
+      <div class="reveal">
+        <span class="eyebrow">The measurement gap</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+          Most loneliness programs cannot tell whether they worked.
+        </h2>
+      </div>
+      <div class="reveal space-y-5 leading-relaxed text-[color:var(--text-muted)]">
+        <p>
+          Self-reported loneliness scales tell you how a population feels. They do not tell you which
+          structural conditions produced that feeling, which of them a program can change, or whether
+          a given intervention changed them. That gap is why well-funded initiatives so often end
+          without a defensible answer about impact.
+        </p>
+        <p>
+          My work applies network methods — sociograms and structural indicators — to make the social
+          architecture of a population legible: where repeated contact exists, where ties are
+          concentrated or absent, and where bridges between groups are missing. That gives a program
+          something concrete to target and a baseline against which to evaluate.
+        </p>
+        <p class="text-[color:var(--text)]">
+          Eight years after the first minister for loneliness was appointed, not one country can show
+          a population whose loneliness measurably fell and stayed down. The world does not need
+          another awareness campaign — it needs a different class of intervention, built to be
+          tested.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== DOWNSTREAM: FERTILITY ===== */}
+  <section id="fertility" class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Downstream consequence</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">A demographic disaster.</h2>
+        <p class="lead mt-6">
+          We treat falling fertility as an economic problem with an economic fix — tax credits,
+          subsidised daycare, paternal leave. It doesn't work. The birth-rate collapse isn't a
+          financial calculation; it is a relational breakdown. It is what happens when human
+          partnerships stop forming.
+        </p>
+        <p class="mt-4 text-sm leading-relaxed text-[color:var(--text-muted)]">
+          Every line below crosses the replacement threshold — 2.1 births per woman — and never
+          recovers.
+        </p>
+      </div>
+
+      <figure
+        class="reveal mx-auto mt-12 max-w-4xl rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] p-4 md:p-7"
+      >
+        <svg
+          viewBox="0 0 940 382"
+          role="img"
+          aria-label="Line chart of total fertility rate from 1960 to 2024 for six Western countries and four East Asian countries and territories. All fall below the replacement rate of 2.1 births per woman and none recovers. By 2024 South Korea is at 0.75, Hong Kong 0.84, Singapore 0.97, Spain 1.10, Japan 1.15, Italy 1.18, Germany 1.36, the United Kingdom 1.55, France 1.61 and the United States 1.63."
+          class="h-auto w-full"
+        >
+          <defs>
+            <linearGradient id="subrep" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.13" />
+              <stop offset="100%" stop-color="var(--accent)" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+
+          {/* grid */}
+          {
+            yTicks.map((t) => (
+              <line x1="86" x2="880" y1={t.y} y2={t.y} stroke="var(--border)" stroke-width="1" />
+            ))
+          }
+
+          {/* sub-replacement zone */}
+          <rect x="86" y={REPL} width="794" height={340 - REPL} fill="url(#subrep)" />
+
+          {/* replacement line */}
+          <line
+            x1="86"
+            x2="880"
+            y1={REPL}
+            y2={REPL}
+            stroke="var(--accent)"
+            stroke-width="2.4"
+            stroke-dasharray="9 6"
+            opacity="0.95"></line>
+          <text
+            x="878"
+            y={REPL - 11}
+            fill="var(--accent)"
+            font-size="12"
+            font-weight="600"
+            text-anchor="end"
+            font-family="var(--font-mono, monospace)"
+            letter-spacing="0.1em">REPLACEMENT · 2.1</text
+          >
+
+          {/* axes */}
+          {
+            yTicks.map((t) => (
+              <text
+                x="72"
+                y={t.y + 4}
+                fill="var(--text-dim)"
+                font-size="12"
+                text-anchor="end"
+                font-family="var(--font-mono, monospace)"
+              >
+                {t.v}
+              </text>
+            ))
+          }
+          {
+            xTicks.map((t) => (
+              <text
+                x={t.x}
+                y="368"
+                fill="var(--text-dim)"
+                font-size="12"
+                text-anchor="middle"
+                font-family="var(--font-mono, monospace)"
+              >
+                {t.year}
+              </text>
+            ))
+          }
+
+          {/* West */}
+          {
+            west.map((c) => (
+              <g>
+                <path
+                  d={c.d}
+                  fill="none"
+                  stroke={c.c}
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  opacity="0.9"
+                />
+                <circle cx="880" cy={YV(Number(c.last))} r="3.4" fill={c.c} />
+              </g>
+            ))
+          }
+          {/* East Asia */}
+          {
+            east.map((c) => (
+              <g>
+                <path
+                  d={c.d}
+                  fill="none"
+                  stroke={c.c}
+                  stroke-width="2.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <circle cx="880" cy={YV(Number(c.last))} r="3.9" fill={c.c} />
+              </g>
+            ))
+          }
+
+          {/* legend, overlaid in the empty upper-right of the plot */}
+          <g class="chart-legend">
+            <rect
+              x="500"
+              y="34"
+              width="380"
+              height="158"
+              rx="11"
+              fill="var(--bg)"
+              opacity="0.82"></rect>
+            <rect
+              x="500"
+              y="34"
+              width="380"
+              height="158"
+              rx="11"
+              fill="none"
+              stroke="var(--border-strong)"></rect>
+
+            <text
+              x="518"
+              y="58"
+              fill="var(--text-dim)"
+              font-size="10.5"
+              letter-spacing="0.16em"
+              font-family="var(--font-mono, monospace)">EAST ASIA · 2024</text
+            >
+            {
+              east.map((c, i) => (
+                <g>
+                  <rect x={518} y={76 + i * 20} width="15" height="3" rx="1.5" fill={c.c} />
+                  <text x={541} y={81 + i * 20} fill="var(--text)" font-size="12.5">
+                    {c.name}
+                  </text>
+                  <text
+                    x={676}
+                    y={81 + i * 20}
+                    fill={c.c}
+                    font-size="12.5"
+                    font-weight="600"
+                    text-anchor="end"
+                    font-family="var(--font-mono, monospace)"
+                  >
+                    {c.last}
+                  </text>
+                </g>
+              ))
+            }
+
+            <text
+              x="700"
+              y="58"
+              fill="var(--text-dim)"
+              font-size="10.5"
+              letter-spacing="0.16em"
+              font-family="var(--font-mono, monospace)">WEST · 2024</text
+            >
+            {
+              west.map((c, i) => (
+                <g>
+                  <rect x={700} y={76 + i * 20} width="15" height="3" rx="1.5" fill={c.c} />
+                  <text x={723} y={81 + i * 20} fill="var(--text-muted)" font-size="12.5">
+                    {c.name}
+                  </text>
+                  <text
+                    x={864}
+                    y={81 + i * 20}
+                    fill={c.c}
+                    font-size="12.5"
+                    font-weight="600"
+                    text-anchor="end"
+                    font-family="var(--font-mono, monospace)"
+                  >
+                    {c.last}
+                  </text>
+                </g>
+              ))
+            }
+          </g>
+        </svg>
+
+        <ul class="mt-5 grid grid-cols-2 gap-x-5 gap-y-2 md:hidden">
+          {
+            [...east, ...west].map((c) => (
+              <li class="flex items-center gap-2 text-xs">
+                <span
+                  class="inline-block h-[3px] w-4 shrink-0 rounded-full"
+                  style={`background:${c.c}`}
+                  aria-hidden="true"
+                />
+                <span class="truncate text-[color:var(--text-muted)]">{c.name}</span>
+                <span
+                  class="ml-auto font-[family-name:var(--font-mono)] font-semibold"
+                  style={`color:${c.c}`}
+                >
+                  {c.last}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+
+        <figcaption
+          class="mt-5 border-t border-[color:var(--border)] pt-4 text-xs leading-relaxed text-[color:var(--text-dim)]"
+        >
+          Total fertility rate, births per woman, 1960–2024. Source: World Bank, indicator
+          SP.DYN.TFRT.IN (series updated July 2026). Replacement level is conventionally 2.1 in
+          low-mortality populations. Curves are drawn through five-year observations. China, not
+          shown, fell below 1.0 in 2023.
+        </figcaption>
+      </figure>
+
+      {/* THE GREAT DECOUPLING */}
+      <div class="mt-16 max-w-2xl">
+        <span class="eyebrow">The Great Decoupling</span>
+        <h3 class="mt-5 text-2xl font-semibold md:text-3xl">
+          Evolution never installed a direct “reproduce now” drive. It built a stepping-stone path
+          across an archipelago of proximate instincts.
+        </h3>
+        <p class="mt-6 leading-relaxed text-[color:var(--text-muted)]">
+          Nobody lies awake aching for an increase in their inclusive fitness. We crave status,
+          attachment, sex, belonging, and legacy. In the ancestral environment these instincts were
+          welded together like bridges between islands: stepping onto the first naturally carried you
+          to the next, and the final shore was always a new generation.
+        </p>
+        <p class="mt-5 leading-relaxed text-[color:var(--text)]">
+          Modernity didn’t destroy our desires — it severed the bridges between the islands.
+        </p>
+      </div>
+
+      <figure
+        class="reveal mt-10 overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)]"
+      >
+        <img
+          src="/images/photos/generativity.webp"
+          width="2048"
+          height="1117"
+          loading="lazy"
+          decoding="async"
+          alt="Illustration titled Generativity is Dismantled: human instincts severed from reproduction. Five islands sit in dark water, once linked in a chain from an origin point. Island 1, mate-preference and status-seeking, severed by virtual status, economic independence and the welfare state. Island 2, pair-bonding and attachment, severed by swipe interfaces, AI companions and commitment drift. Island 3, sexual desire and orgasm drive, severed by pornography, sexual novelty and casual sex. Island 4, belonging and tribal-approval, severed by supernormal tribal approval on social media and curated virtual tribes. Island 5, parental care and nurturing response, severed by the failure of all previous links, opportunity cost and intensive parenting norms — the final island is rarely reached."
+          class="block h-auto w-full"
+        />
+      </figure>
+
+      <div class="mt-10 grid gap-10 md:grid-cols-2">
+        <div class="reveal space-y-5 leading-relaxed text-[color:var(--text-muted)]">
+          <p>
+            Today every island can be reached in total isolation — and increasingly through
+            supernormal digital counterfeits. The ancestral path has been converted into a row of
+            disconnected landfalls: a thirsty animal that finds sweet water on the very first island
+            has no evolutionary incentive to traverse the rest of the chain.
+          </p>
+          <p class="text-[color:var(--text)]">
+            Generativity collapses not because people suddenly hate children, but because the
+            machinery that forced them across the archipelago has been dismantled.
+          </p>
+        </div>
+
+        <div class="reveal">
+          <h4 class="text-lg font-semibold">Why pro-natal policies fail</h4>
+          <p class="mt-4 leading-relaxed text-[color:var(--text-muted)]">
+            Conventional policy treats falling fertility as a financial problem at the very last
+            island — the cost of raising children and subsidising daycare. In reality the drop-offs
+            happen all the way up the chain.
+          </p>
+          <ul class="mt-6 space-y-4">
+            {
+              dropoffs.map((d) => (
+                <li class="border-l border-[color:var(--border-strong)] pl-4">
+                  <span class="font-[family-name:var(--font-mono)] text-[0.68rem] uppercase tracking-[0.18em] text-accent">
+                    {d.island}
+                  </span>
+                  <p class="mt-1.5 text-sm leading-relaxed text-[color:var(--text-muted)]">{d.body}</p>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="mt-6 leading-relaxed text-[color:var(--text)]">
+            By the time a government subsidises childcare, most of the people who will never have
+            children exited three islands back. We pour staggering resources into training people to
+            be economically productive, and almost nothing into teaching them to build the bridges
+            that a family rests on.
+          </p>
+        </div>
+      </div>
+
+      {/* whitepaper */}
+      <div class="card mt-12 grid gap-8 p-8 md:grid-cols-[1.1fr_0.9fr] md:items-center md:p-10">
+        <div>
+          <span class="chip">Forthcoming whitepaper</span>
+          <h3 class="mt-5 text-2xl font-semibold">The Great Decoupling</h3>
+          <p class="mt-2 text-[color:var(--text-muted)] italic">
+            How civilization severed desire from descent
+          </p>
+          <p class="mt-5 text-sm leading-relaxed text-[color:var(--text-muted)]">
+            The full argument: what evolution installed and what it conspicuously did not, how each
+            weld was cut, why the counterfeits are so dangerously satisfying, why pro-natal spending
+            fails, and what the diagnosis implies for states. In preparation.
+          </p>
+        </div>
+        <div class="rounded-xl border border-dashed border-[color:var(--border-strong)] p-6 text-center">
+          <span class="chip">Brevo signup embed</span>
+          <p class="mt-4 text-xs leading-relaxed text-[color:var(--text-dim)]">
+            Single-field email capture, tagged <code>decoupling-waitlist</code> so this audience stays
+            separate from the coaching list.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== SERVICES ===== */}
+  <section id="services" class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Scope of work</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Five ways engagements usually run.</h2>
+        <p class="lead mt-6">
+          Engagements are scoped individually, from a short advisory review to a multi-phase pilot
+          with evaluation. Most begin with a scoping call and a written problem framing.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        {
+          services.map((s) => (
+            <div class="card p-7">
+              <h3 class="text-lg font-semibold">{s.name}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ===== WHO ===== */}
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x grid gap-12 md:grid-cols-[1.05fr_0.95fr] md:items-center">
+      <div class="reveal">
+        <span class="eyebrow">Who I work with</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+          Organisations already running loneliness programs — and needing to prove they work.
+        </h2>
+        <p class="mt-6 leading-relaxed text-[color:var(--text-muted)]">
+          Governments have already started. The WHO Commission on Social Connection made connection
+          a global health priority in June 2025, and national programmes now run from the UK and
+          Japan to Australia, Singapore and South Korea. Almost none of them can yet demonstrate,
+          structurally, whether what they fund is working.
+        </p>
+        <p class="mt-5 leading-relaxed text-[color:var(--text-muted)]">
+          Institutional work runs entirely separately from my individual coaching practice —
+          different scope, different contracting, different data handling.
+        </p>
+        <ul class="offer__list mt-9">
+          {audiences.map((a) => <li>{a}</li>)}
+        </ul>
+      </div>
+      <div class="reveal">
+        <img
+          src="/images/photos/axel-conference.webp"
+          width="1536"
+          height="1024"
+          loading="lazy"
+          decoding="async"
+          alt="Dr. Axel Schumacher in conversation with a colleague in a conference foyer, other delegates in the background."
+          class="w-full rounded-2xl border border-[color:var(--border)]"
+        />
+      </div>
+    </div>
+  </section>
+
+  {/* ===== SPORTS ===== */}
+  <section id="sport" class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="grid gap-10 md:grid-cols-[1.05fr_0.95fr] md:items-center">
+        <div class="reveal">
+          <span class="eyebrow">Elite sport</span>
+          <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+            The same problem, inside a squad — where it is measured in points.
+          </h2>
+          <p class="mt-6 leading-relaxed text-[color:var(--text-muted)]">
+            Professional athletes sit in the loneliest age band, are moved between countries at
+            short notice, and work in a culture where admitting relational distress is read as
+            weakness. In a first-team squad of twenty-five, research suggests around seven players a
+            season experience significant distress from relationship breakdown or isolation.
+          </p>
+          <p class="mt-5 leading-relaxed text-[color:var(--text-muted)]">
+            Clubs manage sleep, load, nutrition and biomechanics to three decimal places, and leave
+            this entirely unmanaged — largely because internal staff cannot solve it. A psychologist
+            paid by the club is structurally unable to hold what a player will not risk the manager
+            hearing.
+          </p>
+          <a href="/sport/" class="btn btn-primary mt-8">The work with clubs and academies</a>
+        </div>
+
+        <div class="card reveal p-7 md:p-8">
+          <p class="font-[family-name:var(--font-mono)] text-[0.68rem] uppercase tracking-[0.18em] text-accent">
+            Football as the worked example
+          </p>
+          <ul class="offer__list mt-5">
+            <li>Relocation and integration for incoming players and their partners</li>
+            <li>Acute relationship crisis, handled outside the club's reporting lines</li>
+            <li>Squad network review — who is actually integrated, and who is not</li>
+            <li>Academy modules for players entering professional life</li>
+          </ul>
+          <p class="mt-6 text-xs leading-relaxed text-[color:var(--text-dim)]">
+            Applies equally to any elite sport that relocates young athletes and concentrates their
+            social world inside the club. Football is where the evidence base and the money are
+            clearest.
+          </p>
+        </div>
+      </div>
+
+      <figure class="reveal mt-14">
+        <div class="squad">
+          <img
+            src="/images/photos/football-squad.webp"
+            width="1536"
+            height="674"
+            loading="lazy"
+            decoding="async"
+            alt="A youth football squad of eleven — a goalkeeper in black and ten outfield players in dark red, roughly sixteen to eighteen years old — standing shoulder to shoulder in a line before kick-off in a floodlit stadium. Every one of them is smiling. Three of them, the third, sixth and ninth in the row, are marked with the labels Lonely, Heartbroken and Suicidal."
+            class="block h-auto w-full rounded-2xl border border-[color:var(--border)]"
+          />
+          <span class="squad-tag" style="left: 24.4%"><em>Lonely</em></span>
+          <span class="squad-tag" style="left: 50.9%"><em>Heartbroken</em></span>
+          <span class="squad-tag" style="left: 76.8%"><em>Suicidal</em></span>
+        </div>
+        <figcaption
+          class="mt-5 border-t border-[color:var(--border)] pt-4 text-xs leading-relaxed text-[color:var(--text-dim)]"
+        >
+          Three in eleven — the same proportion as the seven in twenty-five above. The photograph is
+          an illustration. The ratio is not.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  {/* ===== SPEAKING ===== */}
+  <section id="speaking" class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="grid gap-10 md:grid-cols-[0.95fr_1.05fr] md:items-center">
+        <div class="reveal">
+          <span class="eyebrow">Speaking</span>
+          <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+            Invite me to make the argument in the room.
+          </h2>
+          <p class="lead mt-6">
+            A geneticist explaining why your loneliness strategy is aimed at the wrong cohort tends
+            to change the conversation faster than another slide of survey results. I speak to policy
+            conferences, health congresses, universities, sports-industry events, and closed
+            executive sessions.
+          </p>
+        </div>
+        <div class="reveal">
+          <img
+            src="/images/photos/great-stage.webp"
+            width="1672"
+            height="941"
+            loading="lazy"
+            decoding="async"
+            alt="Dr. Axel Schumacher speaking on a keynote stage in front of a full auditorium, a wide screen behind him showing DNA helices and a network-mapped human figure."
+            class="w-full rounded-2xl border border-[color:var(--border)]"
+          />
+        </div>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        <div class="card p-7 md:p-8">
+          <h3 class="text-lg font-semibold">Talks</h3>
+          <ul class="offer__list mt-5">
+            {speakingTopics.map((t) => <li>{t}</li>)}
+          </ul>
+        </div>
+        <div class="card p-7 md:p-8">
+          <h3 class="text-lg font-semibold">Formats</h3>
+          <ul class="offer__list mt-5">
+            {speakingFormats.map((f) => <li>{f}</li>)}
+          </ul>
+          <p class="mt-6 text-sm leading-relaxed text-[color:var(--text-muted)]">
+            Delivered in English or German. Based in Munich; travelling across Europe. Fees scale with
+            the organisation — reduced or waived for public universities, schools, and non-profit
+            community work.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== ENQUIRY ===== */}
+  <section id="enquiry" class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Enquiry</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Start with a scoping conversation.</h2>
+        <p class="lead mt-6">
+          Tell me the population, the initiative already underway, and where the decision currently
+          sits. I'll reply with whether I can help and what a first phase would look like.
+        </p>
+      </div>
+
+      <div class="card mt-10 p-8 text-center md:p-12">
+        <span class="chip">Tally form embed — advisory</span>
+        <p class="mt-5 text-sm leading-relaxed text-[color:var(--text-muted)]">
+          Organisation, population served, current initiative, geography, decision stage, and desired
+          next step. Deliberately separate from the consumer coaching enquiry.
+        </p>
+        <a href="https://tally.so" class="link-underline mt-6 text-sm"> Set up the Tally form → </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ---------- HISTORIC PORTRAIT IN THE QUOTE BAND ----------
+     The Cousins photograph is a small archive scan (300 × 399) and is
+     warmer/flatter than the site's own photography. Framed square-on
+     (no off-centre crop) and pulled very slightly towards the page
+     palette so it sits inside the lab theme rather than on top of it.
+     --------------------------------------------------------- */
+  .portrait-hist img {
+    object-position: 50% 26%;
+    filter: saturate(0.88) contrast(1.04);
+  }
+
+  /* ---------- HERO BACKGROUND PHOTOGRAPH ----------
+     public/images/photos/urban-loneliness-hero.webp
+     Composition: lone figure left-of-centre, sociogram overlay bottom-right.
+     The copy sits on the left, so the scrim is weighted left-to-right:
+     opaque enough for AA text contrast over the figure, clearing to almost
+     nothing over the sociogram on the right.
+     ------------------------------------------------ */
+  .hero-org {
+    isolation: isolate;
+    min-height: 800px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-photo {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url("/images/photos/urban-loneliness-hero.webp");
+    background-size: cover;
+    background-position: 50% 88%;
+    background-repeat: no-repeat;
+  }
+
+  .hero-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      /* left-to-right legibility scrim — clears completely before the
+         seated figure (image x ~63%) so he and the sociogram stay sharp */
+      linear-gradient(
+        100deg,
+        var(--bg) 0%,
+        color-mix(in srgb, var(--bg) 88%, transparent) 18%,
+        color-mix(in srgb, var(--bg) 76%, transparent) 34%,
+        color-mix(in srgb, var(--bg) 52%, transparent) 48%,
+        color-mix(in srgb, var(--bg) 22%, transparent) 60%,
+        transparent 72%
+      ),
+      /* top + bottom fade into the page */
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--bg) 55%, transparent) 0%,
+        transparent 18%,
+        transparent 70%,
+        color-mix(in srgb, var(--bg) 32%, transparent) 84%,
+        color-mix(in srgb, var(--bg) 72%, transparent) 94%,
+        var(--bg) 100%
+      );
+  }
+
+  /* Tall/narrow viewports: photo becomes atmosphere only. */
+  @media (max-width: 1023px) {
+    .hero-org { min-height: 0; }
+    .hero-photo { background-position: 70% 60%; }
+    .hero-photo::after {
+      background: linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--bg) 55%, transparent) 0%,
+        color-mix(in srgb, var(--bg) 70%, transparent) 55%,
+        var(--bg) 100%
+      );
+    }
+  }
+
+  /* ---------- SQUAD PHOTO WITH LABELS ---------- */
+  .squad {
+    position: relative;
+  }
+
+  .squad-tag {
+    position: absolute;
+    top: 6%;
+    height: 34%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    pointer-events: none;
+  }
+
+  .squad-tag em {
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: 0.52rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+  }
+
+  .squad-tag::after {
+    content: "";
+    flex: 1;
+    width: 1px;
+    background: linear-gradient(
+      180deg,
+      var(--accent) 0%,
+      color-mix(in srgb, var(--accent) 55%, transparent) 55%,
+      transparent 100%
+    );
+  }
+
+  @media (min-width: 768px) {
+    .squad-tag em {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+    }
+  }
+
+  /* ---------- MORTALITY COMPARISON ---------- */
+  .mort-head {
+    display: none;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mort-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mort-row {
+    padding: 1.15rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .mort-row:last-child { border-bottom: 0; }
+
+  .mort-name {
+    font-size: 0.98rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+  }
+  .is-hl .mort-name { color: var(--text); font-weight: 600; }
+
+  .mort-year {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: var(--text-dim);
+  }
+
+  .mort-track {
+    display: grid;
+    grid-template-columns: 1fr 5.25rem;
+    align-items: center;
+    gap: 0.9rem;
+    margin-top: 0.6rem;
+  }
+
+  .mort-barwrap { min-width: 0; }
+
+  .mort-bar {
+    height: 26px;
+    border-radius: 3px;
+    background: var(--surface-2);
+    border: 1px solid var(--border-strong);
+  }
+  .is-hl .mort-bar {
+    background: var(--accent);
+    border-color: transparent;
+  }
+
+  .mort-value {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .is-hl .mort-value { color: var(--accent); }
+
+  .mort-fund {
+    margin-top: 0.55rem;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--text-dim);
+  }
+  .is-hl .mort-fund {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  @media (min-width: 768px) {
+    .mort-head {
+      display: grid;
+      grid-template-columns: 15rem 1fr 17rem;
+      gap: 1.5rem;
+    }
+    .mort-row {
+      display: grid;
+      grid-template-columns: 15rem 1fr 17rem;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 1.35rem 0;
+    }
+    .mort-name { display: block; }
+    .mort-year { display: block; margin-top: 0.2rem; }
+    .mort-track { margin-top: 0; }
+    .mort-fund { margin-top: 0; }
+  }
+
+  @media (max-width: 767px) {
+    .chart-legend { display: none; }
+  }
+</style>

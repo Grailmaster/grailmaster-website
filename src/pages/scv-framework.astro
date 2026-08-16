@@ -1,0 +1,596 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const preprintUrl = "https://doi.org/10.31235/osf.io/m6h58_v1";
+const osfUrl = "https://osf.io/ugstj/overview";
+
+const rings = [
+  {
+    n: "Ring 1",
+    name: "Inner Fellowship",
+    count: "~5",
+    body: "The relationships with the highest daily leverage on your nervous system — your partner, your closest friend, a parent or sibling. Anyone whose mood you feel in your chest before they speak.",
+  },
+  {
+    n: "Ring 2",
+    name: "Sympathy Group",
+    count: "~15",
+    body: "Your reliable allies: the friends you'd call in a crisis, the family you see often, the people who would drive to the airport for you at 5 AM.",
+  },
+  {
+    n: "Ring 3",
+    name: "Active Network",
+    count: "~90+",
+    body: "Coworkers, neighbours, acquaintances, fellow club members. Dismissed as unimportant — yet it is the structural source of weak ties, where most romantic relationships actually begin.",
+  },
+];
+
+const scvInputs = [
+  { k: "Valence", q: "Does this relationship nourish you, or drain you?" },
+  { k: "Dose", q: "How often, and how intensely, does real contact occur?" },
+  { k: "Consequence", q: "Does this tie stabilize your physiology — or destabilize it?" },
+];
+
+/**
+ * The canonical vocabulary. Each definition is deliberately written to stand
+ * alone: one sentence, no pronouns pointing back at earlier text, quotable
+ * verbatim by a reader, a journalist, or a language model. Wording here is the
+ * reference version — keep it identical in the book, the podcast show notes,
+ * and any interview.
+ */
+const definitions = [
+  {
+    term: "Social Connectivity Value (SCV)",
+    def: "The Social Connectivity Value (SCV) is a composite structural biomarker that scores a person's entire social network as a single number, weighting every relationship by its valence, its dose, and its physiological consequence, in order to estimate whether that network buffers stress or amplifies it.",
+  },
+  {
+    term: "The Sociogram Method",
+    def: "The Sociogram Method is a structured mapping procedure in which a person places every meaningful relationship in their life onto three concentric rings drawn around themselves, converting an invisible social architecture into a map that can be scored, tracked, and deliberately edited.",
+  },
+  {
+    term: "Structural loneliness",
+    def: "Structural loneliness is the absence of specific relational positions in a person's network — an empty inner ring, an unfilled partner slot, a periphery with no active weak ties — as distinct from the subjective distress that conventional loneliness scales measure.",
+  },
+  {
+    term: "The Partner Slot",
+    def: "The Partner Slot is the single position in Ring 1 reserved for a romantic partner, and it carries the heaviest weight of any variable in an adult sociogram, which is why two people with identical friend counts can occupy entirely different biological realities.",
+  },
+  {
+    term: "Pipeline function",
+    def: "Pipeline function is a network's capacity to generate new relationships without deliberate effort, determined chiefly by the number of live weak ties in Ring 3 and by whether at least one superconnector sits inside it.",
+  },
+  {
+    term: "Superconnector",
+    def: "A superconnector is a person whose own network is unusually large and unusually bridging, so that a single tie to them exposes you to many people you could not otherwise reach.",
+  },
+  {
+    term: "The rings (5 / 15 / 90)",
+    def: "Ring 1 (Inner Fellowship, ~5 people), Ring 2 (Sympathy Group, ~15) and Ring 3 (Active Network, ~90 or more) are the three concentric layers of the sociogram, calibrated to the layered limits of human social capacity described by Robin Dunbar.",
+  },
+];
+
+/** How the SCV relates to the instruments it does not replace. */
+const comparison = [
+  {
+    name: "UCLA Loneliness Scale",
+    measures: "The subjective intensity of felt loneliness.",
+    gap: "Tells you how bad it is, never what is missing or what to change.",
+  },
+  {
+    name: "Berkman–Syme Social Network Index",
+    measures: "Counts of ties across four social domains.",
+    gap: "Treats ties as interchangeable — no weighting for quality, proximity, or the partner slot.",
+  },
+  {
+    name: "Dunbar's layers",
+    measures: "The cognitive capacity limits of human social life.",
+    gap: "Descriptive of populations, not diagnostic for an individual.",
+  },
+  {
+    name: "Attachment inventories",
+    measures: "Internal working models of relating.",
+    gap: "Interior only — a securely attached person with an empty Ring 1 still scores well.",
+  },
+  {
+    name: "SCV & the Sociogram Method",
+    measures: "The weighted structure of the network itself.",
+    gap: "Outputs a specific structural edit — which tie to add, revive, or release.",
+    self: true,
+  },
+];
+
+/**
+ * FAQ section — hidden 2026-08-14, pending a dedicated /faq page that can carry
+ * many more questions (and FAQPage structured data). Set SHOW_FAQ to true to
+ * restore the on-page block; the copy below is kept verbatim so it can be moved
+ * to /faq unchanged.
+ */
+const SHOW_FAQ = false;
+
+const faqs = [
+  {
+    q: "What is the Social Connectivity Value?",
+    a: "The Social Connectivity Value (SCV) is a composite structural biomarker that scores a person's entire social network as a single number, weighting each relationship by valence, dose, and physiological consequence. It does not measure how lonely you feel; it measures whether the architecture around you protects your health or erodes it.",
+  },
+  {
+    q: "How is the SCV different from a loneliness scale?",
+    a: "A loneliness scale measures a feeling and returns a severity. The SCV measures a structure and returns an intervention. Two people can report identical loneliness scores while one is missing a partner and the other is missing an entire periphery — and those two situations require opposite actions.",
+  },
+  {
+    q: "Who developed the SCV and the Sociogram Method?",
+    a: "Both were developed by Dr. Axel Schumacher, a human geneticist and longevity researcher, and published as an open preprint on SocArXiv (DOI 10.31235/osf.io/m6h58) with the full scoring method and data released on the Open Science Framework (osf.io/ugstj).",
+  },
+  {
+    q: "Is the framework peer-reviewed?",
+    a: "Not yet. It is an open preprint: the method, the scoring engine, and the data are public specifically so that independent researchers can replicate and challenge it. Formal validation studies are the next step, and collaborators are being invited through the OSF project.",
+  },
+  {
+    q: "Can you actually change your SCV?",
+    a: "Yes, and faster than most people expect, because the score responds to structure rather than to personality. Reviving three dormant weak ties, moving a close friend from a distant city to a weekly call, or filling the partner slot each move the number measurably — which is what makes it trackable like blood pressure.",
+  },
+  {
+    q: "Is loneliness really as dangerous as smoking 15 cigarettes a day?",
+    a: "That comparison comes from Holt-Lunstad and colleagues' 2010 meta-analysis, and it describes comparable effect sizes on mortality risk — not a literal biological equivalence. The honest version is narrower and still striking: across 148 studies, stronger social relationships were associated with a roughly 50% greater likelihood of survival over the follow-up periods studied.",
+  },
+];
+---
+
+<Layout
+  theme="lab"
+  title="The Science of Connection — SCV & the Sociogram Method | Dr. Axel Schumacher"
+  description="The Social Connectivity Value (SCV) is a structural biomarker that scores your social network as a single number. Definitions, scoring method, and the open preprint — by Dr. Axel Schumacher, human geneticist."
+>
+  <!-- ========== HERO ========== -->
+  <section class="relative flex items-center overflow-hidden border-b border-[color:var(--border)]" style="min-height:84vh;">
+    <img
+      src="/images/science/hero.png"
+      alt="A lone figure on a rooftop overlooking a city laced with glowing golden network connections."
+      class="absolute inset-0 h-full w-full object-cover"
+      style="object-position:64% 50%;"
+    />
+    <div
+      class="pointer-events-none absolute inset-0"
+      style="background:linear-gradient(90deg, var(--bg) 16%, color-mix(in srgb, var(--bg) 62%, transparent) 46%, transparent 82%), linear-gradient(0deg, var(--bg), transparent 55%);"
+    >
+    </div>
+    <div class="container-x relative z-10 py-24">
+      <span class="eyebrow">The Science · open preprint · SocArXiv</span>
+      <h1 class="mt-6 max-w-4xl text-[clamp(2.5rem,6vw,4.4rem)] font-bold leading-[1.03]">
+        Loneliness has an
+        <span class="serif-accent text-accent">architecture</span>. Now we can read it.
+      </h1>
+      <p class="lead mt-7 max-w-2xl text-lg">
+        For a century, loneliness was treated as a mood — private, formless, unmeasurable.
+        It is none of those things. It is a structure: a map of the people around you, the
+        signal flowing through them, and the way that signal writes itself into your biology.
+        This is the science of measuring — and rebuilding — that structure.
+      </p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href={preprintUrl} class="btn btn-primary">Read the preprint</a>
+        <a href="#rings" class="btn btn-ghost">Explore the framework</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== THE SHIFT ========== -->
+  <section class="section">
+    <div class="container-x grid gap-12 md:grid-cols-[0.85fr_1.15fr] md:items-start">
+      <div class="reveal md:sticky md:top-24">
+        <span class="eyebrow">A new question</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">We were asking the wrong question.</h2>
+      </div>
+      <div class="reveal space-y-6 text-[color:var(--text-muted)]">
+        <p>
+          A century of psychology looked <em>inward</em> to explain loneliness. The lonely
+          person was insecurely attached, anxious, lacking in social skills. The work was to
+          repair the interior so the exterior might follow. That work has helped millions —
+          and it is only half the story.
+        </p>
+        <p class="text-[color:var(--text)]">
+          You can have impeccable attachment security and still be alone if Ring 1 is empty.
+          You can have excellent social skills and still be alone if every weak tie evaporated
+          in a pandemic. No amount of interior work creates a friend who lives close enough to
+          share a meal on a Tuesday.
+        </p>
+        <blockquote
+          class="border-l-2 border-[color:var(--accent)] pl-6 text-[clamp(1.35rem,2.6vw,1.9rem)] leading-snug text-[color:var(--text)]"
+          style="font-family:'Fraunces', serif; font-style:italic;"
+        >
+          Not: what happened to you? But: what is missing from the structure of your life?
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== THE BIOLOGY ========== -->
+  <section class="section relative overflow-hidden border-t border-[color:var(--border)]">
+    <img
+      src="/images/science/biology.png"
+      alt="A young woman lying awake at night, unable to sleep — loneliness registered in the body."
+      class="absolute inset-0 h-full w-full object-cover"
+      style="object-position:78% 55%;"
+      loading="lazy"
+    />
+    <div
+      class="pointer-events-none absolute inset-0"
+      style="background:linear-gradient(90deg, var(--bg) 26%, color-mix(in srgb, var(--bg) 58%, transparent) 50%, transparent 80%), linear-gradient(180deg, transparent 74%, var(--bg));"
+    >
+    </div>
+    <div class="container-x relative z-10">
+      <div class="max-w-2xl reveal">
+        <span class="eyebrow">The biology</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Loneliness isn't only a feeling. It's a physiological state.</h2>
+        <p class="mt-4 text-lg leading-relaxed text-[color:var(--text-muted)]">
+          When the brain registers social threat, the body answers. Inflammation rises. Sleep
+          fragments. Cortisol stays elevated, and — through a conserved genomic response to
+          adversity — the immune system shifts toward inflammation and away from antiviral
+          defense. Chronic loneliness leaves a measurable biological debt.
+        </p>
+      </div>
+
+      <dl class="mt-12 grid gap-px overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[color:var(--border)] sm:grid-cols-3">
+        <div class="bg-[color:var(--surface)] p-7 text-center">
+          <dt class="font-[family-name:var(--font-display)] text-3xl font-bold text-accent">15/day</dt>
+          <dd class="mt-2 text-sm text-[color:var(--text-muted)]">the effect on mortality risk is comparable in size to smoking 15 cigarettes a day</dd>
+        </div>
+        <div class="bg-[color:var(--surface)] p-7 text-center">
+          <dt class="font-[family-name:var(--font-display)] text-3xl font-bold text-accent">↓ Testosterone</dt>
+          <dd class="mt-2 text-sm text-[color:var(--text-muted)]">chronic cortisol suppresses sex hormones and desire</dd>
+        </div>
+        <div class="bg-[color:var(--surface)] p-7 text-center">
+          <dt class="font-[family-name:var(--font-display)] text-3xl font-bold text-accent">CTRA</dt>
+          <dd class="mt-2 text-sm text-[color:var(--text-muted)]">the "molecular signature" of isolation, written in your cells</dd>
+        </div>
+      </dl>
+      <p class="mt-4 font-[family-name:var(--font-mono)] text-[0.66rem] text-[color:var(--text-dim)]">
+        CTRA = conserved transcriptional response to adversity. Sources: Holt-Lunstad et al.; U.S. Surgeon General Advisory (2023).
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== THE RINGS ========== -->
+  <section id="rings" class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl reveal">
+        <span class="eyebrow">The architecture · 5 / 15 / 90</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Every social life has the same shape.</h2>
+        <p class="mt-4 text-lg leading-relaxed text-[color:var(--text-muted)]">
+          Decades of research by Robin Dunbar showed the human brain sustains roughly
+          <span class="text-[color:var(--text)]">5 intimate bonds, 15 close relationships, and 90+ meaningful acquaintances</span>.
+          The Sociogram Method turns that hidden architecture into three concentric rings you can draw, measure, and repair.
+        </p>
+      </div>
+
+      <figure class="mt-12 overflow-hidden rounded-2xl border border-[color:var(--border)] reveal">
+        <img src="/images/science/rings.png" alt="The concentric-ring sociogram: Ring 1 Inner Fellowship, Ring 2 Close Friends, Ring 3 Activated Periphery, centred on the individual." class="w-full" loading="lazy" />
+      </figure>
+      <figcaption class="mt-3 font-[family-name:var(--font-mono)] text-[0.66rem] text-[color:var(--text-dim)]">
+        Fig. 1 — The circle-based sociogram. Each node is a person; symbols encode gender and relationship status, line styles encode distance, and a marked link shows a romantic bond.
+      </figcaption>
+
+      <div class="mt-12 grid gap-5 md:grid-cols-3">
+        {
+          rings.map((r) => (
+            <div class="card reveal p-8">
+              <div class="flex items-baseline justify-between">
+                <span class="font-[family-name:var(--font-mono)] text-xs uppercase tracking-[0.14em] text-accent">{r.n}</span>
+                <span class="font-[family-name:var(--font-display)] text-2xl font-bold text-accent">{r.count}</span>
+              </div>
+              <h3 class="mt-4 text-xl font-semibold">{r.name}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">{r.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== THE PARTNER SLOT ========== -->
+  <section class="section relative overflow-hidden border-t border-[color:var(--border)]">
+    <img
+      src="/images/science/partner.png"
+      alt="A couple in their late twenties, foreheads touching, at golden hour in a lamplit park."
+      class="absolute inset-0 h-full w-full object-cover"
+      style="object-position:72% 42%;"
+      loading="lazy"
+    />
+    <div
+      class="pointer-events-none absolute inset-0"
+      style="background:linear-gradient(90deg, var(--bg) 28%, color-mix(in srgb, var(--bg) 55%, transparent) 50%, transparent 68%), linear-gradient(180deg, transparent 76%, var(--bg));"
+    >
+    </div>
+    <div class="container-x relative z-10">
+      <div class="max-w-xl reveal">
+        <span class="eyebrow">One node to rule them all</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">The Partner Slot</h2>
+        <p class="mt-5 text-lg leading-relaxed text-[color:var(--text-muted)]">
+          Inside Ring 1, the sociogram marks one thing no other model captures: whether a
+          romantic partner is present or absent. Biologically, that single bond is the most
+          heavily weighted variable in an adult's entire network — which is why two people with
+          identical friend counts can live in completely different worlds.
+        </p>
+        <blockquote
+          class="mt-8 text-[clamp(1.4rem,3vw,2.1rem)] leading-snug text-[color:var(--text)]"
+          style="font-family:'Fraunces', serif; font-style:italic;"
+        >
+          A person with a hundred acquaintances and no partner may be
+          <span class="text-accent">structurally starving</span>.
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== THE SCV BIOMARKER ========== -->
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl reveal">
+        <span class="eyebrow">The measure</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Social Connectivity Value — a biomarker for your bonds.</h2>
+        <p class="mt-4 text-lg leading-relaxed text-[color:var(--text-muted)]">
+          The SCV is a single number distilled from your sociogram. It isn't a happiness score.
+          It's a <span class="text-[color:var(--text)]">structural biomarker</span> — a measure of
+          whether your social architecture buffers stress or amplifies it. Every tie is weighed on
+          three properties:
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        {
+          scvInputs.map((s, i) => (
+            <div class="card reveal p-8">
+              <span class="font-[family-name:var(--font-mono)] text-sm text-accent">{String(i + 1).padStart(2, "0")}</span>
+              <h3 class="mt-3 text-xl font-semibold">{s.k}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">{s.q}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-2 md:items-center">
+        <figure class="overflow-hidden rounded-2xl border border-[color:var(--border)] reveal">
+          <img src="/images/science/scv-biomarker.png" alt="The SCV biomarker tracked over six months, from red-zone isolation to green-zone thriving." class="w-full" loading="lazy" />
+        </figure>
+        <div class="reveal">
+          <p class="text-lg leading-relaxed text-[color:var(--text-muted)]">
+            Because the SCV moves the moment your network does, it can be tracked like blood
+            pressure. A <span class="text-accent">positive SCV</span> describes a network that
+            protects you. A <span class="text-accent">negative SCV</span> describes one that
+            quietly erodes your health — and, crucially, shows you exactly which edit will turn
+            the curve back up.
+          </p>
+          <figcaption class="mt-4 font-[family-name:var(--font-mono)] text-[0.66rem] text-[color:var(--text-dim)]">
+            Fig. 2 — A six-month SCV trajectory: from red-zone isolation, through a structural intervention, to green-zone thriving.
+          </figcaption>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WEAK TIES / PIPELINE ========== -->
+  <section class="section border-t border-[color:var(--border)]" style="background:var(--bg-alt)">
+    <div class="container-x grid gap-12 md:grid-cols-[0.85fr_1.15fr] md:items-start">
+      <div class="reveal md:sticky md:top-24">
+        <span class="eyebrow">Where love actually begins</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Weak ties &amp; the pipeline.</h2>
+      </div>
+      <div class="reveal space-y-6 text-[color:var(--text-muted)]">
+        <p>
+          Ring 3 looks trivial, but it is the engine of new connection. Almost every romance
+          begins as a weak tie — a friend of a friend, an unexpected introduction, the ambient
+          exposure of a shared space. A network with active weak ties and at least one
+          <span class="text-[color:var(--text)]">"superconnector"</span> has a high
+          <em>pipeline function</em>: it generates opportunity without effort.
+        </p>
+        <p class="text-[color:var(--text)]">
+          A closed network that recycles the same twelve faces has a pipeline of roughly zero.
+          Which reframes a painful story into a solvable one:
+        </p>
+        <blockquote
+          class="border-l-2 border-[color:var(--accent)] pl-6 text-[clamp(1.25rem,2.4vw,1.7rem)] leading-snug text-[color:var(--text)]"
+          style="font-family:'Fraunces', serif; font-style:italic;"
+        >
+          Most people who feel stuck in dating aren't unattractive. They're embedded in a network that stopped generating opportunity.
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== HOW IT'S SCORED (EXPLAINER) ========== -->
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x grid gap-12 md:grid-cols-2 md:items-center">
+      <figure class="overflow-hidden rounded-2xl border border-[color:var(--border)] reveal">
+        <img src="/images/science/sociogram-scored.png" alt="A scored sociogram: each node carries a base social score and bonuses that sum to the overall SCV." class="w-full" loading="lazy" />
+      </figure>
+      <div class="reveal">
+        <span class="eyebrow">Try it yourself</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">How your SCV is scored.</h2>
+        <p class="mt-4 leading-relaxed text-[color:var(--text-muted)]">
+          You draw yourself at the centre and place the people in your life across the three
+          rings. Each node gets a base score, adjusted by bonuses — a partner, a superconnector,
+          a nearby friend versus a distant one (solid lines for the same city, dotted for far
+          away). Sum the network, and you have your SCV. Simple enough to sketch on a napkin,
+          precise enough to track over years.
+        </p>
+        <p class="mt-4 leading-relaxed text-[color:var(--text-muted)]">
+          A dedicated app to calculate and track your SCV automatically is in development. Want
+          to be first to measure yours?
+        </p>
+        <a href="/#join" class="btn btn-primary mt-6">Join the SCV waitlist</a>
+        <figcaption class="mt-5 font-[family-name:var(--font-mono)] text-[0.66rem] text-[color:var(--text-dim)]">
+          Fig. 3 — A scored sociogram. Numeric values beside each node are base social scores and bonuses, summed into the aggregate SCV.
+        </figcaption>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== THE CANON / DEFINITIONS ========== -->
+  <section id="definitions" class="section border-t border-[color:var(--border)]" style="background:var(--bg-alt)">
+    <div class="container-x">
+      <div class="max-w-2xl reveal">
+        <span class="eyebrow">The canon</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Definitions.</h2>
+        <p class="mt-4 text-lg leading-relaxed text-[color:var(--text-muted)]">
+          A field can only advance on shared language. These are the reference
+          definitions for the framework — written to be quoted, cited, and argued with.
+          Use them freely; they are the same words used in the preprint and the book.
+        </p>
+      </div>
+
+      <dl class="mt-12 grid gap-px overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[color:var(--border)] reveal">
+        {
+          definitions.map((d) => (
+            <div class="bg-[color:var(--surface)] p-7 md:grid md:grid-cols-[0.42fr_1fr] md:gap-8 md:p-9">
+              <dt class="text-lg font-semibold text-[color:var(--text)]">{d.term}</dt>
+              <dd class="mt-3 leading-relaxed text-[color:var(--text-muted)] md:mt-0">{d.def}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <p class="mt-5 font-[family-name:var(--font-mono)] text-[0.66rem] leading-relaxed text-[color:var(--text-dim)]">
+        Terminology introduced by Dr. Axel Schumacher, human geneticist and longevity
+        researcher. First published 2025 as an open preprint on SocArXiv, DOI
+        10.31235/osf.io/m6h58. Reuse with attribution.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== HOW IT DIFFERS ========== -->
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl reveal">
+        <span class="eyebrow">Position</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">What the SCV adds to what already exists.</h2>
+        <p class="mt-4 text-lg leading-relaxed text-[color:var(--text-muted)]">
+          The established instruments are not wrong — they answer a different question.
+          They tell you <em>how much</em>. The sociogram tells you <em>where</em>, and
+          therefore <em>what to do</em>.
+        </p>
+      </div>
+
+      <div class="mt-12 overflow-x-auto reveal">
+        <table class="w-full min-w-[46rem] border-collapse text-left text-sm">
+          <thead>
+            <tr class="border-b border-[color:var(--border-strong)]">
+              <th class="py-4 pr-6 font-[family-name:var(--font-mono)] text-[0.68rem] font-medium uppercase tracking-[0.14em] text-[color:var(--text-dim)]">Instrument</th>
+              <th class="py-4 pr-6 font-[family-name:var(--font-mono)] text-[0.68rem] font-medium uppercase tracking-[0.14em] text-[color:var(--text-dim)]">What it measures</th>
+              <th class="py-4 font-[family-name:var(--font-mono)] text-[0.68rem] font-medium uppercase tracking-[0.14em] text-[color:var(--text-dim)]">What it leaves open</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              comparison.map((c) => (
+                <tr class="border-b border-[color:var(--border)]">
+                  <th
+                    scope="row"
+                    class:list={["py-5 pr-6 align-top font-semibold", c.self ? "text-accent" : "text-[color:var(--text)]"]}
+                  >
+                    {c.name}
+                  </th>
+                  <td class="py-5 pr-6 align-top leading-relaxed text-[color:var(--text-muted)]">{c.measures}</td>
+                  <td
+                    class:list={["py-5 align-top leading-relaxed", c.self ? "text-[color:var(--text)]" : "text-[color:var(--text-muted)]"]}
+                  >
+                    {c.gap}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  {SHOW_FAQ && (
+    <section id="faq" class="section border-t border-[color:var(--border)]">
+      <div class="container-x grid gap-12 md:grid-cols-[0.7fr_1.3fr] md:items-start">
+        <div class="reveal md:sticky md:top-24">
+          <span class="eyebrow">Questions</span>
+          <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Straight answers.</h2>
+          <p class="mt-4 leading-relaxed text-[color:var(--text-muted)]">
+            Including the ones where the popular version of the science overstates its case.
+          </p>
+        </div>
+        <div class="reveal divide-y divide-[color:var(--border)]">
+          {
+            faqs.map((f) => (
+              <div class="py-7 first:pt-0">
+                <h3 class="text-lg font-semibold text-[color:var(--text)]">{f.q}</h3>
+                <p class="mt-3 leading-relaxed text-[color:var(--text-muted)]">{f.a}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ========== OPEN SCIENCE / MOVEMENT ========== -->
+  <section class="section relative overflow-hidden border-t border-[color:var(--border)]">
+    <img
+      src="/images/science/open-science.png"
+      alt="A diverse group of researchers, therapists, and scientists gathered around a glowing network — building an open method together."
+      class="absolute inset-0 h-full w-full object-cover"
+      style="object-position:center 58%;"
+      loading="lazy"
+    />
+    <div
+      class="pointer-events-none absolute inset-0"
+      style="background:linear-gradient(180deg, color-mix(in srgb, var(--bg) 74%, transparent), color-mix(in srgb, var(--bg) 52%, transparent) 62%, color-mix(in srgb, var(--bg) 22%, transparent));"
+    >
+    </div>
+    <div class="container-x relative z-10">
+      <div class="mx-auto max-w-3xl text-center reveal">
+        <span class="eyebrow justify-center">Open science</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">This method belongs to everyone.</h2>
+        <p class="mt-5 text-lg leading-relaxed text-[color:var(--text-muted)]">
+          A framework that aims to become a public-health standard cannot be validated by its
+          author alone. The full method, scoring engine, and data are open on the Open Science
+          Framework. I'm inviting researchers, therapists, and psychologists to test it,
+          replicate it, challenge it, and help refine the next version — and, in doing so, build
+          a movement to end loneliness with evidence rather than slogans.
+        </p>
+        <div class="mt-9 flex flex-wrap justify-center gap-3">
+          <a href={preprintUrl} class="btn btn-primary">Read the preprint</a>
+          <a href={osfUrl} class="btn btn-ghost">Join the OSF project</a>
+        </div>
+        <p class="mt-6 font-[family-name:var(--font-mono)] text-[0.68rem] text-[color:var(--text-dim)]">
+          Preprint DOI: 10.31235/osf.io/m6h58 · OSF project: osf.io/ugstj
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CLOSING CTA ========== -->
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x grid gap-6 lg:grid-cols-3">
+      <article class="card reveal flex flex-col p-9" data-theme="connection">
+        <span class="chip w-fit">For people</span>
+        <h3 class="mt-5 text-2xl font-semibold">Put the science to work in your own life.</h3>
+        <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">
+          Coaching and courses that turn your sociogram into a plan — and your SCV into a rising curve.
+        </p>
+        <a href="/dating-coaching" class="btn btn-primary mt-8 w-fit">Get coaching</a>
+      </article>
+      <article class="card reveal flex flex-col p-9">
+        <span class="chip w-fit">For practitioners</span>
+        <h3 class="mt-5 text-2xl font-semibold">Bring the Sociogram Method to your practice.</h3>
+        <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">
+          <em>Ending Loneliness</em> is the training manual for coaches and therapists ready to lead a new standard of care.
+        </p>
+        <a href="/ending-loneliness" class="btn btn-ghost mt-8 w-fit">See the book</a>
+      </article>
+      <article class="card reveal flex flex-col p-9">
+        <span class="chip w-fit">For everyone</span>
+        <h3 class="mt-5 text-2xl font-semibold">The SCV, in your pocket.</h3>
+        <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">
+          <em>Amoro</em> turns the framework into an app: map your network, watch your score move,
+          and get the weekly moves that raise it.
+        </p>
+        <a href="/amoro" class="btn btn-ghost mt-8 w-fit">See the app</a>
+      </article>
+    </div>
+  </section>
+</Layout>

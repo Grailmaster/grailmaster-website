@@ -1,0 +1,359 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const features = [
+  { title: "Map your circle", body: "Visualize your real social network and see where the gaps and strengths are." },
+  { title: "Track your SCV", body: "Turn the framework into a living score that moves as you invest in connection." },
+  { title: "Nudge, don't nag", body: "Gentle prompts to reach out, follow up, and keep the ties that matter alive." },
+];
+
+/* What a user can look forward to — deliberately concrete, because the whole
+   argument of the page is that Amoro is a program, not another feed. */
+const lookForwardTo = [
+  {
+    title: "Your world, drawn",
+    body: "Your real social network on one screen: who is close, who has drifted, and exactly where the structure is thin.",
+  },
+  {
+    title: "A program, not a feed",
+    body: "Small weekly moves, chosen for your map — a message, a reintroduction, a room. Ten minutes, not ten hours of scrolling.",
+  },
+  {
+    title: "Third places, not swipes",
+    body: "The repeated, real-world settings where friendship and love actually form — and a plan that gets you back there more than once.",
+  },
+  {
+    title: "A number that moves",
+    body: "Your SCV rises as your world widens. For the first time, progress against loneliness is something you can watch happen.",
+  },
+];
+
+// Book preview: set to the PDF path once ready (e.g. "/downloads/ending-loneliness-preview.pdf").
+// Leave null to hide the download button until the preview exists.
+const bookPreviewPdf: string | null = null;
+---
+
+<Layout
+  theme="connection"
+  title="Amoro — the app that ends loneliness | Grailmaster"
+  description="Amoro turns the Sociogram Method into an app: map, measure and rebuild your social world — so love, friendship and belonging have somewhere to land. Join the early-access waitlist."
+>
+  {/* ===== HERO =====
+      The photograph is dark and gold, so the hero runs as a self-contained
+      dark band inside the light connection theme: data-theme="lab" flips the
+      tokens for this section only. See the style block at the foot of the file. */}
+  <section
+    class="hero-amoro relative overflow-hidden border-b border-[color:var(--border)]"
+    data-theme="lab"
+  >
+    <div class="hero-photo" aria-hidden="true"></div>
+    <div class="container-x relative z-10 py-24 md:py-28">
+      <div class="hero-copy">
+        <span class="eyebrow">Coming · amoro.app</span>
+        <h1 class="mt-6 text-[clamp(2.6rem,6vw,4.4rem)] font-bold leading-[1.04]">
+          End Loneliness<span class="text-accent">!</span>
+        </h1>
+        <p class="lead mt-7 text-lg">
+          One in six people alive right now is lonely. That is not a character flaw and it is not
+          your fault — it is a structure. Amoro is the first app built to change the structure:
+          it rebuilds your social world, so that love, friendship and belonging finally have
+          somewhere to land.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href="#waitlist" class="btn btn-primary">Join the waitlist</a>
+          <a href="#why" class="btn btn-ghost">Why we're building it</a>
+        </div>
+        <div class="pill-row">
+          <span class="pill">No swiping</span>
+          <span class="pill">Built on the Sociogram Method</span>
+          <span class="pill">Love · friendship · belonging</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== WHAT IT DOES ===== */}
+  <section class="section">
+    <div class="container-x grid gap-5 md:grid-cols-3">
+      {
+        features.map((f) => (
+          <div class="card reveal p-8">
+            <h3 class="text-xl font-semibold">{f.title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">{f.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  {/* ===== WHY IT MATTERS ===== */}
+  <section id="why" class="section border-t border-[color:var(--border)]" style="background:var(--bg-alt)">
+    <div class="container-x">
+      <div class="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-14">
+        <div class="reveal">
+          <span class="eyebrow">Why this app has to exist</span>
+          <h2 class="mt-5 text-3xl font-semibold leading-tight md:text-4xl">
+            The most connected generation in history is the loneliest one.
+          </h2>
+        </div>
+
+        <div class="reveal space-y-5 leading-relaxed text-[color:var(--text-muted)]">
+          <p>
+            One in six people on Earth is lonely — not sad for an evening, but lonely in the way
+            that shortens a life. The World Health Organization now attributes roughly
+            <span class="text-[color:var(--text)]">one hundred deaths an hour</span> to it, and the
+            largest meta-analyses place weak social connection in the same risk bracket as smoking
+            fifteen cigarettes a day. At the same time there have never been more single adults,
+            more people actively looking, or more apps promising to fix it. Record supply, record
+            demand, record loneliness. That is not a shortage of people. That is a broken mechanism.
+          </p>
+          <p>
+            Swipe apps handed you a catalogue and called it a solution. They are engineered to keep
+            you choosing, not to get you chosen — a slot machine that pays out in strangers, with no
+            mutual friends, no shared history, no third place to run into each other again, and no
+            reason for anyone to stay. It is the least likely way two human beings have ever tried
+            to meet, and it leaves you exactly where you started, only more tired.
+          </p>
+          <p>
+            <span class="text-[color:var(--text)]">Amoro does the opposite of matching.</span> It
+            doesn't hunt for a person — it rebuilds the world around you until the right people can
+            find you. A social life is a structure, and structures can be measured, redesigned and
+            grown: that is the whole point of the Sociogram Method and the Social Connectivity
+            Value. Amoro turns that science into a program you can actually follow, week by week,
+            until you have a life with more surface area — more warm introductions, more rooms worth
+            walking into, more chances every single day. You stop betting everything on one profile
+            and start raising the odds of your whole life.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          lookForwardTo.map((f) => (
+            <div class="card reveal p-7">
+              <h3 class="text-lg font-semibold">{f.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">{f.body}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="reveal mx-auto mt-14 max-w-2xl text-center font-[family-name:var(--font-display)] text-xl italic leading-relaxed text-[color:var(--text)] md:text-2xl">
+        Love, a life partner, or the best friend you haven't met yet — all three arrive the same
+        way. Through a life rich enough to catch them.
+      </p>
+    </div>
+  </section>
+
+  {/* ===== THE BOOK (mirrors the block on /journal) ===== */}
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="card glow-top relative overflow-hidden p-8 reveal md:p-12">
+        <div class="grid items-start gap-10 md:grid-cols-[220px_1fr]">
+          <a href="/ending-loneliness" class="block">
+            <img
+              src="/images/covers/ending-loneliness.png"
+              alt="Ending Loneliness — a Sociogram Framework, by Dr. Axel Schumacher"
+              class="mx-auto w-full max-w-[220px] rounded-lg border border-[color:var(--border)] shadow-[var(--shadow)]"
+            />
+          </a>
+          <div class="max-w-2xl">
+            <span class="eyebrow">The book · coming soon</span>
+            <h2 class="mt-5 text-3xl font-semibold">Ending Loneliness</h2>
+            <p class="mt-4 text-lg font-medium text-accent">
+              A new standard for the coaches on the front line of the loneliness pandemic.
+            </p>
+            <div class="mt-5 space-y-4 leading-relaxed text-[color:var(--text-muted)]">
+              <p>
+                One in three adults now experiences chronic loneliness. Yet most dating advice still focuses
+                on confidence, communication, attachment styles, or attraction. These factors matter, but they
+                often overlook the deeper force shaping relationship outcomes: the structure of a person's
+                social world.
+              </p>
+              <p>
+                Drawing on decades of studying dating and human relationships in the real world — alongside
+                insights from network science, evolutionary biology, sociology, and complex systems theory —
+                Dr. Axel Schumacher reveals how hidden patterns in our social networks influence friendship,
+                dating, belonging, and long-term wellbeing. At its heart is the <strong class="text-[color:var(--text)]">Sociogram Method</strong>
+                and its core measurement tool, the <strong class="text-[color:var(--text)]">Social Connectivity Value (SCV)</strong> — a
+                practical framework for mapping social networks, identifying structural weaknesses, and creating
+                targeted interventions that produce measurable results.
+              </p>
+            </div>
+
+            <p class="mt-6 font-semibold text-[color:var(--text)]">Inside, you'll discover:</p>
+            <ul class="mt-3 space-y-2 text-[color:var(--text-muted)]">
+              <li class="flex gap-2.5"><span class="text-accent">•</span> Why loneliness is often a structural problem rather than a personal failure</li>
+              <li class="flex gap-2.5"><span class="text-accent">•</span> The hidden network patterns that predict relationship success</li>
+              <li class="flex gap-2.5"><span class="text-accent">•</span> Practical tools for auditing and improving social ecosystems</li>
+              <li class="flex gap-2.5"><span class="text-accent">•</span> Real-world case studies illustrating transformation through network redesign</li>
+              <li class="flex gap-2.5"><span class="text-accent">•</span> A new evidence-based methodology for coaches, therapists, matchmakers, and relationship professionals</li>
+            </ul>
+
+            <p class="mt-6 leading-relaxed text-[color:var(--text-muted)]">
+              Part scientific investigation, part practical handbook, <em>Ending Loneliness</em> offers a new
+              lens for understanding human connection — and a new toolkit for helping people build meaningful
+              relationships in an increasingly disconnected world.
+            </p>
+
+            <div class="mt-7 flex flex-wrap gap-3">
+              <a href="/ending-loneliness" class="btn btn-primary">Learn more</a>
+              {bookPreviewPdf && (
+                <a href={bookPreviewPdf} target="_blank" rel="noopener" class="btn btn-ghost">Read a free preview (PDF)</a>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== WAITLIST ===== */}
+  <section id="waitlist" class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="card glow-top relative overflow-hidden p-10 text-center md:p-16">
+        <h2 class="mx-auto max-w-2xl text-3xl font-semibold md:text-4xl">
+          Get early access
+        </h2>
+        <p class="lead mx-auto mt-4 text-center">
+          Be among the first to try Amoro. Early testers help shape it — and get lifetime perks.
+        </p>
+        <!-- Tally.so / Brevo waitlist embed goes here. -->
+        <form class="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row" action="#" method="post">
+          <input
+            type="email"
+            required
+            placeholder="you@email.com"
+            class="w-full rounded-full border border-[color:var(--border-strong)] bg-[color:var(--bg)] px-5 py-3 text-sm placeholder:text-[color:var(--text-dim)] focus:border-accent focus:outline-none"
+          />
+          <button type="submit" class="btn btn-primary whitespace-nowrap">Join waitlist</button>
+        </form>
+        <p class="mt-3 font-[family-name:var(--font-mono)] text-[0.68rem] text-[color:var(--text-dim)]">
+          ↑ Swap for your Tally.so or Brevo embed
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ---------- HERO PHOTOGRAPH ----------
+     public/images/photos/app_background.webp
+     Composition: his face sits LEFT of centre (~10–48% of the frame) with the
+     gold sociogram radiating outward to about 78%; the right edge is empty and
+     dark. So this is the mirror of the /sport hero — copy sits RIGHT, and the
+     scrim is weighted right-to-left, clearing before his face. The rings stay
+     faintly visible behind the type, which is the point of the picture.
+     ------------------------------------- */
+  .hero-amoro {
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    min-height: 780px;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .hero-photo {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url("/images/photos/app_background.webp");
+    background-size: cover;
+    background-position: 34% 42%;
+    background-repeat: no-repeat;
+  }
+
+  .hero-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      /* right-to-left legibility scrim — clears before his face */
+      linear-gradient(
+        260deg,
+        color-mix(in srgb, var(--bg) 92%, transparent) 0%,
+        color-mix(in srgb, var(--bg) 88%, transparent) 22%,
+        color-mix(in srgb, var(--bg) 78%, transparent) 40%,
+        color-mix(in srgb, var(--bg) 52%, transparent) 55%,
+        color-mix(in srgb, var(--bg) 22%, transparent) 68%,
+        transparent 80%
+      ),
+      /* top + bottom fade into the page */
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--bg) 50%, transparent) 0%,
+        transparent 20%,
+        transparent 68%,
+        color-mix(in srgb, var(--bg) 34%, transparent) 84%,
+        color-mix(in srgb, var(--bg) 72%, transparent) 94%,
+        var(--bg) 100%
+      );
+  }
+
+  /* Copy column sits in the right half so it never runs across his face. */
+  .hero-copy {
+    max-width: 34rem;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-copy {
+      margin-left: auto;
+      max-width: 32rem;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .hero-copy {
+      max-width: 34rem;
+    }
+  }
+
+  /* Between 1024 and 1280 the viewport is tall relative to its width, so the
+     photograph crops inward and his face drifts toward the copy. Push it back
+     out and steepen the scrim so the type never sits on lit skin. */
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .hero-photo {
+      background-position: 20% 42%;
+    }
+    .hero-photo::after {
+      background:
+        linear-gradient(
+          265deg,
+          color-mix(in srgb, var(--bg) 94%, transparent) 0%,
+          color-mix(in srgb, var(--bg) 90%, transparent) 30%,
+          color-mix(in srgb, var(--bg) 76%, transparent) 48%,
+          color-mix(in srgb, var(--bg) 40%, transparent) 62%,
+          transparent 76%
+        ),
+        linear-gradient(
+          to bottom,
+          color-mix(in srgb, var(--bg) 50%, transparent) 0%,
+          transparent 20%,
+          transparent 68%,
+          color-mix(in srgb, var(--bg) 34%, transparent) 84%,
+          color-mix(in srgb, var(--bg) 72%, transparent) 94%,
+          var(--bg) 100%
+        );
+    }
+  }
+
+  /* Below 1024px the photograph is atmosphere only: flat vertical darkener,
+     subject pushed left out of the way of the type. */
+  @media (max-width: 1023px) {
+    .hero-amoro {
+      min-height: 0;
+    }
+    .hero-photo {
+      background-position: 26% 40%;
+    }
+    .hero-photo::after {
+      background: linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--bg) 62%, transparent) 0%,
+        color-mix(in srgb, var(--bg) 80%, transparent) 55%,
+        var(--bg) 100%
+      );
+    }
+  }
+</style>

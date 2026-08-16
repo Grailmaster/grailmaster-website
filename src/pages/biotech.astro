@@ -1,0 +1,1269 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+/* ---------------------------------------------------------------
+   AERION BIOSCIENCE — single source of truth for contact details
+   used on this page. Change them here, nowhere else.
+---------------------------------------------------------------- */
+/* The address is deliberately NEVER assembled at build time. Mass
+   harvesters regex the raw HTML for `name@domain`; if that string is
+   never in the file, they find nothing. The inline script at the foot
+   of this page joins the two halves at runtime and writes the real
+   mailto: onto every [data-mail] element. Humans lose nothing; anyone
+   without JS still sees a readable "name [at] domain" fallback and a
+   link that scrolls to it. Real protection is still Axel's mail
+   filtering and, one day, a Tally form — this just removes the page
+   from the easy lists. */
+const AERION = {
+  user: "a.schumacher",
+  domain: "aerion-bioscience.com",
+  site: "https://aerion-bioscience.com",
+  linkedin: "https://www.linkedin.com/company/aerion-bioscience/",
+};
+
+/* Pre-typed subject and body. Visitors who have to compose from
+   scratch mostly don't. These are plain data attributes, not
+   addresses, so they are safe to inline. Swap the whole thing for a
+   Tally embed the day that account exists — slot marked at the CTA. */
+const deckMail = {
+  subject: "Pitch deck request — Aerion Bioscience",
+  body:
+    "Hello Axel,\n\nI'd like to see the Aerion Bioscience deck.\n\n" +
+    "Name:\nOrganisation:\nWriting as (investor / clinical site / research partner / other):\n\n",
+};
+
+const collabMail = {
+  subject: "Research collaboration — Aerion Bioscience",
+  body:
+    "Hello Axel,\n\nInstitution:\n" +
+    "What we hold or can run (cohort, biobank, assay capability):\n\n",
+};
+
+/* SEER 22, 2014–2020. Localised / regional / distant; the remaining
+   ~5% are unstaged and footnoted under the figure. `emphasis` marks
+   the single column the whole argument is about. */
+const stages = [
+  { name: "Localised", note: "Confined to the lung", found: 22, survival: 63.7, emphasis: true },
+  { name: "Regional", note: "Spread to nearby nodes", found: 21, survival: 35.9 },
+  { name: "Distant", note: "Metastatic at diagnosis", found: 53, survival: 8.9 },
+];
+
+/* The published panel. Aerion's own material states five markers run
+   high and one runs low; the paper does not label which, so the page
+   does NOT assign a direction to individual proteins — the third
+   column carries each protein's established role instead, which is
+   both safe and more useful to a scientific reader. If Axel confirms
+   the down-marker, add a `dir` field and a glyph column. */
+const panel = [
+  { gene: "FLNA", name: "Filamin-A", role: "Cytoskeletal scaffold; cell motility" },
+  { gene: "TUBA4A", name: "Tubulin alpha-4A", role: "Microtubule assembly; mitosis" },
+  { gene: "GSTO1", name: "Glutathione S-transferase omega-1", role: "Redox regulation; detoxification" },
+  { gene: "PRDX6", name: "Peroxiredoxin-6", role: "Antioxidant defence; membrane repair" },
+  { gene: "ARHGDIB", name: "Rho GDP-dissociation inhibitor 2", role: "Rho GTPase control; immune-cell signalling" },
+  { gene: "CDH13", name: "Cadherin-13", role: "Cell adhesion; tumour-suppressor activity" },
+];
+
+const differentiators = [
+  {
+    title: "Signal while the tumour is still small",
+    body: "Sequencing-based tests need a tumour large enough to shed readable DNA into the blood. In the foundational survey of the field, circulating tumour DNA was detectable in roughly 47% of localised cancers, against 82% of metastatic ones. Proteins are not diluted the same way: several of these markers are produced by the tissue around the tumour and by the immune response to it, so the signal is there before the lesion sheds much of anything.",
+  },
+  {
+    title: "No clonal-haematopoiesis artefact",
+    body: "Age-related mutations in blood cells — CHIP — are a documented source of false positives in cell-free DNA screening, and controlling for them means paired white-cell sequencing on every sample. A protein readout is not exposed to that failure mode at all.",
+  },
+  {
+    title: "Costs what a screening programme can pay",
+    body: "Two routes to market: mass spectrometry through laboratory partners now, and an ELISA-format assay for volume. Screening economics turn on cost per test as much as on accuracy. A test a health system cannot afford to run annually is not a screening test.",
+  },
+];
+
+const milestones = [
+  {
+    n: "01",
+    h: "Discovery",
+    p: "351 plasma proteins quantified by mass spectrometry across 128 lung cancer patients and 93 healthy donors at the Luxembourg Institute of Health. Six survived selection.",
+  },
+  {
+    n: "02",
+    h: "Validation",
+    p: "The panel held in an independent cohort of 48 patients and 49 healthy volunteers. Published in Cancers, June 2020.",
+  },
+  {
+    n: "03",
+    h: "License",
+    p: "LIH licensed the biomarker panel to Aerion Bioscience. The company launched with NLC Health Ventures and is incorporated in Amsterdam.",
+  },
+  {
+    n: "04",
+    h: "Stage I",
+    p: "A preclinical study recently concluded, confirming the panel's performance in Stage I disease — the case the entire thesis rests on.",
+  },
+  {
+    n: "05",
+    h: "Next",
+    p: "Larger multi-site cohorts, healthy controls, and the pulmonary confounders that actually matter — COPD and benign nodules — plus the ELISA assay for scale.",
+  },
+];
+
+const ventures = [
+  {
+    tag: "Diagnostics",
+    name: "Early cancer detection",
+    body: "Aerion Bioscience — a six-protein blood panel for detecting lung cancer at Stage I, licensed from the Luxembourg Institute of Health.",
+    href: "#aerion",
+  },
+  {
+    tag: "Geroscience",
+    name: "Aging biomarkers & clocks",
+    body: "Epigenetic and multi-omic aging clocks to measure biological age and the effect of interventions on it.",
+  },
+  {
+    tag: "Platform",
+    name: "Longevity data science",
+    body: "Turning genetic and phenotypic data into decision-grade insight for healthspan-extending therapeutics.",
+  },
+];
+
+const credentials = [
+  "Human geneticist",
+  "Longevity & aging researcher",
+  "Author, scientific literature",
+  "Founder & CEO, Aerion Bioscience",
+];
+
+/* Structured data. Two jobs: win the branded search for "Aerion
+   Bioscience" (the company's own site carries no organisation
+   markup, no founder, no contact), and tie the venture to a named,
+   citable scientist. */
+const site = "https://grailmaster.com";
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://aerion-bioscience.com/#organization",
+      name: "Aerion Bioscience",
+      alternateName: "Aerion Bioscience B.V.",
+      url: AERION.site,
+      logo: `${site}/images/logos/aerion-mark.webp`,
+      /* No `email` field. Schema.org contact data is not a ranking
+         factor and is not surfaced in rich results, but JSON-LD is
+         plain text in the document — leaving it here would hand the
+         address straight back to the harvesters the runtime
+         assembly above is meant to defeat. */
+      description:
+        "Aerion Bioscience is developing a non-invasive, six-protein blood test for the early detection of lung cancer, designed to identify disease at Stage I while it is still curable. The biomarker panel is licensed from the Luxembourg Institute of Health.",
+      foundingLocation: { "@type": "Place", name: "Amsterdam, Netherlands" },
+      founder: { "@id": `${site}/#axel` },
+      sameAs: [AERION.linkedin, AERION.site],
+      knowsAbout: [
+        "Early lung cancer detection",
+        "Liquid biopsy",
+        "Proteomic biomarkers",
+        "Cancer screening",
+        "Plasma protein panel",
+      ],
+    },
+    {
+      "@type": "Person",
+      "@id": `${site}/#axel`,
+      name: "Dr. Axel Schumacher",
+      jobTitle: "Founder & CEO, Aerion Bioscience",
+      url: `${site}/about`,
+      sameAs: [
+        "https://www.linkedin.com/in/draxelschumacher",
+        "https://scholar.google.com/citations?user=6LieIdoAAAAJ",
+      ],
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "@id": "https://doi.org/10.3390/cancers12061629",
+      name: "Identification of a Blood-Based Protein Biomarker Panel for Lung Cancer Detection",
+      datePublished: "2020-06-19",
+      isPartOf: { "@type": "Periodical", name: "Cancers" },
+      identifier: "10.3390/cancers12061629",
+      url: "https://www.mdpi.com/2072-6694/12/6/1629",
+    },
+  ],
+};
+---
+
+<Layout
+  theme="lab"
+  title="Aerion Bioscience & Longevity Ventures | Dr. Axel Schumacher"
+  description="Aerion Bioscience is developing a six-protein blood test to detect lung cancer at Stage I, while it is still curable. Founded by Dr. Axel Schumacher — geneticist, longevity scientist and venture builder. Open to research collaborators and investors."
+>
+  <section class="glow-top relative overflow-hidden border-b border-[color:var(--border)]">
+    <div class="grid-bg absolute inset-0 opacity-60" aria-hidden="true"></div>
+    <div class="container-x relative z-10 py-24 md:py-32">
+      <span class="eyebrow">Ventures · for investors & partners</span>
+      <h1 class="mt-6 max-w-4xl text-[clamp(2.2rem,5vw,3.8rem)] font-bold">
+        Building the science of a longer healthspan.
+      </h1>
+      <p class="lead mt-7 max-w-2xl text-lg">
+        Two decades in human genetics and geroscience, now applied to early-stage ventures
+        in cancer diagnostics, aging biomarkers, and longevity data science. This page is a
+        brief, not a brochure.
+      </p>
+      <div class="mt-9">
+        <a href="/about" class="btn btn-primary">Full bio & track record</a>
+      </div>
+    </div>
+  </section>
+
+  {/* ================================================================
+      THE THRESHOLD — thesis section.
+      Background art is /images/science/threshold-bifurcation.webp:
+      the logistic map x -> r·x·(1-x), rendered as a density field over
+      r = 3.48 to 4.0. The period-doubling cascade tips into chaos, with
+      windows of restored order inside it. Generated for this page;
+      not used anywhere else on the site.
+  ================================================================= */}
+  <section class="threshold relative overflow-hidden border-b border-[color:var(--border)]">
+    <div class="threshold__art" aria-hidden="true">
+      <img
+        src="/images/science/threshold-bifurcation.webp"
+        width="1600"
+        height="2000"
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <div class="container-x relative z-10 py-24 md:py-32">
+      <span class="eyebrow">The threshold</span>
+
+      <p class="threshold__lead reveal mt-7 max-w-4xl">
+        We stand at the most consequential threshold our species has ever faced.
+      </p>
+
+      <div class="threshold__body reveal mt-9 max-w-2xl space-y-6">
+        <p class="text-[1.05rem] leading-relaxed text-[color:var(--text)]">
+          For the first time, the deep constraints that shaped us — aging, intelligence, and
+          the architecture of human connection — are becoming designable.
+          <strong>Longevity escape velocity (LEV)</strong> is no longer a distant hope; the
+          arithmetic of biological decline is beginning to yield to engineering.
+          <strong>Artificial superintelligence (ASI)</strong> is approaching with the force of
+          an intelligence explosion, and the question of human–AI alignment has become the
+          central civilizational problem of our time. At the same time, a
+          <strong>loneliness epidemic</strong> is revealing how fragile the social software is
+          that has carried us this far.
+        </p>
+
+        <p class="leading-relaxed text-[color:var(--text-muted)]">
+          These are not separate challenges. They are interlocking faces of a single
+          transition: the moment when humanity gains the capacity to rewrite its own operating
+          system. Success is not guaranteed. It depends on whether we can extend healthy life,
+          cultivate minds that remain coherent with our values, and rebuild the relational
+          foundations that make any future worth inhabiting.
+        </p>
+
+        <p class="threshold__close leading-relaxed text-[color:var(--text)]">
+          My research and entrepreneurial work sit precisely at this intersection. The projects
+          I advance — spanning longevity science, preventive diagnostics, and the neurobiology
+          of human connection — are practical attempts to help us navigate the passage with
+          more clarity than chaos.
+        </p>
+      </div>
+
+      <p class="threshold__caption">
+        <span class="threshold__kicker">Above</span>
+        The logistic map, <span class="threshold__eq">x → r·x(1−x)</span>, for
+        <span class="threshold__eq">r = 3.48 → 4.0</span> — the period-doubling route to chaos,
+        and the windows of order inside it.
+      </p>
+    </div>
+  </section>
+
+  {/* ================================================================
+      AERION BIOSCIENCE — venture spotlight.
+      The section re-declares --accent locally (same technique as
+      .signals-band in global.css), so every .eyebrow, .btn-primary,
+      .chip and .card inside it picks up Aerion's own orange and the
+      block reads as a distinct venture without a single extra rule.
+  ================================================================= */}
+  <section id="aerion" class="aerion aerion-hero relative overflow-hidden">
+    <div class="container-x relative z-10 py-24 md:py-32">
+      <div class="aerion-hero__grid">
+        <div class="reveal">
+          <span class="eyebrow">Venture spotlight</span>
+
+          <img
+            class="aerion-logo mt-8"
+            src="/images/logos/aerion-logo.webp"
+            width="700"
+            height="312"
+            alt="Aerion Bioscience"
+            loading="lazy"
+            decoding="async"
+          />
+
+          <h2 class="aerion-hero__h mt-9">Finding lung cancer while it is still curable.</h2>
+
+          <p class="lead mt-7 max-w-xl">
+            Aerion Bioscience is developing a non-invasive blood test — a six-protein panel read
+            from a single tube of plasma — designed to detect lung cancer at Stage I, when surgery
+            still cures it. I founded the company and lead it as CEO.
+          </p>
+
+          {/* One primary action. The two external links sit beneath it
+              as quiet text rather than competing pills — three buttons
+              in a row also overflow the text column at 1440. */}
+          <div class="mt-9">
+            <a
+              class="btn btn-primary"
+              data-mail
+              data-subject={deckMail.subject}
+              data-body={deckMail.body}
+              href="#aerion-contact">Request the pitch deck</a
+            >
+          </div>
+          <p class="aerion-links mt-5">
+            <a class="link-underline" href={AERION.site} target="_blank" rel="noopener">
+              aerion-bioscience.com <span aria-hidden="true">↗</span>
+            </a>
+            <span class="aerion-links__sep" aria-hidden="true">·</span>
+            <a class="link-underline" href={AERION.linkedin} target="_blank" rel="noopener">
+              LinkedIn <span aria-hidden="true">↗</span>
+            </a>
+          </p>
+
+          <p class="aerion-meta mt-7">
+            Amsterdam · launched with NLC Health Ventures · biomarker panel licensed from the
+            Luxembourg Institute of Health
+          </p>
+        </div>
+
+        {/* The source render has a black ground, so it is composited
+            with mix-blend-mode: screen rather than shipped with an
+            alpha channel — same visual result, a fifth of the weight,
+            and the glow behind it reads straight through. */}
+        <div class="aerion-lung reveal" aria-hidden="true">
+          <span class="aerion-lung__glow"></span>
+          <img
+            src="/images/photos/aerion-lung.webp"
+            width="1280"
+            height="881"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ---- THE GAP ---- */}
+  <section class="aerion section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-3xl">
+        <span class="eyebrow">The problem</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+          Early lung cancer is survivable. We almost never find it early.
+        </h2>
+        <p class="lead mt-6 max-w-2xl">
+          Lung cancer kills more people than any other cancer — around 1.9 million deaths a year,
+          close to one in five of all cancer deaths worldwide. But it is not uniformly lethal. Caught
+          while the tumour is still confined to the lung, five-year survival is 63.7%. Caught after
+          it has spread, 8.9%. The distance between those two numbers is not a treatment problem.
+        </p>
+      </div>
+
+      {/* Emphasis form, not a categorical palette: one column carries
+          the accent, the other two recede. The reader is meant to see
+          a single thing — the best-outcome column is also the emptiest. */}
+      <figure class="cliff reveal">
+        <div class="cliff__grid">
+          {
+            stages.map((s) => (
+              <div class={s.emphasis ? "cliff__col is-key" : "cliff__col"}>
+                <p class="cliff__stage">{s.name}</p>
+                <p class="cliff__note">{s.note}</p>
+
+                <div class="cliff__metric">
+                  <div class="cliff__row">
+                    <span class="cliff__mlabel">Share of diagnoses</span>
+                    <span class="cliff__val">{s.found}%</span>
+                  </div>
+                  <div class="cliff__track" aria-hidden="true">
+                    <span class="cliff__fill" style={`width:${s.found}%`} />
+                  </div>
+                </div>
+
+                <div class="cliff__metric">
+                  <div class="cliff__row">
+                    <span class="cliff__mlabel">Five-year survival</span>
+                    <span class="cliff__val">{s.survival}%</span>
+                  </div>
+                  <div class="cliff__track" aria-hidden="true">
+                    <span class="cliff__fill cliff__fill--sv" style={`width:${s.survival}%`} />
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <figcaption class="cliff__cite">
+          Stage distribution and five-year relative survival, cancer of the lung and bronchus. SEER
+          22, 2014–2020. The remaining ~5% of cases are unstaged.
+        </figcaption>
+      </figure>
+
+      <div class="mt-12 grid gap-10 md:grid-cols-2">
+        <p class="leading-relaxed text-[color:var(--text-muted)]">
+          Only about one case in five is found while the disease is still localised. More than half
+          are found after it has already metastasised. The one screening tool proven to shift that
+          distribution — annual low-dose CT for high-risk adults — reaches roughly 18% of the people
+          eligible for it in the United States, and is still not a national programme across most of
+          Europe.
+        </p>
+        <p class="leading-relaxed text-[color:var(--text)]">
+          The reasons are structural: scanners, radiologists, radiation dose, a false-positive rate
+          that generates follow-up no health system wants to fund, and an eligible population that
+          has to be persuaded to attend. <strong>A CT programme cannot be scaled to a population.
+          A blood draw already is one.</strong> That is the gap Aerion is built for.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* ---- THE TEST ---- */}
+  <section class="aerion section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="aerion-test">
+        <div class="reveal">
+          <span class="eyebrow">The test</span>
+          <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Six proteins, one tube of plasma.</h2>
+          <p class="lead mt-6">
+            The panel was distilled from 351 plasma proteins by mass spectrometry. All six differ
+            significantly between lung cancer patients and healthy donors. Together they describe
+            tumour growth, cell invasion, metastasis and immune disruption — a signature of the
+            disease process rather than of the tumour's genome.
+          </p>
+          <p class="mt-6 text-[0.95rem] leading-relaxed text-[color:var(--text-muted)]">
+            Two readouts. Mass spectrometry through laboratory partners today; an ELISA-format assay
+            in development for the volume a screening programme needs. A machine-learning classifier
+            turns the six concentrations into a single call.
+          </p>
+        </div>
+
+        <figure class="panel reveal">
+          <figcaption class="panel__head">
+            <span>The panel</span>
+            <span class="panel__key">Plasma, LC-PRM mass spectrometry</span>
+          </figcaption>
+          <ul class="panel__list">
+            {
+              panel.map((p) => (
+                <li class="panel__row">
+                  <span class="panel__gene">{p.gene}</span>
+                  <span class="panel__text">
+                    <b class="panel__name">{p.name}</b>
+                    <span class="panel__role">{p.role}</span>
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="panel__cite">
+            El Khoury et al., <i>Cancers</i> 12(6):1629, 2020 · doi:10.3390/cancers12061629
+          </p>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  {/* ---- DIFFERENTIATION ---- */}
+  <section class="aerion section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-3xl">
+        <span class="eyebrow">Differentiation</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Why proteins, and not DNA.</h2>
+        <p class="lead mt-6 max-w-2xl">
+          Most of the liquid-biopsy field sequences circulating tumour DNA. That approach works well
+          once a tumour is large — and least well at precisely the moment that decides whether a
+          patient lives.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-5 md:grid-cols-3">
+        {
+          differentiators.map((d) => (
+            <div class="card reveal p-8">
+              <h3 class="text-lg font-semibold leading-snug">{d.title}</h3>
+              <p class="mt-4 text-sm leading-relaxed text-[color:var(--text-muted)]">{d.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ---- WHERE IT STANDS ---- */}
+  <section class="aerion section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-3xl">
+        <span class="eyebrow">Where it stands</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+          Published, licensed, independently validated.
+        </h2>
+      </div>
+
+      <div class="flow">
+        {
+          milestones.map((m) => (
+            <div class="flow__step reveal">
+              <span class="flow__num">{m.n}</span>
+              <h3>{m.h}</h3>
+              <p>{m.p}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="figures reveal">
+        <div class="figures__item">
+          <span class="figures__fig">0.999</span>
+          <span class="figures__lab">AUC, published cohorts</span>
+        </div>
+        <div class="figures__item">
+          <span class="figures__fig">0.992 / 0.989</span>
+          <span class="figures__lab">Sensitivity / specificity</span>
+        </div>
+        <div class="figures__item is-key">
+          <span class="figures__fig">22 of 23</span>
+          <span class="figures__lab">Stage&nbsp;I patients correctly classified</span>
+        </div>
+      </div>
+
+      {/* The honest caveat. It is here on purpose: an investor who has
+          seen three MCED panels die in prospective screening trusts the
+          founder who names that risk before they have to raise it. */}
+      <div class="note-box">
+        <h3>What these numbers are, and what they are not.</h3>
+        <p>
+          Those figures come from the published discovery and validation cohorts — 176 lung cancer
+          patients and 142 healthy donors in total, with 23 Stage&nbsp;I cases among them. They are
+          not prospective screening performance in an unselected high-risk population, and no
+          early-detection company should present them as though they were. Case-control designs
+          inflate apparent accuracy, and this field is littered with panels that did not survive
+          contact with a real screening cohort.
+        </p>
+        <p>
+          Our position is straightforward: the underlying biology is coherent, the early data is
+          genuinely unusual, and the studies that settle it are the ones we are now raising and
+          partnering to run — larger multi-site cohorts, with COPD and benign nodules as the
+          controls that actually matter.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* ---- WORK WITH US ---- */}
+  <section class="aerion section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-3xl">
+        <span class="eyebrow">Work with us</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">What we are looking for right now.</h2>
+      </div>
+
+      <div class="mt-12 grid gap-5 lg:grid-cols-2">
+        <div class="card reveal p-8 md:p-10">
+          <span class="chip">Research & clinical partners</span>
+          <h3 class="mt-6 text-xl font-semibold">Cohorts, sites, and assay capability</h3>
+          <ul class="offer__list mt-6">
+            <li>
+              <span>
+                <b>Annotated plasma biobanks.</b> Stage&nbsp;I and II NSCLC with matched healthy
+                controls — and, critically, COPD and benign-nodule samples.
+              </span>
+            </li>
+            <li>
+              <span>
+                <b>Screening sites.</b> High-risk cohorts where the panel can be run alongside
+                low-dose CT and scored against it.
+              </span>
+            </li>
+            <li>
+              <span>
+                <b>Assay development.</b> ELISA design and validation; mass-spectrometry partners
+                for the laboratory route.
+              </span>
+            </li>
+          </ul>
+          <a
+            class="btn btn-ghost mt-8"
+            data-mail
+            data-subject={collabMail.subject}
+            data-body={collabMail.body}
+            href="#aerion-contact">Propose a collaboration</a
+          >
+        </div>
+
+        <div class="card reveal p-8 md:p-10">
+          <span class="chip">Investors</span>
+          <h3 class="mt-6 text-xl font-semibold">Early stage, licensed IP, published data</h3>
+          <p class="mt-6 text-[0.95rem] leading-relaxed text-[color:var(--text-muted)]">
+            Aerion holds a license to the biomarker panel from the Luxembourg Institute of Health,
+            with peer-reviewed discovery data and independent cohort validation behind it. We are
+            raising to run the studies that convert that into a regulated screening test.
+          </p>
+          <p class="mt-4 text-[0.95rem] leading-relaxed text-[color:var(--text-muted)]">
+            The deck covers the technology and the license, competitive position against genomic
+            MCED, the regulatory route, cost-per-test modelling, and use of funds.
+          </p>
+          {/* Tally.so embed slot — replace the href below with the form
+              once that account exists, so requests are captured rather
+              than landing in an inbox. */}
+          <a
+            class="btn btn-primary mt-8"
+            data-mail
+            data-subject={deckMail.subject}
+            data-body={deckMail.body}
+            href="#aerion-contact">Request the pitch deck</a
+          >
+        </div>
+      </div>
+
+      {/* The visible address starts life as a readable "name [at]
+          domain" string and is rewritten to the real thing by the
+          script below. Without JS the fallback is still legible and
+          still copyable by a human. */}
+      <p class="aerion-meta mt-10" id="aerion-contact">
+        Or write directly: <a class="link-underline" data-mail data-mail-text href={AERION.site}
+          >{AERION.user} <span aria-hidden="true">[at]</span> {AERION.domain}</a
+        > · Dr. Axel Schumacher, Founder &amp; CEO, Aerion Bioscience B.V., Amsterdam
+      </p>
+    </div>
+  </section>
+
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <span class="eyebrow">Focus areas</span>
+      <h2 class="mt-5 max-w-2xl text-3xl font-semibold md:text-4xl">The wider portfolio</h2>
+      <div class="mt-12 grid gap-5 md:grid-cols-3">
+        {
+          ventures.map((v) => {
+            const Tag = v.href ? "a" : "div";
+            return (
+              <Tag class="card reveal block p-8" href={v.href}>
+                <span class="chip">{v.tag}</span>
+                <h3 class="mt-5 text-xl font-semibold">{v.name}</h3>
+                <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">{v.body}</p>
+                {v.href && <span class="link-underline mt-4 inline-block text-sm">Read more ↑</span>}
+              </Tag>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x grid gap-12 md:grid-cols-[0.85fr_1.15fr] md:items-center">
+      <div class="reveal">
+        <span class="eyebrow">Credibility</span>
+        <h2 class="mt-5 text-3xl font-semibold">A scientist first</h2>
+        <p class="lead mt-4">
+          The consumer work is built on the same rigor as the lab work. For partners and
+          investors, that foundation matters.
+        </p>
+      </div>
+      <ul class="reveal grid gap-px overflow-hidden rounded-2xl border border-[color:var(--border)] sm:grid-cols-2">
+        {
+          credentials.map((c) => (
+            <li class="flex items-center gap-3 bg-[color:var(--surface)] p-6 text-sm">
+              <span class="h-1.5 w-1.5 rounded-full bg-accent" />
+              {c}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="card p-10 text-center reveal md:p-14">
+        <h2 class="mx-auto max-w-2xl text-3xl font-semibold md:text-4xl">
+          Investing, partnering, or collaborating?
+        </h2>
+        <p class="lead mx-auto mt-4 text-center">
+          I'm open to conversations with aligned investors, scientific partners, and operators.
+        </p>
+        <!-- Tally.so contact form embed goes here. -->
+        <a href="/about" class="btn btn-primary mt-8">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  {/* Joins the address halves at runtime and writes the real mailto:
+      onto every [data-mail] element. `is:inline` on purpose — the
+      preview post-processor rewrites bundled /_astro/*.js paths into
+      page slugs and would break the link. */}
+  <script is:inline define:vars={{ u: AERION.user, d: AERION.domain }}>
+    (function () {
+      var a = u + String.fromCharCode(64) + d;
+      document.querySelectorAll("[data-mail]").forEach(function (el) {
+        var q = [];
+        if (el.dataset.subject) q.push("subject=" + encodeURIComponent(el.dataset.subject));
+        if (el.dataset.body) q.push("body=" + encodeURIComponent(el.dataset.body));
+        el.setAttribute("href", "mailto:" + a + (q.length ? "?" + q.join("&") : ""));
+        el.removeAttribute("target");
+        el.removeAttribute("rel");
+        if (el.hasAttribute("data-mail-text")) el.textContent = a;
+      });
+    })();
+  </script>
+
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+</Layout>
+
+<style>
+  /* ================================================================
+     AERION BIOSCIENCE
+     One override block does the branding. Re-declaring --accent and
+     friends on .aerion re-skins every shared component inside it
+     (.eyebrow, .btn-primary, .chip, .card hover, .flow, .note-box,
+     .offer__list, .link-underline) to Aerion's own colours, because
+     Tailwind's @theme inline maps resolve these vars at use time.
+     Values are read off the logo: mark orange, wordmark cyan.
+     ================================================================= */
+  .aerion {
+    --accent: #f79a3e;
+    --accent-2: #9bdcf0;
+    --accent-soft: rgba(247, 154, 62, 0.12);
+    --accent-contrast: #1a1206;
+    background: var(--bg);
+  }
+
+  .aerion-meta {
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+
+  /* .link-underline lives in @layer components, and a layered rule always
+     loses to the unlayered `a { color: inherit }` in global.css — so the
+     accent colour has to be restated here, unlayered, or these links
+     render as body text. */
+  .aerion-meta a,
+  .aerion-links a {
+    color: var(--accent);
+  }
+
+  .aerion-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.55rem 0.9rem;
+    font-size: 0.92rem;
+  }
+
+  .aerion-links__sep {
+    color: var(--text-dim);
+  }
+
+  /* ---------- Venture spotlight header ---------- */
+  .aerion-hero__grid {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .aerion-logo {
+    width: 100%;
+    max-width: 210px;
+    height: auto;
+  }
+
+  .aerion-hero__h {
+    font-size: clamp(2rem, 4.2vw, 3.1rem);
+    line-height: 1.08;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    max-width: 15ch;
+  }
+
+  /* The render ships on a black ground and is composited with
+     `screen`, which drops pure black to nothing — transparency for
+     free, without an alpha channel. The mask feathers the frame
+     edges, where the source cuts through the trachea and the lower
+     lobes, so the crop reads as a fade rather than a cut. */
+  .aerion-lung {
+    position: relative;
+    display: grid;
+    place-items: center;
+  }
+
+  /* Shipped with a real alpha channel rather than a black plate under
+     `mix-blend-mode: screen`. The blend halves the file size, but it
+     resolves against the backdrop of the nearest stacking context —
+     which here is .container-x, transparent — and the image drops out.
+     Verified: it renders as nothing. Alpha costs ~160 KB and always
+     works. The mask only feathers the frame edges, where the source
+     render cuts through the trachea and the lower lobes, so the crop
+     reads as a fade rather than a cut. */
+  .aerion-lung img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: auto;
+    /* Two layers intersected: a radial vignette to soften the sides,
+       and a linear ramp that must actually REACH zero at the bottom —
+       the source render cuts straight through the lower lobes, and a
+       radial alone still leaves ~45% alpha at that edge, which reads
+       as a ruled line. Browsers without mask-composite fall back to
+       `add`, i.e. a gentler vignette rather than a broken image. */
+    --lung-mask-a: radial-gradient(
+      ellipse 96% 88% at 50% 42%,
+      #000 58%,
+      rgba(0, 0, 0, 0.8) 84%,
+      transparent 100%
+    );
+    --lung-mask-b: linear-gradient(to bottom, #000 0%, #000 72%, transparent 99%);
+    -webkit-mask-image: var(--lung-mask-a), var(--lung-mask-b);
+    mask-image: var(--lung-mask-a), var(--lung-mask-b);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  .aerion-lung__glow {
+    position: absolute;
+    z-index: 0;
+    inset: 6% 2% 10%;
+    border-radius: 50%;
+    background:
+      radial-gradient(closest-side, rgba(247, 154, 62, 0.2), transparent 72%),
+      radial-gradient(closest-side at 62% 62%, rgba(155, 220, 240, 0.13), transparent 70%);
+    filter: blur(28px);
+    pointer-events: none;
+  }
+
+  @media (min-width: 1024px) {
+    .aerion-hero__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr);
+      gap: 3.5rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .aerion-hero__grid {
+      gap: 4.5rem;
+    }
+    /* Let the art breathe past the text column without touching the
+       page gutter. */
+    .aerion-lung {
+      margin-right: -2.5rem;
+    }
+  }
+
+  /* Below the split, the lung sits under the copy at full width —
+     still the hero image of the section, just stacked. */
+  @media (max-width: 1023px) {
+    .aerion-hero__grid {
+      gap: 2rem;
+    }
+    .aerion-lung {
+      max-width: 34rem;
+      margin-inline: auto;
+    }
+  }
+
+  /* ---------- The survival cliff ----------
+     Emphasis form, not a categorical palette: "Localised" carries the
+     accent in both meters, the other two stages recede to neutral, so
+     the reader's eye lands on the one column that matters — which is
+     also the emptiest one in the top meter. Every value is printed as
+     text beside its bar, so nothing here depends on colour.
+     ----------------------------------------- */
+  .cliff {
+    margin-top: 3.5rem;
+  }
+
+  .cliff__grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .cliff__col {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(180deg, var(--surface), var(--surface-2));
+    padding: 1.9rem 1.75rem 2rem;
+    transition:
+      border-color 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .cliff__col.is-key {
+    border-color: color-mix(in srgb, var(--accent) 52%, var(--border));
+    box-shadow: 0 22px 50px -30px rgb(0 0 0 / 0.9);
+  }
+
+  .cliff__col:hover {
+    transform: translateY(-2px);
+  }
+
+  .cliff__stage {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .cliff__col.is-key .cliff__stage {
+    color: var(--accent);
+  }
+
+  .cliff__note {
+    margin-top: 0.45rem;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+
+  .cliff__metric {
+    margin-top: 1.6rem;
+  }
+
+  .cliff__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .cliff__mlabel {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  .cliff__val {
+    font-family: var(--font-mono);
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .cliff__col.is-key .cliff__val {
+    color: var(--accent);
+  }
+
+  .cliff__track {
+    position: relative;
+    margin-top: 0.6rem;
+    height: 8px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.07);
+    overflow: hidden;
+  }
+
+  .cliff__fill {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.26);
+  }
+
+  .cliff__col.is-key .cliff__fill {
+    background: color-mix(in srgb, var(--accent) 55%, transparent);
+  }
+
+  .cliff__col.is-key .cliff__fill--sv {
+    background: var(--accent);
+    box-shadow: 0 0 22px color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+
+  .cliff__cite {
+    margin-top: 1.5rem;
+    font-size: 0.74rem;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+
+  @media (min-width: 860px) {
+    .cliff__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  /* ---------- The test: copy + protein panel ---------- */
+  .aerion-test {
+    display: grid;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .panel {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--bg-alt);
+    padding: 1.75rem;
+  }
+
+  .panel__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .panel__key {
+    letter-spacing: 0.06em;
+    text-transform: none;
+    color: var(--text-dim);
+  }
+
+  .panel__list {
+    display: grid;
+  }
+
+  .panel__row {
+    display: grid;
+    grid-template-columns: minmax(5.4rem, auto) 1fr;
+    align-items: baseline;
+    gap: 0.3rem 1.1rem;
+    padding: 0.95rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .panel__row:last-child {
+    border-bottom: 0;
+    padding-bottom: 0.2rem;
+  }
+
+  .panel__gene {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.01em;
+  }
+
+  .panel__text {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .panel__name {
+    font-size: 0.86rem;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--text);
+  }
+
+  .panel__role {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--text-dim);
+  }
+
+  .panel__cite {
+    margin-top: 1.4rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.72rem;
+    line-height: 1.65;
+    color: var(--text-dim);
+  }
+
+  @media (min-width: 960px) {
+    .aerion-test {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 4rem;
+    }
+    .panel {
+      padding: 2.25rem;
+    }
+  }
+
+  /* ---------- Headline figures under the milestone flow ---------- */
+  .figures {
+    margin-top: 4rem;
+    display: grid;
+    gap: 1px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--border);
+  }
+
+  .figures__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    background: var(--surface);
+    padding: 2rem 1.75rem;
+  }
+
+  .figures__fig {
+    font-family: var(--font-mono);
+    font-size: clamp(1.5rem, 3vw, 2.05rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  .figures__item.is-key {
+    background: color-mix(in srgb, var(--accent) 9%, var(--surface));
+  }
+
+  .figures__item.is-key .figures__fig {
+    color: var(--accent);
+  }
+
+  .figures__lab {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  @media (min-width: 760px) {
+    .figures {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  /* The note-box is a shared component; only the flow spacing above it
+     needs adjusting on this page. */
+  .aerion .flow {
+    margin-top: 3.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cliff__col:hover {
+      transform: none;
+    }
+  }
+
+  /* ---------- THE THRESHOLD ---------------------------------------- */
+  .threshold {
+    background: var(--bg);
+  }
+
+  /* The art is a right-hand panel, not a full-bleed wash: the diagram is
+     portrait, so covering the whole section would crop it to stripes. */
+  .threshold__art {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: min(55%, 820px);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .threshold__art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 60% center;
+    opacity: 0.85;
+  }
+
+  /* Scrim: opaque where it meets the text column, clearing across the
+     panel, and feathered top/bottom so the section melts into its
+     neighbours instead of sitting in a box. */
+  .threshold__art::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        90deg,
+        var(--bg) 0%,
+        var(--bg) 30%,
+        color-mix(in srgb, var(--bg) 52%, transparent) 50%,
+        color-mix(in srgb, var(--bg) 4%, transparent) 74%,
+        color-mix(in srgb, var(--bg) 34%, transparent) 100%
+      ),
+      linear-gradient(
+        to bottom,
+        var(--bg) 0%,
+        transparent 15%,
+        transparent 85%,
+        var(--bg) 100%
+      );
+  }
+
+  .threshold__lead {
+    font-size: clamp(1.55rem, 3.3vw, 2.6rem);
+    line-height: 1.16;
+    font-weight: 600;
+    letter-spacing: -0.017em;
+    text-wrap: balance;
+  }
+
+  /* Three key terms — the three faces of the transition. Lifted out of
+     the body colour, not shouted. */
+  .threshold__body strong {
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .threshold__close {
+    border-left: 2px solid color-mix(in srgb, var(--accent) 65%, transparent);
+    padding-left: 1.4rem;
+  }
+
+  .threshold__caption {
+    margin-top: 4.5rem;
+    max-width: 34rem;
+    font-size: 0.76rem;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+
+  .threshold__kicker {
+    margin-right: 0.7rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.85;
+  }
+
+  /* r is lower-case on purpose — it is the control parameter. */
+  .threshold__eq {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.94em;
+    color: color-mix(in srgb, var(--accent) 78%, var(--text));
+    white-space: nowrap;
+  }
+
+  /* On narrow screens the art sits behind the copy, so it drops back
+     and the scrim becomes a full-width veil. */
+  /* Below this width the text column would run into the art panel, so
+     the art drops behind the whole section as a faint veil instead. */
+  @media (max-width: 1199px) {
+    .threshold__art {
+      width: 100%;
+    }
+    .threshold__art img {
+      opacity: 0.3;
+      object-position: 70% center;
+    }
+    .threshold__art::after {
+      background: linear-gradient(
+        to bottom,
+        var(--bg) 0%,
+        color-mix(in srgb, var(--bg) 66%, transparent) 18%,
+        color-mix(in srgb, var(--bg) 66%, transparent) 82%,
+        var(--bg) 100%
+      );
+    }
+    .threshold__caption {
+      margin-top: 3rem;
+    }
+  }
+</style>

@@ -1,0 +1,119 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const chapters = [
+  "Why we stay lonely — the network trap",
+  "The SCV: making connection measurable",
+  "Reach, redundancy, richness",
+  "Rebuilding a network from zero",
+  "Weak ties and the longevity dividend",
+  "A 90-day connection protocol",
+];
+---
+
+<Layout
+  theme="connection"
+  title="Ending Loneliness — the book | Grailmaster"
+  description="Ending Loneliness reframes loneliness as a solvable network problem — and hands you the tools to solve your own. Join the launch list."
+>
+  <section class="glow-top relative overflow-hidden border-b border-[color:var(--border)]">
+    <div class="container-x relative z-10 grid gap-12 py-24 md:grid-cols-[1.1fr_0.9fr] md:items-center md:py-28">
+      <div>
+        <span class="eyebrow">The book · coming soon</span>
+        <h1 class="mt-6 text-[clamp(2.3rem,5vw,4rem)] font-bold">Ending Loneliness</h1>
+        <p class="lead mt-6 max-w-xl text-lg">
+          Loneliness isn't a personality flaw or a life sentence. It's a network problem —
+          and network problems have solutions. This is the science, and the method, for
+          rebuilding a life full of connection.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href="#preorder" class="btn btn-primary">Join the launch list</a>
+          <a href="/scv-framework" class="btn btn-ghost">The science behind it</a>
+        </div>
+      </div>
+
+      <!-- Book cover placeholder -->
+      <div class="reveal mx-auto w-full max-w-xs">
+        <div
+          class="card flex aspect-[3/4] flex-col justify-between p-8"
+          style="background:linear-gradient(150deg,var(--surface-2),var(--bg));"
+        >
+          <span class="eyebrow">Dr. Axel Schumacher</span>
+          <div>
+            <h2 class="text-3xl font-bold leading-tight">Ending<br />Loneliness</h2>
+            <p class="mt-3 text-sm text-[color:var(--text-muted)]">
+              The network science of belonging
+            </p>
+          </div>
+          <span class="font-[family-name:var(--font-mono)] text-[0.68rem] text-[color:var(--text-dim)]">
+            Cover mockup · replace with final art
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-x grid gap-12 md:grid-cols-[0.85fr_1.15fr]">
+      <div class="reveal">
+        <span class="eyebrow">Inside</span>
+        <h2 class="mt-5 text-3xl font-semibold">What you'll learn</h2>
+      </div>
+      <ol class="reveal space-y-px overflow-hidden rounded-2xl border border-[color:var(--border)]">
+        {
+          chapters.map((c, i) => (
+            <li class="flex items-baseline gap-4 bg-[color:var(--surface)] p-5">
+              <span class="font-[family-name:var(--font-mono)] text-sm text-accent">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span class="text-[color:var(--text)]">{c}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  {/* ===== THE APP ===== */}
+  <section class="section border-t border-[color:var(--border)]" style="background:var(--bg-alt)">
+    <div class="container-x">
+      <div class="reveal max-w-2xl">
+        <span class="eyebrow">The companion app · amoro.app</span>
+        <h2 class="mt-5 text-3xl font-semibold">Read the method. Then run it.</h2>
+        <p class="mt-5 leading-relaxed text-[color:var(--text-muted)]">
+          Everything in these chapters — the map, the score, the 90-day protocol — is being built
+          into <span class="text-[color:var(--text)]">Amoro</span>, an app that does the bookkeeping
+          so you only have to do the living. Readers on the launch list get early access first.
+        </p>
+        <a href="/amoro" class="btn btn-ghost mt-7">See the app</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="preorder" class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="card glow-top relative overflow-hidden p-10 text-center md:p-16">
+        <span class="eyebrow justify-center">Launch list</span>
+        <h2 class="mx-auto mt-5 max-w-2xl text-3xl font-semibold md:text-4xl">
+          Be first to know when it's out
+        </h2>
+        <p class="lead mx-auto mt-4 text-center">
+          Join the list for the release date, launch-week bonuses, and a free chapter.
+        </p>
+        <!-- Brevo / MailerLite embed goes here. -->
+        <form class="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row" action="#" method="post">
+          <input
+            type="email"
+            required
+            placeholder="you@email.com"
+            class="w-full rounded-full border border-[color:var(--border-strong)] bg-[color:var(--bg)] px-5 py-3 text-sm placeholder:text-[color:var(--text-dim)] focus:border-accent focus:outline-none"
+          />
+          <button type="submit" class="btn btn-primary whitespace-nowrap">Notify me</button>
+        </form>
+        <p class="mt-3 font-[family-name:var(--font-mono)] text-[0.68rem] text-[color:var(--text-dim)]">
+          ↑ Swap for your Brevo embed
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

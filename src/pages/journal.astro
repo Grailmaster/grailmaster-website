@@ -1,0 +1,272 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { articles, papers, researchProject } from "../data/journal";
+import { downloads } from "../data/downloads";
+
+const featured = articles.find((a) => a.featured);
+const rest = articles.filter((a) => !a.featured);
+const hasPapers = papers.length > 0 && papers[0].href !== "#";
+
+// Book preview: set to the PDF path once ready (e.g. "/downloads/ending-loneliness-preview.pdf").
+// Leave null to hide the download button until the preview exists.
+const bookPreviewPdf: string | null = null;
+---
+
+<Layout
+  theme="connection"
+  title="Books & Resources — Dr. Axel Schumacher"
+  description="The book, essays, original research, and free downloads from Dr. Axel Schumacher — geneticist and connection scientist. Loneliness, connection, and the science underneath it all."
+>
+  <section class="glow-top relative overflow-hidden border-b border-[color:var(--border)]">
+    <div class="container-x relative z-10 grid items-center gap-10 py-20 md:py-24 lg:grid-cols-[1fr_minmax(0,300px)]">
+      <div>
+        <span class="eyebrow">Books &amp; Resources</span>
+        <h1 class="mt-6 max-w-3xl text-[clamp(2.2rem,5vw,3.6rem)] font-bold">
+          Notes on connection, loneliness, and living longer.
+        </h1>
+        <p class="lead mt-7 max-w-2xl text-lg">
+          Long-form essays on love and the post-human future, field notes from the front line of the
+          loneliness epidemic, and the original research underneath it all.
+        </p>
+      </div>
+      <div class="reveal">
+        <img
+          src="/images/photos/journal-hero.webp"
+          alt="A woman in profile overlaid with a sociogram mapping her social connections — lover, superconnector, and third-space zone."
+          class="mx-auto w-full max-w-[13rem] rounded-[var(--radius-lg)] shadow-[var(--shadow)] lg:max-w-none"
+        />
+      </div>
+    </div>
+  </section>
+
+  {/* ===== BOOK ===== */}
+  <section class="section" style="background:var(--bg-alt)">
+    <div class="container-x">
+      <div class="card glow-top relative overflow-hidden p-8 reveal md:p-12">
+        <div class="grid items-start gap-10 md:grid-cols-[220px_1fr]">
+          <a href="/ending-loneliness" class="block">
+            <img
+              src="/images/covers/ending-loneliness.png"
+              alt="Ending Loneliness — a Sociogram Framework, by Dr. Axel Schumacher"
+              class="mx-auto w-full max-w-[220px] rounded-lg border border-[color:var(--border)] shadow-[var(--shadow)]"
+            />
+          </a>
+          <div class="max-w-2xl">
+            <span class="eyebrow">The book · coming soon</span>
+            <h2 class="mt-5 text-3xl font-semibold">Ending Loneliness</h2>
+            <p class="mt-4 text-lg font-medium text-accent">
+              A new standard for the coaches on the front line of the loneliness pandemic.
+            </p>
+            <div class="mt-5 space-y-4 text-[color:var(--text-muted)] leading-relaxed">
+              <p>
+                One in three adults now experiences chronic loneliness. Yet most dating advice still focuses
+                on confidence, communication, attachment styles, or attraction. These factors matter, but they
+                often overlook the deeper force shaping relationship outcomes: the structure of a person's
+                social world.
+              </p>
+              <p>
+                Drawing on decades of studying dating and human relationships in the real world — alongside
+                insights from network science, evolutionary biology, sociology, and complex systems theory —
+                Dr. Axel Schumacher reveals how hidden patterns in our social networks influence friendship,
+                dating, belonging, and long-term wellbeing. At its heart is the <strong class="text-[color:var(--text)]">Sociogram Method</strong>
+                and its core measurement tool, the <strong class="text-[color:var(--text)]">Social Connectivity Value (SCV)</strong> — a
+                practical framework for mapping social networks, identifying structural weaknesses, and creating
+                targeted interventions that produce measurable results.
+              </p>
+            </div>
+
+            <p class="mt-6 font-semibold text-[color:var(--text)]">Inside, you'll discover:</p>
+            <ul class="mt-3 space-y-2 text-[color:var(--text-muted)]">
+              <li class="flex gap-2.5"><span class="text-accent">•</span> Why loneliness is often a structural problem rather than a personal failure</li>
+              <li class="flex gap-2.5"><span class="text-accent">•</span> The hidden network patterns that predict relationship success</li>
+              <li class="flex gap-2.5"><span class="text-accent">•</span> Practical tools for auditing and improving social ecosystems</li>
+              <li class="flex gap-2.5"><span class="text-accent">•</span> Real-world case studies illustrating transformation through network redesign</li>
+              <li class="flex gap-2.5"><span class="text-accent">•</span> A new evidence-based methodology for coaches, therapists, matchmakers, and relationship professionals</li>
+            </ul>
+
+            <p class="mt-6 text-[color:var(--text-muted)] leading-relaxed">
+              Part scientific investigation, part practical handbook, <em>Ending Loneliness</em> offers a new
+              lens for understanding human connection — and a new toolkit for helping people build meaningful
+              relationships in an increasingly disconnected world.
+            </p>
+
+            <div class="mt-7 flex flex-wrap gap-3">
+              <a href="/ending-loneliness" class="btn btn-primary">Learn more</a>
+              {bookPreviewPdf && (
+                <a href={bookPreviewPdf} target="_blank" rel="noopener" class="btn btn-ghost">Read a free preview (PDF)</a>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== RESEARCH ===== */}
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Original Research Papers on Loneliness</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">The science underneath the work.</h2>
+        <p class="mt-4 text-lg leading-relaxed text-[color:var(--text-muted)]">
+          My own research on social connection and longevity — each with its full abstract, a figure, and a link to the complete paper.
+        </p>
+      </div>
+
+      {hasPapers ? (
+        <div class="mt-10 flex flex-col gap-6">
+          {
+            papers.map((p) => (
+              <article class="card reveal overflow-hidden md:grid md:grid-cols-[minmax(0,340px)_1fr]">
+                <a href={p.href} target="_blank" rel="noopener" class="block bg-[color:var(--surface-2)]">
+                  <img
+                    src={p.figure}
+                    alt={p.figureAlt}
+                    loading="lazy"
+                    class="h-52 w-full object-contain p-5 md:h-full"
+                  />
+                </a>
+                <div class="flex flex-col p-7 md:p-9">
+                  <p class="font-[family-name:var(--font-mono)] text-[0.66rem] uppercase tracking-[0.14em] text-accent">
+                    {p.venue}
+                  </p>
+                  <h3 class="mt-3 text-xl font-semibold leading-snug">{p.title}</h3>
+                  <p class="mt-4 text-sm leading-relaxed text-[color:var(--text-muted)]">{p.abstract}</p>
+                  <a href={p.href} target="_blank" rel="noopener" class="link-underline mt-6 inline-flex w-fit items-center gap-1.5 text-sm font-medium">
+                    Read the full paper →
+                  </a>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      ) : (
+        <p class="mt-8 text-[color:var(--text-muted)]">Selected publications are being added here shortly.</p>
+      )}
+
+      <div class="card mt-10 flex flex-col items-start gap-6 p-8 reveal md:flex-row md:items-center md:justify-between">
+        <div class="max-w-2xl">
+          <img src="/images/logos/osf-logo.webp" alt="Open Science Framework" class="h-9 w-auto" />
+          <h3 class="mt-4 text-xl font-semibold">{researchProject.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-[color:var(--text-muted)]">{researchProject.intro}</p>
+        </div>
+        <a href={researchProject.href} target="_blank" rel="noopener" class="btn btn-primary whitespace-nowrap">
+          {researchProject.cta}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== FEATURED ===== */}
+  {featured && (
+    <section class="group relative overflow-hidden border-t border-[color:var(--border)]">
+      <img
+        src="/images/photos/featured-bg.webp"
+        alt=""
+        aria-hidden="true"
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/65 to-transparent"></div>
+      <div class="container-x relative py-24 md:py-32">
+        <a
+          href={featured.href}
+          target={featured.external ? "_blank" : undefined}
+          rel={featured.external ? "noopener" : undefined}
+          class="block max-w-xl [text-shadow:_0_2px_16px_rgb(0_0_0_/_70%)]"
+        >
+          <span class="font-[family-name:var(--font-mono)] text-[0.66rem] uppercase tracking-[0.16em] text-[#F0B77E]">Featured essay</span>
+          <h2 class="mt-5 text-3xl font-semibold md:text-4xl" style="color:#ffffff">
+            {featured.title}
+          </h2>
+          <p class="mt-4 text-lg leading-relaxed" style="color:rgba(255,255,255,0.9)">{featured.hook}</p>
+          <span class="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-white underline-offset-4 group-hover:underline">
+            Read the essay →
+          </span>
+        </a>
+      </div>
+    </section>
+  )}
+
+  {/* ===== ARTICLES ===== */}
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Essays &amp; articles</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">On love, loneliness, and what comes next.</h2>
+      </div>
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          rest.map((a) => (
+            <a
+              href={a.href}
+              target={a.external ? "_blank" : undefined}
+              rel={a.external ? "noopener" : undefined}
+              class="card group flex flex-col p-7 reveal"
+            >
+              <span class="font-[family-name:var(--font-display)] text-2xl font-bold text-accent">{a.n}</span>
+              <h3 class="mt-4 text-lg font-semibold leading-snug group-hover:text-accent">{a.title}</h3>
+              <p class="mt-3 flex-1 text-sm leading-relaxed text-[color:var(--text-muted)]">{a.hook}</p>
+              <span class="link-underline mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-medium">
+                {a.external ? "Read on LinkedIn →" : "Read →"}
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+
+  {/* ===== FREE DOWNLOADS ===== */}
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Free downloads</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Put the framework to work.</h2>
+        <p class="mt-4 text-lg leading-relaxed text-[color:var(--text-muted)]">
+          Worksheets and scoring tools from the Sociogram Method — free to download and use.
+        </p>
+      </div>
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        {
+          downloads.map((d) => (
+            <div class="card reveal flex flex-col p-7">
+              <div class="flex items-center justify-between gap-3">
+                <span class="font-[family-name:var(--font-mono)] text-[0.62rem] uppercase tracking-[0.16em] text-accent">{d.fileType}</span>
+                {!d.url && (
+                  <span class="font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.14em] text-[color:var(--text-dim)]">Coming soon</span>
+                )}
+              </div>
+              <h3 class="mt-3 text-lg font-semibold">{d.name}</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-[color:var(--text-muted)]">{d.description}</p>
+              {d.url ? (
+                <a href={d.url} target="_blank" rel="noopener" class="link-underline mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-medium">
+                  Download →
+                </a>
+              ) : (
+                <span class="mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-[color:var(--text-dim)]">Available soon</span>
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ===== NEWSLETTER CTA ===== */}
+  <section class="relative overflow-hidden border-t border-[color:var(--border)]">
+    <img
+      src="/images/photos/newsletter-bg.webp"
+      alt=""
+      aria-hidden="true"
+      class="absolute inset-0 h-full w-full object-cover"
+    />
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="container-x relative py-24 text-center md:py-32 [text-shadow:_0_2px_16px_rgb(0_0_0_/_70%)]">
+      <span class="font-[family-name:var(--font-mono)] text-[0.66rem] uppercase tracking-[0.16em] text-[#F0B77E]">Stay in the loop</span>
+      <h2 class="mx-auto mt-5 max-w-xl text-3xl font-semibold md:text-4xl" style="color:#ffffff">New essays, straight to your inbox.</h2>
+      <p class="mx-auto mt-4 max-w-md text-lg" style="color:rgba(255,255,255,0.9)">Occasional, considered, and never spammy.</p>
+      <a href="/#join" class="btn btn-primary mt-8">Get new essays by email</a>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,497 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { handouts as allHandouts } from "../data/handouts";
+import { appearances } from "../data/appearances";
+
+const latestHandouts = allHandouts.slice(0, 3);
+
+const subscribeUrl = "https://bit.ly/4umNgFi";
+const youtubeUrl = "https://www.youtube.com/channel/UCff-x-V5yV345m2mYlL_jNQ";
+const spotifyUrl = "https://open.spotify.com/show/4hsq7OXi09HobuZz840ivW";
+const collabUrl = "https://tally.so"; // TODO: replace with the collaboration Tally form
+
+const socials = [
+  { name: "Spotify", url: spotifyUrl, icon: "spotify" },
+  { name: "YouTube", url: youtubeUrl, icon: "youtube" },
+  { name: "X", url: "https://x.com/DatingMindPod", icon: "x" },
+  { name: "Instagram", url: "https://www.instagram.com/insidethedatingmind/", icon: "instagram" },
+  { name: "TikTok", url: "https://www.tiktok.com/@insidethedatingmind", icon: "tiktok" },
+  { name: "LinkedIn", url: "https://www.linkedin.com/company/parallel-space/", icon: "linkedin" },
+];
+
+// Original show themes — one per season
+const themes = [
+  { id: "yUlNAbKDhJE", n: "01", title: "The Original Theme" },
+  { id: "KIB5gN0NbQs", n: "02", title: "Jusqu'à l'aube" },
+  { id: "7Luc8HILhb8", n: "03", title: "An Evening in Paris" },
+  { id: "gBJ3SSxESOc", n: "04", title: "Le Jeu de l'Amour" },
+  { id: "r9_vp6koZvM", n: "05", title: "Sotto il Sole" },
+  { id: "pljSqmhcYtc", n: "06", title: "Tout Ira Bien" },
+  { id: "TwGmuzTzo4Y", n: "07", title: "Matin à Saint Tropez" },
+];
+
+/* ---- Latest episodes: fetched automatically from the YouTube channel feed
+   at build time. Every Cloudflare Pages deploy refreshes this list.
+   If the feed is unreachable, the fallbacks below are used instead. ---- */
+let featured = {
+  id: "KOImsTj1IIo",
+  title: "My 10-Year Study on 400+ of the World's Most Attractive Women (Insane Results)",
+  date: "",
+};
+let episodes = [
+  { id: "KOImsTj1IIo", title: "My 10-Year Study on 400+ of the World's Most Attractive Women", date: "" },
+  { id: "L06ULHiii0w", title: "Game Theory Predicts Whether There's a Second Date", date: "" },
+];
+
+const CHANNEL_ID = "UCff-x-V5yV345m2mYlL_jNQ";
+try {
+  const res = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`);
+  if (res.ok) {
+    const xml = await res.text();
+    const unescape = (s: string) =>
+      s.replace(/&amp;/g, "&").replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+    const entries = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)]
+      .map((m) => ({
+        id: m[1].match(/<yt:videoId>([^<]+)/)?.[1] ?? "",
+        title: unescape(m[1].match(/<media:title>([^<]+)/)?.[1] ?? ""),
+        date: m[1].match(/<published>([^<]+)/)?.[1]?.slice(0, 10) ?? "",
+      }))
+      .filter((v) => v.id && v.title)
+      // keep real episodes: skip theme songs and shorts
+      .filter((v) => !/theme\s*\d/i.test(v.title) && !/#shorts/i.test(v.title));
+    if (entries.length) {
+      featured = entries[0];
+      episodes = entries.slice(0, 6);
+    }
+  }
+} catch {
+  /* build proceeds with fallbacks */
+}
+
+const collabs = [
+  {
+    n: "01",
+    title: "Invite Dr. Schumacher to your show",
+    body: "Cutting-edge insights on evolutionary psychology, the art and science of dating, and the fight against loneliness. Available for podcast appearances, media, and paid speaking engagements.",
+  },
+  {
+    n: "02",
+    title: "Be a guest on Inside the Dating Mind",
+    body: "Sharing research or a story on love, relationships, or human behaviour? The show features experts, entrepreneurs, and thought-leaders. Join us to spark fresh conversations and help end loneliness together.",
+  },
+  {
+    n: "03",
+    title: "Collaborate with us",
+    body: "Co-produce a series, host a live panel, or launch a joint research project. Let's combine our expertise to create impactful content and drive real change in human connection.",
+  },
+];
+
+const YT = `<svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M23 12s0-3.8-.5-5.6a2.9 2.9 0 0 0-2-2C18.7 4 12 4 12 4s-6.7 0-8.5.4a2.9 2.9 0 0 0-2 2C1 8.2 1 12 1 12s0 3.8.5 5.6a2.9 2.9 0 0 0 2 2C5.3 20 12 20 12 20s6.7 0 8.5-.4a2.9 2.9 0 0 0 2-2C23 15.8 23 12 23 12ZM10 15.5v-7l6 3.5-6 3.5Z"/></svg>`;
+const SPOT = `<svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.6 14.4a.75.75 0 0 1-1 .25c-2.8-1.7-6.3-2.1-10.4-1.1a.75.75 0 1 1-.34-1.46c4.5-1 8.4-.6 11.5 1.3.35.22.46.7.24 1.02Zm1.2-2.7a.94.94 0 0 1-1.3.3c-3.2-2-8.1-2.5-11.9-1.4a.94.94 0 1 1-.53-1.8c4.3-1.3 9.7-.7 13.4 1.6.44.27.58.85.33 1.3Zm.1-2.8C14.2 8.6 7.9 8.4 4.3 9.5a1.12 1.12 0 1 1-.65-2.15C7.8 6.1 14.8 6.3 19 8.8a1.12 1.12 0 1 1-1.16 1.92Z"/></svg>`;
+const APPLE = `<svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M16.4 12.9c0-2.2 1.8-3.3 1.9-3.3-1-1.5-2.6-1.7-3.2-1.7-1.3-.1-2.6.8-3.3.8-.7 0-1.7-.8-2.8-.8-1.4 0-2.7.8-3.5 2.1-1.5 2.6-.4 6.4 1.1 8.5.7 1 1.5 2.2 2.6 2.1 1-.04 1.4-.67 2.7-.67 1.2 0 1.6.67 2.7.65 1.1-.02 1.8-1 2.5-2 .8-1.2 1.1-2.3 1.1-2.4-.02-.01-2.1-.82-2.1-3.25ZM14.3 6.3c.6-.7 1-1.7.9-2.7-.85.04-1.9.57-2.5 1.27-.55.62-1 1.64-.9 2.6.94.07 1.9-.48 2.5-1.17Z"/></svg>`;
+const XICON = `<svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"/></svg>`;
+const IG = `<svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069Zm0-2.163C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0Zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881Z"/></svg>`;
+const TIKTOK = `<svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07Z"/></svg>`;
+const LI = `<svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124ZM7.119 20.452H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0Z"/></svg>`;
+const ICONS: Record<string, string> = { spotify: SPOT, youtube: YT, x: XICON, instagram: IG, tiktok: TIKTOK, linkedin: LI };
+---
+
+<Layout
+  theme="podcast"
+  title="Inside the Dating Mind — the podcast | Dr. Axel Schumacher"
+  description="Inside the Dating Mind: the science of attraction, connection, and ending loneliness. Watch on YouTube and Spotify, download episode worksheets, and join the movement."
+>
+  <!-- ========== HERO ========== -->
+  <section class="glow-top relative overflow-hidden border-b border-[color:var(--border)]">
+    <!-- Cinematic backdrop: a blurred still from the latest episode.
+         Updates automatically whenever a new episode is published. -->
+    <div class="absolute inset-0" aria-hidden="true">
+      <img
+        src={`https://i.ytimg.com/vi/${featured.id}/maxresdefault.jpg`}
+        onerror={`this.onerror=null;this.src='https://i.ytimg.com/vi/${featured.id}/hqdefault.jpg'`}
+        alt=""
+        class="h-full w-full scale-110 object-cover opacity-[0.18] blur-md saturate-[0.85]"
+        loading="eager"
+        fetchpriority="low"
+      />
+      <div
+        class="absolute inset-0"
+        style="background:linear-gradient(180deg, color-mix(in srgb, var(--bg) 45%, transparent) 0%, color-mix(in srgb, var(--bg) 72%, transparent) 55%, var(--bg) 100%)"
+      ></div>
+    </div>
+    <div class="container-x relative z-10 py-20 md:py-24">
+      <div class="grid gap-12 md:grid-cols-[1fr_0.9fr] md:items-center">
+        <div>
+          <div class="flex items-center gap-4">
+            <img
+              src="/images/logos/inside-the-dating-mind.png"
+              alt="Inside the Dating Mind podcast logo"
+              class="h-16 w-16 shrink-0 rounded-2xl border border-[color:var(--border)]"
+            />
+            <span class="eyebrow">The podcast</span>
+          </div>
+          <h1 class="mt-6 text-[clamp(2.4rem,5.5vw,4rem)] font-bold leading-[1.03]">Inside the Dating Mind</h1>
+          <p class="lead mt-5 text-lg">
+            The science of attraction, connection, and ending loneliness — with field-tested
+            tips you can actually use, and Aria, my AI co-host, fact-checking every claim.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href={subscribeUrl} target="_blank" rel="noopener" class="btn btn-primary">Subscribe on YouTube</a>
+            <a href={spotifyUrl} target="_blank" rel="noopener" class="btn btn-ghost">Listen on Spotify</a>
+          </div>
+        </div>
+
+        <!-- Featured episode -->
+        <div class="reveal">
+          <div class="overflow-hidden rounded-2xl border border-[color:var(--border)] shadow-2xl">
+            <div class="aspect-video">
+              <iframe
+                class="h-full w-full"
+                src={`https://www.youtube-nocookie.com/embed/${featured.id}`}
+                title={featured.title}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="bg-[color:var(--surface)] p-5">
+              <div class="flex items-center justify-between gap-3">
+                <span class="font-[family-name:var(--font-mono)] text-[0.66rem] uppercase tracking-[0.16em] text-accent">Latest episode</span>
+                {featured.date && (
+                  <span class="font-[family-name:var(--font-mono)] text-[0.66rem] text-[color:var(--text-dim)]">{featured.date}</span>
+                )}
+              </div>
+              <h2 class="mt-2 text-base font-semibold leading-snug">{featured.title}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PLATFORMS BAR ========== -->
+  <section class="border-b border-[color:var(--border)] bg-[color:var(--surface)]">
+    <div class="container-x flex flex-col items-center gap-4 py-6 sm:flex-row sm:justify-between">
+      <p class="font-[family-name:var(--font-mono)] text-[0.7rem] uppercase tracking-[0.2em] text-[color:var(--text-dim)]">
+        Watch &amp; listen everywhere
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        {
+          socials.map((s) => (
+            <a
+              href={s.url}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 rounded-full border border-[color:var(--border)] px-4 py-2 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+            >
+              <span set:html={ICONS[s.icon]} /> {s.name}
+            </a>
+          ))
+        }
+        <span
+          class="inline-flex cursor-default items-center gap-2 rounded-full border border-dashed border-[color:var(--border)] px-4 py-2 text-sm font-medium text-[color:var(--text-dim)] opacity-70"
+          title="Apple Podcasts — coming soon"
+        >
+          <span set:html={APPLE} /> Apple Podcasts · soon
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EPISODES ========== -->
+  <section class="section">
+    <div class="container-x">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <span class="eyebrow">Episodes</span>
+          <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Every episode, with the homework.</h2>
+        </div>
+        <a href={youtubeUrl} target="_blank" rel="noopener" class="btn btn-ghost text-sm">All episodes on YouTube</a>
+      </div>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        {
+          episodes.map((ep) => (
+            <article class="card reveal flex flex-col overflow-hidden">
+              <a href={`https://youtu.be/${ep.id}`} target="_blank" rel="noopener" class="group relative block aspect-video overflow-hidden">
+                <img
+                  src={`https://i.ytimg.com/vi/${ep.id}/maxresdefault.jpg`}
+                  onerror={`this.onerror=null;this.src='https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg'`}
+                  alt={ep.title}
+                  class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
+                <span class="pointer-events-none absolute inset-0 grid place-items-center">
+                  <span class="grid h-14 w-14 place-items-center rounded-full border border-white/30 bg-black/45 backdrop-blur-sm">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"></path></svg>
+                  </span>
+                </span>
+              </a>
+              <div class="flex flex-1 flex-col p-6">
+                {ep.date && (
+                  <span class="font-[family-name:var(--font-mono)] text-[0.66rem] uppercase tracking-[0.14em] text-[color:var(--text-dim)]">{ep.date}</span>
+                )}
+                <h3 class="mt-3 text-lg font-semibold leading-snug">{ep.title}</h3>
+                <div class="mt-auto flex flex-wrap gap-3 pt-5">
+                  <a href={`https://youtu.be/${ep.id}`} target="_blank" rel="noopener" class="btn btn-primary text-sm">Watch</a>
+                  <a href="#resources" class="btn btn-ghost text-sm">↓ Worksheet</a>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+      <p class="mt-6 font-[family-name:var(--font-mono)] text-[0.66rem] text-[color:var(--text-dim)]">
+        This grid updates itself from the YouTube channel on every site deploy.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== THEME SONGS ========== -->
+  <section class="section relative overflow-hidden border-t border-[color:var(--border)]">
+    <img
+      src="/images/photos/soundtrack-bg.webp"
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      class="absolute inset-0 h-full w-full object-cover opacity-30"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-[color:var(--bg)] via-transparent to-[color:var(--bg)]"></div>
+    <div class="container-x relative">
+      <div class="max-w-2xl">
+        <span class="eyebrow">The soundtrack</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Music from a time when flirting was an art form.</h2>
+        <p class="mt-4 text-lg leading-relaxed text-[color:var(--text-muted)]">
+          Every season of Inside the Dating Mind opens with an original song — and each one is a time
+          machine. A golden morning in 1950s Saint-Tropez, back when it was still a fishing village. A
+          smoky basement jazz club in '60s Paris, Juliette Gréco holding court at a corner table. A
+          sun-drenched Italian piazza in the '70s, where seduction happened in broad daylight and charm
+          wore a linen suit. Press play, and step into a world where romance took its time.
+        </p>
+      </div>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          themes.map((t) => (
+            <a
+              href={`https://youtu.be/${t.id}`}
+              target="_blank"
+              rel="noopener"
+              class="card reveal group overflow-hidden"
+            >
+              <div class="relative aspect-video overflow-hidden">
+                <img
+                  src={`https://i.ytimg.com/vi/${t.id}/maxresdefault.jpg`}
+                  onerror={`this.onerror=null;this.src='https://i.ytimg.com/vi/${t.id}/hqdefault.jpg'`}
+                  alt={`Inside the Dating Mind theme ${t.n} — ${t.title}`}
+                  class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
+                <span class="pointer-events-none absolute inset-0 grid place-items-center">
+                  <span class="grid h-12 w-12 place-items-center rounded-full border border-white/30 bg-black/45 backdrop-blur-sm">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
+                  </span>
+                </span>
+              </div>
+              <div class="flex items-center gap-4 p-5">
+                <span class="font-[family-name:var(--font-display)] text-2xl font-bold text-accent">{t.n}</span>
+                <div>
+                  <h3 class="font-semibold leading-snug">{t.title}</h3>
+                  <p class="mt-0.5 font-[family-name:var(--font-mono)] text-[0.64rem] uppercase tracking-[0.14em] text-[color:var(--text-dim)]">
+                    Show theme · YouTube
+                  </p>
+                </div>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== RESOURCE LIBRARY ========== -->
+  <section id="resources" class="section relative overflow-hidden border-t border-[color:var(--border)]" style="background:var(--bg-alt)">
+    <img
+      src="/images/photos/library-bg.webp"
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      class="absolute inset-0 h-full w-full object-cover object-top opacity-50"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-[color:var(--bg-alt)]/70 via-transparent to-[color:var(--bg-alt)]"></div>
+    <div class="container-x relative">
+      <div class="max-w-2xl">
+        <span class="eyebrow">The resource library</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Every worksheet, in one place.</h2>
+        <p class="mt-4 text-lg leading-relaxed text-[color:var(--text-muted)]">
+          Each episode ships with a practical download — worksheets, debrief templates, and
+          guides to put the science to work. Grab a single one, or get the whole vault by email.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-4 md:grid-cols-3">
+        {
+          latestHandouts.map((h) => (
+            <div class="card reveal flex flex-col p-6">
+              <span class="font-[family-name:var(--font-mono)] text-[0.66rem] uppercase tracking-[0.14em] text-accent">
+                Episode {String(h.ep).padStart(3, "0")}
+              </span>
+              <h3 class="mt-3 text-lg font-semibold">{h.title}</h3>
+              <a href={h.url} target="_blank" rel="noopener" class="link-underline mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-medium">
+                Download the handout →
+              </a>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-6">
+        <a href="/handouts" class="link-underline inline-flex items-center gap-1.5 text-sm font-medium">
+          Browse all {allHandouts.length} handouts →
+        </a>
+      </div>
+
+      <div id="unlock" class="card mt-8 flex flex-col items-center gap-4 p-8 text-center reveal md:flex-row md:justify-between md:text-left">
+        <div>
+          <h3 class="text-xl font-semibold">Unlock the entire handout vault</h3>
+          <p class="mt-1 text-sm text-[color:var(--text-muted)]">One email, every download — plus new ones as episodes drop.</p>
+        </div>
+        <a href="/#join" class="btn btn-primary whitespace-nowrap">Get every handout</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ASK / INTERACT ========== -->
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x grid gap-6 lg:grid-cols-2">
+      <div class="card reveal flex flex-col p-8">
+        <span class="chip w-fit">Ask the show</span>
+        <h3 class="mt-5 text-2xl font-semibold">Got a dating or loneliness question?</h3>
+        <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">
+          Submit it and it might be answered on a future episode — with Aria, my AI co-host,
+          bringing the data. The best questions shape the show.
+        </p>
+        <a href="#" class="btn btn-primary mt-8 w-fit">Ask a question</a>
+        <p class="mt-3 font-[family-name:var(--font-mono)] text-[0.64rem] text-[color:var(--text-dim)]">↑ Swap for your Tally.so form</p>
+      </div>
+      <div class="card reveal flex flex-col p-8">
+        <span class="chip w-fit">Share your story</span>
+        <h3 class="mt-5 text-2xl font-semibold">Been through something worth telling?</h3>
+        <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">
+          Your experience of loneliness, dating, or reconnection could help thousands. Share it
+          (anonymously if you like) and become part of the movement.
+        </p>
+        <a href="#" class="btn btn-ghost mt-8 w-fit">Share your story</a>
+        <p class="mt-3 font-[family-name:var(--font-mono)] text-[0.64rem] text-[color:var(--text-dim)]">↑ Swap for your Tally.so form</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GOODIES / MERCH — hidden until merch exists. Restore by removing the {false && ( … )} wrapper. ========== -->
+  {false && (
+  <section class="section border-t border-[color:var(--border)]" style="background:var(--bg-alt)">
+    <div class="container-x">
+      <div class="card relative overflow-hidden p-10 text-center md:p-14">
+        <span class="eyebrow justify-center">Goodies &amp; merch</span>
+        <h2 class="mx-auto mt-5 max-w-xl text-3xl font-semibold">Wear the movement.</h2>
+        <p class="lead mx-auto mt-4 text-center">
+          Inside the Dating Mind merch and goodies are on the way — join the list and you'll be first through the door.
+        </p>
+        <a href="/#join" class="btn btn-primary mt-8">Notify me</a>
+      </div>
+    </div>
+  </section>
+  )}
+
+  <!-- ========== GUEST APPEARANCES ========== -->
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">As heard elsewhere</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Axel on other people's shows.</h2>
+        <p class="mt-4 text-lg leading-relaxed text-[color:var(--text-muted)]">
+          Guest conversations on dating, loneliness, and the science of connection — from around the podcast world.
+        </p>
+      </div>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          appearances.map((a) => (
+            <a href={a.url} target="_blank" rel="noopener" class="card reveal group flex flex-col overflow-hidden">
+              <div class="relative aspect-video overflow-hidden">
+                <img
+                  src={`https://i.ytimg.com/vi/${a.videoId}/hqdefault.jpg`}
+                  alt={`${a.show} — ${a.title}`}
+                  class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
+                <span class="pointer-events-none absolute inset-0 grid place-items-center">
+                  <span class="grid h-12 w-12 place-items-center rounded-full border border-white/30 bg-black/45 backdrop-blur-sm">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
+                  </span>
+                </span>
+              </div>
+              <div class="flex flex-col p-5">
+                <span class="font-[family-name:var(--font-mono)] text-[0.64rem] uppercase tracking-[0.14em] text-accent">{a.show}</span>
+                <h3 class="mt-2 font-semibold leading-snug group-hover:text-accent">{a.title}</h3>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== COLLABORATIONS ========== -->
+  <section id="collaborate" class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="grid items-center gap-10 lg:grid-cols-[1fr_360px]">
+        <div class="max-w-2xl">
+          <span class="eyebrow">Collaborations</span>
+          <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Let's build the conversation together.</h2>
+        </div>
+        <img
+          src="/images/photos/axel-collab.webp"
+          alt="Dr. Axel Schumacher speaking at a live event"
+          loading="lazy"
+          class="reveal w-full rounded-[var(--radius-lg)] border border-[color:var(--border)] object-cover shadow-[var(--shadow)]"
+        />
+      </div>
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        {
+          collabs.map((c) => (
+            <div class="card reveal flex flex-col p-8">
+              <span class="font-[family-name:var(--font-display)] text-3xl font-bold text-accent">{c.n}</span>
+              <h3 class="mt-4 text-lg font-semibold">{c.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">{c.body}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="mt-8">
+        <a href={collabUrl} target="_blank" rel="noopener" class="btn btn-primary">Request a collaboration</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== JOIN CTA ========== -->
+  <section class="section border-t border-[color:var(--border)]" style="background:var(--bg-alt)">
+    <div class="container-x">
+      <div class="card glow-top relative overflow-hidden p-10 text-center md:p-16">
+        <img
+          src="/images/logos/inside-the-dating-mind.png"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          class="pointer-events-none absolute -right-16 -top-10 w-72 rotate-[-8deg] opacity-[0.09] md:w-80"
+        />
+        <span class="eyebrow justify-center">Join the movement</span>
+        <h2 class="mx-auto mt-5 max-w-2xl text-3xl font-semibold md:text-4xl">
+          Never miss an episode — or a handout.
+        </h2>
+        <p class="lead mx-auto mt-4 text-center">
+          New episodes, worksheets, podcast handouts, and first access to everything — straight to your inbox.
+        </p>
+        <a href="/#join" class="btn btn-primary mt-8">Join the list</a>
+      </div>
+    </div>
+  </section>
+</Layout>

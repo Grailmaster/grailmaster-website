@@ -1,0 +1,295 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const scienceCreds = [
+  "Ph.D. in Human Genetics, University of Cologne — specializing in neurogenetics, epigenetics, and game theory.",
+  "20+ years of practical experience at two of the world's leading mental-health centers: the Centre for Addiction and Mental Health (Toronto) and the Psychiatry Department of Klinikum Rechts der Isar (Munich).",
+];
+
+const fieldCreds = [
+  "40+ years studying the modern dating market.",
+  "Coached individuals to find true love, guide their first dates, and forge lasting bonds.",
+  "Conversed with 40,000+ women and interviewed thousands of men across 80+ countries to learn how cultures experience attraction and intimacy.",
+  "Dissected 1,500+ dating books, tens of thousands of scientific studies, thousands of videos, and billions of online-dating data points.",
+  "Analyzed the teachings and seminars of 100+ top dating experts — from classic romantics to modern seduction masters.",
+  "Conducted original field experiments to decode what truly drives attraction.",
+];
+---
+
+<Layout
+  theme="lab"
+  title="About Dr. Axel Schumacher | Grailmaster"
+  description="Dr. Axel Schumacher — world-renowned geneticist, longevity expert, author, and inventor of the SCV sociogram method to end loneliness. 35+ years in epigenetics and human connection."
+>
+  <section class="glow-top relative overflow-hidden border-b border-[color:var(--border)]">
+    <div class="container-x relative z-10 grid gap-12 py-24 md:grid-cols-[1.2fr_0.8fr] md:items-center md:py-28">
+      <div>
+        <span class="eyebrow">About the Doctor</span>
+        <h1 class="mt-6 text-[clamp(2.2rem,5vw,3.8rem)] font-bold">Dr. Axel Schumacher</h1>
+        <p class="lead mt-6 max-w-xl text-lg">
+          World-renowned geneticist, serial entrepreneur, keynote speaker, and author — with over
+          35 years of research in (neuro)epigenetics and human longevity, and the inventor of the
+          SCV sociogram method to end loneliness.
+        </p>
+      </div>
+      <div class="reveal mx-auto w-full max-w-xs">
+        <div class="card relative aspect-[4/5] overflow-hidden">
+          <img
+            src="/images/photos/Axel2.jpg"
+            alt="Dr. Axel Schumacher"
+            class="h-full w-full object-cover"
+            style="object-position:center 18%;"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== BIO ===== */}
+  <section class="section">
+    <div class="container-x grid gap-12 md:grid-cols-[0.85fr_1.15fr]">
+      <div class="reveal">
+        <span class="eyebrow">The Architect of Connection</span>
+        <h2 class="mt-5 text-3xl font-semibold">A life bridging science and the human heart</h2>
+      </div>
+      <div class="reveal space-y-5 text-[color:var(--text-muted)] leading-relaxed">
+        <p>
+          Dr. Axel Schumacher is the inventor of the SCV sociogram method to end loneliness and the
+          author of <em>Ending Loneliness</em>. As co-founder and CEO of several biotech companies, he
+          has pioneered cutting-edge technology platforms, biomarker studies, and companion
+          diagnostics, and advised top tech entrepreneurs around the globe — all while shaping the
+          future of human longevity.
+        </p>
+        <p>
+          Dr. Schumacher uniquely bridges science, advanced technology, and human-centered design. As
+          an innovation strategist, he has led international deep-tech initiatives — both startups and
+          research consortia — across Europe, Asia, and North America.
+        </p>
+        <p class="text-[color:var(--text)]">
+          He is currently writing <em>The Art &amp; Science of Dating</em>, set for release in 2027: the
+          most comprehensive, research-driven dating book ever written, combining decades of fieldwork,
+          work with the best dating coaches on the planet, and rigorous research studies to deliver a
+          unified roadmap out of loneliness.
+        </p>
+        <p>
+          Axel's life's work is simple yet profound: understand the needs of single people and solve the
+          planet's loneliness crisis better than anyone in history, by fusing science, technology, and
+          the timeless art of romance. He is a devoted father of two daughters and currently lives in
+          Munich, Germany.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== QUALIFICATIONS ===== */}
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Qualifications</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">A lifetime devoted to understanding love.</h2>
+      </div>
+
+      <div class="mt-12 grid gap-10 lg:grid-cols-2">
+        <div class="reveal">
+          <h3 class="font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.16em] text-accent">
+            Scientific foundation
+          </h3>
+          <ul class="mt-5 space-y-4">
+            {
+              scienceCreds.map((c) => (
+                <li class="flex gap-3 text-[color:var(--text-muted)] leading-relaxed">
+                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                  <span>{c}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="reveal">
+          <h3 class="font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.16em] text-accent">
+            Four decades in the field
+          </h3>
+          <ul class="mt-5 space-y-4">
+            {
+              fieldCreds.map((c) => (
+                <li class="flex gap-3 text-[color:var(--text-muted)] leading-relaxed">
+                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                  <span>{c}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  {/* ===== QUOTE + STAGE PHOTO ===== */}
+  <section class="photo-band">
+    <div class="container-x">
+      <div class="quote-layout">
+        <div class="quote-panel reveal">
+          <span class="eyebrow">Why this work exists</span>
+          <blockquote>
+            “I spent forty years learning from the best coaches alive and dead. Their insight was real, but untested. So I built the frameworks to test it — and turn it into a way out of loneliness.”
+          </blockquote>
+          <p class="attrib">
+            Dr. Axel Schumacher — on why the SCV method exists.
+          </p>
+        </div>
+
+        <div class="tilt-card reveal">
+          <img
+            src="/images/photos/on-stage-2.png"
+            alt="Dr. Axel Schumacher speaking on stage"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== ON STAGE / IN CONVERSATION ===== */}
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">On stage &amp; in conversation</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+          Taking the science of connection to the room.
+        </h2>
+      </div>
+
+      <div class="strip-wrap reveal">
+        <div class="strip-img">
+          <img
+            src="/images/photos/podcast-2.png"
+            alt="Dr. Axel Schumacher in a live interview on stage"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="strip-caption">
+          <h3
+            class="font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.16em] text-accent"
+          >
+            Inside the Dating Mind
+          </h3>
+          <p class="mt-4 text-sm leading-relaxed text-[color:var(--text-muted)]">
+            Keynotes, panels, and long-form interviews on loneliness, network science, and the
+            biology of belonging — for audiences from research institutes to founder summits.
+          </p>
+          <a href="/inside-the-dating-mind" class="btn btn-ghost mt-6 text-sm">Watch the podcast</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== SPEAKING & MEDIA ===== */}
+  <section id="speaking" class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Speaking &amp; media</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+          Book Axel for a stage, a panel, or a studio.
+        </h2>
+        <p class="lead mt-6">
+          Keynotes and moderated conversations on loneliness, network science, and the biology of
+          connection — for conferences, corporate events, universities, and health organisations.
+          Also available for podcast appearances and expert commentary.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        <div class="card p-7">
+          <h3 class="text-lg font-semibold">Keynote</h3>
+          <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">
+            30 to 60 minutes, built around your audience rather than delivered off the shelf. A
+            scientific argument with a practical ending — people should leave able to do something
+            differently on Monday.
+          </p>
+        </div>
+        <div class="card p-7">
+          <h3 class="text-lg font-semibold">Panel, moderation &amp; workshop</h3>
+          <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">
+            Panel contributions, on-stage interviews, or a hands-on sociogram workshop for a smaller
+            group. Useful when the event needs participation rather than a lecture.
+          </p>
+        </div>
+        <div class="card p-7">
+          <h3 class="text-lg font-semibold">Podcast &amp; broadcast</h3>
+          <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">
+            Long-form podcast appearances, radio, and television. Comfortable with live formats and
+            with hosts who want to be argued with.
+          </p>
+        </div>
+        <div class="card p-7">
+          <h3 class="text-lg font-semibold">Expert commentary</h3>
+          <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">
+            Background or on-record comment for journalists covering loneliness, dating markets,
+            social networks, epigenetics, or longevity. Fast turnaround where a deadline requires it.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-12 grid gap-12 md:grid-cols-2 md:items-start">
+        <div>
+          <h3 class="font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.16em] text-accent">
+            Talks I am asked for most
+          </h3>
+          <ul class="offer__list">
+            <li>Loneliness is a structure problem, not a feelings problem</li>
+            <li>The social connectome: what a map of your relationships reveals</li>
+            <li>Why dating apps produce exposure without belonging</li>
+            <li>The missing variable in longevity science: other people</li>
+            <li>What a geneticist learned from 40,000 conversations about love</li>
+          </ul>
+        </div>
+
+        <div class="note-box">
+          <h3>For organisers</h3>
+          <p>
+            Talks are delivered in English or German, in person or remote. Fees depend on format,
+            travel, and whether the event is commercial, academic, or public-sector — academic and
+            non-profit rates are available, and I take a small number of unpaid events each year for
+            causes that fit the mission. Bio, headshots, past talks, and technical requirements are
+            sent on request.
+          </p>
+        </div>
+      </div>
+
+      <div class="card mt-12 p-8 text-center md:p-12">
+        <span class="chip">Tally form embed</span>
+        <p class="mt-5 text-sm leading-relaxed text-[color:var(--text-muted)]">
+          Paste the speaking enquiry form here — event name, date, location, format, audience size,
+          and budget range. Enquiries answered within two working days.
+        </p>
+        <a href="https://tally.so" class="link-underline mt-6 text-sm">Set up the Tally form →</a>
+      </div>
+
+      <div class="note-box">
+        <h3>Looking to collaborate rather than book?</h3>
+        <p>
+          Guesting on <em>Inside the Dating Mind</em>, co-producing a series, or running a joint
+          research project runs through the podcast.
+          <a href="/inside-the-dating-mind#collaborate" class="link-underline">See collaborations →</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== CONTACT ===== */}
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="card glow-top relative overflow-hidden p-10 text-center md:p-14">
+        <h2 class="mx-auto max-w-2xl text-3xl font-semibold md:text-4xl">Get in touch</h2>
+        <p class="lead mx-auto mt-4 text-center">
+          For coaching, media, speaking, or venture conversations.
+        </p>
+        <a href="mailto:hello@grailmaster.com" class="btn btn-primary mt-8">Email me</a>
+      </div>
+    </div>
+  </section>
+</Layout>

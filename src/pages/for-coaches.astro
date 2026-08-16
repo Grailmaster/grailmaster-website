@@ -1,0 +1,284 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const workshops = [
+  {
+    city: "Munich",
+    when: "Autumn 2026",
+    body: "Two days on the Sociogram Method: building a client sociogram from intake, reading structural bottlenecks, and designing interventions that fit a real life. Taught in English and German.",
+  },
+  {
+    city: "London",
+    when: "Spring 2027",
+    body: "The same core curriculum, with a session on integrating structural diagnosis into an existing therapeutic or coaching practice. Taught in English.",
+  },
+];
+
+const supervision = [
+  "You bring one stuck client case — anonymised, in your own notes.",
+  "We build the sociogram together and locate the structural bottleneck.",
+  "You leave with a diagnosis you can use in your next session, and the reasoning behind it.",
+  "Recurring slots available for practitioners who want ongoing case consultation.",
+];
+---
+
+<Layout
+  theme="lab"
+  title="For Coaches & Therapists | The Sociogram Method"
+  description="Train in the Sociogram Method: workshops in Munich and London, practitioner supervision, referral partnership, and an open invitation to contribute to the research."
+>
+  {/* ===== HERO ===== */}
+  <section class="glow-top relative overflow-hidden border-b border-[color:var(--border)]">
+    <div class="container-x relative z-10 py-24 md:py-28">
+      <span class="eyebrow">For coaches &amp; therapists</span>
+      <h1 class="mt-6 max-w-4xl text-[clamp(2.2rem,5vw,3.6rem)] font-bold">
+        Give your clients a map instead of more shame.
+      </h1>
+      <p class="lead mt-7 max-w-2xl text-lg">
+        Most clients who arrive stuck in dating are not lacking confidence or communication skills.
+        They are living inside a social structure that produces too few real encounters. The
+        Sociogram Method makes that structure visible — so you can diagnose it rather than guess at
+        it.
+      </p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="#workshops" class="btn btn-primary">See the workshops</a>
+        <a href="#supervision" class="btn btn-ghost">Book case supervision</a>
+      </div>
+      <div class="pill-row">
+        <span class="pill">No certification required to use the method</span>
+        <span class="pill">English &amp; German</span>
+        <span class="pill">Munich &amp; London</span>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== WHY ===== */}
+  <section class="section">
+    <div class="container-x grid gap-12 md:grid-cols-[0.85fr_1.15fr]">
+      <div class="reveal">
+        <span class="eyebrow">Why this matters in your practice</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+          The client isn't failing. Their opportunity structure is.
+        </h2>
+      </div>
+      <div class="reveal space-y-5 leading-relaxed text-[color:var(--text-muted)]">
+        <p>
+          When a client reports months of effort and no progress, the standard moves are to work on
+          confidence, communication, attachment, or presentation. Sometimes that is right. Often the
+          bottleneck sits earlier: their week produces almost no repeated, trusted contact, their
+          ties are locked in one context, and nobody in their network is positioned to introduce
+          them onward.
+        </p>
+        <p>
+          Without a way to see that, the work becomes a search for a defect in the person — which is
+          both inaccurate and quietly harmful. A sociogram relocates the problem to something
+          external, concrete, and changeable. Clients tend to relax the moment they see it.
+        </p>
+        <p class="text-[color:var(--text)]">
+          The method is not proprietary and requires no licence to use. It is published, and you are
+          welcome to apply it in your own practice.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== BOOK ===== */}
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x grid gap-12 md:grid-cols-2 md:items-center">
+      <div class="reveal">
+        <span class="eyebrow">The training manual</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Ending Loneliness.</h2>
+        <p class="mt-6 leading-relaxed text-[color:var(--text-muted)]">
+          The full method in written form — the theory, the mapping procedure, the bottleneck
+          taxonomy, and the intervention logic. If you want to work this way without waiting for a
+          workshop, the book is the complete text, and everything I teach live is built on it.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/ending-loneliness" class="btn btn-primary">About the book</a>
+          <a href="/scv-framework" class="btn btn-ghost">Read the science</a>
+        </div>
+      </div>
+      <div class="section-figure reveal">
+        <img
+          src="/images/covers/ending-loneliness.png"
+          alt="Ending Loneliness by Dr. Axel Schumacher"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  {/* ===== WORKSHOPS ===== */}
+  <section id="workshops" class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Workshops</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Two days, in person, in a small room.</h2>
+        <p class="lead mt-6">
+          Practitioner workshops teaching the method end to end, with live mapping on real
+          (anonymised) cases brought by participants. Deliberately small.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        {
+          workshops.map((w) => (
+            <div class="card p-7">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="text-xl font-semibold">{w.city}</h3>
+                <span class="font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.16em] text-accent">
+                  {w.when}
+                </span>
+              </div>
+              <p class="mt-4 text-sm leading-relaxed text-[color:var(--text-muted)]">{w.body}</p>
+              <p class="mt-5 text-[0.78rem] leading-relaxed text-[color:var(--text-muted)]">
+                Exact dates, venue, and pricing are not yet confirmed. Register interest and you'll
+                be told first, with no obligation.
+              </p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="card mt-8 p-8 text-center md:p-10">
+        <span class="chip">Tally form embed</span>
+        <p class="mt-5 text-sm leading-relaxed text-[color:var(--text-muted)]">
+          Paste the workshop interest form here — city preference, professional background, and
+          whether you'd want the certification track when it exists.
+        </p>
+        <a href="https://tally.so" class="link-underline mt-6 text-sm">Set up the Tally form →</a>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== SUPERVISION ===== */}
+  <section id="supervision" class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Practitioner supervision</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+          Bring me a case you're stuck on.
+        </h2>
+        <p class="lead mt-6">
+          One-to-one case consultation for coaches and therapists. Not training in the abstract —
+          structural diagnosis applied to a client you are actually working with.
+        </p>
+      </div>
+
+      <div class="offer-grid">
+        <div class="offer">
+          <div>
+            <h3 class="offer__name">Case consultation</h3>
+            <p class="offer__promise">
+              A 60-minute working session on one client's social structure.
+            </p>
+            <p class="offer__price">On enquiry</p>
+            <p class="offer__note">
+              Single sessions or a recurring slot. Practitioner rate — tell me your setting and
+              caseload.
+            </p>
+            <a href="#enquiry" class="btn btn-primary">Request supervision</a>
+          </div>
+          <ul class="offer__list">
+            {supervision.map((s) => <li>{s}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      <div class="note-box">
+        <h3>On confidentiality</h3>
+        <p>
+          Bring cases anonymised. I do not need your client's name, and a sociogram works perfectly
+          well with initials or pseudonyms for every person in it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== RESEARCH + REFERRAL ===== */}
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Two open invitations</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+          The evidence base gets built by practitioners.
+        </h2>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        <div class="card p-7">
+          <h3 class="text-lg font-semibold">Contribute to the research</h3>
+          <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">
+            If you use structural mapping in your practice, I would like to hear what you see:
+            which bottleneck patterns recur, which interventions move them, and where the method
+            fails. Contributing practitioners are credited by name in any resulting publication.
+          </p>
+          <p class="mt-4 text-sm leading-relaxed text-[color:var(--text-muted)]">
+            Submissions are anonymised case patterns only — never client-identifying data. A written
+            consent and data-handling protocol is provided before anything is shared, and you can
+            withdraw at any point.
+          </p>
+          <a href="#enquiry" class="link-underline mt-5 text-sm">Ask about contributing →</a>
+        </div>
+
+        <div class="card p-7">
+          <h3 class="text-lg font-semibold">Refer, and be referred</h3>
+          <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">
+            I regularly meet clients whose real bottleneck is therapeutic, relational, or somatic —
+            outside my scope. I would rather send them to someone good than stretch past what I do.
+          </p>
+          <p class="mt-4 text-sm leading-relaxed text-[color:var(--text-muted)]">
+            If your practice covers ground mine doesn't, tell me what you do and who you're right
+            for. Where the fit is genuine, referrals go both ways — no fees, no commission, no
+            formal agreement.
+          </p>
+          <a href="#enquiry" class="link-underline mt-5 text-sm">Introduce your practice →</a>
+        </div>
+      </div>
+
+      <div class="card mt-8 p-8 text-center md:p-10">
+        <span class="chip">Brevo / Tally embed</span>
+        <h3 class="mt-5 text-xl font-semibold">The sociogram intake template</h3>
+        <p class="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-[color:var(--text-muted)]">
+          The intake sheet I use to build a client sociogram in the first session — the questions,
+          in order, with notes on what each one is actually measuring. Free for practitioners.
+        </p>
+        <p class="mx-auto mt-4 max-w-xl text-[0.78rem] leading-relaxed text-[color:var(--text-muted)]">
+          Paste the email-capture embed here.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== ENQUIRY ===== */}
+  <section id="enquiry" class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Get in touch</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Tell me about your practice.</h2>
+        <p class="lead mt-6">
+          Supervision, workshops, research, referrals — one form for all of it. Tell me which, and
+          what you work on.
+        </p>
+      </div>
+
+      <div class="card mt-10 p-8 text-center md:p-12">
+        <span class="chip">Tally form embed</span>
+        <p class="mt-5 text-sm leading-relaxed text-[color:var(--text-muted)]">
+          Paste the practitioner enquiry form here — name, practice, professional background,
+          country, and reason for contact.
+        </p>
+        <a href="https://tally.so" class="link-underline mt-6 text-sm">Set up the Tally form →</a>
+      </div>
+
+      <div class="note-box">
+        <h3>Where this is heading</h3>
+        <p>
+          A structured certification track for practitioners is in development, and will follow once
+          the workshops have run and the material has been tested against real practice. Everyone on
+          the workshop interest list hears about it first.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

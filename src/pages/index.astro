@@ -1,0 +1,689 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Honest, evidence-based stats (loneliness & mortality — Holt-Lunstad et al.)
+const stats = [
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-7 w-7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.7 2.6 2.7 15.4 0 18"/><path d="M12 3c-2.7 2.6-2.7 15.4 0 18"/></svg>`,
+    value: "1 in 6",
+    label: "people on Earth are chronically lonely",
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-7 w-7"><path d="M12 20.3S3.5 15 3.5 9.2A4.2 4.2 0 0 1 12 7a4.2 4.2 0 0 1 8.5 2.2c0 5.8-8.5 11.1-8.5 11.1Z"/><path d="M12 8.5l-1.7 3.2 3.1 1.4-1.6 3"/></svg>`,
+    value: "~100 / hr",
+    label: "deaths linked to loneliness — every hour",
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-7 w-7"><rect x="2.5" y="13.5" width="15" height="4" rx="1"/><path d="M14 13.5v4"/><path d="M18.5 9.5c1.6-1 1.6-3 0-4"/><path d="M21.5 9.5c1.6-1 1.6-3 0-4"/></svg>`,
+    value: "15 a day",
+    label: "its toll on your body rivals smoking",
+  },
+];
+
+const paths = [
+  {
+    theme: "connection",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-7 w-7"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5.5a3 3 0 0 1 0 5"/><path d="M18.5 20a6 6 0 0 0-3.2-5.3"/></svg>`,
+    img: "/images/photos/trio1.png",
+    kicker: "For you",
+    title: "You're lonely. Let's change that.",
+    body: "90% of dating advice is nonsense — so dating goes nowhere. No partner. No intimacy. The quiet ache of not being seen. Through private coaching and step-by-step courses, we map exactly what's missing in your world and rebuild it — until connection isn't something you chase, but something you have. Not just a better dating life. A different life.",
+    href: "/dating-coaching",
+    cta: "Get coaching",
+  },
+  {
+    theme: "lab",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-7 w-7"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M20 18v3H6.5A2.5 2.5 0 0 1 4 18.5"/><path d="M8 7.5h8M8 11h6"/></svg>`,
+    img: "/images/photos/trio2.png",
+    kicker: "For coaches & therapists",
+    title: "Be at the forefront of a new movement",
+    body: "Master the Sociogram Method — the structural diagnostic that gives your clients a map instead of more shame — and lead a new era in dating and relationship coaching. My book, Ending Loneliness, is your training manual, and I mentor and advise coaches directly — training the very people others learn from.",
+    href: "/for-coaches",
+    cta: "Train in the method",
+  },
+  {
+    theme: "lab",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-7 w-7"><path d="M3 9.5 12 4l9 5.5"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 21h18"/></svg>`,
+    img: "/images/photos/trio3.png",
+    kicker: "For governments & institutions",
+    title: "Tackling the loneliness epidemic",
+    body: "Almost every public program to fight loneliness — and to reverse collapsing birth rates — has failed, because they treat a feeling instead of a structure. Dr. Schumacher helps governments and institutions design measurable, evidence-based programs that finally change outcomes for millions.",
+    href: "/organizations",
+    cta: "Explore the programs",
+  },
+];
+
+const channelUrl = "https://bit.ly/4umNgFi";
+const podcastBlurb =
+  "Inside the Dating Mind is where I put the science of connection to the test — deep dives into the biology, psychology, and hidden mechanics of attraction, from evolutionary psychology and neuroscience to dating economics and game theory, with field-tested tips you can actually use. My AI co-host Aria keeps me honest with data-driven fact-checks.";
+const videos = [
+  { id: "KOImsTj1IIo", title: "My 10-Year Study on 400+ of the World’s Most Attractive Women (Insane Results)" },
+  { id: "L06ULHiii0w", title: "Game Theory Predicts Whether There’s a Second Date" },
+];
+
+// Flip to false the day the book publishes to remove the ribbon.
+const bookComingSoon = true;
+---
+
+<Layout
+  title="Dr. Axel Schumacher — Official Site | Ending Loneliness for a Longer, Happier Life"
+  description="Epigeneticist and longevity scientist Dr. Axel Schumacher uses the science of connection (the SCV framework) to end loneliness — for individuals, institutions, and society."
+  theme="lab"
+>
+  <!-- ============ 01 · HERO ============ -->
+  <section class="relative overflow-hidden" style="min-height:90vh;display:flex;align-items:center;">
+    <canvas id="sociogram" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
+    <div
+      class="pointer-events-none absolute inset-0"
+      style="background:linear-gradient(90deg, var(--bg) 22%, color-mix(in srgb, var(--bg) 55%, transparent) 54%, transparent 84%), linear-gradient(0deg, var(--bg), transparent 42%);"
+    >
+    </div>
+
+    <div class="container-x relative z-10 py-24">
+      <div class="max-w-2xl">
+        <span class="eyebrow">The revolution in dating coaching</span>
+        <h1 class="mt-6 text-[clamp(2.6rem,6vw,4.4rem)] font-bold leading-[1.02]">
+          Ending loneliness — for a
+          <span class="serif-accent text-accent">longer</span>, happier life.
+        </h1>
+        <p class="mt-5 font-[family-name:var(--font-display)] text-[clamp(1.25rem,2.6vw,1.75rem)] font-medium leading-tight">
+          You're not broken. <span class="serif-accent text-accent">Your network is.</span>
+        </p>
+        <p class="lead mt-6 max-w-xl text-lg">
+          You've read the books, hired the coaches, swiped the apps — and still feel
+          alone. They treat the symptoms, not the structure. As a neuroscientist and
+          epigeneticist, I map the real shape of your social world and rebuild it. No
+          pickup lines. No manifesting or "quantum energy." Just an evidence-based
+          method — one that actually works.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href="/scv-framework" class="btn btn-primary">Discover the science</a>
+          <a href="/dating-coaching" class="btn btn-ghost">Work with me</a>
+        </div>
+      </div>
+
+      <div class="mt-14 max-w-3xl">
+        <p class="eyebrow">The loneliness epidemic</p>
+        <dl class="mt-4 grid gap-px overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[color:var(--border)] sm:grid-cols-3">
+          {
+            stats.map((s) => (
+              <div class="bg-[color:var(--surface)] p-6 text-center">
+                <span class="flex w-full justify-center text-accent [&_svg]:h-10 [&_svg]:w-10" set:html={s.icon} />
+                <dt class="mt-3 font-[family-name:var(--font-display)] text-[1.9rem] font-bold leading-none text-accent">
+                  {s.value}
+                </dt>
+                <dd class="mt-2 text-sm text-[color:var(--text-muted)]">{s.label}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <p class="mt-3 font-[family-name:var(--font-mono)] text-[0.66rem] text-[color:var(--text-dim)]">
+          Sources: WHO Commission on Social Connection · Holt-Lunstad et al.
+        </p>
+      </div>
+    </div>
+
+    <script is:inline>
+      /* Living SCV sociogram in gold — Dr. Schumacher's own framework.
+         "YOU" at centre; lettered contacts with ♀/♂ on three bold rings;
+         a "Lover" on a coil. The site's own gold identity, independent of
+         any single book cover. */
+      (function () {
+        var c = document.getElementById("sociogram");
+        if (!c) return;
+        var x = c.getContext("2d");
+        var w, h, dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var LETTERS = "ACEHJKLMNORSTVYBDFGIP".split("");
+        var GOLD = "#E8CE96", DIM = "199,154,91", LT = "227,196,137";
+        var rings = [], partner = null;
+        function rnd(a, b) { return a + Math.random() * (b - a); }
+        function build() {
+          rings = [];
+          var defs = [
+            { n: 5,  base: 0.36, spd: 0.00100 },
+            { n: 8,  base: 0.64, spd: -0.00070 },
+            { n: 11, base: 0.94, spd: 0.00046 },
+          ];
+          for (var t = 0; t < defs.length; t++) {
+            var d = defs[t], nodes = [];
+            for (var i = 0; i < d.n; i++) {
+              nodes.push({
+                a: (i / d.n) * Math.PI * 2 + rnd(-0.22, 0.22),
+                jr: rnd(0.9, 1.1),
+                L: LETTERS[(Math.random() * LETTERS.length) | 0],
+                g: Math.random() < 0.5 ? "f" : "m",
+                sz: rnd(0.9, 1.26),
+                ph: Math.random() * 6.28,
+              });
+            }
+            rings.push({ base: d.base, spd: d.spd, nodes: nodes });
+          }
+          partner = { a: rnd(-0.55, -0.05) };
+        }
+        function size() {
+          w = c.clientWidth; h = c.clientHeight;
+          c.width = w * dpr; c.height = h * dpr; x.setTransform(dpr, 0, 0, dpr, 0, 0);
+          build();
+        }
+        size(); window.addEventListener("resize", size);
+        function ell(cx, cy, R, ang, jr) {
+          return { x: cx + Math.cos(ang) * R * (jr || 1), y: cy + Math.sin(ang) * R * (jr || 1) * 0.66 };
+        }
+        function nearest(p, arr) {
+          var b = arr[0], bd = 1e9;
+          for (var i = 0; i < arr.length; i++) {
+            var dx = p.x - arr[i].x, dy = p.y - arr[i].y, dd = dx * dx + dy * dy;
+            if (dd < bd) { bd = dd; b = arr[i]; }
+          }
+          return b;
+        }
+        function drawNode(px, py, r, txt, g, alpha) {
+          x.globalAlpha = alpha;
+          x.beginPath(); x.arc(px, py, r, 0, 6.2832);
+          var tcol;
+          if (g === "f") {
+            x.fillStyle = GOLD; x.fill();
+            x.lineWidth = 1; x.strokeStyle = "rgba(" + LT + ",0.9)"; x.stroke();
+            tcol = "#241A0E";
+          } else {
+            x.fillStyle = "#141009"; x.fill();
+            x.lineWidth = 1.5; x.strokeStyle = GOLD; x.stroke();
+            tcol = GOLD;
+          }
+          if (txt !== null && txt !== undefined) {
+            x.fillStyle = tcol;
+            x.font = "600 " + (r * 1.0).toFixed(1) + "px 'Space Grotesk', sans-serif";
+            x.textAlign = "center"; x.textBaseline = "middle";
+            x.fillText(String(txt), px, py + 0.5);
+          }
+          x.globalAlpha = alpha * 0.8; x.fillStyle = "rgba(" + LT + ",1)";
+          x.font = (r * 0.95).toFixed(1) + "px 'Inter', sans-serif";
+          x.textAlign = "center"; x.textBaseline = "middle";
+          x.fillText(g === "f" ? "♀" : "♂", px, py + r + r * 0.68);
+          x.globalAlpha = 1;
+        }
+        var t = 0;
+        function frame() {
+          t++; x.clearRect(0, 0, w, h);
+          var cx = w * 0.66, cy = h * 0.52;
+          var Rmax = Math.min(h * 0.52, w * 0.37);
+          var breathe = 1 + Math.sin(t * 0.008) * 0.015;
+          var nodeR = Math.max(7, Rmax * 0.035);
+          var alphas = [0.34, 0.27, 0.2];
+          var P = [];
+          for (var ri = 0; ri < rings.length; ri++) {
+            var rg = rings[ri], R = Rmax * rg.base * breathe, rot = rg.spd * t, pts = [];
+            if (ri === 2) x.setLineDash([2, 7]); else x.setLineDash([]);
+            x.beginPath();
+            for (var s = 0; s <= 72; s++) {
+              var ag = (s / 72) * 6.2832, e = ell(cx, cy, R, ag, 1);
+              if (s === 0) x.moveTo(e.x, e.y); else x.lineTo(e.x, e.y);
+            }
+            x.strokeStyle = "rgba(" + DIM + "," + alphas[ri] + ")"; x.lineWidth = 1.3; x.stroke(); x.setLineDash([]);
+            for (var i = 0; i < rg.nodes.length; i++) {
+              var nd = rg.nodes[i], pp = ell(cx, cy, R, nd.a + rot, nd.jr);
+              pp.L = nd.L; pp.g = nd.g; pp.sz = nd.sz; pp.ph = nd.ph; pts.push(pp);
+            }
+            P.push(pts);
+          }
+          x.setLineDash([2, 6]); x.lineWidth = 1; x.strokeStyle = "rgba(" + DIM + ",0.16)";
+          for (var i = 0; i < P[2].length; i++) {
+            var q = nearest(P[2][i], P[1]);
+            x.beginPath(); x.moveTo(P[2][i].x, P[2][i].y); x.lineTo(q.x, q.y); x.stroke();
+          }
+          for (var i = 0; i < P[1].length; i++) {
+            var q = nearest(P[1][i], P[0]);
+            x.beginPath(); x.moveTo(P[1][i].x, P[1][i].y); x.lineTo(q.x, q.y); x.stroke();
+          }
+          x.setLineDash([]);
+          x.strokeStyle = "rgba(" + LT + ",0.2)"; x.lineWidth = 1;
+          for (var i = 0; i < P[0].length; i++) {
+            x.beginPath(); x.moveTo(P[0][i].x, P[0][i].y); x.lineTo(cx, cy); x.stroke();
+          }
+          var pR = Rmax * rings[0].base * breathe * 1.24;
+          var pp = ell(cx, cy, pR, partner.a + rings[0].spd * t, 1);
+          (function coil(x1, y1, x2, y2) {
+            var segs = 26, dx = x2 - x1, dy = y2 - y1, len = Math.sqrt(dx * dx + dy * dy) || 1;
+            var nx = -dy / len, ny = dx / len;
+            x.beginPath();
+            for (var s = 0; s <= segs; s++) {
+              var u = s / segs, amp = Math.sin(u * Math.PI) * 6, off = Math.sin(u * 22 + t * 0.05) * amp;
+              var X = x1 + dx * u + nx * off, Y = y1 + dy * u + ny * off;
+              if (s === 0) x.moveTo(X, Y); else x.lineTo(X, Y);
+            }
+            x.strokeStyle = "rgba(" + LT + ",0.42)"; x.lineWidth = 1.3; x.stroke();
+          })(cx, cy, pp.x, pp.y);
+          for (var ri = 0; ri < P.length; ri++) {
+            for (var i = 0; i < P[ri].length; i++) {
+              var p = P[ri][i], tw = 0.5 + Math.sin(t * 0.02 + p.ph) * 0.1;
+              drawNode(p.x, p.y, nodeR * p.sz * (ri === 0 ? 1.05 : 0.92), p.L, p.g, Math.min(0.55, tw));
+            }
+          }
+          x.globalAlpha = 0.7; x.beginPath(); x.arc(pp.x, pp.y, nodeR * 1.12, 0, 6.2832);
+          x.fillStyle = GOLD; x.fill(); x.lineWidth = 1; x.strokeStyle = "rgba(" + LT + ",0.9)"; x.stroke();
+          x.fillStyle = "#8A2F2F"; x.font = (nodeR * 1.15).toFixed(1) + "px 'Inter', sans-serif";
+          x.textAlign = "center"; x.textBaseline = "middle"; x.fillText("♥", pp.x, pp.y + 0.5); x.globalAlpha = 1;
+          x.globalAlpha = 0.6; x.fillStyle = "rgba(" + LT + ",1)";
+          x.font = "italic 500 " + (nodeR * 1.05).toFixed(0) + "px 'Fraunces', Georgia, serif";
+          x.textAlign = "left"; x.textBaseline = "middle";
+          x.fillText("Lover", pp.x + nodeR * 1.6, pp.y - nodeR * 0.9); x.globalAlpha = 1;
+          if (P[1].length > 2) {
+            var gb = P[1][2];
+            var gbf = Math.max(0, Math.min(0.55, (gb.x - cx) / Rmax));
+            x.globalAlpha = gbf; x.fillStyle = "rgba(" + LT + ",1)";
+            x.font = "italic 500 " + nodeR.toFixed(0) + "px 'Fraunces', Georgia, serif";
+            x.textAlign = "left"; x.textBaseline = "middle";
+            x.fillText("Gym Buddy", gb.x + nodeR * 1.3, gb.y - nodeR * 0.6);
+            x.globalAlpha = 1;
+          }
+          var g = x.createRadialGradient(cx, cy, 0, cx, cy, 80);
+          g.addColorStop(0, "rgba(240,220,180,0.55)"); g.addColorStop(1, "rgba(240,220,180,0)");
+          x.fillStyle = g; x.beginPath(); x.arc(cx, cy, 80, 0, 6.2832); x.fill();
+          for (var k = 1; k <= 2; k++) {
+            x.beginPath(); x.arc(cx, cy, nodeR * (1.65 + k * 0.75), 0, 6.2832);
+            x.strokeStyle = "rgba(" + LT + "," + (0.32 - k * 0.09) + ")"; x.lineWidth = 1; x.stroke();
+          }
+          x.beginPath(); x.arc(cx, cy, nodeR * 1.58, 0, 6.2832); x.fillStyle = GOLD; x.fill();
+          x.lineWidth = 1.5; x.strokeStyle = "rgba(" + LT + ",0.95)"; x.stroke();
+          x.fillStyle = "#241A0E"; x.font = "700 " + (nodeR * 0.72).toFixed(1) + "px 'Space Grotesk', sans-serif";
+          x.textAlign = "center"; x.textBaseline = "middle"; x.fillText("YOU", cx, cy + 0.5);
+          requestAnimationFrame(frame);
+        }
+        frame();
+      })();
+    </script>
+  </section>
+
+  <!-- ============ 02 · THE LINEAGE / A NEW SCIENCE ============ -->
+  <section class="section border-y border-[color:var(--border)] bg-[color:var(--surface)]">
+    <div class="container-x">
+      <span class="eyebrow">A new science of connection</span>
+      <p class="mt-7 max-w-4xl font-[family-name:var(--font-display)] text-[clamp(1.55rem,3.4vw,2.5rem)] font-semibold leading-[1.22]">
+        Freud gave us the <span class="text-accent">unconscious</span>. Jung, the
+        <span class="text-accent">archetype</span>. Schumacher's Social Connectivity
+        framework gives us the science of the
+        <span class="serif-accent text-accent">bonds that keep us alive</span> — and a
+        new era for dating coaching and loneliness therapy.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 02b · MEET DR. AXEL ============ -->
+  <section class="section" style="background:var(--bg-alt)">
+    <div class="container-x grid gap-12 md:grid-cols-[0.82fr_1.18fr] md:items-center">
+      <div class="reveal mx-auto w-full max-w-sm">
+        <div
+          class="relative overflow-hidden rounded-2xl border border-[color:var(--border)]"
+          style="aspect-ratio:4/5;background:linear-gradient(160deg,var(--surface-2),var(--bg));"
+        >
+          <img
+            src="/images/photos/color-portrait-1-crop.webp"
+            alt="Dr. Axel Schumacher, geneticist and longevity scientist"
+            class="h-full w-full object-cover"
+            style="object-position:center;"
+            width="768"
+            height="960"
+            loading="lazy"
+            decoding="async"
+          />
+          <div
+            class="pointer-events-none absolute inset-0"
+            style="background:linear-gradient(0deg, rgba(20,16,11,0.4), transparent 42%);"
+          >
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <span class="eyebrow">Meet Dr. Axel</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+          I'm a neuroscientist and epigeneticist who studies why we age — and why
+          <span class="serif-accent text-accent">connection</span> keeps us alive.
+        </h2>
+        <div class="mt-6 space-y-4 text-[color:var(--text-muted)]">
+          <p>
+            For three decades, I've not only worked at the frontier of human genetics,
+            neuroscience, and longevity; I've also studied the mechanics of dating like no
+            one before me — in theory, through experiment, and in practice. The deeper I
+            went, the clearer it became: the ultimate intervention against loneliness isn't
+            more dating apps, attachment theory, or flirting tricks — it's how we
+            structurally map and nurture our <span class="text-accent">social connectome</span>.
+          </p>
+        </div>
+        <ul class="mt-7 grid gap-3 sm:grid-cols-2">
+          <li class="flex items-center gap-2.5 text-sm"><span class="h-1.5 w-1.5 rounded-full bg-accent"></span>Neuroscientist &amp; epigeneticist</li>
+          <li class="flex items-center gap-2.5 text-sm"><span class="h-1.5 w-1.5 rounded-full bg-accent"></span>Worked with the world's best dating experts</li>
+          <li class="flex items-center gap-2.5 text-sm"><span class="h-1.5 w-1.5 rounded-full bg-accent"></span>Host — Inside the Dating Mind</li>
+          <li class="flex items-center gap-2.5 text-sm"><span class="h-1.5 w-1.5 rounded-full bg-accent"></span>Author — Ending Loneliness</li>
+        </ul>
+        <a href="/about" class="link-underline mt-7 inline-flex items-center gap-2 font-medium">Read my full story →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 · THE FRAMEWORK — SCV + SOCIOGRAM METHOD ============ -->
+  <section class="section">
+    <div class="container-x">
+      <div class="max-w-2xl reveal">
+        <span class="eyebrow">The framework</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Measure it. Then rebuild it.</h2>
+        <p class="mt-4 text-lg leading-relaxed text-[color:var(--text-muted)]">
+          In science, you cannot solve what you cannot quantify. For decades, loneliness was
+          treated like an unsolvable mystery. Today, we finally have the tools to objectively
+          measure its architecture — and the exact strategy to reverse it. Welcome to the end
+          of guesswork, and the beginning of
+          <span class="text-accent">systematic human connection</span>.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 lg:grid-cols-2">
+        <article class="card reveal flex flex-col p-8">
+          <span class="text-accent [&_svg]:h-11 [&_svg]:w-11" set:html={`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-7 w-7"><path d="M3.5 18a8.5 8.5 0 0 1 17 0"/><path d="M12 18l4.6-4.1"/><circle cx="12" cy="18" r="1.3" fill="currentColor" stroke="none"/></svg>`} />
+          <span class="chip mt-5 w-fit">The measure · your biomarker</span>
+          <h3 class="mt-4 text-2xl font-semibold">Social Connectivity Value</h3>
+          <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">
+            A single, trackable score for the health of your social world — like blood
+            pressure, but for connection. SCV turns something invisible into a number you can
+            measure, watch improve, and use as a
+            <span class="text-[color:var(--text)]">biomarker for longevity</span>.
+          </p>
+        </article>
+
+        <article class="card reveal flex flex-col p-8">
+          <span class="text-accent [&_svg]:h-11 [&_svg]:w-11" set:html={`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-7 w-7"><circle cx="12" cy="12" r="9" stroke-dasharray="2 3"/><circle cx="12" cy="12" r="5.5"/><circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/></svg>`} />
+          <span class="chip mt-5 w-fit">The method · your map out</span>
+          <h3 class="mt-4 text-2xl font-semibold">The Sociogram Method</h3>
+          <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">
+            A step-by-step way to map your relationships in concentric rings — inner circle,
+            close friends, wider network — and rebuild the ties that are missing. The
+            practical, proven path <span class="text-[color:var(--text)]">out of loneliness</span>.
+          </p>
+        </article>
+      </div>
+
+      <figure class="mt-8 overflow-hidden rounded-2xl border border-[color:var(--border)] reveal">
+        <img
+          src="/images/photos/scv2.png"
+          alt="The SCV biomarker tracked over a six-month journey — from red-zone isolation to green-zone thriving."
+          class="w-full"
+          loading="lazy"
+        />
+      </figure>
+
+      <p class="mt-6 max-w-2xl text-sm text-[color:var(--text-dim)] reveal">
+        SCV tells you where you stand. The Sociogram Method shows you what to do about it.
+      </p>
+      <div class="mt-6 reveal">
+        <a href="/scv-framework" class="link-underline inline-flex items-center gap-2 font-medium">
+          See the full science →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 · MANIFESTO ============ -->
+  <section class="section border-t border-[color:var(--border)]" style="background:var(--bg-alt)">
+    <div class="container-x">
+      <div class="mx-auto max-w-3xl text-center reveal">
+        <span class="eyebrow justify-center">The manifesto</span>
+        <p class="mt-7 font-[family-name:var(--font-display)] text-[clamp(1.7rem,3.5vw,2.6rem)] font-medium leading-[1.25]">
+          We are trapped in the loneliest era in human history — and it is quietly
+          <span class="text-accent">rewriting our biology</span> to shorten our lives.
+          But isolation is not a life sentence; it is a
+          <span class="text-accent">structural problem we can solve</span>. We are here to
+          <span class="serif-accent text-accent">engineer a new blueprint</span> for human
+          connection. That is our mission.
+        </p>
+        <div class="mt-9 flex justify-center">
+          <a href="#join" class="btn btn-primary">Join us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 · THREE PATHS ============ -->
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <span class="eyebrow">Who this is for</span>
+      <h2 class="mt-5 max-w-2xl text-3xl font-semibold md:text-4xl">One mission. Three fronts.</h2>
+      <div class="mt-12 grid gap-6 lg:grid-cols-3">
+        {
+          paths.map((p) => (
+            <article class="card reveal flex flex-col overflow-hidden" data-theme={p.theme}>
+              <div class="aspect-[16/10] overflow-hidden">
+                <img src={p.img} alt={p.title} class="h-full w-full object-cover" loading="lazy" />
+              </div>
+              <div class="flex flex-1 flex-col p-7">
+                <span class="chip w-fit">{p.kicker}</span>
+                <h3 class="mt-4 text-xl font-semibold">{p.title}</h3>
+                <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">{p.body}</p>
+                <a href={p.href} class="btn btn-primary mt-6 w-fit text-sm">
+                  {p.cta}
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 · CONTENT ENGINE (PODCAST) ============ -->
+  <section class="section border-t border-[color:var(--border)]" style="background:var(--bg-alt)">
+    <div class="container-x">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div class="max-w-2xl">
+          <span class="eyebrow">The podcast · YouTube &amp; Spotify</span>
+          <div class="mt-5 flex items-center gap-4">
+            <img
+              src="/images/logos/inside-the-dating-mind.png"
+              alt="Inside the Dating Mind podcast logo"
+              class="h-14 w-14 shrink-0 rounded-xl border border-[color:var(--border)]"
+            />
+            <h2 class="text-3xl font-semibold md:text-4xl">Inside the Dating Mind</h2>
+          </div>
+          <p class="lead mt-4">{podcastBlurb}</p>
+        </div>
+        <a href={channelUrl} class="btn btn-primary whitespace-nowrap">Subscribe on YouTube</a>
+      </div>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        {
+          videos.map((v) => (
+            <a href={`https://youtu.be/${v.id}`} class="card group flex flex-col overflow-hidden reveal">
+              <div class="relative aspect-video overflow-hidden">
+                <img
+                  src={`https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg`}
+                  onerror={`this.onerror=null;this.src='https://i.ytimg.com/vi/${v.id}/hqdefault.jpg'`}
+                  alt={v.title}
+                  class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
+                <span class="pointer-events-none absolute inset-0 grid place-items-center">
+                  <span class="grid h-16 w-16 place-items-center rounded-full border border-white/30 bg-black/45 backdrop-blur-sm transition-transform group-hover:scale-110">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"></path></svg>
+                  </span>
+                </span>
+              </div>
+              <div class="flex flex-1 flex-col p-6">
+                <h3 class="text-lg font-semibold leading-snug">{v.title}</h3>
+                <span class="link-underline mt-auto inline-flex w-fit items-center gap-1.5 pt-4 text-sm font-medium">
+                  Watch on YouTube →
+                </span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="mt-8 reveal">
+        <a href="/inside-the-dating-mind" class="link-underline inline-flex items-center gap-2 text-sm font-medium">
+          All episodes &amp; downloads →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 · THE BOOK ============ -->
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x grid gap-10 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+      <div class="reveal">
+        <span class="eyebrow">The book · for coaches &amp; therapists</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Ending Loneliness</h2>
+        <p class="mt-2 font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.18em] text-accent">
+          A Sociogram Framework for Dating &amp; Relationship Coaches
+        </p>
+        <div class="mt-6 space-y-4 text-[color:var(--text-muted)]">
+          <p>
+            Written for the people who sit across from the lonely — for a living, or out of
+            love. Dating coaches, therapists, matchmakers, counselors. If that's your work,
+            you already suspect it: something structural has broken, and the tools we
+            inherited aren't sharp enough to fix it.
+          </p>
+          <p>
+            Imagine a cardiologist who could only ask whether your chest hurts — no EKG, no
+            scan, no way to see the heart's architecture. That's where relationship
+            practitioners stand today. <span class="text-[color:var(--text)]">Ending Loneliness</span>
+            hands you the missing instrument: a map, a score, and a method to rebuild a
+            client's social world.
+          </p>
+        </div>
+        <p class="mt-6 font-[family-name:var(--font-display)] text-lg italic text-[color:var(--text)]">
+          Not a lament for what's been lost — a manual for what can be rebuilt.
+        </p>
+        <a href="/ending-loneliness" class="btn btn-primary mt-8">Join the launch list</a>
+      </div>
+
+      <div class="reveal mx-auto w-full max-w-xs">
+        <div class="relative overflow-hidden rounded-xl border border-[color:var(--border)] shadow-2xl">
+          <img
+            src="/images/covers/ending-loneliness.png"
+            alt="Ending Loneliness — a Sociogram Framework, by Dr. Axel Schumacher"
+            class="w-full"
+            loading="lazy"
+          />
+          {
+            bookComingSoon && (
+              <div
+                class="pointer-events-none absolute rotate-45 bg-accent py-1.5 text-center font-[family-name:var(--font-mono)] text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--accent-contrast)] shadow-lg"
+                style="top:22px; right:-52px; width:190px;"
+              >
+                Coming Soon
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 08 · AMORO (THE APP) ============ -->
+  <section class="section border-t border-[color:var(--border)]" style="background:var(--bg-alt)">
+    <div class="container-x grid gap-12 md:grid-cols-[1.15fr_0.85fr] md:items-center">
+      <div class="reveal">
+        <span class="eyebrow">The app · amoro.app · coming</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+          End loneliness — in your pocket.
+        </h2>
+        <div class="mt-6 space-y-4 text-[color:var(--text-muted)]">
+          <p>
+            One-to-one coaching is where the map gets drawn, but there are only so many hours in my
+            week. <span class="text-[color:var(--text)]">Amoro</span> is the same method at scale: it
+            maps your social world, scores it, and hands you the small weekly moves that widen it.
+          </p>
+          <p>
+            Not another feed of strangers to swipe past. A program that raises the odds the right
+            person walks into your life — whether that turns out to be love, a life partner, or the
+            best friend you haven't met yet.
+          </p>
+        </div>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/amoro" class="btn btn-primary">See the app</a>
+          <a href="/amoro#waitlist" class="btn btn-ghost">Join the waitlist</a>
+        </div>
+      </div>
+
+      {/* A DOM mock, not a screenshot — crisp at any zoom, translatable, and it
+          changes when the product does without re-exporting an image. */}
+      <div class="reveal mx-auto w-full max-w-[17rem]" aria-hidden="true">
+        <div
+          class="rounded-[2.2rem] border border-[color:var(--border-strong)] p-3 shadow-2xl"
+          style="background:var(--surface-2);"
+        >
+          <div class="rounded-[1.7rem] border border-[color:var(--border)] p-5" style="background:var(--bg);">
+            <div class="flex items-baseline justify-between">
+              <span class="font-[family-name:var(--font-mono)] text-[0.7rem] uppercase tracking-[0.22em] text-accent">amoro</span>
+              <span class="font-[family-name:var(--font-mono)] text-[0.62rem] text-[color:var(--text-dim)]">Week 6</span>
+            </div>
+
+            <svg class="mx-auto mt-5 h-24 w-24 text-accent" viewBox="0 0 100 100" fill="none">
+              <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-opacity="0.28" stroke-width="1" stroke-dasharray="2 4"></circle>
+              <circle cx="50" cy="50" r="30" stroke="currentColor" stroke-opacity="0.5" stroke-width="1"></circle>
+              <circle cx="50" cy="50" r="16" stroke="currentColor" stroke-opacity="0.8" stroke-width="1.2"></circle>
+              <circle cx="50" cy="50" r="3.4" fill="currentColor"></circle>
+              <circle cx="66" cy="50" r="2.4" fill="currentColor"></circle>
+              <circle cx="41" cy="35.6" r="2.4" fill="currentColor"></circle>
+              <circle cx="38" cy="61" r="2.4" fill="currentColor"></circle>
+              <circle cx="76" cy="32" r="2" fill="currentColor" fill-opacity="0.7"></circle>
+              <circle cx="26" cy="42" r="2" fill="currentColor" fill-opacity="0.7"></circle>
+              <circle cx="62" cy="74" r="2" fill="currentColor" fill-opacity="0.7"></circle>
+              <circle cx="88" cy="62" r="1.7" fill="currentColor" fill-opacity="0.45"></circle>
+              <circle cx="18" cy="68" r="1.7" fill="currentColor" fill-opacity="0.45"></circle>
+            </svg>
+
+            <p class="mt-5 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-[color:var(--text-dim)]">
+              Social Connectivity Value
+            </p>
+            <div class="mt-1 flex items-baseline gap-2">
+              <span class="font-[family-name:var(--font-display)] text-[3.2rem] font-bold leading-none text-accent">62</span>
+              <span class="text-xs text-[color:var(--text-muted)]">+14</span>
+            </div>
+            <div class="mt-3 h-1.5 w-full overflow-hidden rounded-full" style="background:var(--surface-2);">
+              <div class="h-full rounded-full" style="width:62%; background:var(--accent);"></div>
+            </div>
+
+            <p class="mt-7 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-[color:var(--text-dim)]">
+              This week
+            </p>
+            <ul class="mt-3 space-y-2.5 text-[0.78rem] leading-snug text-[color:var(--text-muted)]">
+              <li class="flex gap-2.5"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"></span>Message Jonas — dormant 14 months</li>
+              <li class="flex gap-2.5"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"></span>Thursday climbing — 3rd visit</li>
+              <li class="flex gap-2.5"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"></span>Introduce Mira ↔ Paul</li>
+            </ul>
+          </div>
+        </div>
+        <p class="mt-3 text-center font-[family-name:var(--font-mono)] text-[0.6rem] text-[color:var(--text-dim)]">
+          Interface concept · in development
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 09 · JOIN THE MOVEMENT ============ -->
+  <section id="join" class="section border-t border-[color:var(--border)]" style="background:var(--bg-alt)">
+    <div class="container-x">
+      <div class="card glow-top relative overflow-hidden p-10 text-center md:p-16">
+        <span class="eyebrow justify-center">Join the work</span>
+        <h2 class="mx-auto mt-5 max-w-2xl text-3xl font-semibold md:text-4xl">
+          Join the movement to end loneliness.
+        </h2>
+        <p class="lead mx-auto mt-4 text-center">
+          No schedule, no spam — just a note when there's something worth your time, plus
+          first access to new books, homework, podcast handouts, and other materials.
+        </p>
+        <form class="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row" action="#" method="post" aria-label="Newsletter signup">
+          <input
+            type="email"
+            required
+            placeholder="you@email.com"
+            class="w-full rounded-full border border-[color:var(--border-strong)] bg-[color:var(--bg)] px-5 py-3 text-sm text-[color:var(--text)] placeholder:text-[color:var(--text-dim)] focus:border-accent focus:outline-none"
+          />
+          <button type="submit" class="btn btn-primary whitespace-nowrap">Join us</button>
+        </form>
+        <p class="mt-3 font-[family-name:var(--font-mono)] text-[0.68rem] text-[color:var(--text-dim)]">
+          ↑ Connects to your email service once it's set up
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,928 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+/* The four figures escalate in severity, so the colour layer does too:
+   warm gold → ember → coral → crimson, left to right and top to bottom,
+   landing the darkest tone on the suicide statistic. */
+const prevalence = [
+  {
+    label: "Squad prevalence",
+    stat: "~7 of 25",
+    tone: "#D9A85E",
+    body: "players in a first-team squad experience significant psychological distress from relationship breakdown or loneliness in a single season. At least three develop symptoms of severe depression.",
+    /* The only figure here that is literally a head-count, so it gets drawn:
+       25 dots = one squad, 7 lit, of which 3 in the severe tone. */
+    squad: { total: 25, distress: 7, severe: 3 },
+  },
+  {
+    label: "Women's Bundesliga",
+    stat: "14%",
+    tone: "#D9843F",
+    body: "of players across the German 1st and 2nd Women's Bundesliga show severe depressive symptoms — two to four per squad. The leading self-reported causes were separation from family or partner, and acute partnership difficulties.",
+    cite: "Junge & Prinz, 2018; Prinz et al., 2016",
+  },
+  {
+    label: "Relative risk",
+    stat: "20–50%",
+    tone: "#CE6A4C",
+    body: "more likely to report symptoms of a mental disorder: professional players exposed to recent severe adverse life events, including romantic breakups and acute family distress.",
+    cite: "Kilic et al., 2017",
+  },
+  {
+    label: "Suicide",
+    stat: "42%",
+    tone: "#C14A45",
+    body: "of all suicides are linked to intimate relationship problems, breakups, or acute romantic distress. Single professional players report higher anxiety and depression indices than cohabiting or married teammates.",
+    cite: "CDC; Lima & Reis, 2022",
+  },
+];
+
+const pathways = [
+  {
+    metric: "Endocrine",
+    mech: "Elevated chronic cortisol, acute drop in free testosterone.",
+    pitch: "Reduced physical power, slower muscular recovery, loss of competitive drive.",
+  },
+  {
+    metric: "Sleep architecture",
+    mech: "Insomnia, fragmented sleep, diminished REM and deep-sleep cycles.",
+    pitch: "Delayed motor-skill learning, impaired tactical processing, slower reaction times, chronic fatigue.",
+  },
+  {
+    metric: "Attention & cognition",
+    mech: "Loss of focus, psychomotor retardation, cognitive load from grief.",
+    pitch: "Poorer split-second decisions, weaker positioning, higher turnover rate.",
+  },
+  {
+    metric: "Neuromuscular control",
+    mech: "Disrupted proprioception and altered landing mechanics under inattention.",
+    pitch: "Elevated risk of non-contact soft-tissue and joint injury.",
+  },
+];
+
+/* The heads-up display over the corner-kick photograph. Text stays in the DOM
+   — never baked into the image — so it is crisp, translatable and readable by
+   a screen reader. Illustrative for one player, as the caption states. */
+const readouts = [
+  { metric: "Attention", delta: "−5%" },
+  { metric: "Free testosterone", delta: "−20%" },
+  { metric: "Physical power", delta: "−6%" },
+  { metric: "Reaction time", delta: "+0.20 s" },
+  { metric: "Injury risk", delta: "+8%" },
+];
+
+const whyExternal = [
+  {
+    name: "Dual agency",
+    body: "The club pays the internal psychologist. Players believe — often correctly — that disclosing relationship turmoil or emotional instability can reach the coaching staff and affect selection or contract terms. So they do not disclose.",
+  },
+  {
+    name: "Narrow remit",
+    body: "Sports psychology is trained on performance under pressure, visualisation and injury rehabilitation. Partner selection, breakup recovery, digital dating dynamics and relational conflict are a different literature and a different skill set.",
+  },
+  {
+    name: "Visibility",
+    body: "Walking into the psychologist's office at the training ground is a public act in front of twenty-five colleagues, in a culture where visible emotional difficulty is read as weakness.",
+  },
+];
+
+const modules = [
+  {
+    name: "Acute relationship crisis support",
+    body: "A confidential protocol for the weeks after a breakup or marital crisis: stabilisation, sleep restoration, emotional containment, and avoiding impulsive public or contractual decisions taken in the worst month of someone's year.",
+  },
+  {
+    name: "Relocation & integration",
+    body: "International transfers fail for social reasons as often as sporting ones. Structured support for the incoming player and their partner: building an actual social network in the new city, cultural onboarding, and family stability as a route to faster pitch readiness.",
+  },
+  {
+    name: "Partner selection & relational literacy",
+    body: "High-earning young athletes are targets for exploitative relationships and financial extortion. Evidence-based guidance on partner selection, recognising warning signs, boundaries, and navigating dating as a public figure.",
+  },
+  {
+    name: "Academy preparation",
+    body: "Sixteen- to twenty-one-year-olds moved away from everyone they know, at the developmental stage — Erikson's intimacy versus isolation — where the capacity for close relationships is formed. Preventive modules on relationships, sudden status and wealth, consent, and social-media exposure.",
+  },
+  {
+    name: "Squad network review",
+    /* Full-width card: this is the only module that runs on my own published
+       method, so it gets the room to say so. */
+    wide: true,
+    body: "Two maps, not one. First, each player's own network, drawn and scored with the Sociogram Method I developed — a Social Connectivity Value that weights a relationship by its closeness, its frequency and its physiological consequence rather than by how sociable a man looks in the canteen. It surfaces the player whose entire inner ring is teammates, an agent and a translator, which is the structural signature that tends to precede a crisis rather than follow one.",
+    body2:
+      "Second, the dressing room itself as a network: who is structurally isolated, where cliques run along language or nationality lines, and which signings have not actually been absorbed. Both maps are repeatable, so the effect of a transfer window, a relocation or an intervention is visible rather than assumed. Reported at squad level, never as individual disclosure.",
+    href: "/scv-framework",
+    linkText: "The method and the underlying science",
+  },
+];
+
+/* Both papers are published open — no gate, no email wall. A sporting director
+   forwards a PDF to three colleagues before he ever fills in a form, and this
+   page exists to be forwarded. Links are Drive-hosted and world-readable;
+   swap the href if they ever move onto the domain as /papers/…. */
+const documents = [
+  {
+    kicker: "White paper",
+    name: "The Loneliness Blind Spot in Elite Sports",
+    audience: "Sporting directors · performance leaders · player care · academy leadership",
+    body: "The evidence case. Why a club measures load, sleep, tissue and output but not the social environment in which all four are regulated — and what the research actually supports, stated without inflation. It sets out the four-part capability a club can install: confidential monitoring with validated instruments, prevention around predictable transitions, a dedicated non-clinical coach, and clean referral when a player's needs cross that line.",
+    facts: [
+      "Built on a 2026 systematic review of 194 studies covering 88,516 people in sport",
+      "Separates emotional from social loneliness — the distinction that determines the response",
+      "Includes a 90-day club launch plan and the confidentiality protocol it depends on",
+    ],
+    href: "https://drive.google.com/file/d/13INUbbkX2tLwLzCIrYy0ioVk90AP6JzO/view",
+    cta: "Read the white paper",
+  },
+  {
+    kicker: "Executive decision paper",
+    name: "The Unseen Performance Leak",
+    audience: "CEOs · sporting directors · performance directors · heads of player care",
+    body: "The same problem stated as a balance-sheet exposure. Three situations every sporting director recognises — the foreign signing, the long-term injured player, the academy graduate — traced back to the relational cause underneath the football symptom, and then to the cost channels a club is already paying through: availability, failed adaptation, staff time, exit and reputation risk.",
+    facts: [
+      "The Sociogram Method and the five-dimension Social Shield Profile, applied to a squad",
+      "Cost arithmetic stated honestly: exposure modelled, no effect size claimed",
+      "Two scoped entry points — a 30-day squad social risk audit, or a 90-day pilot cohort",
+    ],
+    href: "https://drive.google.com/file/d/1F9_MrfuvGtKJgLXy4NWflzLawyV7V4-U/view",
+    cta: "Read the executive paper",
+  },
+];
+---
+
+<Layout
+  theme="lab"
+  title="Relational Risk in Elite Sport | Loneliness, Heartbreak & Performance | Dr. Axel Schumacher"
+  description="Confidential, external relational support for professional clubs and academies: loneliness, relocation, and relationship crisis as measurable drivers of performance, injury risk and asset value."
+>
+  {/* ===== HERO ===== */}
+  <section class="hero-sport glow-top relative overflow-hidden border-b border-[color:var(--border)]">
+    <div class="hero-photo" aria-hidden="true"></div>
+    <div class="container-x relative z-10 py-24 md:py-28">
+      <span class="eyebrow">For clubs, academies & player representatives</span>
+      <h1 class="mt-6 max-w-3xl text-[clamp(2.2rem,5vw,3.6rem)] font-bold">
+        The hidden variable in your performance model is whether he has anyone to go home to.
+      </h1>
+      <p class="lead mt-7 max-w-xl text-lg">
+        Elite clubs measure sleep, load, nutrition and biomechanics to three decimal places — then
+        move a twenty-year-old to a country where he speaks no language, knows nobody, and has an
+        agent and a translator as his entire social world. The months that follow are treated as
+        settling in. They are a managed risk everywhere else in the building.
+      </p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="#enquiry" class="btn btn-primary">Start a confidential conversation</a>
+        <a href="#evidence" class="btn btn-ghost">See the evidence</a>
+      </div>
+      <div class="pill-row">
+        <span class="pill">Fully external</span>
+        <span class="pill">NDA-protected</span>
+        <span class="pill">Nothing reported to coaching staff</span>
+        <span class="pill">English · German</span>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== FOUNDATION ===== */}
+  <section class="section">
+    <div class="container-x">
+      <div class="quote-panel">
+        <blockquote class="text-xl leading-relaxed md:text-2xl">
+          “Social relationships, or the relative lack thereof, constitute a major risk factor for
+          health — rivalling the effect of well-established health risk factors such as cigarette
+          smoking, blood pressure, blood lipids, obesity and physical activity.”
+        </blockquote>
+        <p class="mt-6 font-[family-name:var(--font-mono)] text-xs uppercase tracking-[0.16em] text-accent">
+          House, Landis & Umberson · Science · 1988
+        </p>
+      </div>
+      <p class="mx-auto mt-10 max-w-2xl text-center leading-relaxed text-[color:var(--text-muted)]">
+        That finding has been reproduced for nearly four decades and was reaffirmed by the WHO
+        Commission on Social Connection in 2025. Every performance department in Europe already acts
+        on the other items in that list.
+      </p>
+    </div>
+  </section>
+
+  {/* ===== EVIDENCE ===== */}
+  <section
+    id="evidence"
+    class="prevalence section relative overflow-hidden border-t border-[color:var(--border)]"
+  >
+    <div class="prevalence-bg" aria-hidden="true"></div>
+    <div class="container-x relative z-10">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Prevalence</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+          This is not rare, and it is not the older players.
+        </h2>
+        <p class="lead mt-6">
+          Professional athletes sit squarely in the loneliest age band in the general population —
+          and then have the ordinary conditions for forming close relationships removed: relocation,
+          compressed schedules, constant travel, and a social circle bounded by the squad.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        {
+          prevalence.map((p) => (
+            <article class="stat-card" style={`--tone: ${p.tone}`}>
+              <span class="stat-label">{p.label}</span>
+              <p class="stat-figure">{p.stat}</p>
+              <p class="stat-body">{p.body}</p>
+              {p.squad && (
+                <div class="squad-dots" role="img" aria-label="One 25-player squad: seven affected, three of them severely">
+                  {Array.from({ length: p.squad.total }, (_, i) => (
+                    <span
+                      class={
+                        i < p.squad.distress - p.squad.severe
+                          ? "dot dot-lit"
+                          : i < p.squad.distress
+                            ? "dot dot-severe"
+                            : "dot"
+                      }
+                    />
+                  ))}
+                </div>
+              )}
+              {p.cite && <p class="stat-cite">{p.cite}</p>}
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="note-box">
+        <h3>On the strength of these numbers</h3>
+        <p>
+          These are prevalence and association findings from squad-level studies, not causal
+          estimates of performance loss. I have not seen a study that cleanly quantifies what a
+          relational crisis costs a club in points or transfer value, and I will not invent one. What
+          the literature does establish is that the distress is common, that it clusters in young and
+          recently relocated players, and that its physiological consequences fall on exactly the
+          systems a performance department already protects.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== PATHWAYS ===== */}
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Mechanism</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">How it reaches the pitch.</h2>
+        <p class="lead mt-6">
+          Heartbreak and prolonged isolation are not moods that a professional simply overrides. They
+          produce a physiological cascade through four channels your medical department already
+          monitors.
+        </p>
+      </div>
+
+      <figure class="cascade reveal mt-12">
+        <div class="cascade-frame">
+          <div class="cascade-shot">
+            <img
+              src="/images/photos/corner-kick.webp"
+              alt="A corner kick under floodlights: seven players packed on the goal line, one player standing alone several metres clear of them."
+              width="1536"
+              height="1024"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="hud-target" aria-hidden="true">
+              <span class="hud-tick"></span>
+            </div>
+          </div>
+          <div class="cascade-hud">
+            <div class="hud-panel">
+              <p class="hud-head">Relational load · one player</p>
+              {
+                readouts.map((r) => (
+                  <p class="hud-row">
+                    <span>{r.metric}</span>
+                    <span class="hud-delta">{r.delta}</span>
+                  </p>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+        <figcaption class="mt-4 text-sm leading-relaxed text-[color:var(--text-dim)]">
+          Illustrative, for a single player. The direction of each effect is established; the
+          magnitude is individual — which is exactly why it never shows up in a squad average.
+        </figcaption>
+      </figure>
+
+      <div class="mt-10 overflow-hidden rounded-2xl border border-[color:var(--border)]">
+        {
+          pathways.map((p, i) => (
+            <div
+              class={`grid gap-4 p-6 md:grid-cols-[0.8fr_1.1fr_1.1fr] md:gap-8 md:p-7 ${i > 0 ? "border-t border-[color:var(--border)]" : ""}`}
+            >
+              <p class="font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.16em] text-accent">
+                {p.metric}
+              </p>
+              <p class="text-sm leading-relaxed text-[color:var(--text-muted)]">{p.mech}</p>
+              <p class="text-sm leading-relaxed text-[color:var(--text)]">{p.pitch}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ===== WHY EXTERNAL ===== */}
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">The objection</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+          “We already employ a sports psychologist.”
+        </h2>
+        <p class="lead mt-6">
+          You do, and they are doing necessary work. They are also structurally unable to do this
+          particular piece of it — for three reasons that have nothing to do with their competence.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        {
+          whyExternal.map((w) => (
+            <div class="card p-7">
+              <h3 class="text-lg font-semibold">{w.name}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">{w.body}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-14 grid gap-10 md:grid-cols-[0.95fr_1fr] md:items-start md:gap-12">
+        <figure class="reveal">
+          <img
+            src="/images/photos/coach-player-tablet-conversation.webp"
+            alt="A coach reads from a tablet while talking to a young player, who nods and looks past him."
+            width="1536"
+            height="1024"
+            loading="lazy"
+            decoding="async"
+            class="w-full rounded-2xl border border-[color:var(--border)]"
+          />
+          <figcaption class="mt-4 text-sm leading-relaxed text-[color:var(--text-dim)]">
+            The review that does happen. He will be asked how he is, he will say he is fine, and the
+            answer will be recorded as true.
+          </figcaption>
+        </figure>
+
+        <div class="reveal space-y-5 leading-relaxed text-[color:var(--text-muted)]">
+          <p>
+            The consequence is well documented in the game. Players conceal personal and romantic
+            distress from internal staff precisely because disclosure carries a cost, and the
+            concealment is most complete in the players under the most pressure to hold their place.
+          </p>
+          <p class="text-[color:var(--text)]">
+            The best-known case in the German game — an international who took his own life —
+            remains the clearest illustration of how completely an elite athlete can hide
+            psychological suffering from everyone around him, including his own club.
+          </p>
+          <p>
+            An external provider solves the structural problem rather than the personal one. No
+            reporting line to the coach. No office at the training ground. No file in the club's
+            medical system.
+          </p>
+          <p class="text-[color:var(--text)]">
+            What this is not: I am not a clinical psychologist, and this does not replace a club's
+            medical or psychiatric provision. Where a player needs clinical care, my job is to
+            recognise it, say so, and step aside.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== MODULES ===== */}
+  <section id="modules" class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Scope of work</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">What an engagement covers.</h2>
+        <p class="lead mt-6">
+          Scoped per club. Some clubs start with a single relocating signing; others with an academy
+          cohort. Football is the worked example throughout, but the same structure applies to any
+          sport that relocates young athletes and concentrates their social world inside the club.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        {
+          modules.map((m) => (
+            <div class={`card p-7 ${m.wide ? "md:col-span-2 md:p-9" : ""}`}>
+              <h3 class="text-lg font-semibold">{m.name}</h3>
+              {m.body2 ? (
+                <div class="mt-3 grid gap-4 md:grid-cols-2 md:gap-8">
+                  <p class="text-sm leading-relaxed text-[color:var(--text-muted)]">{m.body}</p>
+                  <p class="text-sm leading-relaxed text-[color:var(--text-muted)]">{m.body2}</p>
+                </div>
+              ) : (
+                <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">{m.body}</p>
+              )}
+              {m.href && (
+                <a href={m.href} class="link-underline mt-5 inline-block text-sm">
+                  {m.linkText} →
+                </a>
+              )}
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="note-box">
+        <h3>Confidentiality, precisely</h3>
+        <p>
+          The club contracts; the player is coached. The club receives confirmation of engagement and,
+          where separately agreed, squad-level structural findings — never the contents of an
+          individual's sessions, and never a judgement about a player's condition. Players do not use
+          services that report upward, and they are right not to. That constraint is the product, not
+          a limitation of it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== PAPERS ===== */}
+  <section id="papers" class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">The written case</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Two papers, August 2026.</h2>
+        <p class="lead mt-6">
+          The argument in full, referenced, and free to read and circulate. The first makes the
+          scientific case; the second makes the same case to a board. Both state plainly what the
+          evidence does not yet support.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        {
+          documents.map((d) => (
+            <article class="paper card flex flex-col p-8 md:p-9">
+              <span class="chip self-start">{d.kicker}</span>
+              <h3 class="mt-5 text-xl font-semibold leading-snug md:text-2xl">{d.name}</h3>
+              <p class="paper-audience mt-3">{d.audience}</p>
+              <p class="mt-5 text-sm leading-relaxed text-[color:var(--text-muted)]">{d.body}</p>
+              <ul class="paper-facts mt-6">
+                {d.facts.map((f) => (
+                  <li>{f}</li>
+                ))}
+              </ul>
+              <a
+                href={d.href}
+                target="_blank"
+                rel="noopener"
+                class="btn btn-ghost mt-8 self-start"
+              >
+                {d.cta}
+                <span class="paper-ext">PDF</span>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+
+      <p class="mt-10 max-w-2xl text-sm leading-relaxed text-[color:var(--text-dim)]">
+        No form, no email wall — forward either paper to whoever inside the club needs to read it.
+        If it prompts a question, the enquiry below reaches me directly.
+      </p>
+    </div>
+  </section>
+
+  {/* ===== ENQUIRY ===== */}
+  <section id="enquiry" class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Enquiry</span>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+          Start with a conversation nobody has to log.
+        </h2>
+        <p class="lead mt-6">
+          Squad or cohort size, the situation prompting the enquiry, and who inside the club is
+          asking. Handled discreetly, and an initial call costs nothing.
+        </p>
+      </div>
+
+      <div class="card mt-10 p-8 text-center md:p-12">
+        <span class="chip">Tally form embed — sport</span>
+        <p class="mt-5 text-sm leading-relaxed text-[color:var(--text-muted)]">
+          Club or organisation, role, country, squad or academy size, situation, and preferred
+          contact route. Separate from the institutional advisory and consumer coaching enquiries.
+        </p>
+        <a href="https://tally.so" class="link-underline mt-6 text-sm"> Set up the Tally form → </a>
+      </div>
+
+      <p class="mx-auto mt-10 max-w-2xl text-center text-sm leading-relaxed text-[color:var(--text-dim)]">
+        Enquiries also accepted from player representatives and family offices acting for an
+        individual athlete.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ---------- HERO BACKGROUND PHOTOGRAPH ----------
+     public/images/photos/lonely-football-player.webp
+     Composition: a single player sitting on the turf in an empty floodlit
+     stadium at dusk, right of centre (~55–80% of the frame). The copy sits
+     on the left, so the scrim is weighted left-to-right and clears before
+     him — he stays sharp, the type stays legible over the bright turf.
+     ------------------------------------------------ */
+  .hero-sport {
+    isolation: isolate;
+    min-height: 760px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-photo {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url("/images/photos/lonely-football-player.webp");
+    background-size: cover;
+    background-position: 50% 62%;
+    background-repeat: no-repeat;
+  }
+
+  .hero-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      /* left-to-right legibility scrim — clears before the seated player */
+      linear-gradient(
+        100deg,
+        var(--bg) 0%,
+        color-mix(in srgb, var(--bg) 90%, transparent) 20%,
+        color-mix(in srgb, var(--bg) 80%, transparent) 36%,
+        color-mix(in srgb, var(--bg) 56%, transparent) 48%,
+        color-mix(in srgb, var(--bg) 24%, transparent) 60%,
+        transparent 72%
+      ),
+      /* top + bottom fade into the page */
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--bg) 55%, transparent) 0%,
+        transparent 18%,
+        transparent 66%,
+        color-mix(in srgb, var(--bg) 36%, transparent) 82%,
+        color-mix(in srgb, var(--bg) 74%, transparent) 94%,
+        var(--bg) 100%
+      );
+  }
+
+  /* ---------- MECHANISM: CORNER-KICK PHOTO + HUD ----------
+     public/images/photos/corner-kick.webp — the isolated player stands at
+     roughly 74–88% across and 30–86% down the frame, with empty dark stands
+     above him. The target box spotlights him by casting a huge outer shadow
+     over the rest of the picture; the readout panel sits in the dark band
+     above. All positions are percentages so they hold at any width.
+     --------------------------------------------------------- */
+  .cascade-frame {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    line-height: 0;
+  }
+
+  .cascade-shot {
+    position: relative;
+  }
+
+  .cascade-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .cascade-hud {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    font-family: var(--font-mono);
+  }
+
+  .hud-target {
+    position: absolute;
+    left: 70.5%;
+    top: 26%;
+    width: 20.5%;
+    height: 61%;
+    border: 1px solid color-mix(in srgb, #c14a45 65%, transparent);
+    border-radius: 2px;
+    /* everything outside the box is pushed back a stop */
+    box-shadow: 0 0 0 9999px rgb(11 9 7 / 0.52);
+  }
+
+  .hud-tick {
+    position: absolute;
+    left: 12%;
+    top: -7.5%;
+    width: 1px;
+    height: 7.5%;
+    background: color-mix(in srgb, #c14a45 65%, transparent);
+  }
+
+  .hud-panel {
+    position: absolute;
+    left: 56%;
+    right: 9%;
+    top: 5.5%;
+    padding: 0.85rem 1rem 0.95rem;
+    border: 1px solid color-mix(in srgb, #c14a45 32%, transparent);
+    border-radius: 0.4rem;
+    background: rgb(14 11 9 / 0.72);
+    backdrop-filter: blur(3px);
+    line-height: 1.5;
+  }
+
+  .hud-head {
+    font-size: clamp(0.5rem, 0.62vw, 0.66rem);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid rgb(255 255 255 / 0.1);
+  }
+
+  .hud-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    font-size: clamp(0.55rem, 0.72vw, 0.78rem);
+    letter-spacing: 0.06em;
+    color: rgb(245 239 231 / 0.78);
+  }
+
+  .hud-delta {
+    color: #e0645c;
+    font-weight: 600;
+  }
+
+  /* Narrow viewports: the spotlight stays — it is what identifies the subject —
+     but the readout drops below the photograph as an ordinary list. */
+  @media (max-width: 899px) {
+    .cascade-hud {
+      position: static;
+    }
+    .hud-tick {
+      display: none;
+    }
+    .hud-panel {
+      position: static;
+      margin-top: 0.9rem;
+      backdrop-filter: none;
+      background: var(--bg-alt);
+    }
+    .hud-head,
+    .hud-row {
+      font-size: 0.72rem;
+    }
+  }
+
+  /* ---------- PREVALENCE SECTION BACKGROUND ----------
+     public/images/photos/soccer-pitch.webp — an aerial pitch with a
+     sociogram mown into the turf. Pre-darkened and desaturated on export;
+     the scrim below finishes the job so the network reads as a ghost
+     under the cards rather than a green field behind them.
+     ---------------------------------------------------- */
+  .prevalence {
+    isolation: isolate;
+  }
+
+  .prevalence-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url("/images/photos/soccer-pitch.webp");
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+  }
+
+  .prevalence-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      var(--bg) 0%,
+      color-mix(in srgb, var(--bg) 74%, transparent) 12%,
+      color-mix(in srgb, var(--bg) 62%, transparent) 45%,
+      color-mix(in srgb, var(--bg) 74%, transparent) 88%,
+      var(--bg) 100%
+    );
+  }
+
+  /* Cards sit on the field; lift them off it so body copy keeps contrast. */
+  .prevalence .note-box {
+    box-shadow: 0 18px 40px -24px rgb(0 0 0 / 0.85);
+  }
+
+  /* ---------- PREVALENCE STAT CARDS ----------
+     Each card carries its own hue as --tone (set inline from the data).
+     The tone appears three times only — hairline, label, figure — plus a
+     soft wash from the top edge. Body copy stays neutral so nothing
+     competes with the number and contrast never depends on the hue.
+     -------------------------------------------- */
+  .stat-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2.9rem 1.9rem 2.25rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background:
+      radial-gradient(
+        120% 78% at 50% 0%,
+        color-mix(in srgb, var(--tone) 22%, transparent) 0%,
+        transparent 62%
+      ),
+      linear-gradient(180deg, var(--surface), var(--surface-2));
+    box-shadow: 0 18px 40px -24px rgb(0 0 0 / 0.85);
+    transition:
+      border-color 0.3s ease,
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .stat-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--tone), transparent);
+  }
+
+  .stat-card:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--tone) 45%, var(--border));
+    box-shadow: 0 26px 54px -26px rgb(0 0 0 / 0.9);
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--tone) 72%, var(--text-muted));
+  }
+
+  .stat-figure {
+    margin-top: 0.85rem;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: clamp(2.7rem, 5.2vw, 3.9rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--tone);
+    text-shadow: 0 0 40px color-mix(in srgb, var(--tone) 32%, transparent);
+  }
+
+  .stat-body {
+    margin-top: 1.5rem;
+    max-width: 36ch;
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+  }
+
+  /* One squad, drawn. 25 dots; 7 lit; the last 3 of those in the severe tone
+     so the subset reads as a subset. Only card 1 has it — it is the only
+     figure on this row that is a head-count rather than a rate. */
+  .squad-dots {
+    margin-top: auto;
+    padding-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(5, 0.8rem);
+    gap: 0.62rem;
+    justify-content: center;
+  }
+
+  .squad-dots .dot {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 999px;
+    border: 1px solid rgb(255 255 255 / 0.22);
+    background: rgb(255 255 255 / 0.04);
+  }
+
+  .squad-dots .dot-lit {
+    background: var(--tone);
+    border-color: var(--tone);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--tone) 55%, transparent);
+  }
+
+  .squad-dots .dot-severe {
+    background: #c14a45;
+    border-color: #c14a45;
+    box-shadow: 0 0 12px rgb(193 74 69 / 0.55);
+  }
+
+  .stat-cite {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+
+  .stat-cite::before {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    margin: 0 auto 1.1rem;
+    background: var(--border-strong);
+  }
+
+  @media (max-width: 767px) {
+    .stat-card { padding: 2.4rem 1.5rem 2rem; }
+  }
+
+  /* Tall/narrow viewports: photo becomes atmosphere only. */
+  @media (max-width: 1023px) {
+    .prevalence-bg::after {
+      background: linear-gradient(
+        to bottom,
+        var(--bg) 0%,
+        color-mix(in srgb, var(--bg) 88%, transparent) 14%,
+        color-mix(in srgb, var(--bg) 86%, transparent) 86%,
+        var(--bg) 100%
+      );
+    }
+
+    .hero-sport { min-height: 0; }
+    .hero-photo { background-position: 68% 60%; }
+    .hero-photo::after {
+      background: linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--bg) 58%, transparent) 0%,
+        color-mix(in srgb, var(--bg) 72%, transparent) 55%,
+        var(--bg) 100%
+      );
+    }
+  }
+
+  /* ---------- PAPERS ----------
+     Two document cards. The point of difference from the module cards above
+     is the fact list: a sporting director should be able to tell, without
+     opening the PDF, whether it is the one he needs to forward. Cards are
+     flex columns so both buttons sit on the same baseline regardless of
+     how long the two abstracts run.
+     ---------------------------- */
+  .paper-audience {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.7;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+  }
+
+  .paper-facts {
+    display: grid;
+    gap: 0.7rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--border);
+    margin-bottom: auto;
+  }
+
+  .paper-facts li {
+    display: flex;
+    gap: 0.7rem;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  .paper-facts li::before {
+    content: "";
+    flex: none;
+    margin-top: 0.55rem;
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+
+  .paper-ext {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.12rem 0.45rem;
+  }
+</style>

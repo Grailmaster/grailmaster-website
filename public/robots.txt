@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://grailmaster.com/sitemap-index.xml
