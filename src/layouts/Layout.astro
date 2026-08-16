@@ -71,6 +71,33 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     </main>
     <Footer />
 
+    {/* Site-wide contact address, assembled at runtime so the raw
+        "user@domain" string never sits in the static HTML for scrapers
+        to regex. Any element with [data-site-mail] gets its real
+        mailto: href written in on load; add [data-site-mail-text] to
+        also swap its visible text to the real address once JS runs.
+        Without JS, visitors still see a readable "user [at] domain"
+        fallback in the markup — not a dead link, just not machine-
+        parseable as an address. Same idea as the Aerion contact block
+        on /biotech, generalized site-wide under a different data
+        attribute so the two never collide. */}
+    <script is:inline>
+      (function () {
+        var SITE_MAIL_USER = "parallelspace.advisors";
+        var SITE_MAIL_DOMAIN = "gmail.com";
+        document.querySelectorAll("[data-site-mail]").forEach(function (el) {
+          var u = el.dataset.mailUser || SITE_MAIL_USER;
+          var d = el.dataset.mailDomain || SITE_MAIL_DOMAIN;
+          var a = u + String.fromCharCode(64) + d;
+          var q = [];
+          if (el.dataset.subject) q.push("subject=" + encodeURIComponent(el.dataset.subject));
+          if (el.dataset.body) q.push("body=" + encodeURIComponent(el.dataset.body));
+          el.setAttribute("href", "mailto:" + a + (q.length ? "?" + q.join("&") : ""));
+          if (el.hasAttribute("data-site-mail-text")) el.textContent = a;
+        });
+      })();
+    </script>
+
     <!-- Progressive reveal-on-scroll; content is fully visible without JS -->
     <script>
       const els = document.querySelectorAll(".reveal");
