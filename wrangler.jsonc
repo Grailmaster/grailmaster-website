@@ -1,0 +1,11 @@
+{
+  "name": "grailmaster-website",
+  "compatibility_date": "2026-08-16",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
