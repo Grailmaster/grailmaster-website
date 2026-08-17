@@ -23,11 +23,11 @@ export interface Props {
 
 const { formId, title, height = 400, class: className = "w-full" } = Astro.props;
 
-// transparentBackground is deliberately omitted: Tally's default text
-// colors are dark, meant to sit on Tally's own light form background.
-// A transparent embed on this site's dark cards made that text
-// unreadable, so the form keeps its own light background instead.
-const src = `https://tally.so/embed/${formId}?alignLeft=1&hideTitle=1&dynamicHeight=1`;
+// transparentBackground restored: each form's text/answer colors are
+// now set for a dark background directly in Tally's own Design panel,
+// so the embed can blend into this site's dark cards again instead of
+// showing its own light box.
+const src = `https://tally.so/embed/${formId}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`;
 ---
 
 <iframe
