@@ -1,0 +1,39 @@
+---
+/**
+ * Embeds a Tally.so form via Tally's standard iframe embed.
+ * The widget loader script (which finds [data-tally-src] iframes and
+ * fills in their real src, then handles auto-resizing) lives once,
+ * site-wide, in Layout.astro — not repeated per embed.
+ *
+ * Usage:
+ *   <TallyEmbed formId="xX8XEr" title="Speaking Enquiry" height={1269} />
+ *
+ * `formId` is the short code from the embed URL Tally gives you
+ * (https://tally.so/embed/<formId>...). `height` should match the
+ * height Tally's own "Get the code" snippet gave you for this form —
+ * dynamicHeight will adjust it after load, but starting close avoids
+ * a layout jump.
+ */
+export interface Props {
+  formId: string;
+  title: string;
+  height?: number;
+  class?: string;
+}
+
+const { formId, title, height = 400, class: className = "w-full" } = Astro.props;
+
+const src = `https://tally.so/embed/${formId}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`;
+---
+
+<iframe
+  data-tally-src={src}
+  loading="lazy"
+  width="100%"
+  height={height}
+  frameborder="0"
+  marginheight="0"
+  marginwidth="0"
+  title={title}
+  class={className}
+></iframe>

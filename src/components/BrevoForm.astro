@@ -1,0 +1,57 @@
+---
+/**
+ * A single-field (email) signup form wired to a Brevo list.
+ * Submits via background fetch (see the [data-brevo-form] handler in
+ * Layout.astro) so visitors never leave the page or see a Brevo-hosted
+ * screen. Visual styling here is ours, not Brevo's — Brevo only supplies
+ * the submission endpoint for whichever list `action` points at.
+ *
+ * Usage:
+ *   <BrevoForm
+ *     action="https://xxxxx.sibforms.com/serve/..."
+ *     buttonLabel="Join waitlist"
+ *     successText="You're on the list — we'll be in touch."
+ *   />
+ */
+export interface Props {
+  /** The "action" URL from Brevo's Share → Simple HTML embed for this form/list. */
+  action: string;
+  placeholder?: string;
+  buttonLabel?: string;
+  successText?: string;
+  /** Extra classes for the <form> element, to match each page's layout. */
+  class?: string;
+}
+
+const {
+  action,
+  placeholder = "you@email.com",
+  buttonLabel = "Sign up",
+  successText = "You're on the list.",
+  class: className = "mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row",
+} = Astro.props;
+---
+
+<form class={className} data-brevo-form data-action={action} data-success-text={successText}>
+  <input
+    type="email"
+    name="EMAIL"
+    required
+    placeholder={placeholder}
+    class="w-full rounded-full border border-[color:var(--border-strong)] bg-[color:var(--bg)] px-5 py-3 text-sm placeholder:text-[color:var(--text-dim)] focus:border-accent focus:outline-none"
+  />
+  {/* Honeypot: real visitors never see or fill this in; bots that
+      autofill every input do, and we silently drop the submission. */}
+  <input
+    type="text"
+    name="email_address_check"
+    tabindex="-1"
+    autocomplete="off"
+    aria-hidden="true"
+    class="absolute h-0 w-0 opacity-0"
+  />
+  <button type="submit" class="btn btn-primary whitespace-nowrap">{buttonLabel}</button>
+</form>
+<p data-brevo-error class="mt-3 hidden text-xs text-red-400">
+  Something went wrong — please try again, or email us directly.
+</p>

@@ -1,5 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import BrevoForm from "../components/BrevoForm.astro";
+
+const BREVO_NEWSLETTER =
+  "https://b46562d2.sibforms.com/serve/MUIFAKeQYCknnnVPDbjrQzL7ccbmuj95wxWOVK896eub-hl6s6DxGv8uggXU9e8QUWfRKitiXhR4xxpaGy0O0MORmRNRoxPVfpsGla4t__Aohls1jHSpMi0kqghB-cZT4UgYUW9uuTvZxp2B3BsValDgDe0oeR-Z9oxJJFIGB26ZvOetls1hK-V4hVnnErigHMEnpveCoQXixg_SSQ==";
 
 // Honest, evidence-based stats (loneliness & mortality — Holt-Lunstad et al.)
 const stats = [
@@ -671,18 +675,11 @@ const bookComingSoon = true;
           No schedule, no spam — just a note when there's something worth your time, plus
           first access to new books, homework, podcast handouts, and other materials.
         </p>
-        <form class="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row" action="#" method="post" aria-label="Newsletter signup">
-          <input
-            type="email"
-            required
-            placeholder="you@email.com"
-            class="w-full rounded-full border border-[color:var(--border-strong)] bg-[color:var(--bg)] px-5 py-3 text-sm text-[color:var(--text)] placeholder:text-[color:var(--text-dim)] focus:border-accent focus:outline-none"
-          />
-          <button type="submit" class="btn btn-primary whitespace-nowrap">Join us</button>
-        </form>
-        <p class="mt-3 font-[family-name:var(--font-mono)] text-[0.68rem] text-[color:var(--text-dim)]">
-          ↑ Connects to your email service once it's set up
-        </p>
+        <BrevoForm
+          action={BREVO_NEWSLETTER}
+          buttonLabel="Join us"
+          successText="You're on the list — welcome aboard."
+        />
       </div>
     </div>
   </section>

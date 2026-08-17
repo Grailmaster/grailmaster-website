@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import TallyEmbed from "../components/TallyEmbed.astro";
 
 /* ---------------------------------------------------------------
    AERION BIOSCIENCE — single source of truth for contact details
@@ -692,8 +693,9 @@ const jsonLd = {
         <p class="lead mx-auto mt-4 text-center">
           I'm open to conversations with aligned investors, scientific partners, and operators.
         </p>
-        <!-- Tally.so contact form embed goes here. -->
-        <a href="/about" class="btn btn-primary mt-8">Get in touch</a>
+        <div class="mx-auto mt-8 max-w-xl text-left">
+          <TallyEmbed formId="zx8ENk" title="Investing/Partnering Enquiry" height={1050} />
+        </div>
       </div>
     </div>
   </section>

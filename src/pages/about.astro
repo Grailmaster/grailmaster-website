@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import TallyEmbed from "../components/TallyEmbed.astro";
 
 const scienceCreds = [
   "Ph.D. in Human Genetics, University of Cologne — specializing in neurogenetics, epigenetics, and game theory.",
@@ -260,13 +261,17 @@ const fieldCreds = [
         </div>
       </div>
 
-      <div class="card mt-12 p-8 text-center md:p-12">
-        <span class="chip">Tally form embed</span>
-        <p class="mt-5 text-sm leading-relaxed text-[color:var(--text-muted)]">
-          Paste the speaking enquiry form here — event name, date, location, format, audience size,
-          and budget range. Enquiries answered within two working days.
-        </p>
-        <a href="https://tally.so" class="link-underline mt-6 text-sm">Set up the Tally form →</a>
+      <div class="card mt-12 p-8 md:p-12">
+        <div class="text-center">
+          <span class="eyebrow justify-center">Speaking enquiry</span>
+          <p class="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-[color:var(--text-muted)]">
+            Event name, date, location, format, audience size, and budget range — enquiries
+            answered within two working days.
+          </p>
+        </div>
+        <div class="mt-8">
+          <TallyEmbed formId="xX8XEr" title="Speaking Enquiry" height={1269} />
+        </div>
       </div>
 
       <div class="note-box">

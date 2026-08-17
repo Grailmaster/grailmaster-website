@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import TallyEmbed from "../components/TallyEmbed.astro";
 
 /* The four figures escalate in severity, so the colour layer does too:
    warm gold → ember → coral → crimson, left to right and top to bottom,
@@ -508,13 +509,13 @@ const documents = [
         </p>
       </div>
 
-      <div class="card mt-10 p-8 text-center md:p-12">
-        <span class="chip">Tally form embed — sport</span>
-        <p class="mt-5 text-sm leading-relaxed text-[color:var(--text-muted)]">
-          Club or organisation, role, country, squad or academy size, situation, and preferred
-          contact route. Separate from the institutional advisory and consumer coaching enquiries.
+      <div class="card mt-10 p-8 md:p-12">
+        <p class="mx-auto mb-8 max-w-xl rounded-lg border border-[color:var(--border-strong)] bg-[color:var(--bg-alt)] p-4 text-center text-sm leading-relaxed text-[color:var(--text-muted)]">
+          If a player's safety is at risk right now, please contact your club's medical staff or
+          local emergency services immediately — this form is for confidential advisory
+          conversations, not crisis response.
         </p>
-        <a href="https://tally.so" class="link-underline mt-6 text-sm"> Set up the Tally form → </a>
+        <TallyEmbed formId="D4R4ER" title="Start a confidential conversation" height={1384} />
       </div>
 
       <p class="mx-auto mt-10 max-w-2xl text-center text-sm leading-relaxed text-[color:var(--text-dim)]">

@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import TallyEmbed from "../components/TallyEmbed.astro";
 import { handouts as allHandouts } from "../data/handouts";
 import { appearances } from "../data/appearances";
 
@@ -43,9 +44,12 @@ let episodes = [
   { id: "L06ULHiii0w", title: "Game Theory Predicts Whether There's a Second Date", date: "" },
 ];
 
-const CHANNEL_ID = "UCff-x-V5yV345m2mYlL_jNQ";
+// Sourced from the dedicated "Episodes" playlist rather than the full
+// channel upload feed, so Shorts and other non-episode uploads never
+// show up here — no title-guessing needed, the playlist is the curation.
+const EPISODES_PLAYLIST_ID = "PLvflPfPv6AlSswLi1aWyyDBPWMg78xre7";
 try {
-  const res = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`);
+  const res = await fetch(`https://www.youtube.com/feeds/videos.xml?playlist_id=${EPISODES_PLAYLIST_ID}`);
   if (res.ok) {
     const xml = await res.text();
     const unescape = (s: string) =>
@@ -57,8 +61,10 @@ try {
         date: m[1].match(/<published>([^<]+)/)?.[1]?.slice(0, 10) ?? "",
       }))
       .filter((v) => v.id && v.title)
-      // keep real episodes: skip theme songs and shorts
-      .filter((v) => !/theme\s*\d/i.test(v.title) && !/#shorts/i.test(v.title));
+      // Sort newest first by publish date — YouTube's playlist feed order
+      // reflects when a video was added to the playlist, not when it was
+      // published, so this keeps "featured" reliably the latest episode.
+      .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
     if (entries.length) {
       featured = entries[0];
       episodes = entries.slice(0, 6);
@@ -362,26 +368,17 @@ const ICONS: Record<string, string> = { spotify: SPOT, youtube: YT, x: XICON, in
 
   <!-- ========== ASK / INTERACT ========== -->
   <section class="section border-t border-[color:var(--border)]">
-    <div class="container-x grid gap-6 lg:grid-cols-2">
-      <div class="card reveal flex flex-col p-8">
+    <div class="container-x">
+      <div class="card reveal mx-auto max-w-2xl p-8 md:p-10">
         <span class="chip w-fit">Ask the show</span>
         <h3 class="mt-5 text-2xl font-semibold">Got a dating or loneliness question?</h3>
         <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">
           Submit it and it might be answered on a future episode — with Aria, my AI co-host,
           bringing the data. The best questions shape the show.
         </p>
-        <a href="#" class="btn btn-primary mt-8 w-fit">Ask a question</a>
-        <p class="mt-3 font-[family-name:var(--font-mono)] text-[0.64rem] text-[color:var(--text-dim)]">↑ Swap for your Tally.so form</p>
-      </div>
-      <div class="card reveal flex flex-col p-8">
-        <span class="chip w-fit">Share your story</span>
-        <h3 class="mt-5 text-2xl font-semibold">Been through something worth telling?</h3>
-        <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">
-          Your experience of loneliness, dating, or reconnection could help thousands. Share it
-          (anonymously if you like) and become part of the movement.
-        </p>
-        <a href="#" class="btn btn-ghost mt-8 w-fit">Share your story</a>
-        <p class="mt-3 font-[family-name:var(--font-mono)] text-[0.64rem] text-[color:var(--text-dim)]">↑ Swap for your Tally.so form</p>
+        <div class="mt-8">
+          <TallyEmbed formId="WOaJYa" title="Ask the show" height={801} />
+        </div>
       </div>
     </div>
   </section>

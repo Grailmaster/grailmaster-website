@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import TallyEmbed from "../components/TallyEmbed.astro";
 
 const workshops = [
   {
@@ -141,12 +142,12 @@ const supervision = [
       </div>
 
       <div class="card mt-8 p-8 text-center md:p-10">
-        <span class="chip">Tally form embed</span>
+        <span class="chip">No fixed dates yet</span>
         <p class="mt-5 text-sm leading-relaxed text-[color:var(--text-muted)]">
-          Paste the workshop interest form here — city preference, professional background, and
-          whether you'd want the certification track when it exists.
+          Nothing is scheduled yet — tell me a city or format that would work for you and I'll
+          reach out first once a workshop is set.
         </p>
-        <a href="https://tally.so" class="link-underline mt-6 text-sm">Set up the Tally form →</a>
+        <a href="#enquiry" class="btn btn-primary mt-6">Register your interest</a>
       </div>
     </div>
   </section>
@@ -237,14 +238,14 @@ const supervision = [
       </div>
 
       <div class="card mt-8 p-8 text-center md:p-10">
-        <span class="chip">Brevo / Tally embed</span>
+        <span class="chip">Coming soon</span>
         <h3 class="mt-5 text-xl font-semibold">The sociogram intake template</h3>
         <p class="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-[color:var(--text-muted)]">
           The intake sheet I use to build a client sociogram in the first session — the questions,
           in order, with notes on what each one is actually measuring. Free for practitioners.
         </p>
-        <p class="mx-auto mt-4 max-w-xl text-[0.78rem] leading-relaxed text-[color:var(--text-muted)]">
-          Paste the email-capture embed here.
+        <p class="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-[color:var(--text-muted)]">
+          Stay tuned.
         </p>
       </div>
     </div>
@@ -262,13 +263,8 @@ const supervision = [
         </p>
       </div>
 
-      <div class="card mt-10 p-8 text-center md:p-12">
-        <span class="chip">Tally form embed</span>
-        <p class="mt-5 text-sm leading-relaxed text-[color:var(--text-muted)]">
-          Paste the practitioner enquiry form here — name, practice, professional background,
-          country, and reason for contact.
-        </p>
-        <a href="https://tally.so" class="link-underline mt-6 text-sm">Set up the Tally form →</a>
+      <div class="card mt-10 p-8 md:p-12">
+        <TallyEmbed formId="WOaOLJ" title="Coach & Practitioner Enquiry" height={1146} />
       </div>
 
       <div class="note-box">

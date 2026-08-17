@@ -1,5 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import BrevoForm from "../components/BrevoForm.astro";
+
+const BREVO_AMORO_WAITLIST =
+  "https://b46562d2.sibforms.com/serve/MUIFABaGuG0LfwyQc4VaNU8D1bmqsaAFSgp_6V689bMlXt3dTSDHFZtgEZE1jv1r_rMHRw-t1O4X5uBmjsbMFDDBTMFSFCe8epBlxUC7o9W3TSndNOud4TwoHrJkq2GVa8BboCNuVghMwncO9CILKM0lsg8JO7AAFJHHQWoCEHtTFm9PPONpfSugsMxAYzF5R87kvFsxyOySejTrDA==";
 
 const features = [
   { title: "Map your circle", body: "Visualize your real social network and see where the gaps and strengths are." },
@@ -218,19 +222,11 @@ const bookPreviewPdf: string | null = null;
         <p class="lead mx-auto mt-4 text-center">
           Be among the first to try Amoro. Early testers help shape it — and get lifetime perks.
         </p>
-        <!-- Tally.so / Brevo waitlist embed goes here. -->
-        <form class="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row" action="#" method="post">
-          <input
-            type="email"
-            required
-            placeholder="you@email.com"
-            class="w-full rounded-full border border-[color:var(--border-strong)] bg-[color:var(--bg)] px-5 py-3 text-sm placeholder:text-[color:var(--text-dim)] focus:border-accent focus:outline-none"
-          />
-          <button type="submit" class="btn btn-primary whitespace-nowrap">Join waitlist</button>
-        </form>
-        <p class="mt-3 font-[family-name:var(--font-mono)] text-[0.68rem] text-[color:var(--text-dim)]">
-          ↑ Swap for your Tally.so or Brevo embed
-        </p>
+        <BrevoForm
+          action={BREVO_AMORO_WAITLIST}
+          buttonLabel="Join waitlist"
+          successText="You're on the list — we'll email you when early access opens."
+        />
       </div>
     </div>
   </section>

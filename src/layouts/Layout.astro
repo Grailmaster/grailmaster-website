@@ -98,6 +98,81 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       })();
     </script>
 
+    {/* Brevo signup forms: any <form data-brevo-form data-action="..."> on
+        the page submits here via a background fetch instead of a real page
+        navigation, so the visitor never leaves the site or sees Brevo's own
+        page. A hidden honeypot field (email_address_check) silently drops
+        obvious bots. On success the form is swapped for a short confirmation
+        line; on network failure the button re-enables so they can retry. */}
+    <script is:inline>
+      (function () {
+        document.querySelectorAll("[data-brevo-form]").forEach(function (form) {
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var honeypot = form.querySelector('[name="email_address_check"]');
+            if (honeypot && honeypot.value) return;
+            var emailField = form.querySelector('[name="EMAIL"]');
+            var btn = form.querySelector('[type="submit"]');
+            var originalLabel = btn ? btn.textContent : "";
+            if (btn) {
+              btn.disabled = true;
+              btn.textContent = "…";
+            }
+            var body = new URLSearchParams();
+            body.set("EMAIL", emailField ? emailField.value : "");
+            body.set("email_address_check", "");
+            body.set("locale", "en");
+            body.set("html_type", "simple");
+            fetch(form.dataset.action, { method: "POST", mode: "no-cors", body: body })
+              .then(function () {
+                var success = document.createElement("p");
+                success.className = "text-sm font-medium text-[color:var(--text)]";
+                success.textContent = form.dataset.successText || "You're on the list.";
+                form.replaceWith(success);
+              })
+              .catch(function () {
+                if (btn) {
+                  btn.disabled = false;
+                  btn.textContent = originalLabel;
+                }
+                var err = form.parentElement && form.parentElement.querySelector("[data-brevo-error]");
+                if (err) err.classList.remove("hidden");
+              });
+          });
+        });
+      })();
+    </script>
+
+    {/* Tally.so form embeds: loads Tally's widget script once per page,
+        which finds every <iframe data-tally-src="..."> (see TallyEmbed.astro)
+        and fills in its real src plus handles auto-resizing. Centralized
+        here instead of per-embed so pages with a Tally form don't each
+        carry their own copy of this loader. */}
+    <script is:inline>
+      (function () {
+        var d = document,
+          w = "https://tally.so/widgets/embed.js",
+          v = function () {
+            if (typeof Tally !== "undefined") {
+              Tally.loadEmbeds();
+            } else {
+              d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) {
+                e.src = e.dataset.tallySrc;
+              });
+            }
+          };
+        if (typeof Tally !== "undefined") {
+          v();
+        } else if (d.querySelector('script[src="' + w + '"]') == null) {
+          var s = d.createElement("script");
+          s.src = w;
+          s.onload = v;
+          s.onerror = v;
+          d.body.appendChild(s);
+        }
+      })();
+    </script>
+
     <!-- Progressive reveal-on-scroll; content is fully visible without JS -->
     <script>
       const els = document.querySelectorAll(".reveal");

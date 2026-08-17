@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import TallyEmbed from "../components/TallyEmbed.astro";
 
 /* ------------------------------------------------------------------
    Mortality comparison. Every comparator kills FEWER people per year
@@ -659,10 +660,9 @@ const speakingFormats = [
           </p>
         </div>
         <div class="rounded-xl border border-dashed border-[color:var(--border-strong)] p-6 text-center">
-          <span class="chip">Brevo signup embed</span>
-          <p class="mt-4 text-xs leading-relaxed text-[color:var(--text-dim)]">
-            Single-field email capture, tagged <code>decoupling-waitlist</code> so this audience stays
-            separate from the coaching list.
+          <span class="chip">Coming soon</span>
+          <p class="mt-4 text-sm leading-relaxed text-[color:var(--text-muted)]">
+            Stay tuned.
           </p>
         </div>
       </div>
@@ -860,13 +860,8 @@ const speakingFormats = [
         </p>
       </div>
 
-      <div class="card mt-10 p-8 text-center md:p-12">
-        <span class="chip">Tally form embed — advisory</span>
-        <p class="mt-5 text-sm leading-relaxed text-[color:var(--text-muted)]">
-          Organisation, population served, current initiative, geography, decision stage, and desired
-          next step. Deliberately separate from the consumer coaching enquiry.
-        </p>
-        <a href="https://tally.so" class="link-underline mt-6 text-sm"> Set up the Tally form → </a>
+      <div class="card mt-10 p-8 md:p-12">
+        <TallyEmbed formId="BzJzPY" title="Discuss a pilot/project" height={1395} />
       </div>
     </div>
   </section>

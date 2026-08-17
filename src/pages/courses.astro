@@ -1,5 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import BrevoForm from "../components/BrevoForm.astro";
+
+const BREVO_COURSES_INTEREST =
+  "https://b46562d2.sibforms.com/serve/MUIFANE0QdzTzr3rDs5MVSPFMfZW8T36g823O1K-zqfrTeLqkpTu1eJiqq_oqaK-zfR6GIWVDdqFNISKhRUI-8C1yxJFZUWYfeV4W5mge0NB9NePa_tjAQx0E1ZjEjCWXvdegh_SMEAfohc0cNWmdHW9HPI_AjmjhKeJVlOLEP6YqsZaWl2zqpBi69V8QToZpqQ0_5E04kjssN1How==";
 
 /*
   HIDDEN PAGE — not in Navbar or Footer, and excluded from the sitemap
@@ -103,15 +107,14 @@ const modules = [
       <div class="card glow-top relative overflow-hidden p-10 text-center md:p-14">
         <h2 class="mx-auto max-w-2xl text-3xl font-semibold md:text-4xl">Join the research list</h2>
         <p class="lead mx-auto mt-5 text-center">
-          Three questions: your main bottleneck, the result you want, and the format you'd actually
-          use. First access when enrolment opens.
+          Leave your email and you'll be first to hear when enrolment opens — plus the occasional
+          note on how the course is taking shape.
         </p>
-        <div class="mt-8">
-          <span class="chip">Brevo / Tally embed</span>
-          <p class="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-[color:var(--text-muted)]">
-            Paste the waitlist form embed here.
-          </p>
-        </div>
+        <BrevoForm
+          action={BREVO_COURSES_INTEREST}
+          buttonLabel="Join the list"
+          successText="You're on the research list — we'll email you when enrolment opens."
+        />
       </div>
 
       <div class="note-box">
