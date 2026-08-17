@@ -2,18 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import TallyEmbed from "../components/TallyEmbed.astro";
 
-const workshops = [
-  {
-    city: "Munich",
-    when: "Autumn 2026",
-    body: "Two days on the Sociogram Method: building a client sociogram from intake, reading structural bottlenecks, and designing interventions that fit a real life. Taught in English and German.",
-  },
-  {
-    city: "London",
-    when: "Spring 2027",
-    body: "The same core curriculum, with a session on integrating structural diagnosis into an existing therapeutic or coaching practice. Taught in English.",
-  },
-];
+/* Add a workshop here once its format, date, and city are confirmed —
+   this is deliberately empty for now. Workshops run in different
+   formats (introductory sessions, deep-dives, multi-day intensives),
+   so `when`/`body` should describe whichever format that entry is. */
+const workshops = [];
 
 const supervision = [
   "You bring one stuck client case — anonymised, in your own notes.",
@@ -26,29 +19,42 @@ const supervision = [
 <Layout
   theme="lab"
   title="For Coaches & Therapists | The Sociogram Method"
-  description="Train in the Sociogram Method: workshops in Munich and London, practitioner supervision, referral partnership, and an open invitation to contribute to the research."
+  description="Train in the Sociogram Method: practitioner workshops, referral partnership, and an open invitation to contribute to the research."
 >
   {/* ===== HERO ===== */}
   <section class="glow-top relative overflow-hidden border-b border-[color:var(--border)]">
-    <div class="container-x relative z-10 py-24 md:py-28">
-      <span class="eyebrow">For coaches &amp; therapists</span>
-      <h1 class="mt-6 max-w-4xl text-[clamp(2.2rem,5vw,3.6rem)] font-bold">
-        Give your clients a map instead of more shame.
-      </h1>
-      <p class="lead mt-7 max-w-2xl text-lg">
-        Most clients who arrive stuck in dating are not lacking confidence or communication skills.
-        They are living inside a social structure that produces too few real encounters. The
-        Sociogram Method makes that structure visible — so you can diagnose it rather than guess at
-        it.
-      </p>
-      <div class="mt-9 flex flex-wrap gap-3">
-        <a href="#workshops" class="btn btn-primary">See the workshops</a>
-        <a href="#supervision" class="btn btn-ghost">Book case supervision</a>
+    <div class="container-x relative z-10 grid gap-12 py-24 md:grid-cols-[1.2fr_0.8fr] md:items-center md:py-28">
+      <div>
+        <span class="eyebrow">For coaches &amp; therapists</span>
+        <h1 class="mt-6 text-[clamp(2.2rem,5vw,3.6rem)] font-bold">
+          Give your clients a map instead of more shame.
+        </h1>
+        <p class="lead mt-7 max-w-2xl text-lg">
+          Most clients who arrive stuck in dating are not lacking confidence or communication
+          skills. They are living inside a social structure that produces too few real encounters.
+          The Sociogram Method makes that structure visible — so you can diagnose it rather than
+          guess at it.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href="#workshops" class="btn btn-primary">See the workshops</a>
+        </div>
+        <div class="pill-row">
+          <span class="pill">No certification required to use the method</span>
+          <span class="pill">English &amp; German</span>
+          <span class="pill">Munich &amp; London</span>
+        </div>
       </div>
-      <div class="pill-row">
-        <span class="pill">No certification required to use the method</span>
-        <span class="pill">English &amp; German</span>
-        <span class="pill">Munich &amp; London</span>
+      <div class="reveal">
+        <figure class="app-photo">
+          <img
+            src="/images/photos/coupleb.webp"
+            alt="A couple sitting close together in a café, with the Amoro sociogram and its scored nodes drawn over the scene"
+            width="1000"
+            height="563"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
       </div>
     </div>
   </section>
@@ -114,32 +120,37 @@ const supervision = [
     <div class="container-x">
       <div class="max-w-2xl">
         <span class="eyebrow">Workshops</span>
-        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Two days, in person, in a small room.</h2>
+        <h2 class="mt-5 text-3xl font-semibold md:text-4xl">
+          Workshops on the Sociogram Method, added as they're confirmed.
+        </h2>
         <p class="lead mt-6">
-          Practitioner workshops teaching the method end to end, with live mapping on real
-          (anonymised) cases brought by participants. Deliberately small.
+          Different formats — introductory sessions, deep-dives, and multi-day intensives —
+          teaching the method with live mapping on real (anonymised) cases. Find workshops below
+          as they're set; once there's more information on one, it goes up here.
         </p>
       </div>
 
-      <div class="mt-12 grid gap-6 md:grid-cols-2">
-        {
-          workshops.map((w) => (
-            <div class="card p-7">
-              <div class="flex items-baseline justify-between gap-4">
-                <h3 class="text-xl font-semibold">{w.city}</h3>
-                <span class="font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.16em] text-accent">
-                  {w.when}
-                </span>
+      {
+        workshops.length > 0 && (
+          <div class="mt-12 grid gap-6 md:grid-cols-2">
+            {workshops.map((w) => (
+              <div class="card p-7">
+                <div class="flex items-baseline justify-between gap-4">
+                  <h3 class="text-xl font-semibold">{w.city}</h3>
+                  <span class="font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.16em] text-accent">
+                    {w.when}
+                  </span>
+                </div>
+                <p class="mt-4 text-sm leading-relaxed text-[color:var(--text-muted)]">{w.body}</p>
+                <p class="mt-5 text-[0.78rem] leading-relaxed text-[color:var(--text-muted)]">
+                  Exact dates, venue, and pricing are not yet confirmed. Register interest and
+                  you'll be told first, with no obligation.
+                </p>
               </div>
-              <p class="mt-4 text-sm leading-relaxed text-[color:var(--text-muted)]">{w.body}</p>
-              <p class="mt-5 text-[0.78rem] leading-relaxed text-[color:var(--text-muted)]">
-                Exact dates, venue, and pricing are not yet confirmed. Register interest and you'll
-                be told first, with no obligation.
-              </p>
-            </div>
-          ))
-        }
-      </div>
+            ))}
+          </div>
+        )
+      }
 
       <div class="card mt-8 p-8 text-center md:p-10">
         <span class="chip">No fixed dates yet</span>
@@ -153,6 +164,9 @@ const supervision = [
   </section>
 
   {/* ===== SUPERVISION ===== */}
+  {/* Hidden for now, not deleted — flip `false` to re-enable if case
+      supervision comes back as an offer. */}
+  {false && (
   <section id="supervision" class="section border-t border-[color:var(--border)]">
     <div class="container-x">
       <div class="max-w-2xl">
@@ -195,6 +209,7 @@ const supervision = [
       </div>
     </div>
   </section>
+  )}
 
   {/* ===== RESEARCH + REFERRAL ===== */}
   <section class="section border-t border-[color:var(--border)]">
