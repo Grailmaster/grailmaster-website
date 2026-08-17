@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import TallyEmbed from "../components/TallyEmbed.astro";
 
 const signals = [
   "Your week is work and errands — almost no recurring social settings.",
@@ -405,20 +406,14 @@ const faqs = [
         <span class="eyebrow">Book</span>
         <h2 class="mt-5 text-3xl font-semibold md:text-4xl">Tell me what you're working with.</h2>
         <p class="lead mt-6">
-          A short confidential enquiry — what your situation looks like and what you want to change.
-          You'll get a reply within 24 hours with available times.
+          A short, confidential enquiry — what your situation looks like and what you want to
+          change. I read every one personally and get back to you as soon as I can, with next
+          steps and a time to talk.
         </p>
       </div>
 
-      <div class="card mt-10 p-8 text-center md:p-12">
-        <span class="chip">Tally form embed</span>
-        <p class="mt-5 text-sm leading-relaxed text-[color:var(--text-muted)]">
-          Paste the Tally.so enquiry form embed here — current situation, main bottleneck, preferred
-          offer, and language. Confirmation goes out by email.
-        </p>
-        <a href="https://tally.so" class="link-underline mt-6 text-sm">
-          Set up the Tally form →
-        </a>
+      <div class="card mt-10 p-8 md:p-12">
+        <TallyEmbed formId="BzJEg1" title="Dating Coaching Enquiry" height={980} />
       </div>
 
       <div class="note-box">
