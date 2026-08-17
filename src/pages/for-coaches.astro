@@ -2,11 +2,23 @@
 import Layout from "../layouts/Layout.astro";
 import TallyEmbed from "../components/TallyEmbed.astro";
 
-/* Add a workshop here once its format, date, and city are confirmed —
-   this is deliberately empty for now. Workshops run in different
-   formats (introductory sessions, deep-dives, multi-day intensives),
-   so `when`/`body` should describe whichever format that entry is. */
-const workshops = [];
+/* Cities that are actually planned go here even before format and
+   dates are confirmed — `when` stays honest ("Planned") until a real
+   date exists. Workshops run in different formats (introductory
+   sessions, deep-dives, multi-day intensives), so `body` should
+   describe whichever format that entry ends up being, once known. */
+const workshops = [
+  {
+    city: "Munich",
+    when: "Planned",
+    body: "Practitioner training in the Sociogram Method — format and dates to be confirmed. Taught in English and German.",
+  },
+  {
+    city: "London",
+    when: "Planned",
+    body: "Practitioner training in the Sociogram Method — format and dates to be confirmed. Taught in English.",
+  },
+];
 
 const supervision = [
   "You bring one stuck client case — anonymised, in your own notes.",
