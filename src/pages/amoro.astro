@@ -76,17 +76,47 @@ const bookPreviewPdf: string | null = null;
     </div>
   </section>
 
-  {/* ===== WHAT IT DOES ===== */}
+  {/* ===== WHAT IT DOES — with the first prototype screen =====
+      Screenshot is a dark UI on a cream page, so it gets a hard dark frame
+      and a drop shadow to read as a device window, not a hole in the page. */}
   <section class="section">
-    <div class="container-x grid gap-5 md:grid-cols-3">
-      {
-        features.map((f) => (
-          <div class="card reveal p-8">
-            <h3 class="text-xl font-semibold">{f.title}</h3>
-            <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">{f.body}</p>
-          </div>
-        ))
-      }
+    <div class="container-x grid gap-12 md:grid-cols-[0.95fr_1fr] md:items-center md:gap-16">
+      <figure class="reveal mx-auto w-full max-w-[30rem]">
+        <div class="app-shot">
+          <img
+            src="/images/photos/amoroscreen1.webp"
+            alt="Amoro prototype, Map view: the user at the centre of concentric rings of contacts, each tie marked with what it adds to or drains from the SCV, with a legend for partner, bridge, superconnector and fading ties."
+            width="754"
+            height="1058"
+            loading="lazy"
+            decoding="async"
+            class="block w-full"
+          />
+        </div>
+        <figcaption class="mt-4 text-center font-[family-name:var(--font-mono)] text-[0.68rem] uppercase tracking-[0.16em] text-[color:var(--text-dim)]">
+          Working prototype · the Map view
+        </figcaption>
+      </figure>
+
+      <div class="reveal">
+        <span class="eyebrow">First look · the prototype</span>
+        <h2 class="mt-5 text-3xl font-semibold leading-tight md:text-4xl">Your world, on one screen.</h2>
+        <p class="mt-5 leading-relaxed text-[color:var(--text-muted)]">
+          You sit at the centre. Every ring outward is a tier of closeness, and the number beside each
+          person is what that tie adds to your SCV — or quietly drains from it. Bridges and
+          superconnectors light up; ties that are fading say so before they are gone.
+        </p>
+        <ul class="mt-8 space-y-5">
+          {
+            features.map((f) => (
+              <li class="border-l-2 border-[color:var(--accent)] pl-5">
+                <h3 class="text-lg font-semibold">{f.title}</h3>
+                <p class="mt-1.5 text-sm leading-relaxed text-[color:var(--text-muted)]">{f.body}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -353,5 +383,14 @@ const bookPreviewPdf: string | null = null;
         var(--bg) 100%
       );
     }
+  }
+  .app-shot {
+    overflow: hidden;
+    border-radius: 1.25rem;
+    border: 1px solid rgb(0 0 0 / 0.55);
+    background: #121a22;
+    box-shadow:
+      0 0 0 6px rgb(18 26 34 / 0.06),
+      0 34px 70px -30px rgb(20 14 10 / 0.6);
   }
 </style>
