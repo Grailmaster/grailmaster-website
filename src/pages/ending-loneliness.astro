@@ -18,13 +18,14 @@ const chapters = [
 <Layout
   theme="connection"
   title="Ending Loneliness — the book | Grailmaster"
-  description="Ending Loneliness reframes loneliness as a solvable network problem — and hands you the tools to solve your own. Join the launch list."
+  description="Ending Loneliness by Dr. Axel Schumacher — out 12 January 2027. Loneliness reframed as a solvable network problem, with the tools to solve it. Join the launch list."
 >
   <section class="glow-top relative overflow-hidden border-b border-[color:var(--border)]">
     <div class="container-x relative z-10 grid gap-12 py-24 md:grid-cols-[1.1fr_0.9fr] md:items-center md:py-28">
       <div>
-        <span class="eyebrow">The book · coming soon</span>
+        <span class="eyebrow">The book · out <time datetime="2027-01-12">12 January 2027</time></span>
         <h1 class="mt-6 text-[clamp(2.3rem,5vw,4rem)] font-bold">Ending Loneliness</h1>
+        <p class="mt-3 text-lg font-medium text-accent">A Sociogram Framework for Dating &amp; Relationship Coaches</p>
         <p class="lead mt-6 max-w-xl text-lg">
           Loneliness isn't a personality flaw or a life sentence. It's a network problem —
           and network problems have solutions. This is the science, and the method, for
@@ -36,24 +37,22 @@ const chapters = [
         </div>
       </div>
 
-      <!-- Book cover placeholder -->
-      <div class="reveal mx-auto w-full max-w-xs">
-        <div
-          class="card flex aspect-[3/4] flex-col justify-between p-8"
-          style="background:linear-gradient(150deg,var(--surface-2),var(--bg));"
-        >
-          <span class="eyebrow">Dr. Axel Schumacher</span>
-          <div>
-            <h2 class="text-3xl font-bold leading-tight">Ending<br />Loneliness</h2>
-            <p class="mt-3 text-sm text-[color:var(--text-muted)]">
-              The network science of belonging
-            </p>
-          </div>
-          <span class="font-[family-name:var(--font-mono)] text-[0.68rem] text-[color:var(--text-dim)]">
-            Cover mockup · replace with final art
-          </span>
+      <!-- Book cover -->
+      <figure class="reveal mx-auto w-full max-w-sm">
+        <div class="relative overflow-hidden rounded-xl border border-[color:var(--border)] shadow-2xl">
+          <img
+            src="/images/covers/ending-loneliness.webp"
+            alt="Ending Loneliness — A Sociogram Framework for Dating & Relationship Coaches, by Dr. Axel Schumacher"
+            width="880"
+            height="1139"
+            class="block w-full"
+            fetchpriority="high"
+          />
         </div>
-      </div>
+        <figcaption class="mt-4 text-center font-[family-name:var(--font-mono)] text-[0.68rem] uppercase tracking-[0.18em] text-[color:var(--text-dim)]">
+          Release · <time datetime="2027-01-12">12 January 2027</time>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
@@ -99,15 +98,15 @@ const chapters = [
       <div class="card glow-top relative overflow-hidden p-10 text-center md:p-16">
         <span class="eyebrow justify-center">Launch list</span>
         <h2 class="mx-auto mt-5 max-w-2xl text-3xl font-semibold md:text-4xl">
-          Be first to know when it's out
+          Out <time datetime="2027-01-12">12 January 2027</time>
         </h2>
         <p class="lead mx-auto mt-4 text-center">
-          Join the list for the release date, launch-week bonuses, and a free chapter.
+          Join the list for a free chapter before release day and the launch-week bonuses.
         </p>
         <BrevoForm
           action={BREVO_ENDING_LONELINESS_LAUNCH}
           buttonLabel="Notify me"
-          successText="You're on the launch list — we'll email you the release date."
+          successText="You're on the launch list — we'll email you on launch day."
         />
       </div>
     </div>
