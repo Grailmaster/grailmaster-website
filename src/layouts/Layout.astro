@@ -1,4 +1,5 @@
 ---
+import "../styles/fonts.css";
 import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
@@ -51,13 +52,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(image, Astro.site)} />
 
-    <!-- Fonts: preconnect + one blocking stylesheet with all families -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-    />
+    <!-- Fonts are self-hosted (src/styles/fonts.css, public/fonts/): no request to Google (GDPR, LG München I 3 O 17493/20) -->
+    <link rel="preload" href="/fonts/inter-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin />
   </head>
   <body>
     <a
@@ -143,13 +139,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       })();
     </script>
 
-    {/* Tally.so form embeds: loads Tally's widget script once per page,
-        which finds every <iframe data-tally-src="..."> (see TallyEmbed.astro)
-        and fills in its real src plus handles auto-resizing. Centralized
-        here instead of per-embed so pages with a Tally form don't each
-        carry their own copy of this loader. */}
+    {/* Click-to-load embeds (privacy): nothing is requested from Tally or YouTube until the visitor
+        presses the button in a [data-consent-embed] box (TallyEmbed.astro, the podcast page's video).
+        Then the box's <template> content is inserted; for Tally its widget script is loaded once, which
+        fills in iframe[data-tally-src] and handles auto-resizing. */}
     <script is:inline>
       (function () {
+        function tally() {
         var d = document,
           w = "https://tally.so/widgets/embed.js",
           v = function () {
@@ -170,6 +166,20 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
           s.onerror = v;
           d.body.appendChild(s);
         }
+        }
+        document.querySelectorAll("[data-consent-embed]").forEach(function (box) {
+          var btn = box.querySelector("[data-consent-load]");
+          var tpl = box.querySelector("template");
+          if (!btn || !tpl) return;
+          btn.addEventListener("click", function () {
+            var holder = box.querySelector("[data-consent-placeholder]");
+            box.appendChild(tpl.content.cloneNode(true));
+            if (holder) holder.remove();
+            if (box.dataset.consentEmbed === "tally") tally();
+            var frame = box.querySelector("iframe");
+            if (frame) frame.focus();
+          });
+        });
       })();
     </script>
 

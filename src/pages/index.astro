@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { ytThumbs } from "../lib/ytThumb";
 import BrevoForm from "../components/BrevoForm.astro";
 
 const BREVO_NEWSLETTER =
@@ -67,6 +68,9 @@ const videos = [
 
 // Flip to false the day the book publishes to remove the ribbon.
 const bookComingSoon = true;
+// thumbnails served from this site (privacy), see src/lib/ytThumb.ts
+const thumbs = await ytThumbs(videos.map((v) => v.id));
+
 ---
 
 <Layout
@@ -497,8 +501,7 @@ const bookComingSoon = true;
             <a href={`https://youtu.be/${v.id}`} class="card group flex flex-col overflow-hidden reveal">
               <div class="relative aspect-video overflow-hidden">
                 <img
-                  src={`https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg`}
-                  onerror={`this.onerror=null;this.src='https://i.ytimg.com/vi/${v.id}/hqdefault.jpg'`}
+                  src={thumbs[v.id]}
                   alt={v.title}
                   class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                   loading="lazy"

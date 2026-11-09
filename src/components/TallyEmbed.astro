@@ -1,9 +1,8 @@
 ---
 /**
- * Embeds a Tally.so form via Tally's standard iframe embed.
- * The widget loader script (which finds [data-tally-src] iframes and
- * fills in their real src, then handles auto-resizing) lives once,
- * site-wide, in Layout.astro — not repeated per embed.
+ * Embeds a Tally.so form via Tally's standard iframe embed, click to load: nothing is requested
+ * from Tally until the visitor presses "Show the form". The loader (Layout.astro, [data-consent-embed])
+ * then inserts the iframe and loads Tally's widget script, which fills in the real src and resizes.
  *
  * Usage:
  *   <TallyEmbed formId="xX8XEr" title="Speaking Enquiry" height={1269} />
@@ -30,14 +29,23 @@ const { formId, title, height = 400, class: className = "w-full" } = Astro.props
 const src = `https://tally.so/embed/${formId}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`;
 ---
 
-<iframe
-  data-tally-src={src}
-  loading="lazy"
-  width="100%"
-  height={height}
-  frameborder="0"
-  marginheight="0"
-  marginwidth="0"
-  title={title}
-  class={className}
-></iframe>
+{/* Click to load (privacy): the form comes from Tally (tally.so) only after the visitor asks for it. */}
+<div data-consent-embed="tally" class={className}>
+  <div data-consent-placeholder class="rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] p-6 text-sm text-[color:var(--text-muted)]">
+    <p>This form is provided by Tally. Loading it connects your browser to tally.so (see <a href="/privacy" class="link-underline">Privacy</a>).</p>
+    <button type="button" data-consent-load class="btn btn-primary mt-4">Show the form</button>
+  </div>
+  <template>
+    <iframe
+      data-tally-src={src}
+      loading="lazy"
+      width="100%"
+      height={height}
+      frameborder="0"
+      marginheight="0"
+      marginwidth="0"
+      title={title}
+      class="w-full"
+    ></iframe>
+  </template>
+</div>
