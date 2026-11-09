@@ -141,43 +141,53 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 
     {/* Click-to-load embeds (privacy): nothing is requested from Tally or YouTube until the visitor
         presses the button in a [data-consent-embed] box (TallyEmbed.astro, the podcast page's video).
-        Then the box's <template> content is inserted; for Tally its widget script is loaded once, which
-        fills in iframe[data-tally-src] and handles auto-resizing. */}
+        Then the box's <template> content is inserted and a [data-consent-stop] button appears; pressing
+        it removes the iframe again and brings back the placeholder (withdrawal as easy as loading).
+        Tally runs only inside its own iframe (no Tally script on this page); its height messages are
+        read here, accepted only from https://tally.so. Nothing is remembered: every visit starts unloaded. */}
     <script is:inline>
       (function () {
-        function tally() {
-        var d = document,
-          w = "https://tally.so/widgets/embed.js",
-          v = function () {
-            if (typeof Tally !== "undefined") {
-              Tally.loadEmbeds();
-            } else {
-              d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) {
-                e.src = e.dataset.tallySrc;
-              });
-            }
-          };
-        if (typeof Tally !== "undefined") {
-          v();
-        } else if (d.querySelector('script[src="' + w + '"]') == null) {
-          var s = d.createElement("script");
-          s.src = w;
-          s.onload = v;
-          s.onerror = v;
-          d.body.appendChild(s);
-        }
-        }
         document.querySelectorAll("[data-consent-embed]").forEach(function (box) {
           var btn = box.querySelector("[data-consent-load]");
+          var stop = box.querySelector("[data-consent-stop]");
+          var holder = box.querySelector("[data-consent-placeholder]");
+          var slot = box.querySelector("[data-consent-slot]") || box;
           var tpl = box.querySelector("template");
-          if (!btn || !tpl) return;
+          if (!btn || !tpl || !holder) return;
           btn.addEventListener("click", function () {
-            var holder = box.querySelector("[data-consent-placeholder]");
-            box.appendChild(tpl.content.cloneNode(true));
-            if (holder) holder.remove();
-            if (box.dataset.consentEmbed === "tally") tally();
-            var frame = box.querySelector("iframe");
+            slot.appendChild(tpl.content.cloneNode(true));
+            slot.querySelectorAll("iframe[data-tally-src]").forEach(function (f) {
+              f.src = f.dataset.tallySrc;
+            });
+            holder.hidden = true;
+            if (stop) stop.hidden = false;
+            var frame = slot.querySelector("iframe");
             if (frame) frame.focus();
+          });
+          if (stop)
+            stop.addEventListener("click", function () {
+              slot.querySelectorAll("iframe").forEach(function (f) {
+                f.remove();
+              });
+              stop.hidden = true;
+              holder.hidden = false;
+              btn.focus();
+            });
+        });
+        window.addEventListener("message", function (e) {
+          if (e.origin !== "https://tally.so") return;
+          var d = e.data;
+          if (typeof d === "string") {
+            try {
+              d = JSON.parse(d);
+            } catch (_) {
+              return;
+            }
+          }
+          var h = d && Number((d.payload && d.payload.height) || d.height);
+          if (!h || h < 100 || h > 10000) return;
+          document.querySelectorAll("iframe[data-tally-src]").forEach(function (f) {
+            if (f.contentWindow === e.source) f.style.height = h + "px";
           });
         });
       })();

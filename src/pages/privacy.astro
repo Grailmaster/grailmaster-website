@@ -67,14 +67,18 @@ import Layout from "../layouts/Layout.astro";
             Where this site lets you submit a form, book a call, or join a mailing list, that
             feature is provided by one of the following processors. Forms and videos from other
             services load only after you press the button shown in their place ("Show the form",
-            "Play the episode"); until then your browser does not contact them. Each only receives
+            "Play the episode"); until then your browser does not contact them. Once loaded, the
+            button below it ("Remove the form", "Remove the video") takes it out again and your
+            browser stops talking to that service; data already sent while it was open can't be
+            recalled by this site. Nothing is remembered: on your next visit it is unloaded again. Each only receives
             what you actively type into that specific form or embed, plus the technical connection
             data (such as your IP address) that any website receives when your browser loads it:
           </p>
           <ul class="mt-2 list-disc space-y-2 pl-5">
             <li>
               <strong class="text-[color:var(--text)]">Tally</strong> (Tally Labs, operating in the
-              EU/EEA) — for inquiry and contact forms. Submitting a form is processed under Art.
+              EU/EEA) — for inquiry and contact forms. The form runs only inside its own frame and loads only after
+              you press "Show the form". Submitting a form is processed under Art.
               6(1)(b) GDPR (steps to respond to your request) or Art. 6(1)(a) (consent), depending
               on the form. Tally's privacy policy:
               <a href="https://tally.so/help/privacy-policy" target="_blank" rel="noopener noreferrer nofollow" class="link-underline"
@@ -93,7 +97,8 @@ import Layout from "../layouts/Layout.astro";
               <strong class="text-[color:var(--text)]">YouTube</strong> (Google Ireland Limited) — the
               podcast page can show the latest episode. It loads from YouTube's privacy-enhanced domain
               (youtube-nocookie.com) only after you press "Play the episode", based on your request
-              (Art. 6(1)(a) GDPR, consent given by pressing the button). Google may process data in the
+              (Art. 6(1)(a) GDPR, consent given by pressing the button; you withdraw it with "Remove the
+              video" or by leaving the page). Google may process data in the
               USA. Google's privacy policy:
               <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer nofollow" class="link-underline"
                 >policies.google.com/privacy</a

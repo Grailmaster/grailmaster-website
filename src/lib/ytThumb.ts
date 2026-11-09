@@ -3,7 +3,8 @@ import { getImage } from "astro:assets";
 /**
  * YouTube thumbnails, copied into the site at build time (privacy): visitors' browsers load them from
  * grailmaster.com, never from i.ytimg.com. Tries the large image, then the standard one; if the build
- * machine can't reach YouTube, falls back to the YouTube URL so the page still shows a picture.
+ * machine can't reach YouTube, falls back to a local placeholder picture (never a YouTube URL, so a failed
+ * download can't change what visitors' browsers contact).
  */
 const memo = new Map<string, Promise<string>>();
 export function ytThumb(id: string): Promise<string> {
@@ -18,7 +19,8 @@ export function ytThumb(id: string): Promise<string> {
           /* next size */
         }
       }
-      return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+      console.warn(`[ytThumb] could not copy the thumbnail for ${id}; using the local placeholder`);
+      return "/images/video-placeholder.svg";
     })();
     memo.set(id, p);
   }

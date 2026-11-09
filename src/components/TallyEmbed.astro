@@ -2,7 +2,8 @@
 /**
  * Embeds a Tally.so form via Tally's standard iframe embed, click to load: nothing is requested
  * from Tally until the visitor presses "Show the form". The loader (Layout.astro, [data-consent-embed])
- * then inserts the iframe and loads Tally's widget script, which fills in the real src and resizes.
+ * then inserts the iframe (Tally runs only inside it, no Tally script on the page) and shows a
+ * "Remove the form" button that takes it out again.
  *
  * Usage:
  *   <TallyEmbed formId="xX8XEr" title="Speaking Enquiry" height={1269} />
@@ -32,9 +33,11 @@ const src = `https://tally.so/embed/${formId}?alignLeft=1&hideTitle=1&transparen
 {/* Click to load (privacy): the form comes from Tally (tally.so) only after the visitor asks for it. */}
 <div data-consent-embed="tally" class={className}>
   <div data-consent-placeholder class="rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] p-6 text-sm text-[color:var(--text-muted)]">
-    <p>This form is provided by Tally. Loading it connects your browser to tally.so (see <a href="/privacy" class="link-underline">Privacy</a>).</p>
+    <p>This form is provided by Tally. Loading it connects your browser to tally.so; you can remove it again at any time (see <a href="/privacy" class="link-underline">Privacy</a>).</p>
     <button type="button" data-consent-load class="btn btn-primary mt-4">Show the form</button>
   </div>
+  <div data-consent-slot></div>
+  <button type="button" data-consent-stop hidden class="link-underline mt-3 text-sm text-[color:var(--text-muted)]">Remove the form (disconnect from Tally)</button>
   <template>
     <iframe
       data-tally-src={src}

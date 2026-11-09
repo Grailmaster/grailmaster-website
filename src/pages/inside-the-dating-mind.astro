@@ -152,12 +152,14 @@ const thumbs = await ytThumbs([featured.id, ...episodes.map((e) => e.id), ...the
         <!-- Featured episode -->
         <div class="reveal">
           <div class="overflow-hidden rounded-2xl border border-[color:var(--border)] shadow-2xl">
-            <div class="aspect-video" data-consent-embed="youtube">
-              {/* Click to load (privacy): nothing is requested from YouTube until the visitor asks for the video. */}
-              <div data-consent-placeholder class="flex h-full w-full flex-col items-center justify-center gap-3 bg-[color:var(--surface)] p-6 text-center text-sm text-[color:var(--text-muted)]">
-                <p class="max-w-sm">{featured.title}</p>
-                <button type="button" data-consent-load class="btn btn-primary">Play the episode</button>
-                <p class="max-w-sm text-xs">Playing it loads the video from YouTube (Google). See <a href="/privacy" class="link-underline">Privacy</a>.</p>
+            <div data-consent-embed="youtube">
+              <div class="aspect-video" data-consent-slot>
+                {/* Click to load (privacy): nothing is requested from YouTube until the visitor asks for the video. */}
+                <div data-consent-placeholder class="flex h-full w-full flex-col items-center justify-center gap-3 bg-[color:var(--surface)] p-6 text-center text-sm text-[color:var(--text-muted)]">
+                  <p class="max-w-sm">{featured.title}</p>
+                  <button type="button" data-consent-load class="btn btn-primary">Play the episode</button>
+                  <p class="max-w-sm text-xs">Playing it loads the video from YouTube (Google); you can remove it again at any time. See <a href="/privacy" class="link-underline">Privacy</a>.</p>
+                </div>
               </div>
               <template>
                 <iframe
@@ -168,6 +170,9 @@ const thumbs = await ytThumbs([featured.id, ...episodes.map((e) => e.id), ...the
                   allowfullscreen
                 ></iframe>
               </template>
+              <div class="bg-[color:var(--surface)] px-5 pt-3">
+                <button type="button" data-consent-stop hidden class="link-underline text-sm text-[color:var(--text-muted)]">Remove the video (disconnect from YouTube)</button>
+              </div>
             </div>
             <div class="bg-[color:var(--surface)] p-5">
               <div class="flex items-center justify-between gap-3">
