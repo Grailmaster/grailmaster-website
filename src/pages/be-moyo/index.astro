@@ -6,8 +6,9 @@
 import Layout from "../../layouts/Layout.astro";
 import BmHeader from "../../components/bemoyo/BmHeader.astro";
 import { APP_URL, GUIDE, guidePath, publicGuide } from "../../lib/bemoyo";
+const heroAlt = "The map of Mara, a made-up example: her own circle in the centre and nine people in three rings around her, each shown by their initial.";
 const shots = [
-  { id: "map", alt: "The map of Mara, a made-up example: her own circle in the centre and nine people in three rings around her, each shown by their initial.", cap: "Your map" },
+  { id: "today", alt: "Today for the example map: “Good evening, Mara”, the number of people logged this week, and the first cards below it.", cap: "Today" },
   { id: "pulse", alt: "Pulse for the example map: the large SCV number, how far it is from the start, and the label “Above your start”.", cap: "Your numbers" },
   { id: "grow", alt: "The Grow page: “Everything the app can do”, a search box, and the first group, Meet people and stay in touch, with its tools.", cap: "Small steps" },
 ];
@@ -35,7 +36,7 @@ const shots = [
         <p class="bm-quiet">Free to use. No account. Your map stays in your browser, on your device.</p>
       </div>
       <figure class="bm-shot bm-hero-shot">
-        <img src="/be-moyo/shots/map-forest.webp" alt={shots[0].alt} width="390" />
+        <img src="/be-moyo/shots/map-forest.webp" alt={heroAlt} width="390" />
       </figure>
     </header>
 
