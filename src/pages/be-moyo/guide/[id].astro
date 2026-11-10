@@ -2,7 +2,7 @@
 import Layout from "../../../layouts/Layout.astro";
 import BmHeader from "../../../components/bemoyo/BmHeader.astro";
 import BmBlocks from "../../../components/bemoyo/BmBlocks.astro";
-import { APP_URL, GUIDE, entry, groupOf, guidePath, publicGuide, tierLabel, type Entry } from "../../../lib/bemoyo";
+import { GUIDE, entry, groupOf, guidePath, publicGuide, tierLabel, type Entry } from "../../../lib/bemoyo";
 
 export function getStaticPaths() {
   return GUIDE.entries.map((e) => ({ params: { id: e.id }, props: { e } }));
@@ -34,7 +34,7 @@ const groupHref = group ? (group.id === "data" || group.id === "help" ? `${publi
         <span>Applies to app version {e.checked}</span>
         {tier && <span class="bm-chip">{tier}</span>}
       </p>
-      <p class="bm-quiet">The steps on this page are done inside the app.</p>
+      <p class="bm-quiet">These instructions refer to be:moyo. If a step uses your browser settings or another service, it says so.</p>
       <p class="bm-note" data-bm-from-app={e.checked} hidden></p>
 
       {
@@ -94,7 +94,7 @@ const groupHref = group ? (group.id === "data" || group.id === "help" ? `${publi
           </nav>
         )
       }
-      <a class="btn btn-primary" href={APP_URL}>Open the app</a>
+      <a class="btn btn-primary" href="/be-moyo/#waitlist">Join the waitlist</a>
     </aside>
   </div>
 

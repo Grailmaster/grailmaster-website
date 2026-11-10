@@ -1,6 +1,6 @@
 ---
 /** The be:moyo band under the site's own navigation: supplied logo artwork, never retyped (brand guidelines v1.0). */
-import { APP_URL, publicGuide } from "../../lib/bemoyo";
+import { publicGuide } from "../../lib/bemoyo";
 const path = Astro.url.pathname;
 const links = [
   { href: "/be-moyo/", label: "The app" },
@@ -24,7 +24,7 @@ const active = (href: string) => (href === "/be-moyo/" ? path === href : path.st
           </a>
         ))
       }
-      <a class="bm-open" href={APP_URL}>Open the app</a>
+      <a class="bm-open" href="/be-moyo/#waitlist">Join the waitlist</a>
     </nav>
   </div>
 </div>

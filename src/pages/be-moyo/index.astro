@@ -1,107 +1,490 @@
 ---
 /**
- * be:moyo — the app's page on grailmaster.com (DOC-01 §A1). Shows what the app does; no hype, no health claims
- * (intended purpose, spec §L4). Tiles and science lines reuse the Guide's approved text.
+ * be:moyo — the app's page (DOC-01 §A1). Took over the content of the former /amoro page (Axel, 2026-11-11:
+ * the app is called be:moyo; /amoro now redirects here), plus what the app does today, with links into the Guide.
+ * The test app itself is not linked from the site yet (Axel): visitors join the waitlist.
  */
 import Layout from "../../layouts/Layout.astro";
+import BrevoForm from "../../components/BrevoForm.astro";
 import BmHeader from "../../components/bemoyo/BmHeader.astro";
-import { APP_URL, GUIDE, guidePath, publicGuide } from "../../lib/bemoyo";
-const heroAlt = "The map of Mara, a made-up example: her own circle in the centre and nine people in three rings around her, each shown by their initial.";
+import { GUIDE, guidePath, publicGuide } from "../../lib/bemoyo";
+
 const shots = [
   { id: "today", alt: "Today for the example map: “Good evening, Mara”, the number of people logged this week, and the first cards below it.", cap: "Today" },
   { id: "pulse", alt: "Pulse for the example map: the large SCV number, how far it is from the start, and the label “Above your start”.", cap: "Your numbers" },
   { id: "grow", alt: "The Grow page: “Everything the app can do”, a search box, and the first group, Meet people and stay in touch, with its tools.", cap: "Small steps" },
 ];
+
+const BREVO_AMORO_WAITLIST =
+  "https://b46562d2.sibforms.com/serve/MUIFABaGuG0LfwyQc4VaNU8D1bmqsaAFSgp_6V689bMlXt3dTSDHFZtgEZE1jv1r_rMHRw-t1O4X5uBmjsbMFDDBTMFSFCe8epBlxUC7o9W3TSndNOud4TwoHrJkq2GVa8BboCNuVghMwncO9CILKM0lsg8JO7AAFJHHQWoCEHtTFm9PPONpfSugsMxAYzF5R87kvFsxyOySejTrDA==";
+
+const features = [
+  { title: "Map your circle", body: "Visualize your real social network and see where the gaps and strengths are." },
+  { title: "Track your SCV", body: "Turn the framework into a living score that moves as you invest in connection." },
+  { title: "Nudge, don't nag", body: "Gentle prompts to reach out, follow up, and keep the ties that matter alive." },
+];
+
+/* What a user can look forward to — deliberately concrete, because the whole
+   argument of the page is that be:moyo is a program, not another feed. */
+const lookForwardTo = [
+  {
+    title: "Your world, drawn",
+    body: "Your real social network on one screen: who is close, who has drifted, and exactly where the structure is thin.",
+  },
+  {
+    title: "A program, not a feed",
+    body: "Small weekly moves, chosen for your map — a message, a reintroduction, a room. Ten minutes, not ten hours of scrolling.",
+  },
+  {
+    title: "Third places, not swipes",
+    body: "The repeated, real-world settings where friendship and love actually form — and a plan that gets you back there more than once.",
+  },
+  {
+    title: "A number that moves",
+    body: "Your SCV rises as your world widens. For the first time, progress against loneliness is something you can watch happen.",
+  },
+];
+
+// Book preview: set to the PDF path once ready (e.g. "/downloads/ending-loneliness-preview.pdf").
+// Leave null to hide the download button until the preview exists.
+const bookPreviewPdf: string | null = null;
 ---
 
 <Layout
-  title="be:moyo · your social life on one map"
-  description="Map the people in your life, reflect on your relationships and explore small steps to try. Based on the book Ending Loneliness. Free during testing. No account."
   theme="bemoyo"
+  title="be:moyo — the app that ends loneliness | Grailmaster"
+  description="be:moyo turns the Sociogram Method into an app: map, measure and rebuild your social world — so love, friendship and belonging have somewhere to land. Join the early-access waitlist."
   image="/be-moyo/brand/og.png"
 >
   <BmHeader />
-  <div class="container-x bm-page">
-    <header class="bm-hero">
-      <div>
-        <h1>Your social life, on one map.</h1>
-        <p class="bm-answer">
+  {/* ===== HERO =====
+      The photograph is dark and gold, so the hero runs as a self-contained
+      dark band inside the light connection theme: data-theme="lab" flips the
+      tokens for this section only. See the style block at the foot of the file. */}
+  <section
+    class="hero-amoro relative overflow-hidden border-b border-[color:var(--border)]"
+    data-theme="lab"
+  >
+    <div class="hero-photo" aria-hidden="true"></div>
+    <div class="container-x relative z-10 py-24 md:py-28">
+      <div class="hero-copy">
+        <span class="eyebrow">Coming · be:moyo</span>
+        <h1 class="mt-6 text-[clamp(2.6rem,6vw,4.4rem)] font-bold leading-[1.04]">
+          End Loneliness<span class="text-accent">!</span>
+        </h1>
+        <p class="lead mt-7 text-lg">
+          One in six people alive right now is lonely. That is not a character flaw and it is not
+          your fault — it is a structure. be:moyo is the first app built to change the structure:
+          it rebuilds your social world, so that love, friendship and belonging finally have
+          somewhere to land.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href="#waitlist" class="btn btn-primary">Join the waitlist</a>
+          <a href="#why" class="btn btn-ghost">Why we're building it</a>
+        </div>
+        <div class="pill-row">
+          <span class="pill">No swiping</span>
+          <span class="pill">Built on the Sociogram Method</span>
+          <span class="pill">Love · friendship · belonging</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== WHAT IT DOES — with the first prototype screen =====
+      Screenshot is a dark UI on a cream page, so it gets a hard dark frame
+      and a drop shadow to read as a device window, not a hole in the page. */}
+  <section class="section">
+    <div class="container-x grid gap-12 md:grid-cols-[0.95fr_1fr] md:items-center md:gap-16">
+      <figure class="reveal mx-auto w-full max-w-[20rem]">
+        <div class="app-shot">
+          <img
+            src="/be-moyo/shots/map-forest.webp"
+            alt="The map of Mara, a made-up example: her own circle in the centre and nine people in three rings around her, each shown by their initial."
+            width="390"
+            loading="lazy"
+            decoding="async"
+            class="block w-full"
+          />
+        </div>
+        <figcaption class="mt-4 text-center font-[family-name:var(--font-mono)] text-[0.68rem] uppercase tracking-[0.16em] text-[color:var(--text-dim)]">
+          The Map view · an example map
+        </figcaption>
+      </figure>
+
+      <div class="reveal">
+        <span class="eyebrow">First look</span>
+        <h2 class="mt-5 text-3xl font-semibold leading-tight md:text-4xl">Your world, on one screen.</h2>
+        <p class="mt-5 leading-relaxed text-[color:var(--text-muted)]">
+          You sit at the centre. Every ring outward is a tier of closeness, and the number beside each
+          person is what that tie adds to your SCV — or quietly drains from it. Bridges and
+          superconnectors light up; ties that are fading say so before they are gone.
+        </p>
+        <ul class="mt-8 space-y-5">
+          {
+            features.map((f) => (
+              <li class="border-l-2 border-[color:var(--accent)] pl-5">
+                <h3 class="text-lg font-semibold">{f.title}</h3>
+                <p class="mt-1.5 text-sm leading-relaxed text-[color:var(--text-muted)]">{f.body}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== WHAT IT DOES TODAY — from the Guide (approved app texts) ===== */}
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x bm-page" style="padding-block:0">
+      <section aria-labelledby="bm-do">
+        <h2 id="bm-do" class="bm-lead">What you can do with it</h2>
+        <p class="bm-sub">
           Add the people in your life, note what each relationship brings into it, and explore small steps you could
           try. be:moyo runs in your browser.
         </p>
-        <p class="bm-sub">It is built on the book <a href="/ending-loneliness">Ending Loneliness</a> by Dr. Axel Schumacher.</p>
-        <div class="bm-actions">
-          <a class="btn btn-primary" href={APP_URL}>Open the app</a>
-          <a class="btn btn-ghost" href={`${publicGuide.basePath}/`}>Read the Guide</a>
+        <div class="bm-goals">
+          {
+            GUIDE.goals.map((g) => (
+              <a class="bm-goal" href={guidePath(g.to)}>
+                <span>{g.title}</span>
+                <small>{g.line}</small>
+              </a>
+            ))
+          }
         </div>
-        <p class="bm-quiet">
-          Free during testing. No account. Your map is stored in this browser on this device; be:moyo doesn’t upload it.
-          <a href={guidePath("data.where")}>Where your map is kept</a>
-        </p>
-      </div>
-      <figure class="bm-shot bm-hero-shot">
-        <img src="/be-moyo/shots/map-forest.webp" alt={heroAlt} width="390" />
-        <figcaption>An example map</figcaption>
-      </figure>
-    </header>
+        <p><a class="btn btn-ghost" href={`${publicGuide.basePath}/`}>Read the Guide</a></p>
+      </section>
 
-    <section aria-labelledby="bm-do">
-      <h2 id="bm-do" class="bm-lead">What you can do with it</h2>
-      <div class="bm-goals">
-        {
-          GUIDE.goals.map((g) => (
-            <a class="bm-goal" href={guidePath(g.to)}>
-              <span>{g.title}</span>
-              <small>{g.line}</small>
-            </a>
-          ))
-        }
-      </div>
-    </section>
+      <section aria-labelledby="bm-look">
+        <h2 id="bm-look" class="bm-lead">What it looks like</h2>
+        <p class="bm-sub">The pictures show a made-up example: Mara, 34, who moved to a new city.</p>
+        <div class="bm-shots">
+          {
+            shots.map((s) => (
+              <figure class="bm-shot">
+                <img src={`/be-moyo/shots/${s.id}-forest.webp`} alt={s.alt} loading="lazy" decoding="async" width="390" />
+                <figcaption>{s.cap}</figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      </section>
 
-    <section aria-labelledby="bm-look">
-      <h2 id="bm-look" class="bm-lead">What it looks like</h2>
-      <p class="bm-sub">The pictures show a made-up example: Mara, 34, who moved to a new city.</p>
-      <div class="bm-shots">
-        {
-          shots.map((s) => (
-            <figure class="bm-shot">
-              <img src={`/be-moyo/shots/${s.id}-forest.webp`} alt={s.alt} loading="lazy" decoding="async" width="390" />
-              <figcaption>{s.cap}</figcaption>
-            </figure>
-          ))
-        }
-      </div>
-    </section>
-
-    <section aria-labelledby="bm-sci" class="bm-prose">
-      <h2 id="bm-sci">The science, said plainly</h2>
-      <p>
-        The Guide explains where the app’s ideas come from, and keeps three things apart: ideas from the book, published
-        research findings, and claims that have not been tested yet.
-      </p>
-      <p>SCV (Social Connectivity Value) is the app’s summary number for your map.</p>
-      <div class="bm-claim bm-claim-untested">
-        <span class="bm-tag">{GUIDE.copy.claimLabel.untested}</span>
+      <section aria-labelledby="bm-sci" class="bm-prose">
+        <h2 id="bm-sci">The science, said plainly</h2>
         <p>
-          Whether SCV can serve as a measure of social health has not been tested yet; it is a research proposal. be:moyo
-          uses SCV only to show your own change over time.
+          The Guide explains where the app’s ideas come from, and keeps three things apart: ideas from the book,
+          published research findings, and claims that have not been tested yet.
         </p>
-        <small>
-          Schumacher, “The Missing Metric”, preprint ·{" "}
-          <a href="https://doi.org/10.31235/osf.io/m6h58_v1" rel="noopener noreferrer">{GUIDE.copy.readPaper}</a>
-        </small>
-      </div>
-      <p><a href={guidePath("pulse.scv#science")}>The science behind your SCV</a></p>
-    </section>
+        <p>SCV (Social Connectivity Value) is the app’s summary number for your map.</p>
+        <div class="bm-claim bm-claim-untested">
+          <span class="bm-tag">{GUIDE.copy.claimLabel.untested}</span>
+          <p>
+            Whether SCV can serve as a measure of social health has not been tested yet; it is a research proposal.
+            be:moyo uses SCV only to show your own change over time.
+          </p>
+          <small>
+            Schumacher, “The Missing Metric”, preprint ·{" "}
+            <a href="https://doi.org/10.31235/osf.io/m6h58_v1" rel="noopener noreferrer">{GUIDE.copy.readPaper}</a>
+          </small>
+        </div>
+        <p><a href={guidePath("pulse.scv#science")}>The science behind your SCV</a></p>
+      </section>
 
-    <section aria-labelledby="bm-is" class="bm-prose">
-      <h2 id="bm-is">What it is, and what it isn’t</h2>
-      <p>
-        be:moyo is a self-help and reflection tool for organising and strengthening your social life. It is not therapy,
-        and it is not meant to diagnose, treat or prevent any illness.
+      <section aria-labelledby="bm-is" class="bm-prose">
+        <h2 id="bm-is">What it is, and what it isn’t</h2>
+        <p>
+          be:moyo is a self-help and reflection tool for organising and strengthening your social life. It is not
+          therapy, and it is not meant to diagnose, treat or prevent any illness.
+        </p>
+        <p>
+          be:moyo is in its test phase. Free during testing. No account. Your map is stored in your browser on your
+          device; be:moyo doesn’t upload it. <a href={guidePath("data.where")}>Where your map is kept</a>
+        </p>
+      </section>
+    </div>
+  </section>
+
+  {/* ===== WHY IT MATTERS ===== */}
+  <section id="why" class="section border-t border-[color:var(--border)]" style="background:var(--bg-alt)">
+    <div class="container-x">
+      <div class="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-14">
+        <div class="reveal">
+          <span class="eyebrow">Why this app has to exist</span>
+          <h2 class="mt-5 text-3xl font-semibold leading-tight md:text-4xl">
+            The most connected generation in history is the loneliest one.
+          </h2>
+        </div>
+
+        <div class="reveal space-y-5 leading-relaxed text-[color:var(--text-muted)]">
+          <p>
+            One in six people on Earth is lonely — not sad for an evening, but lonely in the way
+            that shortens a life. The World Health Organization now attributes roughly
+            <span class="text-[color:var(--text)]">one hundred deaths an hour</span> to it, and the
+            largest meta-analyses place weak social connection in the same risk bracket as smoking
+            fifteen cigarettes a day. At the same time there have never been more single adults,
+            more people actively looking, or more apps promising to fix it. Record supply, record
+            demand, record loneliness. That is not a shortage of people. That is a broken mechanism.
+          </p>
+          <p>
+            Swipe apps handed you a catalogue and called it a solution. They are engineered to keep
+            you choosing, not to get you chosen — a slot machine that pays out in strangers, with no
+            mutual friends, no shared history, no third place to run into each other again, and no
+            reason for anyone to stay. It is the least likely way two human beings have ever tried
+            to meet, and it leaves you exactly where you started, only more tired.
+          </p>
+          <p>
+            <span class="text-[color:var(--text)]">be:moyo does the opposite of matching.</span> It
+            doesn't hunt for a person — it rebuilds the world around you until the right people can
+            find you. A social life is a structure, and structures can be measured, redesigned and
+            grown: that is the whole point of the Sociogram Method and the Social Connectivity
+            Value. be:moyo turns that science into a program you can actually follow, week by week,
+            until you have a life with more surface area — more warm introductions, more rooms worth
+            walking into, more chances every single day. You stop betting everything on one profile
+            and start raising the odds of your whole life.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          lookForwardTo.map((f) => (
+            <div class="card reveal p-7">
+              <h3 class="text-lg font-semibold">{f.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">{f.body}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="reveal mx-auto mt-14 max-w-2xl text-center font-[family-name:var(--font-display)] text-xl italic leading-relaxed text-[color:var(--text)] md:text-2xl">
+        Love, a life partner, or the best friend you haven't met yet — all three arrive the same
+        way. Through a life rich enough to catch them.
       </p>
-      <p>be:moyo is in its test phase. Pro tools are marked Pro and are open to testers for now.</p>
-    </section>
-  </div>
+    </div>
+  </section>
+
+  {/* ===== THE BOOK (mirrors the block on /journal) ===== */}
+  <section class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="card glow-top relative overflow-hidden p-8 reveal md:p-12">
+        <div class="grid items-start gap-10 md:grid-cols-[220px_1fr]">
+          <a href="/ending-loneliness" class="block">
+            <img
+              src="/images/covers/ending-loneliness.webp"
+              width="880"
+              height="1139"
+              alt="Ending Loneliness — a Sociogram Framework, by Dr. Axel Schumacher"
+              class="mx-auto w-full max-w-[220px] rounded-lg border border-[color:var(--border)] shadow-[var(--shadow)]"
+            />
+          </a>
+          <div class="max-w-2xl">
+            <span class="eyebrow">The book · out <time datetime="2027-01-12">12 January 2027</time></span>
+            <h2 class="mt-5 text-3xl font-semibold">Ending Loneliness</h2>
+            <p class="mt-4 text-lg font-medium text-accent">
+              A new standard for the coaches on the front line of the loneliness pandemic.
+            </p>
+            <div class="mt-5 space-y-4 leading-relaxed text-[color:var(--text-muted)]">
+              <p>
+                One in three adults now experiences chronic loneliness. Yet most dating advice still focuses
+                on confidence, communication, attachment styles, or attraction. These factors matter, but they
+                often overlook the deeper force shaping relationship outcomes: the structure of a person's
+                social world.
+              </p>
+              <p>
+                Drawing on decades of studying dating and human relationships in the real world — alongside
+                insights from network science, evolutionary biology, sociology, and complex systems theory —
+                Dr. Axel Schumacher reveals how hidden patterns in our social networks influence friendship,
+                dating, belonging, and long-term wellbeing. At its heart is the <strong class="text-[color:var(--text)]">Sociogram Method</strong>
+                and its core measurement tool, the <strong class="text-[color:var(--text)]">Social Connectivity Value (SCV)</strong> — a
+                practical framework for mapping social networks, identifying structural weaknesses, and creating
+                targeted interventions that produce measurable results.
+              </p>
+            </div>
+
+            <p class="mt-6 font-semibold text-[color:var(--text)]">Inside, you'll discover:</p>
+            <ul class="mt-3 space-y-2 text-[color:var(--text-muted)]">
+              <li class="flex gap-2.5"><span class="text-accent">•</span> Why loneliness is often a structural problem rather than a personal failure</li>
+              <li class="flex gap-2.5"><span class="text-accent">•</span> The hidden network patterns that predict relationship success</li>
+              <li class="flex gap-2.5"><span class="text-accent">•</span> Practical tools for auditing and improving social ecosystems</li>
+              <li class="flex gap-2.5"><span class="text-accent">•</span> Real-world case studies illustrating transformation through network redesign</li>
+              <li class="flex gap-2.5"><span class="text-accent">•</span> A new evidence-based methodology for coaches, therapists, matchmakers, and relationship professionals</li>
+            </ul>
+
+            <p class="mt-6 leading-relaxed text-[color:var(--text-muted)]">
+              Part scientific investigation, part practical handbook, <em>Ending Loneliness</em> offers a new
+              lens for understanding human connection — and a new toolkit for helping people build meaningful
+              relationships in an increasingly disconnected world.
+            </p>
+
+            <div class="mt-7 flex flex-wrap gap-3">
+              <a href="/ending-loneliness" class="btn btn-primary">Learn more</a>
+              {bookPreviewPdf && (
+                <a href={bookPreviewPdf} target="_blank" rel="noopener" class="btn btn-ghost">Read a free preview (PDF)</a>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ===== WAITLIST ===== */}
+  <section id="waitlist" class="section border-t border-[color:var(--border)]">
+    <div class="container-x">
+      <div class="card glow-top relative overflow-hidden p-10 text-center md:p-16">
+        <h2 class="mx-auto max-w-2xl text-3xl font-semibold md:text-4xl">
+          Get early access
+        </h2>
+        <p class="lead mx-auto mt-4 text-center">
+          Be among the first to try be:moyo. Early testers help shape it — and get lifetime perks.
+        </p>
+        <BrevoForm
+          action={BREVO_AMORO_WAITLIST}
+          buttonLabel="Join waitlist"
+          successText="You're on the list — we'll email you when early access opens."
+        />
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  /* ---------- HERO PHOTOGRAPH ----------
+     public/images/photos/app_background.webp
+     Composition: his face sits LEFT of centre (~10–48% of the frame) with the
+     gold sociogram radiating outward to about 78%; the right edge is empty and
+     dark. So this is the mirror of the /sport hero — copy sits RIGHT, and the
+     scrim is weighted right-to-left, clearing before his face. The rings stay
+     faintly visible behind the type, which is the point of the picture.
+     ------------------------------------- */
+  .hero-amoro {
+    --font-display: "Sora", Arial, Helvetica, sans-serif;
+    --font-sans: "Sora", Arial, Helvetica, sans-serif;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    min-height: 780px;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  /* the band is dark (lab tokens): its bronze button keeps the dark label the site designed for it */
+  .hero-amoro a.btn-primary,
+  .hero-amoro a.btn-primary:hover {
+    color: var(--accent-contrast);
+  }
+
+  .hero-photo {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url("/images/photos/app_background.webp");
+    background-size: cover;
+    background-position: 34% 42%;
+    background-repeat: no-repeat;
+  }
+
+  .hero-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      /* right-to-left legibility scrim — clears before his face */
+      linear-gradient(
+        260deg,
+        color-mix(in srgb, var(--bg) 92%, transparent) 0%,
+        color-mix(in srgb, var(--bg) 88%, transparent) 22%,
+        color-mix(in srgb, var(--bg) 78%, transparent) 40%,
+        color-mix(in srgb, var(--bg) 52%, transparent) 55%,
+        color-mix(in srgb, var(--bg) 22%, transparent) 68%,
+        transparent 80%
+      ),
+      /* top + bottom fade into the page */
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--bg) 50%, transparent) 0%,
+        transparent 20%,
+        transparent 68%,
+        color-mix(in srgb, var(--bg) 34%, transparent) 84%,
+        color-mix(in srgb, var(--bg) 72%, transparent) 94%,
+        var(--bg) 100%
+      );
+  }
+
+  /* Copy column sits in the right half so it never runs across his face. */
+  .hero-copy {
+    max-width: 34rem;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-copy {
+      margin-left: auto;
+      max-width: 32rem;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .hero-copy {
+      max-width: 34rem;
+    }
+  }
+
+  /* Between 1024 and 1280 the viewport is tall relative to its width, so the
+     photograph crops inward and his face drifts toward the copy. Push it back
+     out and steepen the scrim so the type never sits on lit skin. */
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .hero-photo {
+      background-position: 20% 42%;
+    }
+    .hero-photo::after {
+      background:
+        linear-gradient(
+          265deg,
+          color-mix(in srgb, var(--bg) 94%, transparent) 0%,
+          color-mix(in srgb, var(--bg) 90%, transparent) 30%,
+          color-mix(in srgb, var(--bg) 76%, transparent) 48%,
+          color-mix(in srgb, var(--bg) 40%, transparent) 62%,
+          transparent 76%
+        ),
+        linear-gradient(
+          to bottom,
+          color-mix(in srgb, var(--bg) 50%, transparent) 0%,
+          transparent 20%,
+          transparent 68%,
+          color-mix(in srgb, var(--bg) 34%, transparent) 84%,
+          color-mix(in srgb, var(--bg) 72%, transparent) 94%,
+          var(--bg) 100%
+        );
+    }
+  }
+
+  /* Below 1024px the photograph is atmosphere only: flat vertical darkener,
+     subject pushed left out of the way of the type. */
+  @media (max-width: 1023px) {
+    .hero-amoro {
+      min-height: 0;
+    }
+    .hero-photo {
+      background-position: 26% 40%;
+    }
+    .hero-photo::after {
+      background: linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--bg) 62%, transparent) 0%,
+        color-mix(in srgb, var(--bg) 80%, transparent) 55%,
+        var(--bg) 100%
+      );
+    }
+  }
+  .app-shot {
+    overflow: hidden;
+    border-radius: 1.25rem;
+    border: 1px solid rgb(0 0 0 / 0.55);
+    background: #121a22;
+    box-shadow:
+      0 0 0 6px rgb(18 26 34 / 0.06),
+      0 34px 70px -30px rgb(20 14 10 / 0.6);
+  }
+</style>

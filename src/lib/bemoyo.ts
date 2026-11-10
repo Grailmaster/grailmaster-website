@@ -47,8 +47,6 @@ export const GUIDE = guide as unknown as {
 
 /** One route helper for every Guide link, canonical and sitemap entry (spec §A3). */
 export const publicGuide = { origin: "https://grailmaster.com", basePath: "/be-moyo/guide" } as const;
-/** where the app itself lives (browsers keep its data per address) */
-export const APP_URL = "https://ending-loneliness.pages.dev/";
 
 const byId = new Map(GUIDE.entries.map((e) => [e.id, e]));
 export const entry = (id: string) => byId.get(id);
