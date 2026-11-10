@@ -1,0 +1,99 @@
+---
+/**
+ * be:moyo — the app's page on grailmaster.com (DOC-01 §A1). Shows what the app does; no hype, no health claims
+ * (intended purpose, spec §L4). Tiles and science lines reuse the Guide's approved text.
+ */
+import Layout from "../../layouts/Layout.astro";
+import BmHeader from "../../components/bemoyo/BmHeader.astro";
+import { APP_URL, GUIDE, guidePath, publicGuide } from "../../lib/bemoyo";
+const shots = [
+  { id: "map", alt: "The map of Mara, a made-up example: her own circle in the centre and nine people in three rings around her, each shown by their initial.", cap: "Your map" },
+  { id: "pulse", alt: "Pulse for the example map: the large SCV number, how far it is from the start, and the label “Above your start”.", cap: "Your numbers" },
+  { id: "grow", alt: "The Grow page: “Everything the app can do”, a search box, and the first group, Meet people and stay in touch, with its tools.", cap: "Small steps" },
+];
+---
+
+<Layout
+  title="be:moyo · your social life on one map"
+  description="be:moyo shows who is in your life, what each relationship brings, and where a small step would help. Built on the book Ending Loneliness. Free to use, no account."
+  theme="bemoyo"
+  image="/be-moyo/brand/og.png"
+>
+  <BmHeader />
+  <div class="container-x bm-page">
+    <header class="bm-hero">
+      <div>
+        <h1>Your social life, on one map.</h1>
+        <p class="bm-answer">
+          be:moyo shows who is in your life, what each relationship brings, and where a small step would help.
+        </p>
+        <p class="bm-sub">It is built on the book <a href="/ending-loneliness">Ending Loneliness</a> by Dr. Axel Schumacher.</p>
+        <div class="bm-actions">
+          <a class="btn btn-primary" href={APP_URL}>Open the app</a>
+          <a class="btn btn-ghost" href={`${publicGuide.basePath}/`}>Read the Guide</a>
+        </div>
+        <p class="bm-quiet">Free to use. No account. Your map stays in your browser, on your device.</p>
+      </div>
+      <figure class="bm-shot bm-hero-shot">
+        <img src="/be-moyo/shots/map-forest.webp" alt={shots[0].alt} width="390" />
+      </figure>
+    </header>
+
+    <section aria-labelledby="bm-do">
+      <h2 id="bm-do" class="bm-lead">What you can do with it</h2>
+      <div class="bm-goals">
+        {
+          GUIDE.goals.map((g) => (
+            <a class="bm-goal" href={guidePath(g.to)}>
+              <span>{g.title}</span>
+              <small>{g.line}</small>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <section aria-labelledby="bm-look">
+      <h2 id="bm-look" class="bm-lead">What it looks like</h2>
+      <p class="bm-sub">The pictures show a made-up example: Mara, 34, who moved to a new city.</p>
+      <div class="bm-shots">
+        {
+          shots.map((s) => (
+            <figure class="bm-shot">
+              <img src={`/be-moyo/shots/${s.id}-forest.webp`} alt={s.alt} loading="lazy" decoding="async" width="390" />
+              <figcaption>{s.cap}</figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </section>
+
+    <section aria-labelledby="bm-sci" class="bm-prose">
+      <h2 id="bm-sci">The science, said plainly</h2>
+      <p>
+        Every feature page in the Guide says where its ideas come from: the book, published research, or not yet tested.
+      </p>
+      <div class="bm-claim bm-claim-untested">
+        <span class="bm-tag">{GUIDE.copy.claimLabel.untested}</span>
+        <p>
+          Whether SCV can serve as a measure of social health has not been tested yet; it is a research proposal. be:moyo
+          uses SCV only to show your own change over time.
+        </p>
+        <small>
+          Schumacher, “The Missing Metric”, preprint ·{" "}
+          <a href="https://doi.org/10.31235/osf.io/m6h58_v1" rel="noopener noreferrer">{GUIDE.copy.readPaper}</a>
+        </small>
+      </div>
+      <p><a href={guidePath("pulse.scv#science")}>The science behind your SCV</a></p>
+    </section>
+
+    <section aria-labelledby="bm-is" class="bm-prose">
+      <h2 id="bm-is">What it is, and what it isn’t</h2>
+      <p>
+        be:moyo is a self-help and reflection tool for organising and strengthening your social life. It is not therapy,
+        and it is not meant to diagnose, treat or prevent any illness.
+      </p>
+      <p>be:moyo is in its test phase. Pro tools are marked Pro and are open to testers for now.</p>
+    </section>
+  </div>
+</Layout>

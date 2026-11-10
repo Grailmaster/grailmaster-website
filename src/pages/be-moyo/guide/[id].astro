@@ -1,0 +1,110 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import BmHeader from "../../../components/bemoyo/BmHeader.astro";
+import BmBlocks from "../../../components/bemoyo/BmBlocks.astro";
+import { APP_URL, GUIDE, entry, groupOf, guidePath, publicGuide, tierLabel, type Entry } from "../../../lib/bemoyo";
+
+export function getStaticPaths() {
+  return GUIDE.entries.map((e) => ({ params: { id: e.id }, props: { e } }));
+}
+interface Props {
+  e: Entry;
+}
+const { e } = Astro.props;
+const G = GUIDE.copy;
+const group = groupOf(e.id);
+const more = (group?.pages ?? []).filter((id) => id !== e.id).map((id) => entry(id)!);
+const tier = tierLabel(e.tier);
+const subject = `be:moyo Guide · ${e.id} · ${e.checked}`;
+const groupHref = group ? (group.id === "data" || group.id === "help" ? `${publicGuide.basePath}/#${group.id}` : `${publicGuide.basePath}/#group-${group.id}`) : `${publicGuide.basePath}/`;
+---
+
+<Layout title={`${e.title} · be:moyo Guide`} description={e.answer} theme="bemoyo" image="/be-moyo/brand/og.png">
+  <BmHeader />
+  <div class="container-x bm-page bm-cols">
+    <article class="bm-entry">
+      <nav class="bm-crumbs" aria-label="Breadcrumb">
+        <a href={`${publicGuide.basePath}/`}>{G.title}</a>
+        {group && <><span aria-hidden="true">›</span><a href={groupHref}>{group.title}</a></>}
+      </nav>
+      <h1>{e.title}</h1>
+      <p class="bm-answer">{e.answer}</p>
+      {e.sub && <p class="bm-sub">{e.sub}</p>}
+      <p class="bm-meta">
+        <span>Applies to app version {e.checked}</span>
+        {tier && <span class="bm-chip">{tier}</span>}
+      </p>
+      <p class="bm-note" data-bm-from-app={e.checked} hidden></p>
+
+      {
+        e.sections.map((s) => (
+          <section id={s.id} class="bm-prose" aria-labelledby={`h-${s.id}`}>
+            <h2 id={`h-${s.id}`}>{s.title}</h2>
+            <BmBlocks blocks={s.blocks} />
+          </section>
+        ))
+      }
+
+      {
+        e.kind === "feature" && (
+          <p class="bm-quiet">
+            {G.quiet} <a href={guidePath("data.where")}>{G.yourData}</a>
+          </p>
+        )
+      }
+
+      <section class="bm-stuck" aria-labelledby="bm-stuck">
+        <h2 id="bm-stuck" class="bm-label">{e.kind === "help" || e.kind === "data" ? G.stuck : G.unclear}</h2>
+        <p>{G.stuckBody}</p>
+        <p class="bm-mail">
+          <a data-site-mail data-site-mail-text data-subject={subject}>parallelspace.advisors [at] gmail.com</a>
+        </p>
+        <p class="bm-mail">{subject}</p>
+        <p class="bm-quiet">{G.stuckOne}</p>
+      </section>
+    </article>
+
+    <aside class="bm-side">
+      {
+        e.sections.length > 1 && (
+          <nav aria-labelledby="bm-otp">
+            <h2 id="bm-otp" class="bm-label">{G.onThisPage}</h2>
+            <ul>
+              {e.sections.map((s) => (
+                <li>
+                  <a href={`#${s.id}`}>{s.title}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )
+      }
+      {
+        more.length > 0 && group && (
+          <nav aria-labelledby="bm-more">
+            <h2 id="bm-more" class="bm-label">{group.title}</h2>
+            <ul>
+              {more.map((m) => (
+                <li>
+                  <a href={guidePath(m.id)}>{m.title}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )
+      }
+      <a class="btn btn-primary" href={APP_URL}>Open the app</a>
+    </aside>
+  </div>
+
+  {/* A link from the app may carry its version after "#" (never sent to the server). Shown only when it differs. */}
+  <script is:inline>
+    (function () {
+      var el = document.querySelector("[data-bm-from-app]");
+      var m = /(?:^#|&)fromApp=(\d+\.\d+\.\d+)$/.exec(location.hash);
+      if (!el || !m || m[1] === el.dataset.bmFromApp) return;
+      el.textContent = "Your app is version " + m[1] + "; this page describes version " + el.dataset.bmFromApp + ".";
+      el.hidden = false;
+    })();
+  </script>
+</Layout>

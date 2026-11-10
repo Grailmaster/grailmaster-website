@@ -1,0 +1,129 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import BmHeader from "../../../components/bemoyo/BmHeader.astro";
+import { GUIDE, entry, guidePath } from "../../../lib/bemoyo";
+const G = GUIDE.copy;
+const lists = [
+  { id: "data", title: G.yourData, pages: GUIDE.dataPages },
+  { id: "help", title: "Troubleshooting", pages: GUIDE.helpPages },
+];
+const ICON: Record<string, string> = {
+  rings: '<circle cx="12" cy="12" r="2.5"/><circle cx="12" cy="12" r="6.5" opacity=".6"/><circle cx="12" cy="12" r="10" opacity=".35"/>',
+  trend: '<path d="M3 17l5-5 4 3 8-8"/><path d="M15 7h5v5"/>',
+  people: '<circle cx="8" cy="9" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3 20c.8-3 2.8-4.5 5-4.5s4.2 1.5 5 4.5M14 19c.5-2 1.7-3 3-3s2.5 1 3 3"/>',
+  heart: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
+  self: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',
+  book: '<path d="M4 19V5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2zM8 7h6M8 11h6"/>',
+};
+---
+
+<Layout
+  title="The Guide · be:moyo"
+  description="Every feature of be:moyo explained, step by step, with the science behind it: what comes from the book, what research has found, and what hasn’t been tested yet."
+  theme="bemoyo"
+  image="/be-moyo/brand/og.png"
+>
+  <BmHeader />
+  <div class="container-x bm-page">
+    <header class="bm-head">
+      <h1>{G.title}</h1>
+      <p class="bm-answer">Every feature of be:moyo explained, step by step, with the science behind it.</p>
+      <p class="bm-meta"><span>Applies to app version {GUIDE.appVersion}</span></p>
+    </header>
+
+    <form class="bm-search" role="search" data-bm-search hidden>
+      <label for="bm-q">{G.searchLabel}</label>
+      <input id="bm-q" type="search" placeholder={G.searchPlaceholder} autocomplete="off" enterkeyhint="search" />
+      <p class="bm-quiet">{G.searchHint}</p>
+      <p class="bm-quiet" role="status" data-bm-status></p>
+    </form>
+
+    <div data-bm-home>
+      <h2 class="bm-lead">{G.ask}</h2>
+      <div class="bm-goals">
+        {
+          GUIDE.goals.map((g) => (
+            <a class="bm-goal" href={guidePath(g.to)}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true" set:html={ICON[g.icon]} />
+              <span>{g.title}</span>
+              <small>{g.line}</small>
+            </a>
+          ))
+        }
+      </div>
+
+      <section aria-labelledby="bm-common">
+        <h2 id="bm-common" class="bm-label">{G.common}</h2>
+        <div class="bm-list">
+          {GUIDE.common.map((c) => <a href={guidePath(c.to)}>{c.q}</a>)}
+        </div>
+      </section>
+    </div>
+
+    <section aria-labelledby="bm-all">
+      <h2 id="bm-all" class="bm-label">{G.everything}</h2>
+      <nav class="bm-jump" aria-label={G.jump} data-bm-home>
+        {GUIDE.groups.map((g) => <a href={`#group-${g.id}`}>{g.title}</a>)}
+      </nav>
+      {
+        [...GUIDE.groups.map((g) => ({ ...g, id: `group-${g.id}` })), ...lists].map((g) => (
+          <section class="bm-area" aria-labelledby={g.id} data-bm-group>
+            <h3 id={g.id}>{g.title}</h3>
+            <div class="bm-feat">
+              {g.pages.map((id) => {
+                const e = entry(id)!;
+                return (
+                  <a href={guidePath(id)} data-bm-item={[e.title, e.answer, ...(e.keywords ?? [])].join(" ").toLowerCase()}>
+                    <b>{e.title}</b>
+                    <small>{e.answer}</small>
+                  </a>
+                );
+              })}
+            </div>
+          </section>
+        ))
+      }
+    </section>
+  </div>
+
+  {/* Search runs in the browser over the list above; nothing typed is sent or stored. Without JavaScript the full list stays. */}
+  <script is:inline>
+    (function () {
+      var form = document.querySelector("[data-bm-search]");
+      if (!form) return;
+      form.hidden = false;
+      var q = form.querySelector("input");
+      var status = form.querySelector("[data-bm-status]");
+      var items = [].slice.call(document.querySelectorAll("[data-bm-item]"));
+      var seen = {};
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+      });
+      q.addEventListener("input", function () {
+        var words = q.value.toLowerCase().split(/\s+/).filter(function (w) {
+          return w.length > 1;
+        });
+        var n = 0;
+        seen = {};
+        items.forEach(function (a) {
+          var hit = !words.length || words.every(function (w) {
+            return a.dataset.bmItem.indexOf(w) >= 0;
+          });
+          var dup = hit && words.length && seen[a.getAttribute("href")];
+          a.hidden = !hit || !!dup;
+          if (hit && !dup) {
+            seen[a.getAttribute("href")] = 1;
+            n++;
+          }
+        });
+        document.querySelectorAll("[data-bm-group]").forEach(function (g) {
+          g.hidden = !g.querySelector("[data-bm-item]:not([hidden])");
+        });
+        document.querySelectorAll("[data-bm-home]").forEach(function (h) {
+          h.hidden = !!words.length;
+        });
+        status.textContent = words.length ? (n ? n + (n === 1 ? " result" : " results") : "Nothing matched. Try another word.") : "";
+      });
+    })();
+  </script>
+</Layout>

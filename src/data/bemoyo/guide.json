@@ -1,0 +1,4588 @@
+{
+ "format": 1,
+ "appVersion": "0.36.0",
+ "manifestVersion": "0.36.0",
+ "supportEmail": "parallelspace.advisors@gmail.com",
+ "copy": {
+  "title": "The Guide",
+  "back": "Back",
+  "close": "Close the Guide",
+  "searchLabel": "Search the Guide",
+  "searchPlaceholder": "Ask in your own words",
+  "searchHint": "For example “why did my number drop”. What you type stays on this device.",
+  "ask": "What would you like to do?",
+  "common": "Common questions",
+  "everything": "Everything be:moyo does",
+  "jump": "Jump to a group",
+  "noResults": "Nothing matched. These might help:",
+  "draft": "Draft",
+  "free": "Free",
+  "pro": "Pro",
+  "tester": "For testers",
+  "needs": {
+   "person": "Needs at least one person on your map.",
+   "partner-seeker": "Shown when you said you are looking for a partner.",
+   "compass": "Needs your compass from the Attribute Test.",
+   "birthday-adult": "Needs your birthday to check whether this is available to you.",
+   "unlocked": "Needs the app unlocked."
+  },
+  "open": "Open",
+  "tryAdd": "Add your first person",
+  "parts": "Parts of this page",
+  "onThisPage": "On this page",
+  "claimLabel": {
+   "book": "From the book",
+   "research": "Research finding",
+   "untested": "Not yet tested"
+  },
+  "readPaper": "Read it",
+  "studyDetails": "Study details",
+  "quiet": "Worked out on this device from your map.",
+  "yourData": "Your data",
+  "stuck": "Still stuck?",
+  "unclear": "Something unclear on this page?",
+  "stuckBody": "Write to us with the subject below. Add only what you want to share; nothing is attached for you.",
+  "stuckOne": "be:moyo is made by one person. Every message is read, but a quick answer can’t be promised, and we can’t see your map.",
+  "writeEmail": "Write an email",
+  "copyAddress": "Copy address",
+  "copySubject": "Copy subject",
+  "copied": "Copied.",
+  "copyFailed": "Copying isn’t allowed here. Select the text instead.",
+  "picture": "Picture",
+  "lockedTitle": "Help while the app is locked",
+  "lockedIntro": "These pages open without your passcode. They show nothing of your map.",
+  "lockedLink": "Help with the lock and backups"
+ },
+ "goals": [
+  {
+   "title": "Get started",
+   "line": "Your first map in a few minutes",
+   "to": "start.get-started",
+   "icon": "rings"
+  },
+  {
+   "title": "Understand my numbers",
+   "line": "SCV, trend, Realms, momentum",
+   "to": "@numbers",
+   "icon": "trend"
+  },
+  {
+   "title": "Meet people",
+   "line": "Events, regular places, invitations",
+   "to": "@meet",
+   "icon": "people"
+  },
+  {
+   "title": "Find a partner",
+   "line": "Small weekly steps, approaching, flirting",
+   "to": "@partner",
+   "icon": "heart"
+  },
+  {
+   "title": "Know yourself",
+   "line": "The Attribute Test, reflections, only for you",
+   "to": "@know",
+   "icon": "self"
+  },
+  {
+   "title": "The science behind it",
+   "line": "Where the ideas come from, and what has been tested",
+   "to": "pulse.scv#science",
+   "icon": "book"
+  }
+ ],
+ "common": [
+  {
+   "q": "Why did my number drop?",
+   "to": "pulse.scv#numbers"
+  },
+  {
+   "q": "Which ring does someone belong in?",
+   "to": "map.view#rings"
+  },
+  {
+   "q": "What does the slider mean?",
+   "to": "map.person#slider"
+  },
+  {
+   "q": "Who can see my map?",
+   "to": "data.where"
+  },
+  {
+   "q": "My map looks empty. What happened?",
+   "to": "help.map-empty"
+  }
+ ],
+ "footer": [
+  {
+   "label": "Your data, backups and app lock",
+   "to": "data.where"
+  },
+  {
+   "label": "Troubleshooting",
+   "to": "@help"
+  }
+ ],
+ "dataPages": [
+  "data.where",
+  "data.backup",
+  "data.auto-backup",
+  "data.restore",
+  "data.lock",
+  "data.recovery",
+  "data.delete"
+ ],
+ "helpPages": [
+  "help.map-empty",
+  "help.restore-failed",
+  "data.recovery",
+  "help.cant-find",
+  "help.audio-offline",
+  "help.old-version"
+ ],
+ "groups": [
+  {
+   "id": "start",
+   "title": "Getting started",
+   "pages": [
+    "start.get-started",
+    "start.baseline"
+   ]
+  },
+  {
+   "id": "today",
+   "title": "Today",
+   "pages": [
+    "today.home",
+    "today.focus",
+    "today.reminders",
+    "today.log"
+   ]
+  },
+  {
+   "id": "map",
+   "title": "The map",
+   "pages": [
+    "map.view",
+    "map.person",
+    "map.import",
+    "map.export",
+    "map.partner-child",
+    "map.links"
+   ]
+  },
+  {
+   "id": "numbers",
+   "title": "Your numbers",
+   "pages": [
+    "pulse.scv",
+    "pulse.trend",
+    "realms.audit",
+    "grow.momentum"
+   ]
+  },
+  {
+   "id": "meet",
+   "title": "Meet people, stay in touch",
+   "pages": [
+    "grow.find",
+    "grow.events",
+    "grow.places",
+    "grow.rituals",
+    "grow.exposure-coach",
+    "grow.invitations"
+   ]
+  },
+  {
+   "id": "partner",
+   "title": "Partner and flirting",
+   "pages": [
+    "grow.partner-step",
+    "grow.partner",
+    "grow.after-no",
+    "grow.ladder",
+    "grow.liking-gap",
+    "grow.wingman",
+    "grow.flirting-intro"
+   ]
+  },
+  {
+   "id": "know",
+   "title": "Know yourself",
+   "pages": [
+    "grow.attribute-test",
+    "grow.attribute-chapter",
+    "grow.reflection",
+    "grow.closeness",
+    "grow.mirror",
+    "grow.friendzone"
+   ]
+  },
+  {
+   "id": "week",
+   "title": "Your week",
+   "pages": [
+    "grow.message",
+    "grow.week",
+    "grow.library"
+   ]
+  },
+  {
+   "id": "pro",
+   "title": "Pro",
+   "pages": [
+    "pro.worlds",
+    "pro.mirror-analysis",
+    "pro.pattern"
+   ]
+  },
+  {
+   "id": "you",
+   "title": "You and the app",
+   "pages": [
+    "you.about",
+    "you.appearance",
+    "you.session-report",
+    "you.offline",
+    "you.version",
+    "you.tester"
+   ]
+  }
+ ],
+ "entries": [
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "start.get-started",
+   "kind": "start",
+   "covers": [
+    "start.first-map"
+   ],
+   "title": "Get started",
+   "answer": "Put the people who matter on your map. When it feels complete, confirm it as your start.",
+   "sub": "It takes a few minutes. You can begin with one person and add the others whenever you like.",
+   "keywords": [
+    "begin",
+    "first",
+    "setup",
+    "set up",
+    "new",
+    "how to use",
+    "tutorial"
+   ],
+   "sections": [
+    {
+     "id": "steps",
+     "kind": "tutorial",
+     "title": "Your first map",
+     "blocks": [
+      {
+       "ol": [
+        "Answer the two questions about you: whether you have a romantic partner, and whether you wish for a child. They matter for your number, so it stays marked “provisional” until you answer.",
+        "Add the first person: whoever comes to mind first. The order doesn’t matter.",
+        "For each person, the app asks who they are to you, which ring they belong in, how close they live, and what they bring into your life. Context questions are optional.",
+        "Add the others the same way, now or later. Lighter contacts can follow whenever you think of them.",
+        "When everyone who matters is on it, open [Pulse](app:pulse), look at your number and press “My map is complete for now”. That becomes your start."
+       ]
+      },
+      {
+       "p": "You can also stop here and add someone later; until the first person is on your map, the app shows the map. Then Today, Pulse, Realms and Grow open: Today suggests what to do this week, and Grow holds every tool."
+      }
+     ]
+    },
+    {
+     "id": "what-asked",
+     "kind": "reference",
+     "title": "What the app asks about each person",
+     "blocks": [
+      {
+       "ul": [
+        "Name: a first name or initials is enough. Gender is optional.",
+        "Who they are to you: partner, child, parent, sibling, friend, colleague and so on.",
+        "Which ring: how strongly they shape your everyday life.",
+        "How close they live: same city, mostly elsewhere, or online only.",
+        "A little context: where you know them from, when they came into your life, how you met, and whether they open doors to new circles. Optional. Close family skip this step.",
+        "What they bring: the needs this person meets, from deep talk to fun. Optional.",
+        "How it feels: one slider for what this relationship brings into your life right now."
+       ]
+      },
+      {
+       "p": "People you follow online, or an AI companion, can be added as a note outside your rings. They never count in your number."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "map.view",
+   "kind": "feature",
+   "covers": [
+    "map.view",
+    "map.legend"
+   ],
+   "title": "Reading the map",
+   "answer": "You are in the centre. The closer a ring, the more that person shapes your everyday life.",
+   "keywords": [
+    "legend",
+    "symbols",
+    "circles",
+    "rings",
+    "icons",
+    "colours",
+    "colors"
+   ],
+   "sections": [
+    {
+     "id": "rings",
+     "kind": "how",
+     "title": "The three rings",
+     "blocks": [
+      {
+       "ul": [
+        "Ring 1, Inner Fellowship: the handful of people whose mood, presence or absence changes how your week feels. Up to five.",
+        "Ring 2, Close Bonds: people you would notice missing from your life, or who would notice you missing from theirs. Up to fifteen.",
+        "Ring 3, Activated Periphery: people you have actual contact with, however light, in a typical season. Up to ninety."
+       ]
+      },
+      {
+       "p": "Rings sort people by how much they shape your life, not by how much you love them. To move someone, open them and choose another ring."
+      },
+      {
+       "shot": "map",
+       "alt": "The map of Mara, a made-up example: her own circle in the centre and nine people in three rings around her, each shown by their initial."
+      }
+     ]
+    },
+    {
+     "id": "legend",
+     "kind": "reference",
+     "title": "What the symbols mean",
+     "blocks": [
+      {
+       "ul": [
+        "A dark circle is someone single; a light circle is someone in a relationship.",
+        "The line to you shows distance: solid for the same city, dotted for mostly elsewhere, dot-dash for online only. Your partner is joined by a double line.",
+        "A double circle is a bridge, someone who has brought you into a social world you couldn’t reach alone. An amber circle with three dots marks a superconnector (bridge +3 or more).",
+        "A red outline with a minus sign means this relationship weighs on you more than it gives.",
+        "A small “z” means you haven’t been in touch for a while.",
+        "With “Missing slots” switched on, a missing partner or a wished-for child appears in Ring 1 as a muted red disc."
+       ]
+      },
+      {
+       "p": "The legend button on the map (the list icon) shows all symbols at once."
+      },
+      {
+       "shot": "map-legend",
+       "alt": "The legend: a dark and a light circle for single and in a relationship; solid, dotted and dot-dash lines for same city, elsewhere and online only; a double line for a partner; and the symbols for superconnector, bridge, drains and fading."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "The three rings and their sizes come from the book’s drawing exercise: Ring 1 holds the people whose mood, presence or absence changes your week.",
+        "book": {
+         "printed": 251,
+         "quote": "whose mood, presence, or absence changes how your week feels"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "Your rings hold only people who know you back.",
+        "book": {
+         "printed": 111,
+         "quote": "a ring requires mutual recognition"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "Distance counts availability, not affection: nearby counts fully, mostly far away half, online only a quarter.",
+        "book": {
+         "printed": 452,
+         "quote": "availability, not affection"
+        }
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "map.person",
+   "kind": "feature",
+   "covers": [
+    "map.person"
+   ],
+   "title": "A person on your map",
+   "answer": "Each person has one slider: what this relationship brings into your life right now.",
+   "sub": "Open someone on the map to change their ring, slider, distance or anything else.",
+   "keywords": [
+    "slider",
+    "feeling",
+    "score",
+    "edit",
+    "change",
+    "remove person",
+    "profile",
+    "bridge",
+    "superconnector"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Changing what you know about someone",
+     "blocks": [
+      {
+       "ol": [
+        "Tap the person on the [map](app:map).",
+        "Move the slider, or change their ring, distance, what they bring, or how you met.",
+        "Close the sheet. Every change is saved at once."
+       ]
+      },
+      {
+       "p": "If you change someone’s ring or relationship, the slider’s range changes too. The app then asks you to check the number and tap “Looks right”."
+      }
+     ]
+    },
+    {
+     "id": "slider",
+     "kind": "reference",
+     "title": "What the slider means",
+     "blocks": [
+      {
+       "p": "Left means this relationship drains or unsettles you. Right means it supports and steadies you. 0 is neutral. Think of the last three months, not one good or bad day."
+      },
+      {
+       "p": "How far the slider reaches depends on the ring and on who the person is. Close family can reach further than a friend: in Ring 1 a child ranges from −50 to +50, a friend from −10 to +10. A high number is a ceiling, not a target."
+      },
+      {
+       "h": "More you can record"
+      },
+      {
+       "ul": [
+        "Bridges: how strongly someone has brought you into new social worlds, up to +5. From +3 they count as a superconnector.",
+        "Last time you were in touch: shows which ties are fading.",
+        "Ways to reach them, and a history of how the relationship developed.",
+        "A heart, if you have romantic feelings for someone. It never changes your number and is left out of the exported map picture. Like everything you enter, it is in your backups and visible to anyone using your unlocked app."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "The slider ranges come from the book’s scoring engine: the ring sets the base range, and kinship widens it.",
+        "book": {
+         "printed": 167,
+         "quote": "a range of −50 to +50"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "untested",
+        "text": "These ranges come from the book’s framework. They have not been validated as the best weights for every person. They stay the same for everyone, so your own changes stay comparable over time."
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "map.partner-child",
+   "kind": "feature",
+   "covers": [
+    "map.partner-child"
+   ],
+   "title": "A missing partner or a wished-for child",
+   "answer": "If you long for a partner or a child you don’t have, that absence counts in your number, like a person on your map.",
+   "sub": "If you don’t long for one, nothing changes.",
+   "keywords": [
+    "single",
+    "no partner",
+    "children",
+    "kids",
+    "baby",
+    "absence",
+    "empty slot",
+    "provisional"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Setting it",
+     "blocks": [
+      {
+       "ol": [
+        "Open You › About you.",
+        "Answer “Do you have a romantic partner right now?”. If not, a slider shows how much the absence weighs on you, from 0 (not at all) to heavy.",
+        "Answer whether you want a child, or another child, and don’t have one yet: “Yes, and it weighs on me”, “It’s open, no pressure”, “No”, or “Prefer not to say”. If it weighs on you, use the slider to say how much."
+       ]
+      },
+      {
+       "p": "You can change both answers any time. If you have a partner, add them to your map like anyone else; they get their own slider."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "How it counts",
+     "blocks": [
+      {
+       "ul": [
+        "A missing partner you long for weighs between 0 and −40.",
+        "A wished-for child weighs between 0 and −50. “It’s open, no pressure” counts as zero.",
+        "Until both questions are answered, your number is marked “provisional” and your start can’t be set yet."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "The book draws an empty partner place on every map without a partner, because the absence itself is information.",
+        "book": {
+         "printed": 252,
+         "quote": "its absence is the data point"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "A child that is an open possibility, not a source of distress, counts as neutral.",
+        "book": {
+         "printed": 92,
+         "quote": "The child slot is hence neutral"
+        }
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "start.baseline",
+   "kind": "feature",
+   "covers": [
+    "start.baseline"
+   ],
+   "title": "Your start",
+   "answer": "Your start is the map you confirm as complete. From then on, Pulse shows how you move from there.",
+   "sub": "It is your own baseline, not a grade.",
+   "keywords": [
+    "baseline",
+    "confirm",
+    "complete",
+    "chapter",
+    "new chapter",
+    "reset",
+    "start over"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Setting your start",
+     "blocks": [
+      {
+       "ol": [
+        "Answer the two questions about you first (partner and child wish).",
+        "Open [Pulse](app:pulse) and press “My map is complete for now”.",
+        "Check the number your start will have, then confirm."
+       ]
+      },
+      {
+       "p": "A week after you begin your map, Pulse reminds you if you haven’t set your start yet."
+      },
+      {
+       "h": "A new chapter"
+      },
+      {
+       "p": "After a move, a breakup or a birth, you can start a new chapter on Pulse. It starts a fresh comparison at today’s number. Your earlier chapter is kept and stays visible as a faint line."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "People you add later",
+     "blocks": [
+      {
+       "p": "Adding someone can change your current SCV. After your start, the app asks whether the person is new in your life or was always there. If they were always there, the app adjusts the comparison with your start. If the relationship was different back then, you can record how it was, so that difference shows in your trend."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "id": "pulse.scv",
+   "kind": "feature",
+   "covers": [
+    "pulse.scv"
+   ],
+   "title": "Your SCV",
+   "answer": "Your SCV adds up what the people on your map bring into your life.",
+   "sub": "It also counts the weight of a partner you miss or a child you wish for, if that applies to you. Compare it with your own start, not with other people.",
+   "keywords": [
+    "social connectivity value",
+    "score",
+    "number",
+    "total"
+   ],
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "How it works",
+     "blocks": [
+      {
+       "p": "For each person, the app starts with your slider: what this relationship brings into your life right now, from negative to positive. It adds their bridge value, if any, then weighs the total by distance: fully if they live nearby, half if mostly elsewhere, a quarter if online only. Your SCV adds up all the people, plus the weight of a missing partner or wished-for child."
+      },
+      {
+       "p": "Close family can reach further on the slider than a friend, because kinship weighs more. A partner you miss or a child you wish for counts as a weight, if that applies to you."
+      },
+      {
+       "shot": "pulse",
+       "alt": "Pulse for the example map: the large SCV number, how far it is from the start, and the label “Above your start”."
+      },
+      {
+       "h": "To see yours"
+      },
+      {
+       "ol": [
+        "Open [Pulse](app:pulse).",
+        "Your SCV is the large number. Tap “?” next to it for the short version.",
+        "Below it, the bars show what each ring adds."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "numbers",
+     "kind": "reference",
+     "title": "What the number means",
+     "blocks": [
+      {
+       "p": "“Above your start” means your number, adjusted for people who were always in your life, is higher than at your start; “below” means it is lower. A small band around your start counts as “around”. A change can come from editing your map as well as from your relationships changing."
+      },
+      {
+       "h": "Why did my number drop?"
+      },
+      {
+       "p": "Usually one of three things: you moved someone’s slider down, a missing partner or wished-for child now weighs more, or you added someone who weighs on you. Adding someone who was always in your life can change the number itself; the app adjusts the comparison with your start, and if the relationship was different back then, that difference shows in your trend."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "Your rings hold only people who know you back.",
+        "book": {
+         "printed": 111,
+         "quote": "a ring requires mutual recognition"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "Close family can weigh more than friends: in Ring 1, a child within −50 to +50, a friend within −10 to +10.",
+        "book": {
+         "printed": 167,
+         "quote": "a range of −50 to +50"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "A partner you miss can weigh on your social life like a person on your map.",
+        "book": {
+         "printed": 252,
+         "quote": "The empty partner slot"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "research",
+        "text": "A 2010 review of 148 observational studies found that people with stronger social relationships had higher odds of surviving during the studies’ follow-up periods. The studies varied a lot. This link doesn’t show that changing one relationship, or using be:moyo, will make anyone live longer.",
+        "study": {
+         "cite": "Holt-Lunstad, Smith & Layton, PLoS Medicine 2010",
+         "url": "https://doi.org/10.1371/journal.pmed.1000316",
+         "design": "meta-analysis of prospective observational studies",
+         "details": [
+          [
+           "Studies",
+           "148"
+          ],
+          [
+           "People",
+           "308,849"
+          ],
+          [
+           "Result",
+           "50% higher odds of survival (odds ratio 1.50, 95% CI 1.42–1.59)"
+          ],
+          [
+           "Spread",
+           "large differences between studies (I² 81%)"
+          ]
+         ]
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "untested",
+        "text": "Whether SCV can serve as a measure of social health has not been tested yet; it is a research proposal. be:moyo uses SCV only to show your own change over time.",
+        "source": {
+         "cite": "Schumacher, “The Missing Metric”, preprint",
+         "url": "https://doi.org/10.31235/osf.io/m6h58_v1",
+         "design": "research proposal"
+        }
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "pulse.trend",
+   "kind": "feature",
+   "covers": [
+    "pulse.trend"
+   ],
+   "title": "Your trend",
+   "answer": "Your trend shows how your number moved since your start: above, around or below it.",
+   "keywords": [
+    "trajectory",
+    "line",
+    "graph",
+    "chart",
+    "progress",
+    "history",
+    "week",
+    "better",
+    "worse"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Where to find it",
+     "blocks": [
+      {
+       "p": "Open [Pulse](app:pulse). Next to your number you see how far you are from your start, a label (“Above your start”, “Around your start” or “Below your start”), and the change this week. The line below shows the whole way since your start."
+      },
+      {
+       "shot": "pulse",
+       "alt": "Pulse for the example map: the SCV number, the distance from the start with the label “Above your start”, this week’s focus, and a line rising from the start."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Reading it",
+     "blocks": [
+      {
+       "ul": [
+        "Around your start: within 5 points, or 5 % of the size of your starting number if that is more (for a negative start, without the minus sign). The band is an app setting that groups small changes together.",
+        "Above or below: outside that band.",
+        "This week: the change over the last seven days, shown once your current chapter is a week old.",
+        "Earlier chapters stay on the chart as faint lines, each with its own start."
+       ]
+      },
+      {
+       "p": "The trend is never compared with other people. Two maps can’t be compared fairly, so be:moyo only compares you with yourself."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "The book reads SCV as a line over time rather than a single snapshot.",
+        "book": {
+         "printed": 296,
+         "quote": "not as a static snapshot, but as a dynamic trend line"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "untested",
+        "text": "The width of the “around your start” band is a first setting chosen for be:moyo, not a value from research. It may change as people use the app."
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "today.home",
+   "kind": "feature",
+   "covers": [
+    "today.home"
+   ],
+   "title": "Today",
+   "answer": "Today shows what is worth doing this week: three things at most.",
+   "sub": "It is the page the app opens with.",
+   "keywords": [
+    "home",
+    "start page",
+    "this week",
+    "suggestions",
+    "to do",
+    "what now"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "What you see",
+     "blocks": [
+      {
+       "ul": [
+        "A greeting and how many people you logged time with this week.",
+        "“For this week”: up to three things, at most one of each kind. It might ask how an event went, what happened after an invitation, suggest someone worth a message, show your partner step, or this week’s focus.",
+        "Your week so far: moments logged, people you met again, and how lonely you said you feel.",
+        "Coming up: planned events and your rituals."
+       ]
+      },
+      {
+       "shot": "today",
+       "alt": "Today for the example map: “Good evening, Mara”, the number of people logged this week, and the first cards below it."
+      },
+      {
+       "p": "Done with something, or not for you this week? Use “Not now” or “Not this week”. Its place stays empty until the week ends, so Today never fills up again behind your back."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Why three at most",
+     "blocks": [
+      {
+       "p": "Today shows at most three suggestions, so you can pick a manageable next step. More tools are in [Grow](app:grow)."
+      },
+      {
+       "p": "Suggestions are for this week; reminders, behind the bell, are for today. Both can be put aside."
+      },
+      {
+       "p": "Some cards appear only when they apply to you: the partner step if you said you are looking for a partner, a question about your birthday if it is missing, an offer to lock the app. When a new tool arrives in Grow, Today mentions it once."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "today.focus",
+   "kind": "feature",
+   "covers": [
+    "today.focus"
+   ],
+   "title": "This week’s focus",
+   "answer": "One thing about your network that is worth your attention this week. Never a list.",
+   "sub": "When nothing stands out, it stays calm.",
+   "keywords": [
+    "focus",
+    "tip",
+    "advice",
+    "what should i do",
+    "suggestion",
+    "not now"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Using it",
+     "blocks": [
+      {
+       "p": "The focus sits on [Pulse](app:pulse) and, when there is room, on Today. It names one pattern on your map, for example that few of your lighter contacts are active, that a Realm has nobody in it, or that support is fading because you have been out of touch."
+      },
+      {
+       "p": "Each focus offers a step: show the people it means on your map, add a person, or open the tool that helps."
+      },
+      {
+       "p": "“Not now” puts it aside for two weeks."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "How it is chosen",
+     "blocks": [
+      {
+       "p": "The app checks your map for a set of patterns and picks the one that matters most right now. The patterns are calculated only from what you entered."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "A circle where everyone knows everyone, with few links to other circles, rarely brings anyone new. Lighter, outer contacts are where new people and new worlds come from.",
+        "book": {
+         "printed": 216,
+         "quote": "a high-clustering, low-bridging network"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "untested",
+        "text": "The thresholds that decide when a pattern counts are an initial app setting, not validated values. They may change."
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "today.reminders",
+   "kind": "feature",
+   "covers": [
+    "today.reminders"
+   ],
+   "title": "Reminders",
+   "answer": "Birthdays, your planned steps and people you haven’t been in touch with for a while. Three a day at most.",
+   "sub": "Open them with the bell at the top.",
+   "keywords": [
+    "bell",
+    "notification",
+    "birthday",
+    "remind me",
+    "fading",
+    "promise"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "What you can be reminded of",
+     "blocks": [
+      {
+       "ul": [
+        "Birthdays of the people on your map.",
+        "A step you planned, on its day, and while it is still open.",
+        "An event you went to: how was it, and did you meet anyone?",
+        "Notes for next time: something to ask about, or something you promised.",
+        "If you have a partner or children: small moments together.",
+        "People you haven’t been in touch with for a while."
+       ]
+      },
+      {
+       "shot": "reminders",
+       "alt": "The reminders sheet for the example map, with up to three reminders for today."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "How they work",
+     "blocks": [
+      {
+       "p": "Reminders are worked out from your map whenever the app is open. Three a day at most; this week’s focus counts as one of them. The rest wait for another day."
+      },
+      {
+       "p": "Each reminder offers a step, such as logging a moment, plus “Later” and “Dismiss”."
+      },
+      {
+       "p": "Going on holiday, ill, or just busy? “Pause reminders” stops them for a week, two weeks or a month. Nothing is lost; they come back afterwards."
+      },
+      {
+       "p": "The app never sends anything to anyone, and it doesn’t send notifications to your phone. You see reminders when you open be:moyo."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "today.log",
+   "kind": "feature",
+   "covers": [
+    "today.log"
+   ],
+   "title": "Logging a moment",
+   "answer": "After time with someone, log it in a few taps. Over time you see who usually leaves you feeling better.",
+   "keywords": [
+    "log",
+    "moment",
+    "meeting",
+    "met",
+    "call",
+    "mood",
+    "diary",
+    "rei",
+    "how time together leaves you"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Logging",
+     "blocks": [
+      {
+       "ol": [
+        "Tap “Log a moment”, at the bottom of most pages.",
+        "Choose who you were with, how you connected (in person, call, video or message) and when.",
+        "If you like, say how you felt before and after. Energy, who suggested it and a note are optional too."
+       ]
+      },
+      {
+       "shot": "log",
+       "alt": "The top of “Log a moment” in the example: choose the people you were with and how you connected."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "What it changes",
+     "blocks": [
+      {
+       "ul": [
+        "The person’s “last in touch” moves forward, so they no longer show as fading.",
+        "Your week and Momentum count the moment.",
+        "After three moments with someone where you gave before-and-after feelings, their page shows how time together usually leaves you: much better, better, about the same, a bit worse or worse. Recent moments count more.",
+        "Your SCV doesn’t change. It follows the slider, which you set yourself."
+       ]
+      },
+      {
+       "p": "Sometimes how you rate someone and how time with them leaves you disagree. That is worth knowing, not a mistake."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "untested",
+        "text": "“How time together leaves you” summarizes your own before-and-after ratings. It is not a validated test, and how much recent moments count is an initial app setting."
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "realms.audit",
+   "kind": "feature",
+   "covers": [
+    "realms.audit"
+   ],
+   "title": "The seven Realms",
+   "answer": "No one person can be everything. The seven Realms show which of your needs your people meet, and which nobody meets yet.",
+   "keywords": [
+    "realms",
+    "needs",
+    "audit",
+    "seats",
+    "cognitive",
+    "somatic",
+    "sanctuary",
+    "purpose",
+    "aesthetic",
+    "continuity",
+    "polarity"
+   ],
+   "sections": [
+    {
+     "id": "realms",
+     "kind": "reference",
+     "title": "The seven Realms",
+     "blocks": [
+      {
+       "ul": [
+        "Cognitive: someone to think with, who challenges your ideas.",
+        "Somatic: someone to move with: sport, dance, a walk.",
+        "Sanctuary: someone you feel safe confiding in.",
+        "Purpose: people you build something with.",
+        "Aesthetic: someone to enjoy beauty, art and new things with.",
+        "Continuity: people who knew you before, who remember who you were.",
+        "Polarity: romance and desire. The one Realm a partner alone can fill."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Filling them in",
+     "blocks": [
+      {
+       "ol": [
+        "Open [Realms](app:realms).",
+        "Tap a Realm to see what it means, then tap the people who do this for you. You can also tag Realms when you add or open a person.",
+        "If you like, take the Realm Audit: seven questions, one per Realm, each rated from 1 to 10 or skipped."
+       ]
+      },
+      {
+       "shot": "realms",
+       "alt": "The Realms page for the example map: “No one person can be everything.” and the start of the seven Realms."
+      },
+      {
+       "p": "Each Realm has three seats. Someone nearby fills a whole seat, someone mostly far away half, someone online only a quarter, as on your map. A Realm is full when it rests on three nearby people’s worth, so no one has to carry that need alone."
+      },
+      {
+       "p": "An empty Realm is not a failure. It is the next place to grow, and it may become this week’s focus."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "The seven Realms and what each one needs come from the book’s chapter on the relationship matrix.",
+        "book": {
+         "printed": 318,
+         "quote": "The Seven Realms of a Distributed Life"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "Spreading needs across several people protects a partnership: with a well-filled Ring 2, a partner no longer has to be everything.",
+        "book": {
+         "printed": 317,
+         "quote": "the partner is being asked to be the village"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "The Realm Audit asks seven questions, one per Realm, each rated from one to ten.",
+        "book": {
+         "printed": 320,
+         "quote": "seven questions, one per Realm"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "untested",
+        "text": "The seats (whole, half or quarter by distance) are be:moyo’s way of drawing the book’s idea, an initial app setting rather than a measured value."
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.momentum",
+   "kind": "feature",
+   "covers": [
+    "grow.momentum"
+   ],
+   "title": "Momentum",
+   "answer": "Momentum adds up what you did this week and compares it only with your own last four weeks.",
+   "keywords": [
+    "momentum",
+    "activity",
+    "week",
+    "progress",
+    "streak"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Where to find it",
+     "blocks": [
+      {
+       "p": "Open [Grow](app:grow), then Your week, then Momentum."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "What counts",
+     "blocks": [
+      {
+       "ul": [
+        "Moments you logged.",
+        "How many different people.",
+        "People new in your life.",
+        "Events you went to.",
+        "Invitations you made."
+       ]
+      },
+      {
+       "p": "Each part has a ceiling, so no single one can dominate: ten moments count, the eleventh doesn’t add more. Momentum is never compared with other people, and it doesn’t change your SCV."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "untested",
+        "text": "Which parts count, how much each weighs and where the ceilings are is an initial app setting, not a validated scale."
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.library",
+   "kind": "feature",
+   "covers": [
+    "grow.library"
+   ],
+   "title": "Grow",
+   "answer": "Grow holds every tool in the app, grouped by what you want.",
+   "keywords": [
+    "tools",
+    "library",
+    "modules",
+    "features",
+    "all tools"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Finding a tool",
+     "blocks": [
+      {
+       "p": "Open [Grow](app:grow). Search with “Find a tool”, or scroll the groups: Meet people and stay in touch, Partner, Flirting, Know yourself, and Your week. Open a tool to use it."
+      },
+      {
+       "shot": "grow",
+       "alt": "The Grow page: “Everything the app can do”, a search box, and the first group, Meet people and stay in touch, with its tools."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Why some tools are missing",
+     "blocks": [
+      {
+       "p": "The Partner group appears only if you said you are looking for a partner, under You › About you. A few tools need someone on your map first."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.find",
+   "kind": "feature",
+   "covers": [
+    "grow.find"
+   ],
+   "title": "Find something to go to",
+   "answer": "Pick what you enjoy, and the app opens a ready-made search for it on Meetup or Eventbrite near you.",
+   "keywords": [
+    "events",
+    "meetup",
+    "eventbrite",
+    "activities",
+    "hobbies",
+    "go out",
+    "clubs",
+    "groups"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Finding events",
+     "blocks": [
+      {
+       "ol": [
+        "Open [Grow](app:grow) › Find something to go to.",
+        "Add your city and country once.",
+        "Tap an interest, such as hiking, board games, choir or language exchange, or add your own.",
+        "The search opens on Meetup or Eventbrite in a new tab. When you find something, add it to “Events you plan to go to”."
+       ]
+      },
+      {
+       "shot": "find",
+       "alt": "Find something to go to: fields for your city and country, and buttons for interests such as hiking, running, board games, darts, book club and language exchange."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Good to know",
+     "blocks": [
+      {
+       "p": "be:moyo doesn’t fetch events itself and never contacts those sites in the background. It only builds the search; you open it. What happens on Meetup or Eventbrite is governed by their own terms."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.events",
+   "kind": "feature",
+   "covers": [
+    "grow.events"
+   ],
+   "title": "Events you plan to go to",
+   "answer": "Note an event you want to go to. Afterwards the app asks whether you went and whom you met.",
+   "keywords": [
+    "event",
+    "plan",
+    "calendar",
+    "went",
+    "meet",
+    "party",
+    "class"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Planning an event",
+     "blocks": [
+      {
+       "ol": [
+        "Open [Grow](app:grow) › Events you plan to go to and tap to add one.",
+        "Say what it is and when. A link is optional.",
+        "Add it to your calendar if you like."
+       ]
+      },
+      {
+       "p": "After the day, Today and your reminders ask “Did you go?”. If you did, the app asks whom you met there, and you can add them to your map, in your lighter circle to begin with. Add only people who would recognise you too; a face you only know by sight can stay a note under your regular places."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "What it counts",
+     "blocks": [
+      {
+       "p": "Events you went to count in Momentum and in Your week. If you said an event was worth it and it comes up again, the app reminds you before the next one. You can change “I went” or “I didn’t go” afterwards."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.places",
+   "kind": "feature",
+   "covers": [
+    "grow.places"
+   ],
+   "title": "Your regular places",
+   "answer": "Go back to the same place regularly: a club, a class, a choir, a bar. Returning gives people time to recognise one another.",
+   "keywords": [
+    "regular",
+    "place",
+    "club",
+    "class",
+    "choir",
+    "cafe",
+    "bar",
+    "recognise",
+    "recognize",
+    "faces",
+    "third place"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Using it",
+     "blocks": [
+      {
+       "ol": [
+        "Open [Grow](app:grow) › Your regular places and add a place: what and where, how often, and which day.",
+        "After each visit, tap “I went”. The app asks whether you talked to someone new, whether anyone there might be someone to date, and whether you’ll go again.",
+        "Note faces you start to recognise in a few words, just for you, such as “barista” or “man with the chess set”. They aren’t people on your map."
+       ]
+      },
+      {
+       "shot": "places",
+       "alt": "Your regular places for the example map: “Bouldering at the climbing hall, Tuesday evening”, every week at 19:00, with buttons “I went”, “Take someone along”, “Calendar” and “No longer going”, and a section for faces."
+      },
+      {
+       "p": "For each face, the app suggests the next small step: from a nod, to one sentence more, to saying your name and asking theirs. Once you know each other, you can add them to your map."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "What to look for",
+     "blocks": [
+      {
+       "p": "Count recognition, not conversations. After a few visits, ask yourself: does anyone recognise you yet, or you them? Everything else builds on that."
+      },
+      {
+       "p": "You can take someone along, add a visit to your calendar, or stop a place when you no longer go. Up to eight faces per place."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "The measure of a regular place is whether anyone starts to recognise you, not how many people you talk to.",
+        "book": {
+         "printed": 288,
+         "quote": "The unit of measurement is recognition, not interaction"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "Groups and activities that meet again and again are where friendships, and partners, have traditionally been found.",
+        "book": {
+         "printed": 104,
+         "quote": "the Ring 3 contexts that historically produced romantic opportunity"
+        }
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.rituals",
+   "kind": "feature",
+   "covers": [
+    "grow.rituals"
+   ],
+   "title": "Your rituals",
+   "answer": "Something you do again and again with people you know, like the Sunday call or the Thursday run. The app keeps the rhythm with you.",
+   "keywords": [
+    "ritual",
+    "routine",
+    "weekly",
+    "monthly",
+    "regular call",
+    "game night",
+    "tradition"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Adding a ritual",
+     "blocks": [
+      {
+       "ol": [
+        "Open [Grow](app:grow) › Your rituals › Add a ritual.",
+        "Name it in your own words, and choose with whom (up to eight people on your map).",
+        "Choose how often (every week, every two weeks or every month), the day, a time if you like, and how: in person, call or video call."
+       ]
+      },
+      {
+       "p": "On the day, a reminder says “Today: …”. Tap “We did it” and it is recorded as a moment together, or “Not this time” and the next one is set."
+      },
+      {
+       "shot": "rituals",
+       "alt": "Your rituals for the example map: “Sunday call with Lena”, every week on Sunday at 18:00, with buttons “We did it” and “Add to calendar”."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Good to know",
+     "blocks": [
+      {
+       "p": "Each ritual shows the last 90 days: how often you did it. You can add it to your calendar, or stop it. If you keep your distance from someone in a ritual, it goes on hold."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "The book suggests that a small, repeated ritual can be one way to rebuild connection.",
+        "book": {
+         "printed": 428,
+         "quote": "A small ritual resurrected from the ash"
+        }
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.exposure-coach",
+   "kind": "feature",
+   "covers": [
+    "grow.exposure-coach"
+   ],
+   "title": "Exposure Coach",
+   "answer": "One small real-world step, on the days you choose: a look, a hello, a question, a bit of play, a flirt.",
+   "sub": "You can’t fail a step, and skipping one is always allowed.",
+   "keywords": [
+    "practice",
+    "shy",
+    "nervous",
+    "anxiety",
+    "talk to strangers",
+    "small talk",
+    "confidence",
+    "courage",
+    "flirt"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Using it",
+     "blocks": [
+      {
+       "ol": [
+        "Open [Grow](app:grow) › Exposure Coach.",
+        "Choose how often: every day, every two days, three times a week or once a week.",
+        "Choose where to start: Warm-up, Small talk or Flirting. Pick a level that feels manageable; you can start easier and switch any time.",
+        "On a practice day you get one step. Before you go, guess how likely it is to go badly. Then “I’m going”, “Give me a different one” or “Not today”.",
+        "Afterwards, note what happened and how it went compared with your fear."
+       ]
+      },
+      {
+       "shot": "coach",
+       "alt": "The Exposure Coach start screen: a short introduction and the choice of how often, from every day to once a week."
+      },
+      {
+       "p": "If you met someone and you now know each other’s names, you can add them to your map. “Pause the coach” stops it until you switch it back on."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "The levels",
+     "blocks": [
+      {
+       "ul": [
+        "Warm-up: Seen (a look, a smile, a greeting), One question, Small kindness.",
+        "Small talk: Openers, The second sentence, Stay a little.",
+        "Flirting: Playful warmth, Clear interest, An easy next step."
+       ]
+      },
+      {
+       "p": "Every try counts, whatever the answer: a “no” counts exactly as much as a “yes”. Over a few weeks you see, in your own numbers, how often your fear was right."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "research",
+        "text": "In train and bus experiments, commuters asked to talk with a stranger reported a more pleasant journey than those asked to sit in solitude, although other people predicted the opposite. In later studies, people underestimated how interested strangers were in talking. These are averages; they don’t tell you how any one conversation will go.",
+        "study": {
+         "cite": "Epley & Schroeder, Journal of Experimental Psychology: General 2014",
+         "url": "https://doi.org/10.1037/a0037323",
+         "design": "field and lab experiments"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "untested",
+        "text": "The order of the steps and levels was designed for be:moyo and has not been tested against other sequences."
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.invitations",
+   "kind": "feature",
+   "covers": [
+    "grow.invitations"
+   ],
+   "title": "Your invitations",
+   "answer": "From the map to a real meeting: pick a person and a plan, and the app drafts the message for you to send.",
+   "sub": "Every invitation counts. The answer is theirs.",
+   "keywords": [
+    "invite",
+    "invitation",
+    "ask out",
+    "message",
+    "meet up",
+    "whatsapp",
+    "date",
+    "plan"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Inviting someone",
+     "blocks": [
+      {
+       "ol": [
+        "Open a person on your map, or [Grow](app:grow) › Your invitations.",
+        "Choose the kind of plan, for example a drink or a walk, an activity together, bringing them along to something, a proper call, a visit, a small get-together, an introduction, or just a warm hello.",
+        "The app drafts a message. Change it as you like, then copy it or open WhatsApp and send it yourself."
+       ]
+      },
+      {
+       "shot": "invitations",
+       "alt": "Your invitations: a “New invitation” button and the line “From the map to a real meeting. Every invitation counts — the answer is theirs.”"
+      },
+      {
+       "p": "Later the app asks what happened. If you met, it asks whether you’d like to see them again. If it was a date, whether you’d like another one. If they said they aren’t interested in dating, the app stops suggesting dates with them."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Goals and fitting plans",
+     "blocks": [
+      {
+       "p": "For anyone on your map you can set what you want with them, for example more time together, keep it as it is, repair something, romantic interest, a wingman, or more family time. This is optional. It decides which plans are offered: no “date” for family, no “family time” for friends."
+      },
+      {
+       "p": "The invitations card shows your last 30 days: invitations sent, meetings that happened, people you want to see again. It is your own record, separate from your SCV."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "After a first conversation, people tend to like us more than we think. The book calls this a necessary reassurance before reaching out.",
+        "book": {
+         "printed": 178,
+         "quote": "A Necessary Reassurance: The Liking Gap"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "research",
+        "text": "In studies of conversations between strangers, people consistently underestimated how much their partner liked them and enjoyed their company.",
+        "study": {
+         "cite": "Boothby, Cooney, Sandstrom & Clark, Psychological Science 2018",
+         "url": "https://doi.org/10.1177/0956797618783714",
+         "design": "experiments and field studies"
+        }
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.wingman",
+   "kind": "feature",
+   "covers": [
+    "grow.wingman"
+   ],
+   "title": "Wingman / wingwoman",
+   "answer": "Go out as the plus-one of a friend who knows circles you don’t. Their introductions open doors you can’t open alone.",
+   "keywords": [
+    "wingman",
+    "wingwoman",
+    "friend",
+    "go out",
+    "introductions",
+    "circles",
+    "plus one"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Using it",
+     "blocks": [
+      {
+       "ol": [
+        "Open [Grow](app:grow) › Wingman / wingwoman.",
+        "Choose a friend who opens circles you don’t know. The best candidates are the people you rated as a bridge on their profile.",
+        "Plan the outing: what and when. Add it to your calendar if you like.",
+        "Afterwards, note how many new people your friend introduced you to, and how many of them came from circles you didn’t know. Add anyone you’d like to keep in touch with."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Good to know",
+     "blocks": [
+      {
+       "p": "The counts are yours. Your friend is never rated. A useful wingman may be someone who can introduce you to people outside your usual circles."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "A wingman, in the book’s sense, is a friend who sits where several social circles meet, circles you couldn’t reach on your own.",
+        "book": {
+         "printed": 288,
+         "quote": "a friend who sits at the intersection of multiple clusters"
+        }
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.message",
+   "kind": "feature",
+   "covers": [
+    "grow.message"
+   ],
+   "title": "Worth a message",
+   "answer": "Each week, a few people worth a message, chosen from your goals and rhythms. Never more than three.",
+   "keywords": [
+    "message",
+    "reach out",
+    "get in touch",
+    "who should i contact",
+    "rhythm",
+    "every month"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Using it",
+     "blocks": [
+      {
+       "p": "Open [Grow](app:grow) › Your week › Worth a message. The person most worth a message also appears on Today. One tap per person: only plans that fit are offered."
+      },
+      {
+       "p": "To steer it, open a person and set your rhythm with them: every two weeks, every month, every three months, or let the app decide. You can also give them a goal, such as more time together."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "How people are chosen",
+     "blocks": [
+      {
+       "p": "The app looks at whom you wanted to see more often, whose rhythm is due, and who has been out of touch for a while. Your partner step counts as one of the three. When nobody is due, it says so."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.week",
+   "kind": "feature",
+   "covers": [
+    "grow.week"
+   ],
+   "title": "Your week",
+   "answer": "What you did, whom you saw again, and how you felt. Three things, kept apart on purpose.",
+   "keywords": [
+    "week",
+    "review",
+    "summary",
+    "lonely",
+    "loneliness question",
+    "met again"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Where to find it",
+     "blocks": [
+      {
+       "p": "Open [Grow](app:grow) › Your week › Your week, or tap “Open review” on Today."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "The three parts",
+     "blocks": [
+      {
+       "ul": [
+        "What you did: moments logged, invitations sent and met, dates, events, and visits to your regular places.",
+        "Whom you met again: of the people you met this week, how many you had met before. It counts meetings and calls you logged; messages are not meetings.",
+        "How you felt: your own answer to “How often do you feel lonely?”, asked about once a month in the short reflection under Know yourself."
+       ]
+      },
+      {
+       "p": "Your feeling is never mixed with the numbers. Doing more doesn’t automatically mean feeling less lonely, and the app doesn’t pretend it does. It also lists people you wanted to see again but haven’t met or invited since."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.partner-step",
+   "kind": "feature",
+   "covers": [
+    "grow.partner-step"
+   ],
+   "title": "Your partner step",
+   "answer": "One small step a week towards a partner, chosen from where your path gets stuck right now.",
+   "sub": "Shown when you said you are looking for a partner (You › About you).",
+   "keywords": [
+    "partner",
+    "dating",
+    "single",
+    "next step",
+    "where do i stand",
+    "pathway"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Using it",
+     "blocks": [
+      {
+       "p": "The step appears on Today and in [Grow](app:grow) › Partner. It says where you stand and gives one step for this week, for example “See Lena this week”, “Ask Priya if she knows someone single”, or “Go to the climbing hall this week and talk to one new person”."
+      },
+      {
+       "p": "The step changes as your map and what you record change. Not right for you? Tap “This doesn’t fit” and it is hidden for two weeks on this device; it comes back sooner if things change."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Where you stand",
+     "blocks": [
+      {
+       "ul": [
+        "Map first: put your people on the map, then the app can see where it gets stuck.",
+        "Foundation: your inner rings are thin. Build that base alongside the dating.",
+        "Open edge: you meet the same people again and again. What helps is a new bridge, not more effort.",
+        "Convert: you have recorded meeting new people. An invitation might be a next step.",
+        "Second date: you had a first date. If you both want to meet again, consider suggesting another meeting.",
+        "Reflect: first dates, but no second. Look back for a minute before the next one.",
+        "Going: you are seeing someone again. Keep the rhythm."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "A tight circle where everyone knows everyone stops producing new people, however sociable you are. A new bridge to another circle helps more than more effort.",
+        "book": {
+         "printed": 216,
+         "quote": "a high-clustering, low-bridging network"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "untested",
+        "text": "The stages and the order in which the app checks them are be:moyo’s own design, not a tested model."
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.partner",
+   "kind": "feature",
+   "covers": [
+    "grow.partner"
+   ],
+   "title": "Finding a partner",
+   "answer": "Friends of friends and places you go to regularly can be ways to meet a partner.",
+   "sub": "Shown when you said you are looking for a partner (You › About you).",
+   "keywords": [
+    "partner",
+    "dating",
+    "introduction",
+    "friends of friends",
+    "single",
+    "meet someone"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Using it",
+     "blocks": [
+      {
+       "ol": [
+        "Open [Grow](app:grow) › Partner › Finding a partner.",
+        "Ask for an introduction: the app lists people you rated as bridges, who connect you to other circles. A short, honest message can be a way to ask.",
+        "Keep going to your regular places, and record your visits there."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Your last 30 days",
+     "blocks": [
+      {
+       "p": "The page counts your real steps: introductions asked for, visits to regular places, new conversations there, date invitations, dates and second dates. Only what you recorded. No score, no judgement."
+      },
+      {
+       "p": "No one to ask yet? Rate who brings you into new circles (the bridge on a person’s page), and the best people to ask appear here."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "Across decades of research on how couples meet, partners are rarely found through the closest members of a person’s network.",
+        "book": {
+         "printed": 194,
+         "quote": "Romantic partners are rarely encountered through the closest members"
+        }
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.ladder",
+   "kind": "feature",
+   "covers": [
+    "grow.ladder"
+   ],
+   "title": "Approach ladder",
+   "answer": "Five small steps from hello to asking to meet, at a place you both go to. You move up when the step feels ordinary.",
+   "sub": "Shown when you said you are looking for a partner (You › About you).",
+   "keywords": [
+    "approach",
+    "talk to someone",
+    "ask out",
+    "hello",
+    "conversation",
+    "shy",
+    "crush"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "The five steps",
+     "blocks": [
+      {
+       "note": "Example: Daniel, 29, keeps seeing the same woman at his climbing gym on Tuesdays. (A made-up example.)"
+      },
+      {
+       "ol": [
+        "Short hello: a brief, warm hello when you see a familiar face, then keep moving. Daniel moves up after 4–5 easy hellos.",
+        "One real question: one genuine, low-stakes question about the place or the moment, then listen. Three times.",
+        "Names: offer your name and ask for theirs. Two or three times.",
+        "Second conversation: next time, pick up from last time, briefly. At least once with the same person.",
+        "Ask to meet: when there has been ease across a couple of conversations, suggest one specific, easy-to-decline next step outside the usual place. This step opens Your invitations."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Recording a try",
+     "blocks": [
+      {
+       "p": "After each try you note how it went, including “It felt awkward, but I did it”, “I started but stopped” and “I didn’t do it this time”. Every honest try counts."
+      },
+      {
+       "p": "A flat hello, an awkward question or a no is practice and information, not a verdict on you."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "untested",
+        "text": "The five steps and when to move up are be:moyo’s own design. Whether this order works better than another has not been tested."
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.liking-gap",
+   "kind": "feature",
+   "covers": [
+    "grow.liking-gap"
+   ],
+   "title": "The liking gap",
+   "answer": "After a date, you may be unsure whether the other person liked you. Research on conversations suggests people can underestimate how much others enjoyed meeting them. Your impression may be right or wrong.",
+   "sub": "Shown when you said you are looking for a partner (You › About you).",
+   "keywords": [
+    "first date",
+    "did they like me",
+    "second date",
+    "rejection",
+    "liking gap"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "When it appears",
+     "blocks": [
+      {
+       "p": "After a date, if you say you don’t want to see someone again, the app asks why. If your reason is “I don’t think they liked me”, it shows the liking gap: your impression may be right, or it may be the usual bias."
+      },
+      {
+       "p": "If you would like to see them again, ask. A clear, low-pressure message gives you real data instead of a story: “I enjoyed Thursday. Want to do it again next week?” If they say no, that is clean information."
+      },
+      {
+       "p": "Read or listen to the full text (about 4 minutes) in [Grow](app:grow) › Partner › The liking gap."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "When it doesn’t apply",
+     "blocks": [
+      {
+       "p": "If you didn’t feel it, or the person doesn’t fit what you are looking for, the case is closed. The liking gap is only about the doubt “they didn’t like me”."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "research",
+        "text": "In studies of conversations between strangers, people consistently underestimated how much the other person liked them and enjoyed their company.",
+        "study": {
+         "cite": "Boothby, Cooney, Sandstrom & Clark, Psychological Science 2018",
+         "url": "https://doi.org/10.1177/0956797618783714",
+         "design": "experiments and field studies"
+        }
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.after-no",
+   "kind": "feature",
+   "covers": [
+    "grow.after-no"
+   ],
+   "title": "After a no",
+   "answer": "A no is information about fit or timing, not a measure of your value. This text helps you take it that way.",
+   "keywords": [
+    "rejection",
+    "no",
+    "declined",
+    "no reply",
+    "ghosted",
+    "turned down",
+    "hurt"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "When it appears",
+     "blocks": [
+      {
+       "p": "When you record that an invitation got a no, or no reply, the app shows a short note fitting what happened: a decline, silence, no second date, or several noes in a row. It also counts your tries, never the results: asking at all is the part that is yours."
+      },
+      {
+       "p": "A few steps follow, starting with calming down before you analyse anything or text anyone."
+      },
+      {
+       "p": "The full text, to read or listen to, is in [Grow](app:grow) › Partner › After a no. It comes in two versions; you see the one meant for you."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Good to know",
+     "blocks": [
+      {
+       "p": "The texts are Axel’s, narrated by an AI voice. Listening needs an internet connection unless you saved the recordings for offline listening; the text always works offline."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.flirting-intro",
+   "kind": "feature",
+   "covers": [
+    "grow.flirting-intro"
+   ],
+   "title": "Flirting — an introduction",
+   "answer": "What flirting is, why it lowers the risk for both sides, its five styles, and how to spot it. To read or listen, about 24 minutes.",
+   "keywords": [
+    "flirting",
+    "flirt",
+    "signals",
+    "attraction",
+    "styles",
+    "seduction",
+    "audio",
+    "listen"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Reading or listening",
+     "blocks": [
+      {
+       "p": "Open [Grow](app:grow) › Flirting. Each of the six chapters can be read or played on its own."
+      },
+      {
+       "ul": [
+        "Flirting, the Dance of Nature",
+        "The Biological Safety Net: Why Flirting Reduces Risk",
+        "The Dialects of Seduction: Mapping the Five Styles of Flirting",
+        "The Radar Illusion: Why We Miss the Signals",
+        "How to Spot Flirting",
+        "When flirting goes wrong"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Good to know",
+     "blocks": [
+      {
+       "p": "The text is Axel’s, narrated by an AI voice. The Exposure Coach links here from its flirting steps. The text always works offline; audio needs a connection unless saved for offline listening."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.attribute-test",
+   "kind": "feature",
+   "covers": [
+    "grow.attribute-test"
+   ],
+   "title": "The Attribute Test",
+   "answer": "Who are you really looking for? The test turns a vague wish list into three short lists and the courage to say no to the rest.",
+   "sub": "Free. About 10 to 20 minutes.",
+   "keywords": [
+    "attribute test",
+    "partner list",
+    "what do i want",
+    "dealbreaker",
+    "compass",
+    "stadium",
+    "type",
+    "ideal partner"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "The five steps",
+     "blocks": [
+      {
+       "ol": [
+        "Collect: pick what you want (gold) and what you can’t live with (red), in looks, character and lifestyle.",
+        "Truth test: for each dealbreaker, consider whether it really matters to you.",
+        "Duels: two wishes, one choice. Your choices rank them and find your top five.",
+        "The cut: check the five, swap one back in if you must, then delete the rest.",
+        "Your compass: fifteen things to look for, the signs to spot them on a date, and a feeling to remember."
+       ]
+      },
+      {
+       "shot": "attribute-test",
+       "alt": "The start of the Attribute Test: “Who are you really looking for?”, a short introduction, and the “Start here” card for the chapter, with “Listen to the chapter” and “Read it”."
+      },
+      {
+       "p": "Start in [Grow](app:grow) › Know yourself, or Partner. If you like, listen to the chapter behind the test first."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "The stadium and your compass",
+     "blocks": [
+      {
+       "p": "While you choose, a stadium of 100,000 people illustrates how combining wishes can shrink the pool, because “and” multiplies. Its shares are rough assumptions, not a count of actual people."
+      },
+      {
+       "p": "Your compass then sits on the partner place on your map. If you are looking for a partner, its must-haves also join the questions after a date. You can switch that off (“Don’t use for date checks”), edit the compass, or delete it."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "research",
+        "text": "A study of 10,358 people in 43 countries found that people rate a partner a little more positively when the partner matches their ideals. The link was statistically clear but small, and very small for single traits. It doesn’t show that a list causes happiness.",
+        "study": {
+         "cite": "Eastwick, Sparks, Finkel et al., Journal of Personality and Social Psychology 2025",
+         "url": "https://doi.org/10.1037/pspp0000524",
+         "design": "worldwide survey study"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "untested",
+        "text": "The Attribute Test is a structured reflection from Axel’s book The Art & Science of Dating, not a validated psychometric test."
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.attribute-chapter",
+   "kind": "feature",
+   "covers": [
+    "grow.attribute-chapter"
+   ],
+   "title": "The chapter behind the test",
+   "answer": "Why most people can’t say what they want, the green-car effect, the Big Five, the tyranny of “and”, and the five steps. Read or listen, about 25 minutes.",
+   "keywords": [
+    "chapter",
+    "audio",
+    "listen",
+    "attribute test",
+    "green car"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Reading or listening",
+     "blocks": [
+      {
+       "p": "Open it from the start screen of the Attribute Test (“Start here”), or from [Grow](app:grow) › Know yourself. Seven sections, each to read or play on its own. The test works without it."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Good to know",
+     "blocks": [
+      {
+       "p": "From Axel’s book The Art & Science of Dating, narrated by an AI voice. The text always works offline; audio needs a connection unless saved for offline listening."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.reflection",
+   "kind": "feature",
+   "covers": [
+    "grow.reflection"
+   ],
+   "title": "Know yourself",
+   "answer": "A short reflection: your dating situation, five personality tendencies and a few recent moments. Optional, and only for you.",
+   "sub": "About 7 minutes; about 3 if you are not looking for a partner.",
+   "keywords": [
+    "personality",
+    "big five",
+    "mini-ipip",
+    "reflection",
+    "questionnaire",
+    "test",
+    "lonely",
+    "check-in"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Taking it",
+     "blocks": [
+      {
+       "p": "Open [Grow](app:grow) › Know yourself › Know yourself and start the reflection. Answer as you generally are now, not as you wish to be."
+      },
+      {
+       "p": "After about a month, a short check-in asks about the last four weeks, so you can see what changed. Its last question, “How often do you feel lonely?”, also appears in Your week."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "The five tendencies",
+     "blocks": [
+      {
+       "ul": [
+        "Extraversion: from quiet and reserved to outgoing.",
+        "Agreeableness: from direct and independent-minded to warm and attuned to others.",
+        "Conscientiousness: from spontaneous and flexible to organised and reliable.",
+        "Emotional reactivity: from calm and even-keeled to feeling things strongly.",
+        "Intellect / imagination: from practical and concrete to imaginative. Not an IQ test."
+       ]
+      },
+      {
+       "p": "Neither end is better; each brings strengths. It is a reflection, not a diagnosis: it describes, it doesn’t explain why, and it doesn’t predict."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "research",
+        "text": "The 20 personality statements are the Mini-IPIP, a published short form of the Big Five, used here word for word.",
+        "study": {
+         "cite": "Donnellan, Oswald, Baird & Lucas, Psychological Assessment 2006",
+         "url": "https://doi.org/10.1037/1040-3590.18.2.192",
+         "design": "validated short questionnaire"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "untested",
+        "text": "The questions about your dating situation, recent moments and loneliness are be:moyo’s own, not a validated scale."
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.closeness",
+   "kind": "feature",
+   "covers": [
+    "grow.closeness"
+   ],
+   "title": "Closeness and worry",
+   "answer": "Nine statements about close relationships in general, and if you like nine about a partner or former partner. About three minutes.",
+   "sub": "Free, and only for you.",
+   "keywords": [
+    "attachment",
+    "ecr",
+    "anxiety",
+    "avoidance",
+    "closeness",
+    "worry",
+    "relationships"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Taking it",
+     "blocks": [
+      {
+       "p": "Open [Grow](app:grow) › Know yourself › Closeness and worry. Rate each statement from 1 to 7. The second part asks about a real romantic relationship, current or past, only if there is one."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Reading the result",
+     "blocks": [
+      {
+       "p": "Your answers place you on two lines: keeping distance (from leaning on others easily to keeping some distance) and worry about being cared for. Answers about a former partner look back; they don’t describe how you are in a relationship today."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "research",
+        "text": "The statements are the ECR-RS questionnaire, used word for word with the author’s permission.",
+        "study": {
+         "cite": "Fraley, Heffernan, Vicary & Brumbaugh, Psychological Assessment 2011",
+         "url": "https://doi.org/10.1037/a0022898",
+         "design": "validated questionnaire"
+        }
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.mirror",
+   "kind": "feature",
+   "covers": [
+    "grow.mirror"
+   ],
+   "title": "The Mirror Audit",
+   "answer": "You have scored the people closest to you. The Mirror Audit turns the chart around: how might they see you?",
+   "keywords": [
+    "mirror",
+    "how do they see me",
+    "give and take",
+    "balance",
+    "gap",
+    "reciprocity"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Using it",
+     "blocks": [
+      {
+       "ol": [
+        "Open [Grow](app:grow) › Know yourself › The Mirror Audit.",
+        "Pick someone from your two inner rings, or anyone you have feelings for.",
+        "Guess how they would score you, on the same scale you used for them.",
+        "Read the gap, then choose one small step."
+       ]
+      },
+      {
+       "shot": "mirror",
+       "alt": "The Mirror Audit start for the example map: “How might they see you?” and the people from the two inner rings to choose from."
+      },
+      {
+       "p": "Nobody is asked and nothing is sent. Your estimate is never treated as their answer, and your SCV never changes."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Reading the gap",
+     "blocks": [
+      {
+       "p": "Green means your feeling for them and your guess of theirs are close; red means far apart. Being on opposite sides (you enrich each other, or one of you weighs on the other) counts more than “very good” against “good”. Up to 10 % is about even."
+      },
+      {
+       "p": "Your estimate is a question to reflect on, not their answer. People can underestimate how much a conversation partner likes them, but that may not apply to a particular relationship."
+      }
+     ]
+    },
+    {
+     "id": "science",
+     "kind": "science",
+     "title": "The science behind it",
+     "blocks": [
+      {
+       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
+      },
+      {
+       "claim": {
+        "status": "book",
+        "text": "We know our own intentions; others only see some of our deeds. So their picture of us differs from ours.",
+        "book": {
+         "printed": 177,
+         "quote": "We have the film. Everyone else has the stills"
+        }
+       }
+      },
+      {
+       "claim": {
+        "status": "untested",
+        "text": "The colours and the 10 % band are a visual guide built from your own ratings, not a measurement of anyone’s feelings."
+       }
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "grow.friendzone",
+   "kind": "feature",
+   "covers": [
+    "grow.friendzone"
+   ],
+   "title": "The friendzone",
+   "answer": "Feelings for a friend who doesn’t feel the same. A text to read or listen to, without naming anyone.",
+   "keywords": [
+    "friendzone",
+    "friend zone",
+    "unrequited",
+    "feelings for a friend",
+    "crush on friend"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Reading or listening",
+     "blocks": [
+      {
+       "p": "Open [Grow](app:grow) › Know yourself › The friendzone. It covers what the friendzone is, its nine faces and the move each needs, whether men and women can be friends, what research says, how friends become lovers, and why the hope won’t let go."
+      },
+      {
+       "p": "On a person’s page you can also say whether there is a friendzone situation with them. It is asked, never guessed."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Privacy",
+     "blocks": [
+      {
+       "p": "Your answer is stored on this device and in your backups. A map picture can show a small marker, and a session report can include selected friendzone facts, only if you tick that option for that export; it is off every time. Your private friendzone notes are never included. The friendzone answer does not change your SCV."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "data.where",
+   "kind": "data",
+   "covers": [
+    "data.where"
+   ],
+   "title": "Where your map is kept",
+   "answer": "In this browser on this device. be:moyo has no account and no database of ours, and doesn’t upload your map.",
+   "keywords": [
+    "privacy",
+    "where is my data",
+    "cloud",
+    "server",
+    "account",
+    "who can see",
+    "storage",
+    "upload"
+   ],
+   "sections": [
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "What that means",
+     "blocks": [
+      {
+       "ul": [
+        "Your people, moments and answers are stored in this browser’s storage. Another browser or device starts empty.",
+        "When you open the app, your browser loads its files from our host (Cloudflare), which, like any website, sees connection information such as your IP address.",
+        "Links you tap (calendar, WhatsApp, Meetup and others) open those services, under their own terms.",
+        "Clearing your browser data erases the map. Keep a backup file somewhere safe."
+       ]
+      },
+      {
+       "p": "You › Your map on this device shows how much space your map uses. Recordings saved for offline listening are stored separately."
+      }
+     ]
+    },
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Check it yourself",
+     "blocks": [
+      {
+       "p": "Open your browser’s developer tools, choose Network, and use the app for a while. You should see only the app’s own files. The app also tells your browser to connect only to its own address. That rule is an extra safeguard, not proof on its own."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "data.backup",
+   "kind": "data",
+   "covers": [
+    "data.backup"
+   ],
+   "title": "Saving a backup",
+   "answer": "A backup file keeps your map safe if browser data is cleared, and lets you move to another device.",
+   "keywords": [
+    "backup",
+    "save",
+    "export",
+    "copy",
+    "file",
+    "new phone",
+    "move device",
+    "json"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Saving one",
+     "blocks": [
+      {
+       "ol": [
+        "Open You › Backup.",
+        "Tap “Save a backup file”.",
+        "Keep the file somewhere safe, for example in your cloud folder."
+       ]
+      },
+      {
+       "p": "With App Lock on, you get two choices: “Save a locked backup file”, which opens only with your passcode or recovery code, or “Save unencrypted” after a warning that anyone who finds the file can read it."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "What is in it",
+     "blocks": [
+      {
+       "p": "Everything: your people, moments, answers and the private modules, with full names. If you haven’t saved a backup for a while, the You button shows a dot as a reminder."
+      },
+      {
+       "p": "Files you saved readable earlier stay readable, even after you turn on App Lock. Make a new locked backup and delete the old files."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "data.auto-backup",
+   "kind": "data",
+   "covers": [
+    "data.auto-backup"
+   ],
+   "title": "Automatic backup",
+   "answer": "Pick a file once, ideally in your iCloud, OneDrive or Dropbox folder, and the app keeps it up to date after every change.",
+   "sub": "Works in Chrome and Edge on a computer.",
+   "keywords": [
+    "automatic",
+    "auto backup",
+    "sync",
+    "onedrive",
+    "icloud",
+    "dropbox",
+    "cloud folder"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Setting it up",
+     "blocks": [
+      {
+       "ol": [
+        "Open You › Backup on a computer, in Chrome or Edge.",
+        "Choose the automatic backup and pick a file, ideally in a folder your cloud service syncs.",
+        "From then on the app updates that file a few seconds after each change."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Good to know",
+     "blocks": [
+      {
+       "p": "With App Lock on, the automatic file is written encrypted; with the lock off, readable. While the app is locked, it isn’t written at all. If the browser loses permission to the file, You › Backup asks you to check it."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "data.restore",
+   "kind": "data",
+   "covers": [
+    "data.restore"
+   ],
+   "title": "Restoring a backup",
+   "answer": "Choose a backup file and the app shows what it holds before anything happens. Your current map is normally kept, so you can go back.",
+   "keywords": [
+    "restore",
+    "import",
+    "load backup",
+    "open file",
+    "new device",
+    "get my map back"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Restoring",
+     "blocks": [
+      {
+       "ol": [
+        "Open You › Backup and choose “Restore from a backup”.",
+        "Pick the backup file. A locked file asks for the passcode or recovery code it was made with.",
+        "Check what the file holds (how many people, saved by whom), then tap “Restore”."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "file",
+     "kind": "how",
+     "title": "Keeping the backup file unchanged",
+     "blocks": [
+      {
+       "p": "On a computer in Chrome or Edge, if you have no automatic backup yet, the restore screen shows “Keep this file up to date automatically from now on”. It is ticked at first. Ticked, restoring replaces that file’s contents with your merged map right away and keeps it current from then on."
+      },
+      {
+       "p": "To keep the file exactly as it is, untick the box before you tap “Restore”, or keep a separate copy of the file first. [Automatic backup](guide:data.auto-backup)"
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "What restoring does",
+     "blocks": [
+      {
+       "p": "It brings the people back as they were in the backup. People who exist only on this device are kept, and nobody is added twice. The app also keeps a safety copy of your current map, so you can bring it back. If there isn’t enough space for that copy, it tells you and restores nothing. Read the message it shows afterwards."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "data.lock",
+   "kind": "data",
+   "covers": [
+    "data.lock"
+   ],
+   "title": "App lock",
+   "answer": "With App Lock on, the app saves your map encrypted on this device, and it opens with your passcode.",
+   "sub": "Useful on a shared computer, or if your phone gets lost.",
+   "keywords": [
+    "lock",
+    "passcode",
+    "password",
+    "pin",
+    "encrypt",
+    "encryption",
+    "private",
+    "protect"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Turning it on",
+     "blocks": [
+      {
+       "ol": [
+        "Open You › Privacy and set up the lock.",
+        "Choose a passcode of at least 12 characters. Several random words work well; not a saying, a name or a date.",
+        "Keep the recovery code the app shows you, once, in your password manager or on paper. It opens your map if you forget the passcode.",
+        "Afterwards, make a new locked backup and delete older, unencrypted files."
+       ]
+      },
+      {
+       "p": "You can set when the app locks by itself: after a while without use, and when the app is put away. You can also lock it right away, change the passcode, get a new recovery code, or make a new key if someone may know your passcode or have your recovery code."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "What it protects, and what not",
+     "blocks": [
+      {
+       "ul": [
+        "With App Lock on, the app saves your map, photos included, on this device encrypted (AES-256-GCM; the key comes from your passcode or recovery code).",
+        "While you use the unlocked app, your map is readable on screen like in any open app.",
+        "A device someone else controls (malware, or someone who knows your device password) isn’t protected by the app lock.",
+        "Backups and other files saved unencrypted stay readable, and so do exported map pictures. A locked backup needs the passcode or recovery code it was saved with, also when you share it: sharing a file passes on a copy, readable only if the file itself is.",
+        "Recordings you saved for offline listening are stored separately and aren’t encrypted. They are the app’s own audio, not your map.",
+        "If the device still holds an older readable version of your map (for example from an old window of the app), the app tells you and asks what to do with it. A locked map saved as a file can contain such versions too; see [Lost passcode or recovery code](guide:data.recovery)."
+       ]
+      },
+      {
+       "p": "Removing the lock stores your map readable again, and new backups are no longer encrypted."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "data.recovery",
+   "kind": "help",
+   "covers": [
+    "data.recovery"
+   ],
+   "title": "Lost passcode or recovery code",
+   "answer": "There is no master key and no reset by us. Your recovery code, a backup file, or starting fresh are the ways back.",
+   "keywords": [
+    "forgot passcode",
+    "forgot password",
+    "locked out",
+    "recovery code",
+    "reset",
+    "cant open"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "What you can do on the lock screen",
+     "blocks": [
+      {
+       "ol": [
+        "Use your recovery code instead of the passcode.",
+        "Save the locked map as a file. The locked part opens again later with the passcode or recovery code, if one turns up. The app tells you if the file also holds older readable versions of your map: anyone with the file can read those, so keep it somewhere safe.",
+        "Replace it with a backup file. Changes since that backup are lost.",
+        "Erase it and start fresh. This can’t be undone; you type ERASE to confirm."
+       ]
+      },
+      {
+       "p": "Before replacing or erasing, save the locked map as a file. If the passcode comes back to you, that file still opens."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Why we can’t help",
+     "blocks": [
+      {
+       "p": "The app never sends your map to us, and the key comes from your passcode or recovery code. We don’t have either. That is what makes the lock safe, and it is also why we can’t fix a lost passcode and a lost recovery code. Copies you saved or shared yourself may still exist elsewhere."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "data.delete",
+   "kind": "data",
+   "covers": [
+    "data.delete"
+   ],
+   "title": "Deleting your data",
+   "answer": "Remove one person, one tool’s answers, or everything on this device. Copies you saved elsewhere stay where they are.",
+   "keywords": [
+    "delete",
+    "remove",
+    "erase",
+    "forget",
+    "wipe",
+    "clear",
+    "reset",
+    "start over"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "How",
+     "blocks": [
+      {
+       "ul": [
+        "One person: open them, choose “Remove”, and say whether the relationship ended or you are just tidying up. Only an ended relationship counts as a change since your start.",
+        "One tool’s data: most tools have their own delete, such as “Delete my answers” (Know yourself), “Delete my compass” (Attribute Test), “Delete my coach data” (Exposure Coach) or “Remove my pattern”.",
+        "Everything on this device: save a backup first if you may want it back. Then delete this site’s data in your browser’s settings (for this app’s address only)."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Copies outside the app",
+     "blocks": [
+      {
+       "p": "Deleting in the app doesn’t delete backup files you saved, pictures or reports you shared, or copies in cloud folders. Delete those where they are."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "you.about",
+   "kind": "feature",
+   "covers": [
+    "you.about"
+   ],
+   "title": "About you",
+   "answer": "A few questions about you that shape your number and which tools the app offers.",
+   "keywords": [
+    "about you",
+    "profile",
+    "settings",
+    "purpose",
+    "looking for",
+    "gender",
+    "birthday"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "What it asks",
+     "blocks": [
+      {
+       "ul": [
+        "What you use the app for, for example friends, a partner, or both.",
+        "Your gender, and whom you date if you are looking for a partner.",
+        "Whether you have a romantic partner, and whether you wish for a child. These two count in your number; see [A missing partner or a wished-for child](guide:map.partner-child).",
+        "Your birthday, if you like. The partner tools need it before they suggest dating someone on your map, and for some people they also ask one age question about them. You can add it later."
+       ]
+      },
+      {
+       "p": "Open You › About you to change any answer."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "What changes with it",
+     "blocks": [
+      {
+       "p": "If you say you are looking for a partner, the Partner tools appear in Grow and on Today. Your answers stay on this device like the rest of your map."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "you.appearance",
+   "kind": "feature",
+   "covers": [
+    "you.appearance"
+   ],
+   "title": "How the app looks",
+   "answer": "Choose the background your map sits on: light ones use the Sand colours, dark ones the Forest colours.",
+   "keywords": [
+    "theme",
+    "dark mode",
+    "light mode",
+    "background",
+    "colours",
+    "colors",
+    "texture"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Changing it",
+     "blocks": [
+      {
+       "p": "Open You and choose a background. Some have a texture you can make stronger or weaker; text and your map stay just as readable."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Good to know",
+     "blocks": [
+      {
+       "p": "Rings, Realms and scores keep their meaning on every background. The choice is saved on this device only."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "you.session-report",
+   "kind": "feature",
+   "covers": [
+    "you.session-report"
+   ],
+   "title": "Session report for your practitioner",
+   "answer": "A PDF for a coaching session: what changed since last time, the book’s numbers, your own sentence and your one experiment.",
+   "sub": "Made on this device. It only leaves it if you send it to someone.",
+   "keywords": [
+    "report",
+    "pdf",
+    "coach",
+    "therapist",
+    "practitioner",
+    "session",
+    "export"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Making one",
+     "blocks": [
+      {
+       "ol": [
+        "Open You › Session report.",
+        "Set the date of your last session (four weeks ago by default).",
+        "Write one sentence about what happened since, and one small experiment until next time, with a date.",
+        "Choose full names or initials, and save the PDF."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "What is in it, and what not",
+     "blocks": [
+      {
+       "p": "Never in the report: notes about people, and the Mirror Audit. The friendzone only if you tick it. Your own sentences go in as you wrote them; initials don’t change them, so check them for names."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "you.offline",
+   "kind": "feature",
+   "covers": [
+    "you.offline"
+   ],
+   "title": "Listening offline",
+   "answer": "Texts always work offline. To listen without internet, save a text’s recordings on this device first.",
+   "keywords": [
+    "offline",
+    "audio",
+    "listen",
+    "download",
+    "no internet",
+    "recordings"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Saving recordings",
+     "blocks": [
+      {
+       "p": "Open a text you can listen to, for example in Flirting or The friendzone, and tap “Save for offline listening”. “Remove them from this device” frees the space again."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Good to know",
+     "blocks": [
+      {
+       "p": "Some browsers can’t keep recordings; the app then says so. Saved recordings are stored apart from your map and don’t count in its size."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "you.version",
+   "kind": "feature",
+   "covers": [
+    "you.version"
+   ],
+   "title": "Updates and What’s new",
+   "answer": "New versions arrive by themselves. When one is ready, a note asks you to reload.",
+   "keywords": [
+    "update",
+    "new version",
+    "reload",
+    "whats new",
+    "release notes",
+    "old version"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Updating",
+     "blocks": [
+      {
+       "p": "When “A new version of the app is ready” appears, finish what you are doing and reload. With App Lock on, you may need your passcode again."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "What’s new",
+     "blocks": [
+      {
+       "p": "Each release lists what changed, with links to the Guide pages it affects. Updates are made to keep your map as it is. Still, keep a recent backup, and if the app shows a warning about another window or a save problem, follow it before closing anything."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "you.tester",
+   "kind": "feature",
+   "covers": [
+    "you.tester"
+   ],
+   "title": "For testers",
+   "answer": "Something broken, confusing or missing? One line of feedback is enough.",
+   "keywords": [
+    "tester",
+    "feedback",
+    "bug",
+    "beta",
+    "report a problem"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Giving feedback",
+     "blocks": [
+      {
+       "p": "Open You and use the feedback button in the testers section. Tell what confused you, what was missing, and what you liked."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Good to know",
+     "blocks": [
+      {
+       "p": "Before the public launch, the app moves to its own web address once. You then save a backup here and restore it there, which takes about two minutes. Pro tools are open to testers."
+      }
+     ]
+    }
+   ],
+   "tier": "tester",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "map.import",
+   "kind": "feature",
+   "covers": [
+    "map.import"
+   ],
+   "title": "Adding people from your contacts",
+   "answer": "Pick the people who matter from your phone or computer contacts instead of typing. Only the ones you choose come in.",
+   "keywords": [
+    "import",
+    "contacts",
+    "vcf",
+    "vcard",
+    "phone contacts",
+    "address book",
+    "google contacts"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Importing",
+     "blocks": [
+      {
+       "ol": [
+        "Export your contacts as a file (.vcf). The app shows how for iPhone, Android and Google contacts.",
+        "When you add a person, choose “Import from your contacts” (on an empty map: “Import people from my contacts”), and pick that file.",
+        "Tick the people who matter. Each comes in with name, birthday, phone, email and photo, if the file has them.",
+        "Place each one: who they are to you, which ring, and how it feels."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Good to know",
+     "blocks": [
+      {
+       "p": "The file is read on this device; nothing is uploaded. People you don’t tick are not kept. After your start, the app asks whether imported people are new in your life or were always there."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "map.export",
+   "kind": "feature",
+   "covers": [
+    "map.export"
+   ],
+   "title": "Exporting your map",
+   "answer": "A picture of your map in the book’s notation, with your numbers, as PNG or PDF. For your coach or therapist.",
+   "keywords": [
+    "export",
+    "picture",
+    "image",
+    "pdf",
+    "png",
+    "print",
+    "share map",
+    "coach"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Exporting",
+     "blocks": [
+      {
+       "ol": [
+        "On the map, tap the share button.",
+        "Choose names in full or initials, and whether photos are included.",
+        "Save it as PNG or PDF."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "What is in it",
+     "blocks": [
+      {
+       "p": "The rings, the people and their numbers. If you said you have no partner, or that you wish for a child, the exported map shows that empty place, as the book draws it, even if you hid it on your live map. Romantic hearts are never in an exported picture, and the friendzone only if you choose it."
+      },
+      {
+       "p": "The file is created on this device and only leaves it if you send it to someone. Initials make a picture harder to link to someone; relationships and context can still give a person away."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "map.links",
+   "kind": "feature",
+   "covers": [
+    "map.links"
+   ],
+   "title": "All links",
+   "answer": "Everything that leads outside the app in one place: event searches, ways to reach your people, and the science.",
+   "keywords": [
+    "links",
+    "whatsapp",
+    "phone",
+    "email",
+    "book",
+    "paper",
+    "science"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Using it",
+     "blocks": [
+      {
+       "p": "Tap the link button at the top. Links open in a new tab; the app itself never contacts anyone."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "What you find there",
+     "blocks": [
+      {
+       "ul": [
+        "Searches for events near you, once your city and interests are set in Grow.",
+        "Everyone you saved a way to reach (WhatsApp, phone, email, a profile), closest first.",
+        "The book Ending Loneliness and the research paper behind the app, “The Missing Metric”."
+       ]
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "pro.worlds",
+   "kind": "feature",
+   "covers": [
+    "pro.worlds"
+   ],
+   "title": "Worlds: how your people know each other",
+   "answer": "Worlds shows how your people are linked to each other, so separate worlds, bridges and gaps become visible.",
+   "sub": "Pro. Open to testers today; prices follow only once they are set.",
+   "keywords": [
+    "worlds",
+    "circles",
+    "network",
+    "who knows whom",
+    "clusters",
+    "bridges",
+    "groups"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Building it",
+     "blocks": [
+      {
+       "ol": [
+        "On the map, switch the layout from Rings to Worlds.",
+        "Add a circle, such as your climbing crew, your family or your team at work, and say who is in it.",
+        "Say whether everyone in the circle knows each other, or name ties one by one."
+       ]
+      },
+      {
+       "p": "One person can be in several circles. That is where bridges between your worlds come from."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Reading it",
+     "blocks": [
+      {
+       "p": "You are linked to everyone, so Worlds leaves you out. Dashed lines come from “everyone in this circle knows each other”; solid lines are ties you named. Nothing is guessed."
+      },
+      {
+       "p": "You can export the structure with names replaced by P1, P2 and so on, for your own analysis or a coach. Deleting a circle keeps the people on your map."
+      }
+     ]
+    }
+   ],
+   "tier": "pro",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "pro.mirror-analysis",
+   "kind": "feature",
+   "covers": [
+    "pro.mirror-analysis"
+   ],
+   "title": "Mirror analysis",
+   "answer": "Your Mirror Audit estimates over time, person by person, and across everyone you looked at.",
+   "sub": "Pro. Open to testers today; prices follow only once they are set.",
+   "keywords": [
+    "mirror",
+    "analysis",
+    "over time",
+    "trend",
+    "estimates"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Where to find it",
+     "blocks": [
+      {
+       "p": "It is part of [The Mirror Audit](guide:grow.mirror): each person’s page in the audit shows their line over time, and an overview shows all the people you looked at."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Reading it",
+     "blocks": [
+      {
+       "p": "Each line shows your estimates of one person’s view, look by look. A new line starts when the scale changed (another ring or relationship type). These are your estimates, not their answers; “about the same” means a gap of 10 % or less."
+      }
+     ]
+    }
+   ],
+   "tier": "pro",
+   "checked": "0.36.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "pro.pattern",
+   "kind": "feature",
+   "covers": [
+    "pro.pattern"
+   ],
+   "title": "Your tribe pattern",
+   "answer": "A pattern that grows from your own map: one band for each ring, as full as that ring is, and a crown of seven marks for the Realms.",
+   "sub": "Pro. Open to testers today; prices follow only once they are set.",
+   "keywords": [
+    "pattern",
+    "tribe pattern",
+    "motif",
+    "design",
+    "sun",
+    "art"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Making it",
+     "blocks": [
+      {
+       "p": "Open You › Your tribe pattern and pick a motif; the rest comes from your map. If you like, wear it around the sun on your map."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Good to know",
+     "blocks": [
+      {
+       "p": "The motifs are original and abstract, inspired by knotwork, spirals and weaving. No sacred or culturally specific designs are copied. “Remove my pattern” takes it away again."
+      }
+     ]
+    }
+   ],
+   "tier": "pro",
+   "checked": "0.36.0"
+  },
+  {
+   "kind": "help",
+   "covers": [],
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "help.map-empty",
+   "title": "My map looks empty",
+   "answer": "An empty map can have several causes. Check these before you restore a backup.",
+   "keywords": [
+    "gone",
+    "lost",
+    "disappeared",
+    "missing",
+    "empty",
+    "deleted",
+    "where is my map",
+    "blank"
+   ],
+   "sections": [
+    {
+     "id": "check",
+     "kind": "how",
+     "title": "Check these first",
+     "blocks": [
+      {
+       "note": "Before you change anything: don’t clear your browser data. That would delete a map that may still be there."
+      },
+      {
+       "ol": [
+        "Same browser? Your map lives in the browser you made it in. Chrome and Safari on the same phone each keep their own.",
+        "Same address? Open be:moyo from the same link or home-screen icon as before. A different address starts empty.",
+        "Private window? Private windows forget everything when you close them. Open the app in a normal window.",
+        "Does your browser block site data? Some settings and privacy add-ons stop websites from keeping anything. The app then can’t show a saved map."
+       ]
+      },
+      {
+       "p": "Found your map? Stop here and save a backup right away. [How to save a backup](guide:data.backup)"
+      }
+     ]
+    },
+    {
+     "id": "next",
+     "kind": "reference",
+     "title": "If none of these helps",
+     "blocks": [
+      {
+       "p": "You have a backup file: restore it under You › Backup. Read what the file holds and any warning first. The app normally keeps a safety copy of your current map, and tells you if it can’t. On a computer in Chrome or Edge, restoring can also update the backup file itself; untick “Keep this file up to date automatically” if you want the file unchanged. [Restoring a backup](guide:data.restore)"
+      },
+      {
+       "p": "You have no backup file: we can’t bring back a map deleted from this browser, because the app never sent it to us. You can begin a new map whenever you are ready."
+      }
+     ]
+    }
+   ],
+   "tier": null,
+   "checked": "0.36.0"
+  },
+  {
+   "kind": "help",
+   "covers": [],
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "help.restore-failed",
+   "title": "A restore didn’t work",
+   "answer": "Nothing on your map changes when a restore fails. The message tells you which of these it was.",
+   "keywords": [
+    "restore",
+    "backup",
+    "error",
+    "file",
+    "import",
+    "wont open",
+    "not a backup",
+    "damaged",
+    "newer version"
+   ],
+   "sections": [
+    {
+     "id": "messages",
+     "kind": "reference",
+     "title": "What the message means",
+     "blocks": [
+      {
+       "ul": [
+        "The file is not a backup of this app, or is not readable: it may be a different file, or it was changed or damaged after saving. Look for another copy, for example your automatic backup file.",
+        "“Made by a newer version of the app”: update the app first. Reload when the note about a new version appears, then restore again.",
+        "“Too large to be a backup of this app”: you probably picked a different file.",
+        "A locked backup asks for a passcode: it opens only with the passcode or recovery code it was made with, even if you use a different one today."
+       ]
+      },
+      {
+       "p": "The app never overwrites a file it can’t read. [Restoring a backup](guide:data.restore)"
+      }
+     ]
+    }
+   ],
+   "tier": null,
+   "checked": "0.36.0"
+  },
+  {
+   "kind": "help",
+   "covers": [],
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "help.audio-offline",
+   "title": "Audio won’t play offline",
+   "answer": "Recordings play without internet only after you saved them on this device.",
+   "keywords": [
+    "audio",
+    "listen",
+    "recording",
+    "offline",
+    "no internet",
+    "plane",
+    "sound"
+   ],
+   "sections": [
+    {
+     "id": "fix",
+     "kind": "how",
+     "title": "What to do",
+     "blocks": [
+      {
+       "ol": [
+        "Go online and open the text you want to hear.",
+        "Tap “Save for offline listening” and wait until it says the recordings are saved.",
+        "From then on they play without internet. The text itself always works offline."
+       ]
+      },
+      {
+       "p": "Some browsers, especially in private windows, can’t keep recordings; the app then says so. [Listening offline](guide:you.offline)"
+      }
+     ]
+    }
+   ],
+   "tier": null,
+   "checked": "0.36.0"
+  },
+  {
+   "kind": "help",
+   "covers": [],
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "help.old-version",
+   "title": "The app shows an old version",
+   "answer": "New versions arrive by themselves, but they start only after a reload.",
+   "keywords": [
+    "update",
+    "old",
+    "version",
+    "new version",
+    "refresh",
+    "reload",
+    "not updating"
+   ],
+   "sections": [
+    {
+     "id": "fix",
+     "kind": "how",
+     "title": "What to do",
+     "blocks": [
+      {
+       "ol": [
+        "Finish what you are doing.",
+        "When “A new version of the app is ready” appears, reload. If no note appears, close the app completely and open it again.",
+        "Close any other window or tab with the app still open from before. An old window can still show your map, and what it saves can be lost."
+       ]
+      },
+      {
+       "p": "Updates are made to keep your map as it is. Keep a recent backup anyway, and if the app shows a warning about another window or a save problem, follow it before closing anything. With App Lock on, you may need your passcode again. [Updates and What’s new](guide:you.version)"
+      }
+     ]
+    }
+   ],
+   "tier": null,
+   "checked": "0.36.0"
+  },
+  {
+   "kind": "help",
+   "covers": [],
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
+   "id": "help.cant-find",
+   "title": "I can’t find a feature",
+   "answer": "Some tools appear only when they apply to you, and a few need someone on your map first.",
+   "keywords": [
+    "missing",
+    "where is",
+    "cant find",
+    "hidden",
+    "partner tools",
+    "not there"
+   ],
+   "sections": [
+    {
+     "id": "reasons",
+     "kind": "reference",
+     "title": "Common reasons",
+     "blocks": [
+      {
+       "ul": [
+        "The partner tools appear only if you said you are looking for a partner, under You › About you. [About you](guide:you.about)",
+        "Pulse, Realms and the other views open once at least one person is on your map. Until then the app shows the map.",
+        "Pro tools are marked Pro. During the test phase they are open to testers."
+       ]
+      },
+      {
+       "p": "Search the Guide in your own words, or open [Grow](app:grow), which lists every tool."
+      }
+     ]
+    }
+   ],
+   "tier": null,
+   "checked": "0.36.0"
+  }
+ ],
+ "releases": [
+  {
+   "version": "0.36.0",
+   "date": "2026-11-10",
+   "title": "The Guide",
+   "items": [
+    "You → The Guide: every feature of be:moyo explained, step by step, with the science behind it: what comes from the book, what research has found, and what hasn’t been tested yet.",
+    "Search it in your own words. Every “?” tip and every tool in Grow has a “Read more in the Guide” link to its page.",
+    "Forgot your passcode? The lock screen now has “Help with the lock and backups”: the pages on the lock, backups and recovery open without unlocking.",
+    "Troubleshooting for the usual worries: a map that looks empty, a restore that didn’t work, audio offline, an old version."
+   ],
+   "impacts": [
+    "data.recovery",
+    "data.lock"
+   ]
+  },
+  {
+   "version": "0.35.0",
+   "date": "2026-11-09",
+   "title": "The Attribute Test",
+   "items": [
+    "Grow → Know yourself (and Partner) → \"The Attribute Test\": who are you really looking for? Pick what you want and what you can’t live with in looks, character and lifestyle; a truth test for your dealbreakers, duels to rank your wishes, and the cut to five per dimension. A stadium of 100,000 seats shows, as an illustration, how every wish narrows the field.",
+    "At the end you have your compass: your five per dimension, your true dealbreakers, how to spot them on a date and a feeling to remember. It shows on the partner slot of your map, and your date checks use it (you can switch that off).",
+    "The chapter behind the test, by Axel, to read or listen to (seven parts, about 25 minutes)."
+   ]
+  },
+  {
+   "version": "0.34.0",
+   "date": "2026-11-07",
+   "title": "Flirting — an introduction, to listen to",
+   "items": [
+    "Grow → Flirting → \"Flirting — an introduction\" can now be listened to: one recording per section, or all six in a row (about 24 minutes)."
+   ]
+  },
+  {
+   "version": "0.33.0",
+   "date": "2026-11-07",
+   "title": "Exposure Coach",
+   "items": [
+    "Grow → Exposure Coach: one small real-world step on the days you choose — a look, a hello, a question, a bit of play, a flirt. Three tracks (warm-up, small talk, flirting), three levels each.",
+    "Before a step you can guess how it will go; afterwards you note how it went. Over time you see, in your own numbers, how often your fear was right. A \"no\" counts as much as a \"yes\".",
+    "Steps where you said hello, asked a real question, swapped names or asked to meet also count on the approach ladder.",
+    "Grow → Flirting → \"Flirting — an introduction\": a longer text to read, with audio to follow."
+   ]
+  },
+  {
+   "version": "0.32.0",
+   "date": "2026-11-04",
+   "title": "Who you are looking for",
+   "items": [
+    "You → About you asks for your birthday, and, if you are looking for a partner, what you are looking for: the kind of relationship, children, your pace, and three to five wishes in your own words.",
+    "After a date, three short questions: did you find out what they are looking for, did children come up, and does this person fit your wishes. No score, no percentage. Your answers stay on your device.",
+    "If you want children, Grow → Partner shows a family plan for your age.",
+    "Date help is only offered between two adults or between two people under 18."
+   ]
+  }
+ ]
+}

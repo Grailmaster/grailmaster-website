@@ -1,0 +1,74 @@
+---
+/** One section's content, as in the app's Guide (text first; pictures add, they never carry information alone). */
+import { GUIDE, rich, type Block } from "../../lib/bemoyo";
+interface Props {
+  blocks: Block[];
+}
+const { blocks } = Astro.props;
+const L = GUIDE.copy.claimLabel as Record<string, string>;
+---
+
+{
+  blocks.map((b) =>
+    "p" in b ? (
+      <p set:html={rich(b.p)} />
+    ) : "h" in b ? (
+      <h3>{b.h}</h3>
+    ) : "ol" in b ? (
+      <ol>
+        {b.ol.map((t) => (
+          <li set:html={rich(t)} />
+        ))}
+      </ol>
+    ) : "ul" in b ? (
+      <ul>
+        {b.ul.map((t) => (
+          <li set:html={rich(t)} />
+        ))}
+      </ul>
+    ) : "note" in b ? (
+      <p class="bm-note" set:html={rich(b.note)} />
+    ) : "claim" in b ? (
+      <div class={`bm-claim bm-claim-${b.claim.status}`}>
+        <span class="bm-tag">{L[b.claim.status]}</span>
+        <p set:html={rich(b.claim.text)} />
+        {b.claim.status === "book" && <small>Ending Loneliness, p. {b.claim.book.printed}</small>}
+        {b.claim.status === "research" && (
+          <>
+            <small>
+              {b.claim.study.cite} ·{" "}
+              <a href={b.claim.study.url} rel="noopener noreferrer">
+                {GUIDE.copy.readPaper}
+              </a>
+            </small>
+            {b.claim.study.details && (
+              <details>
+                <summary>{GUIDE.copy.studyDetails}</summary>
+                <dl>
+                  {b.claim.study.details.map(([k, v]) => (
+                    <>
+                      <dt>{k}</dt>
+                      <dd>{v}</dd>
+                    </>
+                  ))}
+                </dl>
+              </details>
+            )}
+          </>
+        )}
+        {b.claim.status === "untested" && b.claim.source && (
+          <small>
+            {b.claim.source.cite} ·{" "}
+            <a href={b.claim.source.url} rel="noopener noreferrer">
+              {GUIDE.copy.readPaper}
+            </a>
+          </small>
+        )}
+      </div>
+    ) : (
+      <figure class="bm-shot">
+        <img src={`/be-moyo/shots/${b.shot}-forest.webp`} alt={b.alt} loading="lazy" decoding="async" width="390" />
+      </figure>
+    ),
+  )
+}

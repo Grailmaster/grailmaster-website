@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="208" viewBox="0 0 320 208" role="img" aria-labelledby="title"><title id="title">be:moyo symbol, reverse</title><g id="symbol">
+<path id="outer-arc" fill="#EAF3EA" d="M 27 164 A 133 133 0 0 1 293 164 L 283 164 A 123 123 0 0 0 37 164 Z"/>
+<path id="inner-arc" fill="#FFFFFF" d="M 75 164 A 85 85 0 0 1 245 164 L 235 164 A 75 75 0 0 0 85 164 Z"/>
+<circle id="outer-node-left" cx="32" cy="164" r="12" fill="#EAF3EA"/>
+<circle id="outer-node-crown" cx="160" cy="36" r="12" fill="#EAF3EA"/>
+<circle id="outer-node-right" cx="288" cy="164" r="12" fill="#EAF3EA"/>
+<path id="you-half-dot" fill="#F4B64E" d="M 132 164 A 28 28 0 0 1 188 164 Z"/>
+</g></svg>

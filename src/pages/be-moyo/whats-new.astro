@@ -1,0 +1,47 @@
+---
+/** What's new: the app's own release notes for users (same text as You › What's new), newest first. */
+import Layout from "../../layouts/Layout.astro";
+import BmHeader from "../../components/bemoyo/BmHeader.astro";
+import { GUIDE, guidePath } from "../../lib/bemoyo";
+const pageOf = (feature: string) => GUIDE.entries.find((e) => ((e as any).covers as string[]).includes(feature));
+const day = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+---
+
+<Layout title="What’s new · be:moyo" description="What changed in be:moyo, release by release, in plain words." theme="bemoyo" image="/be-moyo/brand/og.png">
+  <BmHeader />
+  <div class="container-x bm-page">
+    <header class="bm-head">
+      <h1>What’s new</h1>
+      <p class="bm-answer">What changed in be:moyo, release by release.</p>
+    </header>
+    {
+      GUIDE.releases.map((r) => (
+        <section class="bm-prose bm-release" aria-labelledby={`v-${r.version}`}>
+          <h2 id={`v-${r.version}`}>
+            {r.version} · {r.title}
+          </h2>
+          <p class="bm-quiet">{day(r.date)}</p>
+          <ul>
+            {r.items.map((i) => (
+              <li>{i}</li>
+            ))}
+          </ul>
+          {r.impacts?.length ? (
+            <p class="bm-quiet">
+              In the Guide:{" "}
+              {r.impacts
+                .map((id) => pageOf(id))
+                .filter(Boolean)
+                .map((e, k) => (
+                  <>
+                    {k > 0 && " · "}
+                    <a href={guidePath(e!.id)}>{e!.title}</a>
+                  </>
+                ))}
+            </p>
+          ) : null}
+        </section>
+      ))
+    }
+  </div>
+</Layout>

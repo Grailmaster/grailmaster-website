@@ -1,0 +1,30 @@
+---
+/** The be:moyo band under the site's own navigation: supplied logo artwork, never retyped (brand guidelines v1.0). */
+import { APP_URL, publicGuide } from "../../lib/bemoyo";
+const path = Astro.url.pathname;
+const links = [
+  { href: "/be-moyo/", label: "The app" },
+  { href: `${publicGuide.basePath}/`, label: "The Guide" },
+  { href: "/be-moyo/whats-new/", label: "What’s new" },
+];
+const active = (href: string) => (href === "/be-moyo/" ? path === href : path.startsWith(href));
+---
+
+<div class="bm-band">
+  <div class="container-x bm-band-in">
+    <a href="/be-moyo/" class="bm-logo" aria-label="be:moyo">
+      <img class="bm-logo-wide" src="/be-moyo/brand/bemoyo-horizontal-color.svg" width="248" height="80" alt="" />
+      <img class="bm-logo-compact" src="/be-moyo/brand/bemoyo-symbol-color.svg" width="56" height="56" alt="" />
+    </a>
+    <nav class="bm-nav" aria-label="be:moyo">
+      {
+        links.map((l) => (
+          <a href={l.href} class={l.href === "/be-moyo/" ? "bm-nav-app" : undefined} aria-current={active(l.href) ? "page" : undefined}>
+            {l.label}
+          </a>
+        ))
+      }
+      <a class="bm-open" href={APP_URL}>Open the app</a>
+    </nav>
+  </div>
+</div>
