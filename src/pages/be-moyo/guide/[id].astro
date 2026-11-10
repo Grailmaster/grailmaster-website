@@ -34,6 +34,7 @@ const groupHref = group ? (group.id === "data" || group.id === "help" ? `${publi
         <span>Applies to app version {e.checked}</span>
         {tier && <span class="bm-chip">{tier}</span>}
       </p>
+      <p class="bm-quiet">The steps on this page are done inside the app.</p>
       <p class="bm-note" data-bm-from-app={e.checked} hidden></p>
 
       {

@@ -16,7 +16,7 @@ const shots = [
 
 <Layout
   title="be:moyo · your social life on one map"
-  description="be:moyo shows who is in your life, what each relationship brings, and where a small step would help. Built on the book Ending Loneliness. Free to use, no account."
+  description="Map the people in your life, reflect on your relationships and explore small steps to try. Based on the book Ending Loneliness. Free during testing. No account."
   theme="bemoyo"
   image="/be-moyo/brand/og.png"
 >
@@ -26,17 +26,22 @@ const shots = [
       <div>
         <h1>Your social life, on one map.</h1>
         <p class="bm-answer">
-          be:moyo shows who is in your life, what each relationship brings, and where a small step would help.
+          Add the people in your life, note what each relationship brings into it, and explore small steps you could
+          try. be:moyo runs in your browser.
         </p>
         <p class="bm-sub">It is built on the book <a href="/ending-loneliness">Ending Loneliness</a> by Dr. Axel Schumacher.</p>
         <div class="bm-actions">
           <a class="btn btn-primary" href={APP_URL}>Open the app</a>
           <a class="btn btn-ghost" href={`${publicGuide.basePath}/`}>Read the Guide</a>
         </div>
-        <p class="bm-quiet">Free to use. No account. Your map stays in your browser, on your device.</p>
+        <p class="bm-quiet">
+          Free during testing. No account. Your map is stored in this browser on this device; be:moyo doesn’t upload it.
+          <a href={guidePath("data.where")}>Where your map is kept</a>
+        </p>
       </div>
       <figure class="bm-shot bm-hero-shot">
         <img src="/be-moyo/shots/map-forest.webp" alt={heroAlt} width="390" />
+        <figcaption>An example map</figcaption>
       </figure>
     </header>
 
@@ -72,8 +77,10 @@ const shots = [
     <section aria-labelledby="bm-sci" class="bm-prose">
       <h2 id="bm-sci">The science, said plainly</h2>
       <p>
-        Every feature page in the Guide says where its ideas come from: the book, published research, or not yet tested.
+        The Guide explains where the app’s ideas come from, and keeps three things apart: ideas from the book, published
+        research findings, and claims that have not been tested yet.
       </p>
+      <p>SCV (Social Connectivity Value) is the app’s summary number for your map.</p>
       <div class="bm-claim bm-claim-untested">
         <span class="bm-tag">{GUIDE.copy.claimLabel.untested}</span>
         <p>
