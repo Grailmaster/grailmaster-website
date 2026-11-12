@@ -1,7 +1,7 @@
 {
  "format": 1,
- "appVersion": "0.36.0",
- "manifestVersion": "0.36.0",
+ "appVersion": "0.37.0",
+ "manifestVersion": "0.37.0",
  "supportEmail": "parallelspace.advisors@gmail.com",
  "copy": {
   "title": "The Guide",
@@ -533,18 +533,12 @@
          "quote": "a range of −50 to +50"
         }
        }
-      },
-      {
-       "claim": {
-        "status": "untested",
-        "text": "These ranges come from the book’s framework. They have not been validated as the best weights for every person. They stay the same for everyone, so your own changes stay comparable over time."
-       }
       }
      ]
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.37.0"
   },
   {
    "status": "approved",
@@ -943,18 +937,12 @@
          "quote": "not as a static snapshot, but as a dynamic trend line"
         }
        }
-      },
-      {
-       "claim": {
-        "status": "untested",
-        "text": "The width of the “around your start” band is a first setting chosen for be:moyo, not a value from research. It may change as people use the app."
-       }
       }
      ]
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.37.0"
   },
   {
    "status": "approved",
@@ -1099,18 +1087,12 @@
          "quote": "a high-clustering, low-bridging network"
         }
        }
-      },
-      {
-       "claim": {
-        "status": "untested",
-        "text": "The thresholds that decide when a pattern counts are an initial app setting, not validated values. They may change."
-       }
       }
      ]
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.37.0"
   },
   {
    "status": "approved",
@@ -1251,26 +1233,10 @@
        "p": "Sometimes how you rate someone and how time with them leaves you disagree. That is worth knowing, not a mistake."
       }
      ]
-    },
-    {
-     "id": "science",
-     "kind": "science",
-     "title": "The science behind it",
-     "blocks": [
-      {
-       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
-      },
-      {
-       "claim": {
-        "status": "untested",
-        "text": "“How time together leaves you” summarizes your own before-and-after ratings. It is not a validated test, and how much recent moments count is an initial app setting."
-       }
-      }
-     ]
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.37.0"
   },
   {
    "status": "approved",
@@ -1384,18 +1350,12 @@
          "quote": "seven questions, one per Realm"
         }
        }
-      },
-      {
-       "claim": {
-        "status": "untested",
-        "text": "The seats (whole, half or quarter by distance) are be:moyo’s way of drawing the book’s idea, an initial app setting rather than a measured value."
-       }
       }
      ]
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.37.0"
   },
   {
    "status": "approved",
@@ -1452,26 +1412,10 @@
        "p": "Each part has a ceiling, so no single one can dominate: ten moments count, the eleventh doesn’t add more. Momentum is never compared with other people, and it doesn’t change your SCV."
       }
      ]
-    },
-    {
-     "id": "science",
-     "kind": "science",
-     "title": "The science behind it",
-     "blocks": [
-      {
-       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
-      },
-      {
-       "claim": {
-        "status": "untested",
-        "text": "Which parts count, how much each weighs and where the ceilings are is an initial app setting, not a validated scale."
-       }
-      }
-     ]
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.37.0"
   },
   {
    "status": "approved",
@@ -1926,18 +1870,12 @@
          "design": "field and lab experiments"
         }
        }
-      },
-      {
-       "claim": {
-        "status": "untested",
-        "text": "The order of the steps and levels was designed for be:moyo and has not been tested against other sequences."
-       }
       }
      ]
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.37.0"
   },
   {
    "status": "approved",
@@ -2308,18 +2246,12 @@
          "quote": "a high-clustering, low-bridging network"
         }
        }
-      },
-      {
-       "claim": {
-        "status": "untested",
-        "text": "The stages and the order in which the app checks them are be:moyo’s own design, not a tested model."
-       }
       }
      ]
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.37.0"
   },
   {
    "status": "approved",
@@ -2462,26 +2394,10 @@
        "p": "A flat hello, an awkward question or a no is practice and information, not a verdict on you."
       }
      ]
-    },
-    {
-     "id": "science",
-     "kind": "science",
-     "title": "The science behind it",
-     "blocks": [
-      {
-       "p": "These labels show where each idea comes from and what has, or hasn’t, been tested. Book pages are the printed page numbers."
-      },
-      {
-       "claim": {
-        "status": "untested",
-        "text": "The five steps and when to move up are be:moyo’s own design. Whether this order works better than another has not been tested."
-       }
-      }
-     ]
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.37.0"
   },
   {
    "status": "approved",
@@ -2770,18 +2686,12 @@
          "design": "worldwide survey study"
         }
        }
-      },
-      {
-       "claim": {
-        "status": "untested",
-        "text": "The Attribute Test is a structured reflection from Axel’s book The Art & Science of Dating, not a validated psychometric test."
-       }
       }
      ]
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.37.0"
   },
   {
    "status": "approved",
@@ -2915,18 +2825,12 @@
          "design": "validated short questionnaire"
         }
        }
-      },
-      {
-       "claim": {
-        "status": "untested",
-        "text": "The questions about your dating situation, recent moments and loneliness are be:moyo’s own, not a validated scale."
-       }
       }
      ]
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.37.0"
   },
   {
    "status": "approved",
@@ -3083,18 +2987,12 @@
          "quote": "We have the film. Everyone else has the stills"
         }
        }
-      },
-      {
-       "claim": {
-        "status": "untested",
-        "text": "The colours and the 10 % band are a visual guide built from your own ratings, not a measurement of anyone’s feelings."
-       }
       }
      ]
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.37.0"
   },
   {
    "status": "approved",
@@ -3250,7 +3148,7 @@
       {
        "ol": [
         "Open You › Backup.",
-        "Tap “Save a backup file”.",
+        "Tap “Save a backup file”. It is named bemoyo-backup- and the date; files from earlier versions, named social-health-os-backup-, open just the same.",
         "Keep the file somewhere safe, for example in your cloud folder."
        ]
       },
@@ -3274,7 +3172,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.37.0"
   },
   {
    "status": "approved",
@@ -4530,6 +4428,20 @@
  ],
  "releases": [
   {
+   "version": "0.37.0",
+   "date": "2026-11-11",
+   "title": "be:moyo",
+   "items": [
+    "The app has its name: be:moyo, and a new icon. Your map, your backups and everything you saved stay as they are, and backups made before still open.",
+    "New backup files are called bemoyo-backup-…; an automatic backup file you already chose keeps its name.",
+    "On your home screen the old name and icon may stay until your device offers the new ones. Nothing is lost if they stay. On an iPhone or iPad, don’t remove the app to get the new icon without saving a backup file first: removing it can delete what it stored.",
+    "The Guide: the “Not yet tested” notes about the app’s own settings are gone from the feature pages. The note on Your SCV stays."
+   ],
+   "impacts": [
+    "data.backup"
+   ]
+  },
+  {
    "version": "0.36.0",
    "date": "2026-11-10",
    "title": "The Guide",
@@ -4571,17 +4483,6 @@
     "Before a step you can guess how it will go; afterwards you note how it went. Over time you see, in your own numbers, how often your fear was right. A \"no\" counts as much as a \"yes\".",
     "Steps where you said hello, asked a real question, swapped names or asked to meet also count on the approach ladder.",
     "Grow → Flirting → \"Flirting — an introduction\": a longer text to read, with audio to follow."
-   ]
-  },
-  {
-   "version": "0.32.0",
-   "date": "2026-11-04",
-   "title": "Who you are looking for",
-   "items": [
-    "You → About you asks for your birthday, and, if you are looking for a partner, what you are looking for: the kind of relationship, children, your pace, and three to five wishes in your own words.",
-    "After a date, three short questions: did you find out what they are looking for, did children come up, and does this person fit your wishes. No score, no percentage. Your answers stay on your device.",
-    "If you want children, Grow → Partner shows a family plan for your age.",
-    "Date help is only offered between two adults or between two people under 18."
    ]
   }
  ]
