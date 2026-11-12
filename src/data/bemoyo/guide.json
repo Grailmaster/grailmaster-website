@@ -1,7 +1,7 @@
 {
  "format": 1,
- "appVersion": "0.37.0",
- "manifestVersion": "0.37.0",
+ "appVersion": "0.38.0",
+ "manifestVersion": "0.38.0",
  "supportEmail": "parallelspace.advisors@gmail.com",
  "copy": {
   "title": "The Guide",
@@ -295,6 +295,9 @@
        ]
       },
       {
+       "p": "After the first person, the app shows them on your map and offers “Add another person” or “See Today”."
+      },
+      {
        "p": "You can also stop here and add someone later; until the first person is on your map, the app shows the map. Then Today, Pulse, Realms and Grow open: Today suggests what to do this week, and Grow holds every tool."
       }
      ]
@@ -322,7 +325,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.38.0"
   },
   {
    "status": "approved",
@@ -1207,7 +1210,8 @@
        "ol": [
         "Tap “Log a moment”, at the bottom of most pages.",
         "Choose who you were with, how you connected (in person, call, video or message) and when.",
-        "If you like, say how you felt before and after. Energy, who suggested it and a note are optional too."
+        "If you like, open “How you felt before and after” and give both. Energy, who suggested it and a note are optional too.",
+        "Tap Save. Save and Cancel stay at the bottom of the sheet."
        ]
       },
       {
@@ -1236,7 +1240,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.37.0"
+   "checked": "0.38.0"
   },
   {
    "status": "approved",
@@ -3571,7 +3575,7 @@
     "you.appearance"
    ],
    "title": "How the app looks",
-   "answer": "Choose the background your map sits on: light ones use the Sand colours, dark ones the Forest colours.",
+   "answer": "Choose the background your map sits on: light ones use the Sand colours, dark ones the Forest colours. Mist Morning is light, in the be:moyo greens.",
    "keywords": [
     "theme",
     "dark mode",
@@ -3604,7 +3608,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.38.0"
   },
   {
    "status": "approved",
@@ -4428,6 +4432,22 @@
  ],
  "releases": [
   {
+   "version": "0.38.0",
+   "date": "2026-11-12",
+   "title": "Mist Morning",
+   "items": [
+    "A new look: in You, choose Mist Morning. It is light, in the be:moyo greens, with Forest green for what you tap. Forest Dusk and Sand Morning stay as they are.",
+    "Your first person: after you add them, the app shows them on your map and offers “Add another person” or “See Today”.",
+    "Log a moment: Save and Cancel now stay at the bottom of the sheet, so you don’t have to scroll to find them. How you felt before and after is folded away; open it if you want to give it.",
+    "On a computer, the be:moyo logo now sits above your list of people, next to the map. In a short browser window the map’s buttons no longer slide under the top bar."
+   ],
+   "impacts": [
+    "start.first-map",
+    "today.log",
+    "you.appearance"
+   ]
+  },
+  {
    "version": "0.37.0",
    "date": "2026-11-11",
    "title": "be:moyo",
@@ -4472,17 +4492,6 @@
    "title": "Flirting — an introduction, to listen to",
    "items": [
     "Grow → Flirting → \"Flirting — an introduction\" can now be listened to: one recording per section, or all six in a row (about 24 minutes)."
-   ]
-  },
-  {
-   "version": "0.33.0",
-   "date": "2026-11-07",
-   "title": "Exposure Coach",
-   "items": [
-    "Grow → Exposure Coach: one small real-world step on the days you choose — a look, a hello, a question, a bit of play, a flirt. Three tracks (warm-up, small talk, flirting), three levels each.",
-    "Before a step you can guess how it will go; afterwards you note how it went. Over time you see, in your own numbers, how often your fear was right. A \"no\" counts as much as a \"yes\".",
-    "Steps where you said hello, asked a real question, swapped names or asked to meet also count on the approach ladder.",
-    "Grow → Flirting → \"Flirting — an introduction\": a longer text to read, with audio to follow."
    ]
   }
  ]
