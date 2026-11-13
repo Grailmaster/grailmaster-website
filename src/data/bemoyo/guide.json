@@ -1,7 +1,7 @@
 {
  "format": 1,
- "appVersion": "0.41.0",
- "manifestVersion": "0.41.0",
+ "appVersion": "0.42.0",
+ "manifestVersion": "0.42.0",
  "supportEmail": "parallelspace.advisors@gmail.com",
  "copy": {
   "title": "The Guide",
@@ -486,7 +486,8 @@
       {
        "ol": [
         "Tap the person on the [map](app:map).",
-        "Move the slider, or change their ring, distance, what they bring, or how you met.",
+        "Their page opens with the slider and how the relationship developed, then one line each for what to remember, your goal, your rhythm and your story. Tap a line to open it.",
+        "Ring, relationship, distance, ways to reach them and the rest are under “Edit details”. Time together, the Mirror and similar tools are under “Tools for this relationship”.",
         "Close the sheet. Every change is saved at once."
        ]
       },
@@ -541,7 +542,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.37.0"
+   "checked": "0.42.0"
   },
   {
    "status": "approved",
@@ -3475,7 +3476,7 @@
      "blocks": [
       {
        "ul": [
-        "One person: open them, choose “Remove”, and say whether the relationship ended or you are just tidying up. Only an ended relationship counts as a change since your start.",
+        "One person: open them, open “Edit details”, choose “Remove” at the end, and say whether the relationship ended or you are just tidying up. Only an ended relationship counts as a change since your start.",
         "One tool’s data: most tools have their own delete, such as “Delete my answers” (Know yourself), “Delete my compass” (Attribute Test), “Delete my coach data” (Exposure Coach) or “Remove my pattern”.",
         "Everything on this device: save a backup first if you may want it back. Then delete this site’s data in your browser’s settings (for this app’s address only)."
        ]
@@ -3494,7 +3495,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.42.0"
   },
   {
    "status": "approved",
@@ -4432,6 +4433,20 @@
  ],
  "releases": [
   {
+   "version": "0.42.0",
+   "date": "2026-11-13",
+   "title": "A person at a glance",
+   "items": [
+    "A person’s page now opens as an overview: ways to reach them (WhatsApp, phone, email) one tap away, your slider and how the relationship developed, then one line each for what to remember, your goal, your rhythm and your story. Tap a line to open it.",
+    "Everything else is still there, in two groups: “Edit details” (ring, relationship, distance, contact details, Realms, remove) and “Tools for this relationship”. “Edit details” stays open on this device once you open it.",
+    "A reminder about something to ask now opens the person at “Remember for next time”."
+   ],
+   "impacts": [
+    "map.person",
+    "data.delete"
+   ]
+  },
+  {
    "version": "0.41.0",
    "date": "2026-11-13",
    "title": "A lighter start",
@@ -4485,20 +4500,6 @@
     "start.first-map",
     "today.log",
     "you.appearance"
-   ]
-  },
-  {
-   "version": "0.37.0",
-   "date": "2026-11-11",
-   "title": "be:moyo",
-   "items": [
-    "The app has its name: be:moyo, and a new icon. Your map, your backups and everything you saved stay as they are, and backups made before still open.",
-    "New backup files are called bemoyo-backup-…; an automatic backup file you already chose keeps its name.",
-    "On your home screen the old name and icon may stay until your device offers the new ones. Nothing is lost if they stay. On an iPhone or iPad, don’t remove the app to get the new icon without saving a backup file first: removing it can delete what it stored.",
-    "The Guide: the “Not yet tested” notes about the app’s own settings are gone from the feature pages. The note on Your SCV stays."
-   ],
-   "impacts": [
-    "data.backup"
    ]
   }
  ]
