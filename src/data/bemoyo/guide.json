@@ -1,7 +1,7 @@
 {
  "format": 1,
- "appVersion": "0.39.0",
- "manifestVersion": "0.39.0",
+ "appVersion": "0.40.0",
+ "manifestVersion": "0.40.0",
  "supportEmail": "parallelspace.advisors@gmail.com",
  "copy": {
   "title": "The Guide",
@@ -394,7 +394,7 @@
        ]
       },
       {
-       "p": "The legend button on the map (the list icon) shows all symbols at once."
+       "p": "The legend button on the map (the list icon) shows all symbols at once. On a phone, in the Rings view, it is under “View”, together with photos or initials, missing slots and export; “Map” and “List” at the top switch between the map and the list of your people."
       },
       {
        "shot": "map-legend",
@@ -444,7 +444,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.40.0"
   },
   {
    "status": "approved",
@@ -4432,6 +4432,20 @@
  ],
  "releases": [
   {
+   "version": "0.40.0",
+   "date": "2026-11-13",
+   "title": "Map and list on a phone",
+   "items": [
+    "On a phone, the Map tab (Rings view) has “Map” and “List” at the top: the map, or the list of your people. The app remembers your choice on this device.",
+    "The map’s display settings (photos or initials, missing slots, the legend, export) are now under one “View” button on a phone, so the map comes first. On a computer nothing changes.",
+    "Realms: the wheel comes first; how the Realms work is one tap away.",
+    "Grow: shortcuts to its groups under the search box."
+   ],
+   "impacts": [
+    "map.view"
+   ]
+  },
+  {
    "version": "0.39.0",
    "date": "2026-11-13",
    "title": "Start without anyone on your map",
@@ -4488,16 +4502,6 @@
    "impacts": [
     "data.recovery",
     "data.lock"
-   ]
-  },
-  {
-   "version": "0.35.0",
-   "date": "2026-11-09",
-   "title": "The Attribute Test",
-   "items": [
-    "Grow → Know yourself (and Partner) → \"The Attribute Test\": who are you really looking for? Pick what you want and what you can’t live with in looks, character and lifestyle; a truth test for your dealbreakers, duels to rank your wishes, and the cut to five per dimension. A stadium of 100,000 seats shows, as an illustration, how every wish narrows the field.",
-    "At the end you have your compass: your five per dimension, your true dealbreakers, how to spot them on a date and a feeling to remember. It shows on the partner slot of your map, and your date checks use it (you can switch that off).",
-    "The chapter behind the test, by Axel, to read or listen to (seven parts, about 25 minutes)."
    ]
   }
  ]
