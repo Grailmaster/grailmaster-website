@@ -1,7 +1,7 @@
 {
  "format": 1,
- "appVersion": "0.40.0",
- "manifestVersion": "0.40.0",
+ "appVersion": "0.41.0",
+ "manifestVersion": "0.41.0",
  "supportEmail": "parallelspace.advisors@gmail.com",
  "copy": {
   "title": "The Guide",
@@ -3539,7 +3539,7 @@
        ]
       },
       {
-       "p": "Open You › About you to change any answer."
+       "p": "From “Start: what are you here for?” on the first screen, the questions come in three short pages. You can leave any question unanswered; “Skip” on the first page goes straight to adding a person. Open You › About you to change any answer; there they are on one page."
       }
      ]
     },
@@ -3555,7 +3555,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.41.0"
   },
   {
    "status": "approved",
@@ -4432,6 +4432,18 @@
  ],
  "releases": [
   {
+   "version": "0.41.0",
+   "date": "2026-11-13",
+   "title": "A lighter start",
+   "items": [
+    "The first questions about you now come in three short pages: what you are here for, about you, partner and children. You can leave any question unanswered; your answers save as you give them. From You they stay on one page.",
+    "On Today and Pulse, “Log a moment” is now outlined, so the card’s own button leads. On the map it stays as it was."
+   ],
+   "impacts": [
+    "you.about"
+   ]
+  },
+  {
    "version": "0.40.0",
    "date": "2026-11-13",
    "title": "Map and list on a phone",
@@ -4487,21 +4499,6 @@
    ],
    "impacts": [
     "data.backup"
-   ]
-  },
-  {
-   "version": "0.36.0",
-   "date": "2026-11-10",
-   "title": "The Guide",
-   "items": [
-    "You → The Guide: every feature of be:moyo explained, step by step, with the science behind it: what comes from the book, what research has found, and what hasn’t been tested yet.",
-    "Search it in your own words. Every “?” tip and every tool in Grow has a “Read more in the Guide” link to its page.",
-    "Forgot your passcode? The lock screen now has “Help with the lock and backups”: the pages on the lock, backups and recovery open without unlocking.",
-    "Troubleshooting for the usual worries: a map that looks empty, a restore that didn’t work, audio offline, an old version."
-   ],
-   "impacts": [
-    "data.recovery",
-    "data.lock"
    ]
   }
  ]
