@@ -1,7 +1,7 @@
 {
  "format": 1,
- "appVersion": "0.38.0",
- "manifestVersion": "0.38.0",
+ "appVersion": "0.39.0",
+ "manifestVersion": "0.39.0",
  "supportEmail": "parallelspace.advisors@gmail.com",
  "copy": {
   "title": "The Guide",
@@ -298,7 +298,7 @@
        "p": "After the first person, the app shows them on your map and offers “Add another person” or “See Today”."
       },
       {
-       "p": "You can also stop here and add someone later; until the first person is on your map, the app shows the map. Then Today, Pulse, Realms and Grow open: Today suggests what to do this week, and Grow holds every tool."
+       "p": "You can also stop here and add someone later. With nobody on your map yet, the app opens on the map, but Today, Pulse, Realms and Grow are already there: “Start by meeting people” leads to the tools for meeting new people, and Today shows one next step. Your number appears with the first person."
       }
      ]
     },
@@ -325,7 +325,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.38.0"
+   "checked": "0.39.0"
   },
   {
    "status": "approved",
@@ -4432,6 +4432,20 @@
  ],
  "releases": [
   {
+   "version": "0.39.0",
+   "date": "2026-11-13",
+   "title": "Start without anyone on your map",
+   "items": [
+    "You can now use be:moyo before anyone is on your map. The first screen has a second way in, “Start by meeting people”, and a link to the Guide.",
+    "Today, Pulse, Realms and Grow are open from the start. Finding events, your regular places, the Exposure Coach, the tests and everything to read or listen to work without anyone on your map.",
+    "With nobody on your map, Today shows one next step: an event to answer, who you met at an event you went to, an event coming up, or two ways to begin.",
+    "Where a step needs a person, such as inviting someone or a ritual, the app says so and offers to add one."
+   ],
+   "impacts": [
+    "start.first-map"
+   ]
+  },
+  {
    "version": "0.38.0",
    "date": "2026-11-12",
    "title": "Mist Morning",
@@ -4484,14 +4498,6 @@
     "Grow → Know yourself (and Partner) → \"The Attribute Test\": who are you really looking for? Pick what you want and what you can’t live with in looks, character and lifestyle; a truth test for your dealbreakers, duels to rank your wishes, and the cut to five per dimension. A stadium of 100,000 seats shows, as an illustration, how every wish narrows the field.",
     "At the end you have your compass: your five per dimension, your true dealbreakers, how to spot them on a date and a feeling to remember. It shows on the partner slot of your map, and your date checks use it (you can switch that off).",
     "The chapter behind the test, by Axel, to read or listen to (seven parts, about 25 minutes)."
-   ]
-  },
-  {
-   "version": "0.34.0",
-   "date": "2026-11-07",
-   "title": "Flirting — an introduction, to listen to",
-   "items": [
-    "Grow → Flirting → \"Flirting — an introduction\" can now be listened to: one recording per section, or all six in a row (about 24 minutes)."
    ]
   }
  ]
