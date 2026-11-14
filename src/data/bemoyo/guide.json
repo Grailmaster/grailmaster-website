@@ -1,7 +1,7 @@
 {
  "format": 1,
- "appVersion": "0.42.0",
- "manifestVersion": "0.42.0",
+ "appVersion": "0.43.0",
+ "manifestVersion": "0.43.0",
  "supportEmail": "parallelspace.advisors@gmail.com",
  "copy": {
   "title": "The Guide",
@@ -542,7 +542,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.42.0"
+   "checked": "0.43.0"
   },
   {
    "status": "approved",
@@ -986,7 +986,7 @@
        "ul": [
         "A greeting and how many people you logged time with this week.",
         "“For this week”: up to three things, at most one of each kind. It might ask how an event went, what happened after an invitation, suggest someone worth a message, show your partner step, or this week’s focus.",
-        "Your week so far: moments logged, people you met again, and how lonely you said you feel.",
+        "Your week so far: moments logged, people you met again, and how lonely you said you feel. In your very first week, until one of these exists, it is a single sentence.",
         "Coming up: planned events and your rituals."
        ]
       },
@@ -1017,7 +1017,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.43.0"
   },
   {
    "status": "approved",
@@ -3593,7 +3593,7 @@
      "title": "Changing it",
      "blocks": [
       {
-       "p": "Open You and choose a background. Some have a texture you can make stronger or weaker; text and your map stay just as readable."
+       "p": "Open You and choose a background. Some have a texture you can make stronger or weaker; text and your map stay just as readable. On the long reading pages (Realms, Grow and this Guide) moving backgrounds sit behind a soft veil, so the text stays calm."
       }
      ]
     },
@@ -3609,7 +3609,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.38.0"
+   "checked": "0.43.0"
   },
   {
    "status": "approved",
@@ -4433,6 +4433,19 @@
  ],
  "releases": [
   {
+   "version": "0.43.0",
+   "date": "2026-11-14",
+   "title": "Calmer reading",
+   "items": [
+    "On Realms, Grow and the Guide, moving backgrounds such as Golden threads now sit behind a soft veil. The threads keep moving; the text in front of them is easier to read. Your background choice is unchanged.",
+    "In your very first week, Today’s “Your week” says it in one sentence until you log a moment or answer how lonely you feel, instead of three empty boxes."
+   ],
+   "impacts": [
+    "today.home",
+    "you.appearance"
+   ]
+  },
+  {
    "version": "0.42.0",
    "date": "2026-11-13",
    "title": "A person at a glance",
@@ -4484,22 +4497,6 @@
    ],
    "impacts": [
     "start.first-map"
-   ]
-  },
-  {
-   "version": "0.38.0",
-   "date": "2026-11-12",
-   "title": "Mist Morning",
-   "items": [
-    "A new look: in You, choose Mist Morning. It is light, in the be:moyo greens, with Forest green for what you tap. Forest Dusk and Sand Morning stay as they are.",
-    "Your first person: after you add them, the app shows them on your map and offers “Add another person” or “See Today”.",
-    "Log a moment: Save and Cancel now stay at the bottom of the sheet, so you don’t have to scroll to find them. How you felt before and after is folded away; open it if you want to give it.",
-    "On a computer, the be:moyo logo now sits above your list of people, next to the map. In a short browser window the map’s buttons no longer slide under the top bar."
-   ],
-   "impacts": [
-    "start.first-map",
-    "today.log",
-    "you.appearance"
    ]
   }
  ]
