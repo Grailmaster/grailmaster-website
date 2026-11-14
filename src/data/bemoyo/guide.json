@@ -1,7 +1,7 @@
 {
  "format": 1,
- "appVersion": "0.44.0",
- "manifestVersion": "0.44.0",
+ "appVersion": "0.44.1",
+ "manifestVersion": "0.44.1",
  "supportEmail": "parallelspace.advisors@gmail.com",
  "copy": {
   "title": "The Guide",
@@ -4433,6 +4433,16 @@
  ],
  "releases": [
   {
+   "version": "0.44.1",
+   "date": "2026-11-14",
+   "title": "Two fixes",
+   "items": [
+    "With nobody on your map yet, the Exposure Coach now shows its practice step on Today, so you can log it, and add the person you met as the first one on your map.",
+    "Windows that open by themselves, like the welcome, no longer show a box around their title."
+   ],
+   "impacts": []
+  },
+  {
    "version": "0.44.0",
    "date": "2026-11-14",
    "title": "You and Settings",
@@ -4486,20 +4496,6 @@
    ],
    "impacts": [
     "you.about"
-   ]
-  },
-  {
-   "version": "0.40.0",
-   "date": "2026-11-13",
-   "title": "Map and list on a phone",
-   "items": [
-    "On a phone, the Map tab (Rings view) has “Map” and “List” at the top: the map, or the list of your people. The app remembers your choice on this device.",
-    "The map’s display settings (photos or initials, missing slots, the legend, export) are now under one “View” button on a phone, so the map comes first. On a computer nothing changes.",
-    "Realms: the wheel comes first; how the Realms work is one tap away.",
-    "Grow: shortcuts to its groups under the search box."
-   ],
-   "impacts": [
-    "map.view"
    ]
   }
  ]
