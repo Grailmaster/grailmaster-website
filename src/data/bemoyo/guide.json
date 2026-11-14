@@ -1,7 +1,7 @@
 {
  "format": 1,
- "appVersion": "0.44.1",
- "manifestVersion": "0.44.1",
+ "appVersion": "0.45.0",
+ "manifestVersion": "0.45.0",
  "supportEmail": "parallelspace.advisors@gmail.com",
  "copy": {
   "title": "The Guide",
@@ -212,6 +212,7 @@
    "pages": [
     "grow.attribute-test",
     "grow.attribute-chapter",
+    "grow.want-more",
     "grow.reflection",
     "grow.closeness",
     "grow.mirror",
@@ -1061,6 +1062,9 @@
       },
       {
        "p": "“Not now” puts it aside for two weeks."
+      },
+      {
+       "p": "When nothing stands out and you have an open step from [What do you want more of?](app:grow/want-more), the focus shows that step instead."
       }
      ]
     },
@@ -1096,7 +1100,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.37.0"
+   "checked": "0.45.0"
   },
   {
    "status": "approved",
@@ -2761,6 +2765,70 @@
      "date": "2026-11-10"
     }
    ],
+   "id": "grow.want-more",
+   "kind": "feature",
+   "covers": [
+    "grow.want-more"
+   ],
+   "title": "What do you want more of?",
+   "answer": "Choose one need, say how met it feels and what is in the way, and pick one small step with a day. The day after, the app asks whether the step happened and helped.",
+   "sub": "About two minutes. Not a test, no score.",
+   "keywords": [
+    "need",
+    "missing",
+    "want more",
+    "step",
+    "realm",
+    "lonely",
+    "what is missing",
+    "follow-up"
+   ],
+   "sections": [
+    {
+     "id": "how",
+     "kind": "how",
+     "title": "Using it",
+     "blocks": [
+      {
+       "p": "Open [Grow](app:grow) › Know yourself › What do you want more of? Four short steps: the need, how met it feels right now (or leave it empty), what is in the way, and one step with a day. You can also save just your answers."
+      },
+      {
+       "p": "You have one step at a time. From the day after its day, a card on Today asks: did it happen? If not yet, choose a new day or close it. After 14 days without an answer it closes quietly."
+      },
+      {
+       "p": "The suggestions follow what you said is in the way: a person you sorted into the related Realm, one of your regular places, something to go to, or the Exposure Coach. Little time or energy makes each suggestion smaller."
+      }
+     ]
+    },
+    {
+     "id": "reference",
+     "kind": "reference",
+     "title": "Privacy and your Realm Audit",
+     "blocks": [
+      {
+       "p": "Your answers and notes stay on this device and in your backups. They are never in a map picture, a calendar file or a session report, unless you tap “Use your current step as your experiment” in the report form."
+      },
+      {
+       "p": "If you have taken the Realm Audit, its rating for the related Realm is shown for comparison. It is never changed by this tool, and “Romance, a partner” never changes your partner goal."
+      }
+     ]
+    }
+   ],
+   "tier": "free",
+   "checked": "0.45.0"
+  },
+  {
+   "status": "approved",
+   "approvals": [
+    {
+     "by": "ChatGPT",
+     "date": "2026-11-10"
+    },
+    {
+     "by": "Axel",
+     "date": "2026-11-10"
+    }
+   ],
    "id": "grow.reflection",
    "kind": "feature",
    "covers": [
@@ -3663,12 +3731,15 @@
      "blocks": [
       {
        "p": "Never in the report: notes about people, and the Mirror Audit. The friendzone only if you tick it. Your own sentences go in as you wrote them; initials don’t change them, so check them for names."
+      },
+      {
+       "p": "If you have an open step from What do you want more of?, the form shows it; only a tap on “Use your current step as your experiment” copies it into the experiment. Your answers and notes from that tool never go in."
       }
      ]
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.45.0"
   },
   {
    "status": "approved",
@@ -4433,6 +4504,21 @@
  ],
  "releases": [
   {
+   "version": "0.45.0",
+   "date": "2026-11-14",
+   "title": "What do you want more of?",
+   "items": [
+    "New in Grow › Know yourself: What do you want more of? Choose one need, say how met it feels and what is in the way, and pick one small step with a day. About two minutes, no score.",
+    "The day after your step, a card on Today asks whether it happened and whether it helped. Not yet? Choose a new day or close it.",
+    "A Realm with a low audit rating now offers “Want more of this? Choose one step”. When Pulse has nothing to point out, it shows your open step. The session report can use your step as its experiment, but only if you tap."
+   ],
+   "impacts": [
+    "grow.want-more",
+    "today.focus",
+    "you.session-report"
+   ]
+  },
+  {
    "version": "0.44.1",
    "date": "2026-11-14",
    "title": "Two fixes",
@@ -4484,18 +4570,6 @@
    "impacts": [
     "map.person",
     "data.delete"
-   ]
-  },
-  {
-   "version": "0.41.0",
-   "date": "2026-11-13",
-   "title": "A lighter start",
-   "items": [
-    "The first questions about you now come in three short pages: what you are here for, about you, partner and children. You can leave any question unanswered; your answers save as you give them. From You they stay on one page.",
-    "On Today and Pulse, “Log a moment” is now outlined, so the card’s own button leads. On the map it stays as it was."
-   ],
-   "impacts": [
-    "you.about"
    ]
   }
  ]
