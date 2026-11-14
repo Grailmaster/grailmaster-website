@@ -1,7 +1,7 @@
 {
  "format": 1,
- "appVersion": "0.43.0",
- "manifestVersion": "0.43.0",
+ "appVersion": "0.44.0",
+ "manifestVersion": "0.44.0",
  "supportEmail": "parallelspace.advisors@gmail.com",
  "copy": {
   "title": "The Guide",
@@ -3097,7 +3097,7 @@
        ]
       },
       {
-       "p": "You › Your map on this device shows how much space your map uses. Recordings saved for offline listening are stored separately."
+       "p": "Settings › Backup & storage shows how much space your map uses. Recordings saved for offline listening are stored separately."
       }
      ]
     },
@@ -3113,7 +3113,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.44.0"
   },
   {
    "status": "approved",
@@ -3152,7 +3152,7 @@
      "blocks": [
       {
        "ol": [
-        "Open You › Backup.",
+        "Open Settings (the gear next to You) › Backup & storage.",
         "Tap “Save a backup file”. It is named bemoyo-backup- and the date; files from earlier versions, named social-health-os-backup-, open just the same.",
         "Keep the file somewhere safe, for example in your cloud folder."
        ]
@@ -3168,7 +3168,7 @@
      "title": "What is in it",
      "blocks": [
       {
-       "p": "Everything: your people, moments, answers and the private modules, with full names. If you haven’t saved a backup for a while, the You button shows a dot as a reminder."
+       "p": "Everything: your people, moments, answers and the private modules, with full names. If you haven’t saved a backup for a while, the Settings gear next to You shows a dot as a reminder, and Backup & storage says “Needs attention”."
       },
       {
        "p": "Files you saved readable earlier stay readable, even after you turn on App Lock. Make a new locked backup and delete the old files."
@@ -3177,7 +3177,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.37.0"
+   "checked": "0.44.0"
   },
   {
    "status": "approved",
@@ -3216,7 +3216,7 @@
      "blocks": [
       {
        "ol": [
-        "Open You › Backup on a computer, in Chrome or Edge.",
+        "Open Settings › Backup & storage on a computer, in Chrome or Edge.",
         "Choose the automatic backup and pick a file, ideally in a folder your cloud service syncs.",
         "From then on the app updates that file a few seconds after each change."
        ]
@@ -3229,13 +3229,13 @@
      "title": "Good to know",
      "blocks": [
       {
-       "p": "With App Lock on, the automatic file is written encrypted; with the lock off, readable. While the app is locked, it isn’t written at all. If the browser loses permission to the file, You › Backup asks you to check it."
+       "p": "With App Lock on, the automatic file is written encrypted; with the lock off, readable. While the app is locked, it isn’t written at all. If the browser loses permission to the file, Settings › Backup & storage asks you to check it."
       }
      ]
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.44.0"
   },
   {
    "status": "approved",
@@ -3272,7 +3272,7 @@
      "blocks": [
       {
        "ol": [
-        "Open You › Backup and choose “Restore from a backup”.",
+        "Open Settings › Backup & storage and choose “Restore from a backup”.",
         "Pick the backup file. A locked file asks for the passcode or recovery code it was made with.",
         "Check what the file holds (how many people, saved by whom), then tap “Restore”."
        ]
@@ -3304,7 +3304,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.44.0"
   },
   {
    "status": "approved",
@@ -3344,7 +3344,7 @@
      "blocks": [
       {
        "ol": [
-        "Open You › Privacy and set up the lock.",
+        "Open Settings › Privacy & app lock and set up the lock.",
         "Choose a passcode of at least 12 characters. Several random words work well; not a saying, a name or a date.",
         "Keep the recovery code the app shows you, once, in your password manager or on paper. It opens your map if you forget the passcode.",
         "Afterwards, make a new locked backup and delete older, unencrypted files."
@@ -3377,7 +3377,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.44.0"
   },
   {
    "status": "approved",
@@ -3593,7 +3593,7 @@
      "title": "Changing it",
      "blocks": [
       {
-       "p": "Open You and choose a background. Some have a texture you can make stronger or weaker; text and your map stay just as readable. On the long reading pages (Realms, Grow and this Guide) moving backgrounds sit behind a soft veil, so the text stays calm."
+       "p": "Open Settings › Appearance and choose a background. Some have a texture you can make stronger or weaker; text and your map stay just as readable. On the long reading pages (Realms, Grow and this Guide) moving backgrounds sit behind a soft veil, so the text stays calm."
       }
      ]
     },
@@ -3609,7 +3609,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.43.0"
+   "checked": "0.44.0"
   },
   {
    "status": "approved",
@@ -3807,7 +3807,7 @@
      "title": "Giving feedback",
      "blocks": [
       {
-       "p": "Open You and use the feedback button in the testers section. Tell what confused you, what was missing, and what you liked."
+       "p": "Open Settings › Help & about and use the feedback button in the testers section. Tell what confused you, what was missing, and what you liked."
       }
      ]
     },
@@ -3823,7 +3823,7 @@
     }
    ],
    "tier": "tester",
-   "checked": "0.36.0"
+   "checked": "0.44.0"
   },
   {
    "status": "approved",
@@ -4152,7 +4152,7 @@
      "title": "Making it",
      "blocks": [
       {
-       "p": "Open You › Your tribe pattern and pick a motif; the rest comes from your map. If you like, wear it around the sun on your map."
+       "p": "Open Settings › Appearance › Your tribe pattern and pick a motif; the rest comes from your map. If you like, wear it around the sun on your map."
       }
      ]
     },
@@ -4168,7 +4168,7 @@
     }
    ],
    "tier": "pro",
-   "checked": "0.36.0"
+   "checked": "0.44.0"
   },
   {
    "kind": "help",
@@ -4225,7 +4225,7 @@
      "title": "If none of these helps",
      "blocks": [
       {
-       "p": "You have a backup file: restore it under You › Backup. Read what the file holds and any warning first. The app normally keeps a safety copy of your current map, and tells you if it can’t. On a computer in Chrome or Edge, restoring can also update the backup file itself; untick “Keep this file up to date automatically” if you want the file unchanged. [Restoring a backup](guide:data.restore)"
+       "p": "You have a backup file: restore it under Settings › Backup & storage. Read what the file holds and any warning first. The app normally keeps a safety copy of your current map, and tells you if it can’t. On a computer in Chrome or Edge, restoring can also update the backup file itself; untick “Keep this file up to date automatically” if you want the file unchanged. [Restoring a backup](guide:data.restore)"
       },
       {
        "p": "You have no backup file: we can’t bring back a map deleted from this browser, because the app never sent it to us. You can begin a new map whenever you are ready."
@@ -4234,7 +4234,7 @@
     }
    ],
    "tier": null,
-   "checked": "0.36.0"
+   "checked": "0.44.0"
   },
   {
    "kind": "help",
@@ -4433,6 +4433,23 @@
  ],
  "releases": [
   {
+   "version": "0.44.0",
+   "date": "2026-11-14",
+   "title": "You and Settings",
+   "items": [
+    "You is now only about you: your name and photo, the two questions, your start, your assessments and the session report.",
+    "New: Your assessments in You. The Attribute Test, Know yourself, Closeness and worry and the Mirror Audit, each with whether and when you did it. Results open only on their own page.",
+    "Everything about the app moved to Settings, the gear next to You: Appearance, Privacy & app lock, Backup & storage, Help & about. Buttons that ask for a backup now open Backup & storage directly.",
+    "Tablets and narrow windows now have the tabs at the bottom, like phones, so the header always fits."
+   ],
+   "impacts": [
+    "you.about",
+    "you.appearance",
+    "data.backup",
+    "data.lock"
+   ]
+  },
+  {
    "version": "0.43.0",
    "date": "2026-11-14",
    "title": "Calmer reading",
@@ -4483,20 +4500,6 @@
    ],
    "impacts": [
     "map.view"
-   ]
-  },
-  {
-   "version": "0.39.0",
-   "date": "2026-11-13",
-   "title": "Start without anyone on your map",
-   "items": [
-    "You can now use be:moyo before anyone is on your map. The first screen has a second way in, “Start by meeting people”, and a link to the Guide.",
-    "Today, Pulse, Realms and Grow are open from the start. Finding events, your regular places, the Exposure Coach, the tests and everything to read or listen to work without anyone on your map.",
-    "With nobody on your map, Today shows one next step: an event to answer, who you met at an event you went to, an event coming up, or two ways to begin.",
-    "Where a step needs a person, such as inviting someone or a ritual, the app says so and offers to add one."
-   ],
-   "impacts": [
-    "start.first-map"
    ]
   }
  ]
