@@ -1,7 +1,7 @@
 {
  "format": 1,
- "appVersion": "0.47.0",
- "manifestVersion": "0.47.0",
+ "appVersion": "0.48.0",
+ "manifestVersion": "0.48.0",
  "supportEmail": "parallelspace.advisors@gmail.com",
  "copy": {
   "title": "The Guide",
@@ -916,6 +916,7 @@
        "ul": [
         "Around your start: within 5 points, or 5 % of the size of your starting number if that is more (for a negative start, without the minus sign). The band is an app setting that groups small changes together.",
         "Above or below: outside that band.",
+        "Colours: the line is gold around your start and turns slowly green above it or coral below it, so a small change never flips its colour. Today’s point has the colour of where you stand.",
         "This week: the change over the last seven days, shown once your current chapter is a week old.",
         "Earlier chapters stay on the chart as faint lines, each with its own start."
        ]
@@ -947,7 +948,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.37.0"
+   "checked": "0.48.0"
   },
   {
    "status": "approved",
@@ -4521,6 +4522,18 @@
  ],
  "releases": [
   {
+   "version": "0.48.0",
+   "date": "2026-11-18",
+   "title": "A brighter trend",
+   "items": [
+    "The trend line on Pulse now glows. It is gold around your start and turns slowly green above it or coral below it, so a small change never flips its colour.",
+    "Today’s point is a small sun in the colour of where you stand."
+   ],
+   "impacts": [
+    "pulse.trend"
+   ]
+  },
+  {
    "version": "0.47.0",
    "date": "2026-11-18",
    "title": "A calmer first screen",
@@ -4570,23 +4583,6 @@
     "Windows that open by themselves, like the welcome, no longer show a box around their title."
    ],
    "impacts": []
-  },
-  {
-   "version": "0.44.0",
-   "date": "2026-11-14",
-   "title": "You and Settings",
-   "items": [
-    "You is now only about you: your name and photo, the two questions, your start, your assessments and the session report.",
-    "New: Your assessments in You. The Attribute Test, Know yourself, Closeness and worry and the Mirror Audit, each with whether and when you did it. Results open only on their own page.",
-    "Everything about the app moved to Settings, the gear next to You: Appearance, Privacy & app lock, Backup & storage, Help & about. Buttons that ask for a backup now open Backup & storage directly.",
-    "Tablets and narrow windows now have the tabs at the bottom, like phones, so the header always fits."
-   ],
-   "impacts": [
-    "you.about",
-    "you.appearance",
-    "data.backup",
-    "data.lock"
-   ]
   }
  ]
 }
