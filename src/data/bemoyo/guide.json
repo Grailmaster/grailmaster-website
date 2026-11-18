@@ -1,7 +1,7 @@
 {
  "format": 1,
- "appVersion": "0.45.0",
- "manifestVersion": "0.45.0",
+ "appVersion": "0.46.0",
+ "manifestVersion": "0.46.0",
  "supportEmail": "parallelspace.advisors@gmail.com",
  "copy": {
   "title": "The Guide",
@@ -3644,7 +3644,7 @@
     "you.appearance"
    ],
    "title": "How the app looks",
-   "answer": "Choose the background your map sits on: light ones use the Sand colours, dark ones the Forest colours. Mist Morning is light, in the be:moyo greens.",
+   "answer": "Choose the background your map sits on: light ones use the Sand colours, dark ones the Forest colours. Mist Morning is light, in the be:moyo greens. You can also choose how the app opens.",
    "keywords": [
     "theme",
     "dark mode",
@@ -3652,7 +3652,11 @@
     "background",
     "colours",
     "colors",
-    "texture"
+    "texture",
+    "opening",
+    "animation",
+    "splash",
+    "start"
    ],
    "sections": [
     {
@@ -3666,18 +3670,31 @@
      ]
     },
     {
+     "id": "opening",
+     "kind": "how",
+     "title": "The opening animation",
+     "blocks": [
+      {
+       "p": "When the app starts, a short sunrise shows “Be seen. Be known”. The full four seconds play on your first start and on every tenth start after that; the other starts get a short version in your own colours. Reloading the page does not play it again."
+      },
+      {
+       "p": "Choose Normal, Short only or Off in Settings › Appearance. If your device is set to reduce motion, you see the finished picture for a moment instead. The opening never covers the lock screen or a message about your data, and it shows nothing from your map."
+      }
+     ]
+    },
+    {
      "id": "reference",
      "kind": "reference",
      "title": "Good to know",
      "blocks": [
       {
-       "p": "Rings, Realms and scores keep their meaning on every background. The choice is saved on this device only."
+       "p": "Rings, Realms and scores keep their meaning on every background. Your background and the opening choice are saved on this device only, not in your backups."
       }
      ]
     }
    ],
    "tier": "free",
-   "checked": "0.44.0"
+   "checked": "0.46.0"
   },
   {
    "status": "approved",
@@ -4504,6 +4521,19 @@
  ],
  "releases": [
   {
+   "version": "0.46.0",
+   "date": "2026-11-18",
+   "title": "The opening",
+   "items": [
+    "be:moyo now opens with a short sunrise: “Be seen. Be known”. The full four seconds play on your first start and on every tenth start after that; the other starts get a short version in your own colours.",
+    "Settings › Appearance › Opening animation: Normal, Short only or Off. If your device is set to reduce motion, you see the finished picture for a moment instead.",
+    "The opening never stands in your way: the lock screen and any message about your data appear at once."
+   ],
+   "impacts": [
+    "you.appearance"
+   ]
+  },
+  {
    "version": "0.45.0",
    "date": "2026-11-14",
    "title": "What do you want more of?",
@@ -4556,20 +4586,6 @@
    "impacts": [
     "today.home",
     "you.appearance"
-   ]
-  },
-  {
-   "version": "0.42.0",
-   "date": "2026-11-13",
-   "title": "A person at a glance",
-   "items": [
-    "A person’s page now opens as an overview: ways to reach them (WhatsApp, phone, email) one tap away, your slider and how the relationship developed, then one line each for what to remember, your goal, your rhythm and your story. Tap a line to open it.",
-    "Everything else is still there, in two groups: “Edit details” (ring, relationship, distance, contact details, Realms, remove) and “Tools for this relationship”. “Edit details” stays open on this device once you open it.",
-    "A reminder about something to ask now opens the person at “Remember for next time”."
-   ],
-   "impacts": [
-    "map.person",
-    "data.delete"
    ]
   }
  ]
