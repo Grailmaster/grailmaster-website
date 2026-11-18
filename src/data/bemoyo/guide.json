@@ -1,7 +1,7 @@
 {
  "format": 1,
- "appVersion": "0.46.0",
- "manifestVersion": "0.46.0",
+ "appVersion": "0.47.0",
+ "manifestVersion": "0.47.0",
  "supportEmail": "parallelspace.advisors@gmail.com",
  "copy": {
   "title": "The Guide",
@@ -299,7 +299,7 @@
        "p": "After the first person, the app shows them on your map and offers “Add another person” or “See Today”."
       },
       {
-       "p": "You can also stop here and add someone later. With nobody on your map yet, the app opens on the map, but Today, Pulse, Realms and Grow are already there: “Start by meeting people” leads to the tools for meeting new people, and Today shows one next step. Your number appears with the first person."
+       "p": "You can also stop here and add someone later. With nobody on your map yet, the app opens on the map, but Today, Pulse, Realms and Grow are already there: Grow has the tools for meeting new people (the first screen for adding a person links there too, until you type a name), and Today shows one next step. Your number appears with the first person."
       }
      ]
     },
@@ -326,7 +326,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.39.0"
+   "checked": "0.47.0"
   },
   {
    "status": "approved",
@@ -3950,7 +3950,7 @@
       {
        "ol": [
         "Export your contacts as a file (.vcf). The app shows how for iPhone, Android and Google contacts.",
-        "When you add a person, choose “Import from your contacts” (on an empty map: “Import people from my contacts”), and pick that file.",
+        "When you add a person, choose “Import from your contacts”, and pick that file.",
         "Tick the people who matter. Each comes in with name, birthday, phone, email and photo, if the file has them.",
         "Place each one: who they are to you, which ring, and how it feels."
        ]
@@ -3969,7 +3969,7 @@
     }
    ],
    "tier": "free",
-   "checked": "0.36.0"
+   "checked": "0.47.0"
   },
   {
    "status": "approved",
@@ -4521,6 +4521,19 @@
  ],
  "releases": [
   {
+   "version": "0.47.0",
+   "date": "2026-11-18",
+   "title": "A calmer first screen",
+   "items": [
+    "A calmer first screen: answer a few questions, or skip ahead to adding your first person. “How be:moyo works” and “Restore a backup” are at the bottom.",
+    "No one to add yet? Grow has the tools for meeting new people. The first screen for adding a person links there too, until you type a name, and offers importing from your contacts."
+   ],
+   "impacts": [
+    "start.first-map",
+    "map.import"
+   ]
+  },
+  {
    "version": "0.46.0",
    "date": "2026-11-18",
    "title": "The opening",
@@ -4573,19 +4586,6 @@
     "you.appearance",
     "data.backup",
     "data.lock"
-   ]
-  },
-  {
-   "version": "0.43.0",
-   "date": "2026-11-14",
-   "title": "Calmer reading",
-   "items": [
-    "On Realms, Grow and the Guide, moving backgrounds such as Golden threads now sit behind a soft veil. The threads keep moving; the text in front of them is easier to read. Your background choice is unchanged.",
-    "In your very first week, Today’s “Your week” says it in one sentence until you log a moment or answer how lonely you feel, instead of three empty boxes."
-   ],
-   "impacts": [
-    "today.home",
-    "you.appearance"
    ]
   }
  ]
