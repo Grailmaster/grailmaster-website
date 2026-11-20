@@ -1,7 +1,7 @@
 {
  "format": 1,
- "appVersion": "0.48.0",
- "manifestVersion": "0.48.0",
+ "appVersion": "0.49.0",
+ "manifestVersion": "0.49.0",
  "supportEmail": "parallelspace.advisors@gmail.com",
  "copy": {
   "title": "The Guide",
@@ -3931,8 +3931,8 @@
    "covers": [
     "map.import"
    ],
-   "title": "Adding people from your contacts",
-   "answer": "Pick the people who matter from your phone or computer contacts instead of typing. Only the ones you choose come in.",
+   "title": "Importing people",
+   "answer": "Bring people in from your phone, LinkedIn, Google, Outlook or Facebook instead of typing. Only the ones you choose come in.",
    "keywords": [
     "import",
     "contacts",
@@ -3940,7 +3940,12 @@
     "vcard",
     "phone contacts",
     "address book",
-    "google contacts"
+    "google contacts",
+    "linkedin",
+    "facebook",
+    "outlook",
+    "csv",
+    "zip"
    ],
    "sections": [
     {
@@ -3950,10 +3955,10 @@
      "blocks": [
       {
        "ol": [
-        "Export your contacts as a file (.vcf). The app shows how for iPhone, Android and Google contacts.",
-        "When you add a person, choose “Import from your contacts”, and pick that file.",
-        "Tick the people who matter. Each comes in with name, birthday, phone, email and photo, if the file has them.",
-        "Place each one: who they are to you, which ring, and how it feels."
+        "Get a file: your phone’s contacts (.vcf), LinkedIn’s or Facebook’s data export (the ZIP file as downloaded), or a Google or Outlook contacts file. “Need a file?” shows how for each. On Android you can also pick straight from the phone’s contacts.",
+        "Choose “Import people” and pick the file.",
+        "Tick the people who matter. Search finds anyone by name or company, also in a list of thousands.",
+        "Place them: ring, relationship and distance. “Same for all” sets everyone at once. Then rate them, or skip the ratings and rate later."
        ]
       }
      ]
@@ -3964,13 +3969,13 @@
      "title": "Good to know",
      "blocks": [
       {
-       "p": "The file is read on this device; nothing is uploaded. People you don’t tick are not kept. After your start, the app asks whether imported people are new in your life or were always there."
+       "p": "The file is read on this device; nothing is uploaded, and nobody you don’t tick is kept. Someone already on your map is marked; “Add details” fills only what is missing and never changes what you wrote. After your start, the app asks whether imported people are new in your life or were always there."
       }
      ]
     }
    ],
    "tier": "free",
-   "checked": "0.47.0"
+   "checked": "0.49.0"
   },
   {
    "status": "approved",
@@ -4522,6 +4527,20 @@
  ],
  "releases": [
   {
+   "version": "0.49.0",
+   "date": "2026-11-20",
+   "title": "Bring your people in",
+   "items": [
+    "Import people from LinkedIn, Google, Outlook or Facebook, not only from your phone. Use the file exactly as you download it; the ZIP is fine.",
+    "Search the list by name or company, handy when LinkedIn gives you thousands of connections. Nobody comes in unless you tick them.",
+    "Placing is quicker: set ring, relationship and distance for everyone at once, and skip the ratings if you like.",
+    "Someone already on your map? The app says so and can add just what is missing, like a birthday or a LinkedIn link."
+   ],
+   "impacts": [
+    "map.import"
+   ]
+  },
+  {
    "version": "0.48.0",
    "date": "2026-11-18",
    "title": "A brighter trend",
@@ -4573,16 +4592,6 @@
     "today.focus",
     "you.session-report"
    ]
-  },
-  {
-   "version": "0.44.1",
-   "date": "2026-11-14",
-   "title": "Two fixes",
-   "items": [
-    "With nobody on your map yet, the Exposure Coach now shows its practice step on Today, so you can log it, and add the person you met as the first one on your map.",
-    "Windows that open by themselves, like the welcome, no longer show a box around their title."
-   ],
-   "impacts": []
   }
  ]
 }
